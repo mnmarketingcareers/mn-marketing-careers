@@ -1,121 +1,95 @@
+# MN Marketing Careers Application
 
-# EDA Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+## Description
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+_Duration: 2 Week Sprint_
 
-## Use the Template for This Repository (Don't Clone)
-
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+This is an application to make life easier for the curators and subcribers to the MN Marketing Careers joblist sharing service. Our application will include MailChimp functionalty to allow the client to incorporate existing practices and subscriber contact data conveneintly and effectively into the application.
 
 
-## Prerequisites
+To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
 
-Before you get started, make sure you have the following software installed on your computer:
+## Screen Shot
 
+Some things to consider...
+
+So classic
+
+![Classic Lasagna](public/images/classic_lasagna.png)
+
+Wow, pretty!
+
+![Expensive Lucid Chart](public/images/lucid_chart.png)
+
+
+### Prerequisites
+
+Link to software that is required to install the app (e.g. node).
+
+- MailChimp account (with API_KEY)
 - [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+- List other prerequisites here
 
-## Create database and table
+## Installation
 
-Create a new database called `prime_app` and create a `user` table:
+_This will be important for our client to spin this up on their own. Let's make sure to write it as clearly, simply, and exact as possible, being aware of possible assumptions we might make from our perspective._
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
+*this section is un-edited, as of 11/05/2021*
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
 
-## Development Setup Instructions
+If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
+1. Create a database named `mn_marketing_careers`,
+2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
+3. Open up your editor of choice and run an `npm install`
+4. Run `npm run server` in your terminal
+5. Run `npm run client` in your terminal
+6. The `npm run client` command will open up a new browser tab for you!
 
-## Debugging
+## Usage
+How does someone use this application? Tell a user story here.
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+1. Go to the main page, linked from email
+2. See the jobs - Click around
+3. use the search bar to filter results
+4. Apply!
+5. Select a column header to sort by given column
+6. If you have a job to post, follow the link to send it to the admin
+7. If you are aware of an issue with a job post, follow the link to inform the admin
+8. You may unsubscribe at the link at the bottom - we'll have a couple questions for you
+9. The site also includes functionality for page administrators ('admins')
+10. Admins need to login at a private url to access these features
+11. Logged in admins will see a list of notifications
+12. Notifications include pending job posts added by potential empoloyers, and any issues sent from users on the main page
+13. Admins will also be able to view all active listings, with options to edit, delete, or deactivate job listings
+14. Admins may approve or deny pending job posts
+15. Admins may address issues and mark them complete, or delete them
+16. Admins may draft new job postings and save them to a queue to post live at a later time
+17. Admins may draft a weekly email which will feature new job listings and, on send, will post new job listings to the main webpage
+18. Admins may choose to post new job listings in the queue to the main webpage without sending the email
+19. Admins may log out when finished
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+## Built With
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+1. JavaScript
+2. React
+3. Redux
+4. AWS S3/aws-sdk
+5. Material-UI
+6. Express
+7. Postgres
+8. Node.js
+9. HTML/css
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
 
-## Testing Routes with Postman
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
+_Note, include this only if you have a license file. GitHub will generate one for you if you want!_
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
+## Acknowledgement
+Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. Thanks to lasagna, for being the world of inspiration that you are.
 
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+## Support
+If you have suggestions or issues, please email me at [coolcoolcool@killer-beans.com](www.google.com)
