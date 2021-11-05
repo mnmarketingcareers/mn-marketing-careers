@@ -1,7 +1,7 @@
 --CREATE DATABASE mn-marketing-careers
 
 CREATE TABLE "job_postings" (
-	"id" serial NOT NULL,
+	"id" serial primaray NOT NULL,
 	"user_id" integer NOT NULL,
 	"company_id" integer NOT NULL,
 	"available_role" varchar(500) NOT NULL,
