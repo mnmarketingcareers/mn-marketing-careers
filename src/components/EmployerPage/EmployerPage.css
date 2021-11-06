@@ -1,0 +1,13 @@
+.employer-form {
+    display: grid;
+    justify-content: center;
+}
+
+.description {
+    height: 75px;
+}
+
+.state {
+    width: 41px;
+    text-transform: uppercase;
+}
