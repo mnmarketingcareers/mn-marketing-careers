@@ -29,9 +29,9 @@ function RegisterForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
+          Email:
           <input
-            type="text"
+            type="email"
             name="username"
             value={username}
             required

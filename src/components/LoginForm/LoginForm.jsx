@@ -34,9 +34,9 @@ function LoginForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
+          Email:
           <input
-            type="text"
+            type="email"
             name="username"
             required
             value={username}
