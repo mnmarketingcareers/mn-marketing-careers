@@ -162,8 +162,8 @@ function EmployerPage() {
                                     aria-label="Can we share a contact person?"
                                     name="radio-buttons-group-contacts"
                                 >
-                                    <FormControlLabel inputprops={{ className: "test" }} value="yes" onClick={setValues} control={<Radio />} label="yes" />
-                                    <FormControlLabel inputprops={{ className: "test" }} value="no" onClick={setValues} control={<Radio />} label="no" />
+                                    <FormControlLabel className="share-contact" value="yes" onClick={setValues} control={<Radio />} label="yes" />
+                                    <FormControlLabel className="share-contact" value="no" onClick={setValues} control={<Radio />} label="no" />
                                 </RadioGroup>
                             </FormControl>
                         </Card>
