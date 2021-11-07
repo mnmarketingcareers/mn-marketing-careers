@@ -1,11 +1,10 @@
-.employer-form {
+.employer-form{
+    padding-left: 50px;
     display: grid;
     justify-content: center;
 }
 
-.description {
-    height: 75px;
-}
+
 
 .state {
     width: 41px;
