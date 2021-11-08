@@ -7,9 +7,12 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import FormGroup from '@mui/material/FormGroup';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardHeader from '@mui/material/CardHeader';
+import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
 import CardContent from '@mui/material/CardContent';
 
 import './EmployerPage.css';
@@ -19,18 +22,29 @@ function EmployerPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const [editMode, setEditMode] = useState(true);
+// On the question : "Is this job remote?"; toggles wether other input field is displayed or not.
+    const [toggleOther, setToggleOther] = useState(true);
 
-    const [jobPostingsTable, setJobPostingsTable] = useState({ company: '', available_role: '', application_link: '', description: '', job_city: '', job_state: '', remote: '', share_contact: '' });
+    const changeState = () => {
+        setToggleOther(!toggleOther)
+    }
+
+// On the question: "Can we share contact person?"; toggles the input fields necessary to add person's contact info.
+    const [toggleContact, setToggleContact] = useState(true);
+
+    const changeContactView = () => {
+        setToggleContact(!toggleContact)
+    }
+
+// Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
+    const [jobPostingsTable, setJobPostingsTable] = useState({ company: '', available_role: '', application_link: '', description: '', job_city: '', job_state: '', remote: '', share_contact: '', name: '', email: '', title: '', phone: '' });
 
     const submitEmployerJob = (event) => {
         console.log('what is jobPostingsTable', jobPostingsTable)
 
     }
 
-    const changeState = () => {
-        setEditMode(!editMode)
-    }
+ 
 
     const setValues = (event) => {
         console.log('what is event.target.className', event.target.className);
@@ -56,14 +70,38 @@ function EmployerPage() {
                 break;
             case 'PrivateSwitchBase-input css-1m9pwf3':
                 setJobPostingsTable({ ...jobPostingsTable, remote: event.target.value })
-                setEditMode(true);
+                setToggleOther(true);
                 break;
             case 'other':
                 setJobPostingsTable({ ...jobPostingsTable, remote: event.target.value })
                 break;
-            case 'test':
-                setJobPostingsTable({ ...jobPostingsTable, share_contact: event.target.value })
+            case 'hiring-contact-name':
+                setJobPostingsTable({ ...jobPostingsTable, name: event.target.value })
                 break;
+            case 'hiring-contact-email':
+                setJobPostingsTable({ ...jobPostingsTable, email: event.target.value })
+                break;
+            case 'hiring-contact-title':
+                setJobPostingsTable({ ...jobPostingsTable, title: event.target.value })
+                break;
+            case 'hiring-contact-phone':
+                setJobPostingsTable({ ...jobPostingsTable, phone: event.target.value })
+                break;
+        }
+    };
+
+    const checkBoxValue = (event) => {
+        console.log('in checkbox: event.target.value', event.target.name)
+        console.log('in checkbox: event.target.checked', event.target.checked)
+        switch (event.target.name){
+            case 'yes':
+                setJobPostingsTable({...jobPostingsTable, share_contact: true})
+                changeContactView();
+                break;
+            case 'no':
+                setJobPostingsTable({...jobPostingsTable, share_contact: false})
+                break;
+
         }
     }
 
@@ -76,6 +114,7 @@ function EmployerPage() {
                             <CardHeader title="Company Name" />
                             <input
                                 type="text"
+                                id="company"
                                 placeholder="company"
                                 className="company"
                                 onChange={setValues}
@@ -146,10 +185,10 @@ function EmployerPage() {
                                     aria-label="Is this job remote?"
                                     name="radio-buttons-group"
                                 >
-                                    <FormControlLabel value="yes" onClick={setValues} control={<Radio />} label="yes" />
-                                    <FormControlLabel value="no" onClick={setValues} control={<Radio />} label="no" />
+                                    <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues} control={<Radio />} label="yes" />
+                                    <FormControlLabel placeholder="remote-no" value="no" onClick={setValues} control={<Radio />} label="no" />
                                     <FormControlLabel value="other" onClick={changeState} control={<Radio />} label="Other" />
-                                    {editMode ? <p></p> : <p><input className="other" placeholder="details" onChange={setValues} ></input></p>}
+                                    {toggleOther ? <p></p> : <p><input className="other" placeholder="details" onChange={setValues} ></input></p>}
                                 </RadioGroup>
                             </FormControl>
                         </Card>
@@ -157,15 +196,14 @@ function EmployerPage() {
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="Can we share a contact person?" />
-                            <FormControl component="fieldset">
-                                <RadioGroup
-                                    aria-label="Can we share a contact person?"
-                                    name="radio-buttons-group-contacts"
-                                >
-                                    <FormControlLabel className="share-contact" value="yes" onClick={setValues} control={<Radio />} label="yes" />
-                                    <FormControlLabel className="share-contact" value="no" onClick={setValues} control={<Radio />} label="no" />
-                                </RadioGroup>
-                            </FormControl>
+                                <FormGroup>
+                                    <FormControlLabel control={<Checkbox />} name="yes" onClick={checkBoxValue} label="yes"/>
+                                    {toggleContact ? <p></p> : <p><input className="hiring-contact-name" placeholder="name" onChange={setValues} ></input>
+                                                                <input className="hiring-contact-email" placeholder="email" onChange={setValues} ></input>
+                                                                <input className="hiring-contact-title" placeholder="title" onChange={setValues} ></input>
+                                                                <input className="hiring-contact-phone" placeholder="phone" onChange={setValues} ></input></p>}
+                                    <FormControlLabel control={<Checkbox />} name="no" onClick={checkBoxValue} label="no"/>
+                                </FormGroup>                           
                         </Card>
                     </Grid>
                 </Grid>
