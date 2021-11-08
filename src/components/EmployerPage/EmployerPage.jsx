@@ -37,10 +37,25 @@ function EmployerPage() {
     }
 
 // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
-    const [jobPostingsTable, setJobPostingsTable] = useState({ company: '', available_role: '', application_link: '', description: '', job_city: '', job_state: '', remote: '', share_contact: '', name: '', email: '', title: '', phone: '' });
+    const [jobPostingsTable, setJobPostingsTable] = useState({ company: '', 
+                                                            available_role: '', 
+                                                            application_link: '', 
+                                                            description: '', 
+                                                            job_city: '', 
+                                                            job_state: '', 
+                                                            remote: '', 
+                                                            share_contact: '', 
+                                                            name: '', 
+                                                            email: '', 
+                                                            title: '', 
+                                                            phone: '' });
 
     const submitEmployerJob = (event) => {
         console.log('what is jobPostingsTable', jobPostingsTable)
+        dispatch({
+            type: 'NEW_EMPLOYER_JOB_POST',
+            payload: jobPostingsTable
+        })
 
     }
 
