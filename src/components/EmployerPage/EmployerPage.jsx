@@ -61,48 +61,10 @@ function EmployerPage() {
 
  
 
-    const setValues = (event) => {
-        console.log('what is event.target.className', event.target.className);
+    const setValues = (propertyName) => (event) => {
+        console.log('what is propertyName', propertyName);
         console.log('what is event.target.value', event.target.value);
-        switch (event.target.className) {
-            case 'company':
-                setJobPostingsTable({ ...jobPostingsTable, company: event.target.value })
-                break;
-            case 'title':
-                setJobPostingsTable({ ...jobPostingsTable, available_role: event.target.value })
-                break;
-            case 'application-link':
-                setJobPostingsTable({ ...jobPostingsTable, application_link: event.target.value })
-                break;
-            case 'description':
-                setJobPostingsTable({ ...jobPostingsTable, description: event.target.value })
-                break;
-            case 'city':
-                setJobPostingsTable({ ...jobPostingsTable, job_city: event.target.value })
-                break;
-            case 'state':
-                setJobPostingsTable({ ...jobPostingsTable, job_state: event.target.value })
-                break;
-            case 'PrivateSwitchBase-input css-1m9pwf3':
-                setJobPostingsTable({ ...jobPostingsTable, remote: event.target.value })
-                setToggleOther(true);
-                break;
-            case 'other':
-                setJobPostingsTable({ ...jobPostingsTable, remote: event.target.value })
-                break;
-            case 'hiring-contact-name':
-                setJobPostingsTable({ ...jobPostingsTable, name: event.target.value })
-                break;
-            case 'hiring-contact-email':
-                setJobPostingsTable({ ...jobPostingsTable, email: event.target.value })
-                break;
-            case 'hiring-contact-title':
-                setJobPostingsTable({ ...jobPostingsTable, title: event.target.value })
-                break;
-            case 'hiring-contact-phone':
-                setJobPostingsTable({ ...jobPostingsTable, phone: event.target.value })
-                break;
-        }
+        setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value })
     };
 
     const checkBoxValue = (event) => {
@@ -127,69 +89,75 @@ function EmployerPage() {
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="Company Name" />
-                            <input
+                            <TextField
                                 type="text"
                                 id="company"
+                                variant="standard"
                                 placeholder="company"
                                 className="company"
-                                onChange={setValues}
-                                value={jobPostingsTable.company} ></input>
+                                onChange={setValues('company')}
+                                value={jobPostingsTable.company} ></TextField>
                         </Card>
                     </Grid>
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="Title of Position Available" />
-                            <input
+                            <TextField
                                 type="text"
                                 placeholder="Title"
+                                variant="standard"
                                 className="title"
-                                onChange={setValues}
-                                value={jobPostingsTable.available_role} ></input>
+                                onChange={setValues('available_role')}
+                                value={jobPostingsTable.available_role} ></TextField>
                         </Card>
                     </Grid>
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="Link to Job Post Online" />
-                            <input
+                            <TextField
                                 type="text"
                                 placeholder="Link"
+                                variant="standard"
                                 className="application-link"
-                                onChange={setValues}
-                                value={jobPostingsTable.application_link} ></input>
+                                onChange={setValues('application_link')}
+                                value={jobPostingsTable.application_link} ></TextField>
                         </Card>
                     </Grid>
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="Description" />
-                            <input
+                            <TextField
                                 type="text"
                                 placeholder="Description"
+                                variant="standard"
                                 className="description"
-                                onChange={setValues}
-                                value={jobPostingsTable.description} ></input>
+                                onChange={setValues('description')}
+                                value={jobPostingsTable.description} ></TextField>
                         </Card>
                     </Grid>
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="City" />
-                            <input
+                            <TextField
                                 type="text"
                                 placeholder="City"
+                                variant="standard"
                                 className="city"
-                                onChange={setValues}
-                                value={jobPostingsTable.job_city} ></input>
+                                onChange={setValues('job_city')}
+                                value={jobPostingsTable.job_city} ></TextField>
                         </Card>
                     </Grid>
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="State" />
-                            <input
+                            <TextField
                                 type="text"
                                 placeholder="State"
+                                variant="standard"
                                 maxLength="2"
                                 className="state"
-                                onChange={setValues}
-                                value={jobPostingsTable.job_state} ></input>
+                                onChange={setValues('job_state')}
+                                value={jobPostingsTable.job_state} ></TextField>
                         </Card>
                     </Grid>
                     <Grid item xs={8}>
@@ -200,10 +168,10 @@ function EmployerPage() {
                                     aria-label="Is this job remote?"
                                     name="radio-buttons-group"
                                 >
-                                    <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues} control={<Radio />} label="yes" />
-                                    <FormControlLabel placeholder="remote-no" value="no" onClick={setValues} control={<Radio />} label="no" />
+                                    <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
+                                    <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
                                     <FormControlLabel value="other" onClick={changeState} control={<Radio />} label="Other" />
-                                    {toggleOther ? <p></p> : <p><input className="other" placeholder="details" onChange={setValues} ></input></p>}
+                                    {toggleOther ? <p></p> : <p><input className="other" placeholder="details" onChange={setValues('remote')} ></input></p>}
                                 </RadioGroup>
                             </FormControl>
                         </Card>
@@ -212,12 +180,12 @@ function EmployerPage() {
                         <Card>
                             <CardHeader title="Can we share a contact person?" />
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox />} name="yes" onClick={checkBoxValue} label="yes"/>
-                                    {toggleContact ? <p></p> : <p><input className="hiring-contact-name" placeholder="name" onChange={setValues} ></input>
-                                                                <input className="hiring-contact-email" placeholder="email" onChange={setValues} ></input>
-                                                                <input className="hiring-contact-title" placeholder="title" onChange={setValues} ></input>
-                                                                <input className="hiring-contact-phone" placeholder="phone" onChange={setValues} ></input></p>}
-                                    <FormControlLabel control={<Checkbox />} name="no" onClick={checkBoxValue} label="no"/>
+                                    <FormControlLabel control={<Checkbox />} name="yes" onClick={checkBoxValue} label="Yes"/>
+                                    {toggleContact ? <p></p> : <p><input className="hiring-contact-name" placeholder="name" onChange={setValues('name')} ></input>
+                                                                <input className="hiring-contact-email" placeholder="email" onChange={setValues('email')} ></input>
+                                                                <input className="hiring-contact-title" placeholder="title" onChange={setValues('title')} ></input>
+                                                                <input className="hiring-contact-phone" placeholder="phone" onChange={setValues('phone')} ></input></p>}
+                                    <FormControlLabel control={<Checkbox />} name="no" onClick={checkBoxValue} label="No"/>
                                 </FormGroup>                           
                         </Card>
                     </Grid>
