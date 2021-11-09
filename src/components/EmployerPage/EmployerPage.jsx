@@ -15,6 +15,12 @@ import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import CardContent from '@mui/material/CardContent';
 
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import Select from '@mui/material/Select';
+
 import './EmployerPage.css';
 
 function EmployerPage() {
@@ -22,33 +28,37 @@ function EmployerPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-// On the question : "Is this job remote?"; toggles wether other input field is displayed or not.
+    // On the question : "Is this job remote?"; toggles wether other input field is displayed or not.
     const [toggleOther, setToggleOther] = useState(true);
 
     const changeState = () => {
         setToggleOther(!toggleOther)
     }
 
-// On the question: "Can we share contact person?"; toggles the input fields necessary to add person's contact info.
+    // On the question: "Can we share contact person?"; toggles the input fields necessary to add person's contact info.
     const [toggleContact, setToggleContact] = useState(true);
 
     const changeContactView = () => {
         setToggleContact(!toggleContact)
     }
 
-// Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
-    const [jobPostingsTable, setJobPostingsTable] = useState({ company: '', 
-                                                            available_role: '', 
-                                                            application_link: '', 
-                                                            description: '', 
-                                                            job_city: '', 
-                                                            job_state: '', 
-                                                            remote: '', 
-                                                            share_contact: '', 
-                                                            name: '', 
-                                                            email: '', 
-                                                            title: '', 
-                                                            phone: '' });
+    // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
+    const [jobPostingsTable, setJobPostingsTable] = useState({
+        company: '',
+        available_role: '',
+        application_link: '',
+        description: '',
+        job_city: '',
+        job_state: '',
+        remote: '',
+        share_contact: '',
+        name: '',
+        email: '',
+        title: '',
+        phone: '',
+        job_type_name: []
+
+    });
 
     const submitEmployerJob = (event) => {
         console.log('what is jobPostingsTable', jobPostingsTable)
@@ -59,7 +69,7 @@ function EmployerPage() {
 
     }
 
- 
+
 
     const setValues = (propertyName) => (event) => {
         console.log('what is propertyName', propertyName);
@@ -70,17 +80,152 @@ function EmployerPage() {
     const checkBoxValue = (event) => {
         console.log('in checkbox: event.target.value', event.target.name)
         console.log('in checkbox: event.target.checked', event.target.checked)
-        switch (event.target.name){
+        switch (event.target.name) {
             case 'yes':
-                setJobPostingsTable({...jobPostingsTable, share_contact: true})
+                setJobPostingsTable({ ...jobPostingsTable, share_contact: true })
                 changeContactView();
                 break;
             case 'no':
-                setJobPostingsTable({...jobPostingsTable, share_contact: false})
+                setJobPostingsTable({ ...jobPostingsTable, share_contact: false })
                 break;
 
         }
     }
+
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
+
+    const names = [
+        {
+            order: 1,
+            field: 'Account Management'
+        },
+        {
+            order: 2,
+            field: 'Advertising'
+        },
+        {
+            order: 3,
+            field: 'Branding'
+        },
+        {
+            order: 4,
+            field: 'Communications'
+        },
+        {
+            order: 5,
+            field: 'Copywriting'
+        },
+        {
+            order: 6,
+            field: 'Digital Media'
+        },
+        {
+            order: 7,
+            field: 'Graphic Design'
+        },
+        {
+            order: 8,
+            field: 'Marketing'
+        },
+        {
+            order: 9,
+            field: 'Public Relations'
+        },
+        {
+            order: 10,
+            field: 'Social Media'
+        },
+        {
+            order: 11,
+            field: 'Editorial'
+        },
+        {
+            order: 12,
+            field: 'Ecommerce'
+        },
+        {
+            order: 13,
+            field: 'Project Management'
+        },
+        {
+            order: 14,
+            field: 'Internship'
+        },
+    ];
+
+
+    const [job, setJob] = useState([]);
+    const jobType = [];
+    
+
+    const handleJob = (event) => {
+        console.log('what is event?', event);
+        const {
+            target: { value },
+        } = event;
+        setJob(
+            // On autofill we get a the stringified value.
+            typeof value === 'string' ? value.split(',') : value
+        );
+        console.log('what is job?', value);
+        for (const i of value){
+            if (i == 'Account Management' && jobPostingsTable.job_type_name.includes('1') === false){
+                jobPostingsTable.job_type_name.push('1');
+            } if (i == 'Advertising' && jobPostingsTable.job_type_name.includes('2') === false){
+                jobPostingsTable.job_type_name.push('2');
+            }
+        }
+        console.log('jobPostingsTable.job_type_name', jobPostingsTable.job_type_name);
+    };
+
+    // const handleJob = (event) => {
+    //     console.log('what is event?', event);
+    //     const {
+    //         target: { value },
+    //     } = event;
+    //     console.log('what is value?', value)
+    //     setJob(
+    //         // On autofill we get a the stringified value.
+    //         typeof value === 'string' ? value.split(',') : value
+    //     );
+    //     if (value.includes('Account Management') && jobPostingsTable.job_type_name.includes('1') === false) {
+    //         jobPostingsTable.job_type_name.push('1')
+    //     } if (value.includes('Advertising') && jobPostingsTable.job_type_name.includes('2') === false) {
+    //         jobPostingsTable.job_type_name.push('2')
+    //     } if (value.includes('Branding') && jobPostingsTable.job_type_name.includes('3') === false) {
+    //         jobPostingsTable.job_type_name.push('3')
+    //     } if (value.includes('Communications') && jobPostingsTable.job_type_name.includes('4') === false){
+    //         jobPostingsTable.job_type_name.push('4')
+    //     }
+    //     console.log('jobPostingsTable.job_type_name', jobPostingsTable.job_type_name);
+    // };
+
+    // const handleJob = (event) => {
+    //     console.log('what is event?', event);
+    //     const {
+    //         target: { value },
+    //     } = event;
+    //     console.log('what is value?', value)
+    //     setJob(
+    //         // On autofill we get a the stringified value.
+    //         typeof value === 'string' ? value.split(',') : value
+    //     );
+    //     if (value.includes('Account Management')) {
+    //         setJobPostingsTable({ ...jobPostingsTable, job_type_name: {...'1'} })
+    //     } if (value.includes('Branding')) {
+    //         setJobPostingsTable({...jobPostingsTable, job_type_name: {...'3'} })
+    //     };
+    //     console.log('what is jobPostingsTable.job_type_name', jobPostingsTable.job_type_name);
+    // };
 
     return (
         <>
@@ -137,6 +282,34 @@ function EmployerPage() {
                     </Grid>
                     <Grid item xs={8}>
                         <Card>
+                            <CardHeader title="Select job types (Multiple selections allowed)" />
+                            <div>
+                                <FormControl sx={{ m: 1, width: 300 }}>
+                                    <InputLabel id="job-types">types</InputLabel>
+                                    <Select
+                                        labelId="job-types"
+                                        id="job-types"
+                                        multiple
+                                        value={job}
+                                        onChange={handleJob}
+                                        input={<OutlinedInput label="Types" />}
+                                        renderValue={(selected) => selected.join(', ')}
+                                        MenuProps={MenuProps}
+                                    >
+                                        {names.map((name) => (
+                                            <MenuItem key={name.field} id={name.field} value={name.field}>
+                                                <Checkbox checked={job.indexOf(name.field) > -1} />
+                                                <ListItemText primary={name.field} />
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        </Card>
+                    </Grid>
+
+                    <Grid item xs={8}>
+                        <Card>
                             <CardHeader title="City" />
                             <TextField
                                 type="text"
@@ -179,14 +352,14 @@ function EmployerPage() {
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="Can we share a contact person?" />
-                                <FormGroup>
-                                    <FormControlLabel control={<Checkbox />} name="yes" onClick={checkBoxValue} label="Yes"/>
-                                    {toggleContact ? <p></p> : <p><input className="hiring-contact-name" placeholder="name" onChange={setValues('name')} ></input>
-                                                                <input className="hiring-contact-email" placeholder="email" onChange={setValues('email')} ></input>
-                                                                <input className="hiring-contact-title" placeholder="title" onChange={setValues('title')} ></input>
-                                                                <input className="hiring-contact-phone" placeholder="phone" onChange={setValues('phone')} ></input></p>}
-                                    <FormControlLabel control={<Checkbox />} name="no" onClick={checkBoxValue} label="No"/>
-                                </FormGroup>                           
+                            <FormGroup>
+                                <FormControlLabel control={<Checkbox />} name="yes" onClick={checkBoxValue} label="Yes" />
+                                {toggleContact ? <p></p> : <p><input className="hiring-contact-name" placeholder="name" onChange={setValues('name')} ></input>
+                                    <input className="hiring-contact-email" placeholder="email" onChange={setValues('email')} ></input>
+                                    <input className="hiring-contact-title" placeholder="title" onChange={setValues('title')} ></input>
+                                    <input className="hiring-contact-phone" placeholder="phone" onChange={setValues('phone')} ></input></p>}
+                                <FormControlLabel control={<Checkbox />} name="no" onClick={checkBoxValue} label="No" />
+                            </FormGroup>
                         </Card>
                     </Grid>
                 </Grid>
