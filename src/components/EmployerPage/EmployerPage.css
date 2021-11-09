@@ -1,0 +1,20 @@
+.MuiFormGroup-root {
+    padding: 20px;
+}
+
+.MuiPaper-root {
+    padding: 20px;
+}
+
+.employer-form{
+    padding-left: 50px;
+    display: grid;
+    justify-content: center;
+}
+
+
+
+.state {
+    width: 41px;
+    text-transform: uppercase;
+}

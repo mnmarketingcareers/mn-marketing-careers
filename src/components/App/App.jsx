@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import EmployerPage from '../EmployerPage/EmployerPage';
 
 import './App.css';
 
@@ -109,6 +110,13 @@ function App() {
               <LandingPage />
             }
           </Route>
+
+          <ProtectedRoute
+            exact
+            path="/EmployerPage"
+          >
+            <EmployerPage />
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
