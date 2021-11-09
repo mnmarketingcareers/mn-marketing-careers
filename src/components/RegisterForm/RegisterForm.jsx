@@ -20,7 +20,6 @@ function RegisterForm() {
         password: password,
         first_name: firstName,
         last_name: lastName,
-        zip_code: zipcode
       },
     });
   }; // end registerUser
@@ -78,17 +77,6 @@ function RegisterForm() {
             value={lastName}
             required
             onChange={(event) => setLastName(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="zip-code">
-          Zip Code(not required):
-          <input
-            type="text"
-            name="zip-code"
-            value={zipcode}
-            onChange={(event) => setZipcode(event.target.value)}
           />
         </label>
       </div>

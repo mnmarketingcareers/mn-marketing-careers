@@ -10,7 +10,7 @@ const {
  */
 router.get('/', rejectUnauthenticated, async (req, res) => {
   // GET route code here
-  const query = `SELECT `
+//   const query = `SELECT * FROM "job_postings`
 });
 
 /**
@@ -18,8 +18,8 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
  */
 router.post('/', rejectUnauthenticated, async (req, res) => {
   // POST route code here
-    const jobQuery = 
-    const ContactQuery = 
+    // const jobQuery = 
+    // const ContactQuery = 
 });
 
 module.exports = router;
