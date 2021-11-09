@@ -64,7 +64,7 @@ CREATE TABLE "hiring_contact" (
 
 CREATE TABLE "job_types" (
 	"id" serial NOT NULL,
-	"name" varchar(500) NOT NULL,
+	"type" varchar(500) NOT NULL,
 	CONSTRAINT "job_types_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -74,7 +74,7 @@ CREATE TABLE "job_types" (
 
 CREATE TABLE "company" (
 	"id" serial NOT NULL,
-	"name" varchar(500) NOT NULL,
+	"company_name" varchar(500) NOT NULL,
 	CONSTRAINT "company_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -100,7 +100,7 @@ CREATE TABLE "issues" (
 	"issue_type" varchar(500) NOT NULL,
 	"date" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"status" BOOLEAN NOT NULL DEFAULT FALSE,
-	"email" varchar(255) NOT NULL UNIQUE,
+	"issue_email" varchar(255) NOT NULL UNIQUE,
 	"hiring_contact_id" integer NOT NULL,
 	"add_post_contact_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
@@ -132,6 +132,20 @@ ALTER TABLE "issues" ADD CONSTRAINT "issues_fk3" FOREIGN KEY ("user_id") REFEREN
 
 
 
-
+INSERT INTO "job_types" ("name") VALUES 
+	('Account Management'),
+	('Advertising'),
+	('Branding'),
+	('Communications'),
+	('Copywriting'),
+	('Digital Media'),
+	('Graphic Design'),
+	('Marketing'),
+	('Public Relations'),
+	('Social Media'),
+	('Editorial'),
+	('Ecommerce'),
+	('Project Management'),
+	('Internship');
 
 
