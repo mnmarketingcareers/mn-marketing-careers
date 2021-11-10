@@ -3,8 +3,9 @@ const axios = require('axios');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-// Handles POST request with new job seeker feedback
-router.post('/api/feedback', (req, res) => {
+// Handles POST request with new job seeker feedback, responses to database
+// Additional POST to post feedback to DOM?
+router.post('/', (req, res) => {
     const reason = req.body.reason;
     const message = req.body.message;
     const archived = req.body.archived;
@@ -21,6 +22,24 @@ router.post('/api/feedback', (req, res) => {
             res.sendStatus(500);
         })
 })
+
+// Handles GET request, get feedback data from database
+router.get('/', (req, res) => {
+    console.log('in router.get');
+    const queryText = `SELECT * FROM "feedback";`;
+    //not positive on what we are actually pooling here
+    pool.query(queryText, [req.body.id])
+    .then( result=> {
+        res.send(result.rows);
+    })
+    .catch(err => {
+        console.log('ERROR: GET all feedback', err);
+        res.sendStatus(500);
+    })
+});
+
+// Handles PUT request, change feedback archived status to TRUE
+
 
 
 module.exports = router;
