@@ -120,7 +120,10 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     );
     
     console.log('ID of new "job_postings" row', rowId.rows[0].id);
-    
+    // set returned new row ID to variable
+    const rowIdToAdd = rowId.rows[0].id;
+
+
     // create an empty array to add IDs of job types
     const jobsByType = [];
     // get array of job types with IDs
@@ -131,16 +134,27 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     const jobTypes = req.body.job_type_name;
     console.log('Job types from the client', jobTypes);
     for (let index in jobTypes) {
-        console.log('');
-        if (jobTypes[index] == allJobTypes.rows[index].type) {
-            jobsByType.push(allJobTypes.rows[index].id);
+        console.log('looping through job Types from client');
+        console.log('index', index, 'job type here', jobTypes[index], 'value in allJobtypes here', allJobTypes.rows[index].type);
+        for (let item in allJobTypes.rows) {
+            console.log('checking all job types at item', item);
+            if (jobTypes[index] == allJobTypes.rows[item].type) {
+                console.log('found a match at index', index, 'item', item);
+                jobsByType.push(allJobTypes.rows[item].id);
+            }
         }
     }
     console.log('Jobs by type, as IDs', jobsByType);
     // now loop over that new array of IDs and add them to the "jobs_by_type" table
     for (let i = 0; i < jobsByType.length; i++) {
-        await pool.query(`INSERT INTO "jobs_by_type" ("job_posting_id", "job_type_id") VALUES (${rowId}, $1);`, jobsByType[i]);
+        let jobTypeToAdd = jobsByType[i];
+        await pool.query(`
+                    INSERT INTO "jobs_by_type" ("job_posting_id", "job_type_id") 
+                    VALUES ($1, $2);`, 
+                    [rowIdToAdd, jobTypeToAdd]);
     }
+    console.log('POST SUCCESS');
+    res.sendStatus(200);
   } catch (error) {
       console.log('ERROR in POST', error);
       res.sendStatus(500);
