@@ -113,7 +113,7 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/EmployerPage"
+            path="/employerpage"
           >
             <EmployerPage />
           </ProtectedRoute>

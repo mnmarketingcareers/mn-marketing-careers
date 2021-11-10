@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
+  // use local state to store form inputs to compile as object for dispatch to server
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirsName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [zipcode, setZipcode] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const registerUser = (event) => {
     event.preventDefault();
 
+    // Sends new user information to server via saga route 'REGISTER'
     dispatch({
       type: 'REGISTER',
       payload: {
