@@ -8,14 +8,12 @@ const router = express.Router();
 router.post('/', (req, res) => {
     const reason = req.body.reason;
     const message = req.body.message;
-    const archived = req.body.archived;
-    const date_received = req.body.date_received;
     // the query that's responsible for inserting user feedback into the feedback database table
-    const queryText = `INSERT INTO "feedback" (reason, message, archived, date_received)
-    VALUES ($1, $2, $3, $4) RETURNING id;`;
+    const queryText = `INSERT INTO "feedback" (reason, message)
+    VALUES ($1, $2) RETURNING id;`;
     // this pools the query text and datafields and sends the data on to the database 
     pool
-        .query(queryText, [reason, message, archived, date_received])
+        .query(queryText, [reason, message])
         .then(() => res.sendStatus(201))
         .catch((err) => {
             console.log('feedback POST failed: ', err);
