@@ -131,11 +131,12 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     const jobTypes = req.body.job_type_name;
     console.log('Job types from the client', jobTypes);
     for (let index in jobTypes) {
-        if (jobTypes[index] === allJobTypes[index].type) {
-            jobsByType.push(allJobTypes[index].id);
+        console.log('');
+        if (jobTypes[index] == allJobTypes.rows[index].type) {
+            jobsByType.push(allJobTypes.rows[index].id);
         }
     }
-    console.log('Jobs by tyype, as IDs', jobsByType);
+    console.log('Jobs by type, as IDs', jobsByType);
     // now loop over that new array of IDs and add them to the "jobs_by_type" table
     for (let i = 0; i < jobsByType.length; i++) {
         await pool.query(`INSERT INTO "jobs_by_type" ("job_posting_id", "job_type_id") VALUES (${rowId}, $1);`, jobsByType[i]);
