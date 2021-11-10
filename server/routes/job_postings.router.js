@@ -14,8 +14,9 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
                 "remote", "date_posted", "hc".hiring_contact_email, "hc".hiring_contact_name, "hc".title, "hc".phone, 
                 "co"."company_name" FROM "job_postings" AS "jp"
                 JOIN "company" AS "co" ON "jp".company_id = "co".id
-                JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
+                LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
                 WHERE "jp".archived = 'false' AND "jp".status = 'POSTED'
+                AND "jp"."date_posted" > (current_date - interval '30' day)
                 GROUP BY "jp"."id", "available_role", "description", "application_link", "job_city", "job_state", 
                 "remote", "date_posted", "hc".hiring_contact_email, "hc".hiring_contact_name, "hc".title, "hc".phone, 
                 "co"."company_name"
@@ -37,6 +38,8 @@ router.get('/types', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     });
 });
+
+
 
 /**
  * POST route template
