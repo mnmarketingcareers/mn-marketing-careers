@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import EmployerPage from '../EmployerPage/EmployerPage';
+import AdminHub from '../AdminHub/AdminHub';
 
 import './App.css';
 
@@ -67,6 +68,16 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+
+          <ProtectedRoute 
+            // logged in shows InfoPage else shows LoginPage
+            // added by Mo 11/9/21 @ 10p
+            exact
+            path="/adminhub"
+          >
+            <AdminHub />
           </ProtectedRoute>
 
           <Route
