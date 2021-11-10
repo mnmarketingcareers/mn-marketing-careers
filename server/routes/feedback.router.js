@@ -48,18 +48,20 @@ router.get('/feedbacklist', (req, res) => {
 // Access level for admin-only access?
 router.put('/:id', (req, res) => {
     const updatedFeedback = req.body;
-    // this query updates the archive boolean status of a job seeker's feedback
-    const queryText = `UPDATE "feedback" SET "archived" = $1 WHERE "id" = $2;`;
-    // this variable contains the archived status to be updated 
-    // also notes the id of the table column being edited
-    const queryValues = [updatedFeedback.archived, updatedFeedback.id];
-    // this pools the query text and values and sends the updated data back to the database
-    pool.query(queryText, queryValues)
-    .then(() => { res.sendStatus(200); })
-    .catch((err) => {
-        console.log('Error completing UPDATE feedback query', err);
-        res.sendStatus(500);
-    });
+    if (req.user.access_level === 1) {
+        // this query updates the archive boolean status of a job seeker's feedback
+        const queryText = `UPDATE "feedback" SET "archived" = $1 WHERE "id" = $2;`;
+        // this variable contains the archived status to be updated 
+        // also notes the id of the table column being edited
+        const queryValues = [updatedFeedback.archived, updatedFeedback.id];
+        // this pools the query text and values and sends the updated data back to the database
+        pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.log('Error completing UPDATE feedback query', err);
+            res.sendStatus(500);
+        });
+    } 
 });
 
 
