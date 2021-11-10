@@ -44,6 +44,8 @@ function EmployerPage() {
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
     const [jobPostingsTable, setJobPostingsTable] = useState({
+        posting_contact_name: 'otherTestName',
+        posting_contact_email: 'nope@yuppers.com',
         company: '',
         available_role: '',
         application_link: '',

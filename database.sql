@@ -152,6 +152,3 @@ INSERT INTO "job_types" ("type") VALUES
 	('Project Management'),
 	('Internship');
 
-
-SELECT "", "status", "archived", "hiring_contact_id" FROM "job_postings"
-JOIN ;

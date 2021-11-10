@@ -43,6 +43,7 @@ router.get('/types', rejectUnauthenticated, (req, res) => {
  */
 router.post('/', rejectUnauthenticated, async (req, res) => {
   // POST route code here
+  console.log('In job_postings router, POST');
   try {
     console.log('show me the monster:', req.body);
     const userId = req.user.id;
@@ -77,14 +78,18 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('posting contact ID', posting_contact_id);
     
     // for hiring contact, only insert a value if we get one from the client
-    let hiring_contact_id = '';
+    // let hiring_contact_id = '';
     // we'll know that we have one id share_contact is true
-    if (req.body.share_contact) {
-        // Insert new contact
-        hiring_contact_id = await pool.query(hiringContactQuery, 
-            [req.body.name, req.body.email, req.body.title, req.body.phone]
-        );
-    }
+    const setNewId = () => {
+        let newId = '';
+        (req.body.share_contact) && (newId = pool.query(hiringContactQuery, 
+                [req.body.name, req.body.email, req.body.title, req.body.phone]
+            ))
+        return newId;
+    };
+
+    const hiring_contact_id = await setNewId();
+
     console.log('hiring contact ID', hiring_contact_id);
 
     const company_id = await pool.query(companyQuery, 
@@ -128,7 +133,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('Jobs by tyype, as IDs', jobsByType);
     // now loop over that new array of IDs and add them to the "jobs_by_type" table
     for (let i = 0; i < jobsByType.length; i++) {
-        await pool.query(`INSERT INTO "jobs_by_type" ("job_posting_id", "job_type_id") VALUES (${rowId}, $1)`, jobsByType[i]);
+        await pool.query(`INSERT INTO "jobs_by_type" ("job_posting_id", "job_type_id") VALUES (${rowId}, $1);`, jobsByType[i]);
     }
   } catch (error) {
       console.log('ERROR in POST', error);

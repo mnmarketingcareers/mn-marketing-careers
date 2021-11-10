@@ -5,7 +5,7 @@ function* addEmployerForm(action){
     try {
       console.log('First saga wired up', action.payload)
         const newEmployerForm = action.payload;
-        yield axios.post('/api/job', newEmployerForm);
+        yield axios.post('/api/jobs', newEmployerForm);
         
       } catch(err) {
         console.log(err)
