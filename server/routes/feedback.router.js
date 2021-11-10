@@ -2,6 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 // Handles POST request with new job seeker feedback, responses to database
 // Additional POST to post feedback to DOM?
@@ -22,26 +25,31 @@ router.post('/', (req, res) => {
 })
 
 // Handles GET request, get feedback data from database
-router.get('/', (req, res) => {
-    console.log('in router.get');
-    const queryText = `SELECT * FROM "feedback";`;
-    //not positive on what we are actually pooling here
-    //unsure if req.body.id is the correct course of action here
-    pool.query(queryText, [req.body.id])
-    .then( result=> {
-        res.send(result.rows);
-    })
-    .catch(err => {
+// Select for access level (secure submarine as an example)
+// wrap query around conditional that checks for access_level
+router.get('/feedbacklist', (req, res) => {
+    console.log('in router.get', req.user);
+    
+    if (req.user.access_level === 1){
+        const queryText = `SELECT * FROM "feedback";`;
+        //not positive on what we are actually pooling here
+        pool.query(queryText)
+        .then(results => {
+        res.send(results.rows);
+        })
+        .catch(err => {
         console.log('ERROR: GET all feedback', err);
         res.sendStatus(500);
-    })
+        })
+    }  
 });
 
 // Handles PUT request, change feedback archived status to TRUE
+// Access level for admin-only access?
 router.put('/:id', (req, res) => {
     const updatedFeedback = req.body;
     // this query updates the archive boolean status of a job seeker's feedback
-    const queryText = `UPDATE "feedback" SET "archived" = $1 WHERE "id" = $5;`;
+    const queryText = `UPDATE "feedback" SET "archived" = $1 WHERE "id" = $2;`;
     // this variable contains the archived status to be updated 
     // also notes the id of the table column being edited
     const queryValues = [updatedFeedback.archived, updatedFeedback.id];
