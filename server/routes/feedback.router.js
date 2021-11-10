@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
 });
 
 // Handles PUT request, change feedback archived status to TRUE
-router.put('/id', (req, res) => {
+router.put('/:id', (req, res) => {
     const updatedFeedback = req.body;
     // this query updates the archive boolean status of a job seeker's feedback
     const queryText = `UPDATE "feedback" SET "archived" = $1 WHERE "id" = $5;`;
