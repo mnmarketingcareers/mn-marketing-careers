@@ -71,43 +71,49 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
                         RETURNING "id";`;
 
-    // set the query result to a new variable, for posting to the job_postings table
-    const posting_contact_id = await pool.query(postingContactQuery, 
+    // run the query for the posting contact table
+    const postingContactQueryResult = await pool.query(postingContactQuery, 
         [req.body.posting_contact_name, req.body.posting_contact_email]
     );
-    console.log('posting contact ID', posting_contact_id.rows[0].id);
+    console.log('posting contact ID', postingContactQueryResult.rows[0].id);
+    // set the returned ID to a new variable 
+    const posting_contact_id = postingContactQueryResult.rows[0].id;
 
     // for hiring contact, only insert a value if we get one from the client
     let hiring_contact_id = '';
-    // we'll know that we have one id share_contact is true
-    if(req.body.share_contact === true){
-        hiring_contact_id = await pool.query(hiringContactQuery, 
+    // we'll know that we have a value to insert if share_contact is true
+    if(req.body.share_contact === true){   // if true, query the database
+        const checkHiringContact = await pool.query(hiringContactQuery, 
             [req.body.name, req.body.email, req.body.title, req.body.phone]
         );
-    } 
+        console.log('hiring contact ID', checkHiringContact.rows[0].id);
+        hiring_contact_id = checkHiringContact.rows[0].id;  // Set the returned ID to the variable
+    } else {        // if false, leave the variable undefined
+        hiring_contact_id = null; 
+        console.log('hiring contact ID', hiring_contact_id);
+    }
 
-    // const hiring_contact_id = await setNewId();
-
-    console.log('hiring contact ID', hiring_contact_id.rows[0].id);
-
-    const company_id = await pool.query(companyQuery, 
+    // run the query for the company table
+    const companyQueryResult = await pool.query(companyQuery, 
         [req.body.company]
     );
-    console.log('company id', company_id.rows[0].id);
-
+    console.log('company id', companyQueryResult.rows[0].id);
+    // set the returned ID to a new variable 
+    const company_id = companyQueryResult.rows[0].id;
+ 
     // Insert the new Job posting, setting the returned ID to a variable
     const rowId = await pool.query(jobQuery, 
             [
-                company_id.rows[0].id,                 // $1 
+                company_id,                 // $1 
                 req.body.available_role,    // $2
                 req.body.description,       // $3
                 req.body.application_link,  // $4
                 req.body.job_city,          // $5
                 req.body.job_state,         // $6
                 req.body.remote,            // $7
-                posting_contact_id.rows[0].id,         // $8
+                posting_contact_id,         // $8
                 req.body.share_contact,     // $9
-                hiring_contact_id.rows[0].id,          // $10
+                hiring_contact_id,          // $10
                 userId,                     // $11
                 'PENDING_APPROVAL'          // $12
             ]
