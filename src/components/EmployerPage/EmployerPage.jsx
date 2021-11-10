@@ -6,15 +6,12 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardHeader from '@mui/material/CardHeader';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
-import CardContent from '@mui/material/CardContent';
-
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -44,6 +41,8 @@ function EmployerPage() {
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
     const [jobPostingsTable, setJobPostingsTable] = useState({
+        posting_contact_name: '',
+        posting_contact_email: '',
         company: '',
         available_role: '',
         application_link: '',
@@ -56,7 +55,7 @@ function EmployerPage() {
         email: '',
         title: '',
         phone: '',
-        job_type_name: []
+        job_types: []
 
     });
 
@@ -169,6 +168,8 @@ function EmployerPage() {
 
     const handleJob = (event) => {
         console.log('what is event?', event);
+        console.log('what is names?', names);
+        console.log('what is names?', names[0].field);
         const {
             target: { value },
         } = event;
@@ -176,15 +177,14 @@ function EmployerPage() {
             // On autofill we get a the stringified value.
             typeof value === 'string' ? value.split(',') : value
         );
-        console.log('what is job?', value);
-        for (const i of value){
-            if (i == 'Account Management' && jobPostingsTable.job_type_name.includes('1') === false){
-                jobPostingsTable.job_type_name.push('1');
-            } if (i == 'Advertising' && jobPostingsTable.job_type_name.includes('2') === false){
-                jobPostingsTable.job_type_name.push('2');
-            }
-        }
-        console.log('jobPostingsTable.job_type_name', jobPostingsTable.job_type_name);
+        // console.log('what is job?', value);
+        // for (let i in value){
+        //     if( value[i] == names[i].field){
+        //         console.log('inside function', names[i].order)
+        //         // setJobPostingsTable({ ...jobPostingsTable, job_types: names.order[i]});
+        //     }
+        setJobPostingsTable({ ...jobPostingsTable, job_types: value });
+        // }
     };
 
     // const handleJob = (event) => {
@@ -230,7 +230,33 @@ function EmployerPage() {
     return (
         <>
             <form className="employer-form" onSubmit={submitEmployerJob}>
-                <Grid container spacing={2}>
+            <Grid container spacing={2}>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Your name" />
+                            <TextField
+                                type="text"
+                                id="poster-name"
+                                variant="standard"
+                                placeholder="name"
+                                className="poster-name"
+                                onChange={setValues('posting_contact_name')}
+                                value={jobPostingsTable.posting_contact_name} ></TextField>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Your email" />
+                            <TextField
+                                type="text"
+                                id="poster-email"
+                                variant="standard"
+                                placeholder="email"
+                                className="poster-email"
+                                onChange={setValues('posting_contact_email')}
+                                value={jobPostingsTable.posting_contact_email} ></TextField>
+                        </Card>
+                    </Grid>
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="Company Name" />
