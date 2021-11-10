@@ -28,7 +28,7 @@ function EmployerPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // On the question : "Is this job remote?"; toggles wether other input field is displayed or not.
+    // On the question : "Is this job remote?"; toggles whether other input field is displayed or not.
     const [toggleOther, setToggleOther] = useState(true);
 
     const changeState = () => {
