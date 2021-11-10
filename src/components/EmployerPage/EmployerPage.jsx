@@ -60,6 +60,7 @@ function EmployerPage() {
     });
 
     const submitEmployerJob = (event) => {
+        event.preventDefault();
         console.log('what is jobPostingsTable', jobPostingsTable)
         dispatch({
             type: 'NEW_EMPLOYER_JOB_POST',
@@ -76,19 +77,22 @@ function EmployerPage() {
         setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value })
     };
 
-    const checkBoxValue = (event) => {
-        console.log('in checkbox: event.target.value', event.target.name)
-        console.log('in checkbox: event.target.checked', event.target.checked)
-        switch (event.target.name) {
-            case 'yes':
-                setJobPostingsTable({ ...jobPostingsTable, share_contact: true })
-                changeContactView();
-                break;
-            case 'no':
-                setJobPostingsTable({ ...jobPostingsTable, share_contact: false })
-                break;
+    const shareContact = (event) => {
+        console.log('what is event', event.target.value)
+            console.log('in yes')
+            setJobPostingsTable({ ...jobPostingsTable, share_contact: true });
+            changeContactView();
+        };
+  
 
-        }
+    const dontShareContact = (event) => {
+        console.log('what is event', event.target.value)
+        console.log('in no');
+        setJobPostingsTable({ ...jobPostingsTable, share_contact: false,
+                                                    name: '',
+                                                    email: '',
+                                                    title: '',
+                                                    phone: '', });
     }
 
     const ITEM_HEIGHT = 48;
@@ -164,7 +168,7 @@ function EmployerPage() {
 
     const [job, setJob] = useState([]);
     const jobType = [];
-    
+
 
     const handleJob = (event) => {
         console.log('what is event?', event);
@@ -174,63 +178,16 @@ function EmployerPage() {
             target: { value },
         } = event;
         setJob(
-            // On autofill we get a the stringified value.
+            // On autofill we get the stringified value.
             typeof value === 'string' ? value.split(',') : value
         );
-        // console.log('what is job?', value);
-        // for (let i in value){
-        //     if( value[i] == names[i].field){
-        //         console.log('inside function', names[i].order)
-        //         // setJobPostingsTable({ ...jobPostingsTable, job_types: names.order[i]});
-        //     }
         setJobPostingsTable({ ...jobPostingsTable, job_types: value });
-        // }
     };
-
-    // const handleJob = (event) => {
-    //     console.log('what is event?', event);
-    //     const {
-    //         target: { value },
-    //     } = event;
-    //     console.log('what is value?', value)
-    //     setJob(
-    //         // On autofill we get a the stringified value.
-    //         typeof value === 'string' ? value.split(',') : value
-    //     );
-    //     if (value.includes('Account Management') && jobPostingsTable.job_type_name.includes('1') === false) {
-    //         jobPostingsTable.job_type_name.push('1')
-    //     } if (value.includes('Advertising') && jobPostingsTable.job_type_name.includes('2') === false) {
-    //         jobPostingsTable.job_type_name.push('2')
-    //     } if (value.includes('Branding') && jobPostingsTable.job_type_name.includes('3') === false) {
-    //         jobPostingsTable.job_type_name.push('3')
-    //     } if (value.includes('Communications') && jobPostingsTable.job_type_name.includes('4') === false){
-    //         jobPostingsTable.job_type_name.push('4')
-    //     }
-    //     console.log('jobPostingsTable.job_type_name', jobPostingsTable.job_type_name);
-    // };
-
-    // const handleJob = (event) => {
-    //     console.log('what is event?', event);
-    //     const {
-    //         target: { value },
-    //     } = event;
-    //     console.log('what is value?', value)
-    //     setJob(
-    //         // On autofill we get a the stringified value.
-    //         typeof value === 'string' ? value.split(',') : value
-    //     );
-    //     if (value.includes('Account Management')) {
-    //         setJobPostingsTable({ ...jobPostingsTable, job_type_name: {...'1'} })
-    //     } if (value.includes('Branding')) {
-    //         setJobPostingsTable({...jobPostingsTable, job_type_name: {...'3'} })
-    //     };
-    //     console.log('what is jobPostingsTable.job_type_name', jobPostingsTable.job_type_name);
-    // };
 
     return (
         <>
             <form className="employer-form" onSubmit={submitEmployerJob}>
-            <Grid container spacing={2}>
+                <Grid container spacing={2}>
                     <Grid item xs={8}>
                         <Card>
                             <CardHeader title="Your name" />
@@ -370,27 +327,31 @@ function EmployerPage() {
                                     <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
                                     <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
                                     <FormControlLabel value="other" onClick={changeState} control={<Radio />} label="Other" />
-                                    {toggleOther ? <p></p> : <p><input className="other" placeholder="details" onChange={setValues('remote')} ></input></p>}
+                                    {toggleOther ? <p></p> : <div><TextField className="other" variant="standard" placeholder="details" onChange={setValues('remote')} ></TextField></div>}
                                 </RadioGroup>
                             </FormControl>
                         </Card>
                     </Grid>
+
                     <Grid item xs={8}>
                         <Card>
-                            <CardHeader title="Can we share a contact person?" />
-                            <FormGroup>
-                                <FormControlLabel control={<Checkbox />} name="yes" onClick={checkBoxValue} label="Yes" />
-                                {toggleContact ? <p></p> : <p><input className="hiring-contact-name" placeholder="name" onChange={setValues('name')} ></input>
-                                    <input className="hiring-contact-email" placeholder="email" onChange={setValues('email')} ></input>
-                                    <input className="hiring-contact-title" placeholder="title" onChange={setValues('title')} ></input>
-                                    <input className="hiring-contact-phone" placeholder="phone" onChange={setValues('phone')} ></input></p>}
-                                <FormControlLabel control={<Checkbox />} name="no" onClick={checkBoxValue} label="No" />
-                            </FormGroup>
-                        </Card>
-                    </Grid>
+                            <CardHeader title="Can we share a contact person" />
+                            <FormControl component="fieldset">
+                                <RadioGroup
+                                    aria-label="Can we share a contact person?"
+                                    name="radio-buttons-group"
+                                >
+                                <FormControlLabel placeholder="yes" value="yes" onClick={shareContact} control={<Radio />} label="Yes" />
+                                    {toggleContact ? <p></p> : <div><TextField className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('name')} ></TextField>
+                                    <TextField className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('email')} ></TextField>
+                                    <TextField className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>
+                                    <TextField className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField></div>}
+                                <FormControlLabel placeholder="no" value="no" onClick={dontShareContact} control={<Radio />} label="No" />
+                            </RadioGroup>
+                        </FormControl>
+                    </Card>
                 </Grid>
-
-
+            </Grid>
                 <input className="submit-employer-form-button" type='submit' value='Submit' />
             </form>
 
