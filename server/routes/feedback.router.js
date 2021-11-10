@@ -28,6 +28,7 @@ router.get('/', (req, res) => {
     console.log('in router.get');
     const queryText = `SELECT * FROM "feedback";`;
     //not positive on what we are actually pooling here
+    //unsure if req.body.id is the correct course of action here
     pool.query(queryText, [req.body.id])
     .then( result=> {
         res.send(result.rows);
