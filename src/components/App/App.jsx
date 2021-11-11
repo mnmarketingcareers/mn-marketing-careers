@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import EmployerPage from '../EmployerPage/EmployerPage';
+import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 
 import './App.css';
 
@@ -109,6 +110,12 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
+          </Route>
+          <Route 
+          exact
+          path="/FeedbackPage"
+          >
+            <UnsubFeedbackPage />
           </Route>
 
           <ProtectedRoute
