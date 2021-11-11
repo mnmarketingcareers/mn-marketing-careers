@@ -97,7 +97,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
         console.log('In Job Postings PUT, updating ID', req.body.id);
         const query = `UPDATE "job_postings" SET "status" = $1 WHERE "id" = $2;`;
         
-        const results = await pool.query(query, [req.body.status, req.body.id])
+        const results = await pool.query(query, [req.body.status, req.params.id])
         console.log('Rows updated', results.rowCount);
         res.sendStatus(201);
         
@@ -111,6 +111,25 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
 /**
  * DELETE route here
  */
+router.delete('/:id', rejectUnauthenticated, async (req, res) =>{
+    // code here
+    // if requiring access level check, uncomment the next 4 lines
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level to delete this content');
+        return;
+    }
+    try {
+        const query = `DELETE FROM "job_postings" WHERE "id" = $1`;
+        const result = await pool.query(query, [req.params.id]);
+        console.log('Rows updated', results.rowCount);
+        res.sendStatus(201);
+        
+        console.log('end of DELETE');
+    } catch (error) {
+        console.log('ERROR in DELETE');
+        res.sendStatus(500);
+    }
+});
 
 /**
  * POST route template
