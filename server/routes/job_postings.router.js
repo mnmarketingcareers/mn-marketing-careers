@@ -9,7 +9,7 @@ const {
  * GET route template
  */
 router.get('/', rejectUnauthenticated, async (req, res) => {
-  // GET route code here
+  console.log('In GET for all recent, approved job postings');
   const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -27,13 +27,15 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";
             ;`
     pool.query(query).then((results) => {
+        console.log('Resulting Rows to send', results.rows);
         res.send(results.rows);
     }).catch(error => {
         console.log('ERROR in GET all job postings', error);
         res.sendStatus(500);
-    })
+    });
 });
 
+// TO DO: check if this is used here
 router.get('/types', rejectUnauthenticated, (req, res) => {
     const query = `SELECT * FROM "job_types";`;
     pool.query(query).then(result => {
@@ -44,7 +46,61 @@ router.get('/types', rejectUnauthenticated, (req, res) => {
     });
 });
 
+/**
+ * GET by id here
+ */
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('In GET by id', req.body.id);
+    // if requiring access level check, uncomment the next 4 lines
+    // if (req.user.access_level < 1) {
+    //     res.status(500).send('You do not have the correct access level for this content');
+    //     return;
+    // }
+    const query = `
+                SELECT "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
+                ARRAY_AGG("jt"."type") 
+                FROM "job_postings" AS "jp"
+                JOIN "company" AS "co" ON "jp".company_id = "co".id
+                LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
+                LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
+                LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
+                WHERE "jp"."id" = $1
+                GROUP BY "jp"."id", "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";
+    `;
+    pool.query(query, [req.body.id]).then((results) => {
+        console.log('results', results.rows);
+        res.send(results.rows[0]);
+    }).catch(error => {
+        console.log('ERROR in GET all job postings', error);
+        res.sendStatus(500);
+    })
+});
 
+/**
+ * GET QUERY HERE
+ */
+
+/**
+ * PUT Route for changing STATUS here
+ */
+router.put('/:id', rejectUnauthenticated, async, (req, res) => {
+    try {
+        
+        console.log('end of PUT');
+        // TO DO: send success!
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+})
+
+/**
+ * DELETE route here
+ */
 
 /**
  * POST route template
