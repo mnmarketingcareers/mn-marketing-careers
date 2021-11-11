@@ -17,7 +17,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
-
 import './EmployerPage.css';
 
 function EmployerPage() {
@@ -186,6 +185,7 @@ function EmployerPage() {
 
     return (
         <>
+            
             <form className="employer-form" onSubmit={submitEmployerJob}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
