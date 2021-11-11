@@ -32,6 +32,10 @@ function Nav() {
               Info Page
             </Link>
 
+            <Link className="navLink" to="/adminhub">
+              Admin Hub
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}
