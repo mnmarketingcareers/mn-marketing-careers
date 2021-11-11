@@ -19,6 +19,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
+import Modal from "../Modal/Modal.jsx";
 
 import './Main.css';
 
@@ -27,6 +28,8 @@ function Main() {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const [openModal, setOpenModal] = useState(false)
 
     return (
         <>
@@ -39,12 +42,20 @@ function Main() {
                         and apply directly through the hiring company unless otherwise noted. 
                         </div>
                 </div>
+                {openModal && <Modal closeModal={setOpenModal} />}
                 <div className="top-of-table"><h2>Companies Hiring</h2></div>
             </div>
             <div className="tables-container">
                 <div className="job-postings-table">
-                    
-                
+                </div>
+            </div>
+            <div className="links-container">
+                <div className="subscribe">
+                Receive this email from a friend?
+                Sign up to receive our weekly email update <button onClick={() => {setOpenModal(true)}}>Subscribe</button>
+                </div>
+                <div className="submit">
+                Submit open positions to be included in an upcoming update <button>Submit</button>
                 </div>
 
             </div>
