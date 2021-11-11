@@ -49,7 +49,7 @@ router.get('/feedbacklist', (req, res) => {
 router.put('/:id', (req, res) => {
     if (req.user.access_level === 1) {
         // this query updates the archive boolean status of a job seeker's feedback
-        const queryText = `UPDATE "feedback" SET "archived" = TRUE WHERE "id" = $1;`;
+        const queryText = `UPDATE "feedback" SET "archived" = NOT "archived" WHERE "id" = $1;`;
         // this pools the query text and values and sends the updated data back to the database
         pool.query(queryText)
         .then(() => { res.sendStatus(200); })
