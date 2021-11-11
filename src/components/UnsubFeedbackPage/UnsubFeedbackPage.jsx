@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { TextField } from '@mui/material';
+import './UnsubFeedbackPage.css';
 import FormGroup from '@mui/material/FormGroup';
 import axios from 'axios';
 import { Feedback } from '@mui/icons-material';
@@ -83,9 +84,10 @@ function UnsubFeedbackPage() {
 
     return (
         <>
-        <div>
+        <div className="unsubheader">
             <h2>Unsubcribing? Let Us Know Why!</h2>
         </div>
+        <div className="unsubfeedback">
             <FormControl component="fieldset">
             <FormLabel component="legend">Select a Reason</FormLabel>
             <RadioGroup
@@ -124,6 +126,7 @@ function UnsubFeedbackPage() {
             </RadioGroup>
             <input onClick={handleSubmit} className="btn" type="submit" name="submit" value="submit feedback" />
             </FormControl>
+        </div>
         </>
         
     )
