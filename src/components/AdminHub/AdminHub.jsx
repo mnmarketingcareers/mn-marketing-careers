@@ -73,12 +73,12 @@ const AdminHub = () => {
 
   return (
     <div className="adminHubPage">
-      <Typography className="tempHeader">WUT IT DO, ADMIN PAGE</Typography>
+      <h1 className="tempHeader">WUT IT DO, ADMIN PAGE</h1>
 
       <Container className="adminContainer">
         <div className="gridWrapper">
           <div className="gridL">
-            <Typography variant="h6">Manual Subsucriber Entry</Typography>
+            <Typography variant="h6">Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
               <TextField
                 value={userEmail}
@@ -120,7 +120,7 @@ const AdminHub = () => {
                 onChange={(event) => setUserZip(event.target.value)}
               />
               <br />
-              <Button type="submit">Submit</Button>
+              <Button variant="contained" type="submit">Submit</Button>
             </form>
           </div>
 
@@ -164,6 +164,16 @@ const AdminHub = () => {
                         fontSize: "20px",
                       }}
                     >
+                      Zip Code
+                       </TableCell>
+                    <TableCell
+                      className="tableHeaderCell"
+                      style={{
+                        fontFamily: "Lato",
+                        textAlign: "center",
+                        fontSize: "20px",
+                      }}
+                    >
                       Status
                     </TableCell>
                   </TableRow>
@@ -191,6 +201,19 @@ const AdminHub = () => {
                           {item.email_address}
                         </TableCell>
 
+
+                        <TableCell
+                          style={{
+                            fontFamily: "Lato",
+                            textAlign: "center",
+                            fontSize: "16px",
+                          }}
+                        >
+                          {item.merge_fields.ADDRESS.zip}
+                        </TableCell>
+
+
+
                         <TableCell
                           style={{
                             fontFamily: "Lato",
@@ -203,7 +226,7 @@ const AdminHub = () => {
                       </TableRow>
                     ))
                   ) : (
-                    <img className="loader" src="./images/Pendulum.gif" />
+                    <img src="./images/Pendulum.gif" />
                   )}
                 </TableBody>
               </Table>

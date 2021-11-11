@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import employerSaga from './employer.saga';
 import getSubsSaga from './getSubs.saga';
+import addSubscriberSaga from './addSubscriber.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     employerSaga(),
-    getSubsSaga() //get from API
+    getSubsSaga(), //get from API
+    addSubscriberSaga() //post to API
   ]);
 }
