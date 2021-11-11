@@ -47,11 +47,13 @@ router.get('/feedbacklist', (req, res) => {
 // Handles PUT request, change feedback archived status to TRUE
 // Access level for admin-only access?
 router.put('/:id', (req, res) => {
+    
     if (req.user.access_level === 1) {
         // this query updates the archive boolean status of a job seeker's feedback
         const queryText = `UPDATE "feedback" SET "archived" = NOT "archived" WHERE "id" = $1;`;
+        const queryValues = [req.body.id];
         // this pools the query text and values and sends the updated data back to the database
-        pool.query(queryText)
+        pool.query(queryText, queryValues)
         .then(() => { res.sendStatus(200); })
         .catch((err) => {
             console.log('Error completing UPDATE feedback query', err);
