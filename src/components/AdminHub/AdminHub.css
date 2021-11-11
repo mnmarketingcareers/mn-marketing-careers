@@ -5,23 +5,6 @@
     text-align: center;
 }
 
-.tempHeader::after {
-    content: '';
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 4px;
-  bottom: 0;
-  left: 0;
-  background-color: black;
-  transform-origin: center;
-  transition: transform 0.3s ease-out;
-}
-
-.tempHeader:hover::after {
-    transform: scaleX(.29);
-  transform-origin: center;
-}
 
 .adminContainer {
     height: 800px;
