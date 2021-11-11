@@ -7,14 +7,16 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import useStyles from "../Styles/Styles";
+import useStyles from "../Styles/Styles"; //important paste this
 
 import "./AdminHub.css";
 
 const AdminHub = () => {
-  const classes = useStyles();
+  const classes = useStyles(); //important paste this
   const dispatch = useDispatch();
   const subs = useSelector((store) => store.setSubsListReducer);
+  const user = useSelector((store) => store.user);
+
 
   //loading and redux state
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +33,7 @@ const AdminHub = () => {
     console.log("page loaded - fetching subscribers...");
     dispatch({ type: "GET_SUBS" });
     setSubList(subs.data);
+    console.log('user is:', user.first_name)
   }, []);
 
   //check email - is it real? if keep required attribute //deletelater
@@ -75,12 +78,12 @@ const AdminHub = () => {
 
   return (
     <div className="adminHubPage">
-      <h1 className={classes.adminHeader}>Admin Page Header!</h1>
+      <Typography style={{fontSize: '40px', margin: 30}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
 
       <Container className="adminContainer">
         <div className="gridWrapper">
           <div className="gridL">
-            <Typography variant="h6">Manual Subscriber Entry</Typography>
+            <Typography variant="h4">Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
               <TextField
                 value={userEmail}
@@ -122,7 +125,7 @@ const AdminHub = () => {
                 onChange={(event) => setUserZip(event.target.value)}
               />
               <br />
-              <Button variant="contained" type="submit">Submit</Button>
+              <Button className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
             </form>
           </div>
 
@@ -135,46 +138,28 @@ const AdminHub = () => {
             </Typography>
 
             <Paper elevation={8} className="adminPaper">
-              <Table className="tableMain">
-                <TableHead>
+              <TableContainer sx={{ maxHeight: 470 }}>
+              <Table className="tableMain" stickyHeader aria-label="sticky table">
+                <TableHead className={classes.tableHeader}>
                   <TableRow>
                     <TableCell
-                      className="tableHeaderCell"
-                      style={{
-                        fontFamily: "Lato",
-                        textAlign: "center",
-                        fontSize: "20px",
-                      }}
+                      className={classes.tableHeaderCell}
                     >
                       Name
                     </TableCell>
                     <TableCell
-                      className="tableHeaderCell"
-                      style={{
-                        fontFamily: "Lato",
-                        textAlign: "center",
-                        fontSize: "20px",
-                      }}
+                      className={classes.tableHeaderCell}
                     >
                       Email
                     </TableCell>
                     <TableCell
-                      className="tableHeaderCell"
-                      style={{
-                        fontFamily: "Lato",
-                        textAlign: "center",
-                        fontSize: "20px",
-                      }}
+                      className={classes.tableHeaderCell}
                     >
                       Zip Code
                        </TableCell>
                     <TableCell
-                      className="tableHeaderCell"
-                      style={{
-                        fontFamily: "Lato",
-                        textAlign: "center",
-                        fontSize: "20px",
-                      }}
+                      className={classes.tableHeaderCell}
+                      
                     >
                       Status
                     </TableCell>
@@ -183,7 +168,7 @@ const AdminHub = () => {
                 <TableBody className="adminTableBody">
                   {subs.length > 0 ? (
                     subs[0].map((item) => (
-                      <TableRow key={item.id}>
+                      <TableRow key={item.id} className={classes.tableBodyRow}>
                         <TableCell
                           style={{
                             fontFamily: "Lato",
@@ -232,6 +217,7 @@ const AdminHub = () => {
                   )}
                 </TableBody>
               </Table>
+              </TableContainer>
             </Paper>
             <Typography></Typography>
           </div>
