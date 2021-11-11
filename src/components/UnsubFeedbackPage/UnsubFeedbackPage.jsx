@@ -61,6 +61,15 @@ function UnsubFeedbackPage() {
         setMessage({...reason, message: event.target.value})
     }
 
+    // if an unsubscriber selects the "other option" 
+    // we want to toggle from true to false for the ternerary operator
+    const [toggleOther, setToggleOther] = useState(true);
+
+    // this changeState function is called in the click action firing the "other" radio button
+    const changeState = () => {
+        setToggleOther(!toggleOther);
+    }
+
 
     // in this return I want a selection of reasons as radio/check buttons
     // conditional rendering to the DOM
@@ -106,11 +115,12 @@ function UnsubFeedbackPage() {
                 control={<Radio />} 
                 label="I Did Not Sign Up to Receive These Emails" 
                 onClick={radioButtonValue}/>
-                <TextField 
+                <FormControlLabel value="other" onClick={changeState} control={<Radio />} label="Other" />
+                {toggleOther ? <p></p> : <div><TextField 
                 id="standard-basic" 
                 label="Other" 
                 variant="standard" 
-                onChange={textFieldValue}/>
+                onChange={textFieldValue}/></div>}
             </RadioGroup>
             <input onClick={handleSubmit} className="btn" type="submit" name="submit" value="submit feedback" />
             </FormControl>
