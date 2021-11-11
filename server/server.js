@@ -13,6 +13,13 @@ const userRouter = require('./routes/user.router');
 const subsRouter = require('./routes/subs.router');
 const feedbackRouter = require('./routes/feedback.router');
 
+
+
+// jobs routers
+const jobsRouter = require('./routes/job_postings.router');
+const jobTypesRouter = require('./routes/job_types.router');
+
+
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +35,13 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/subs', subsRouter);
 app.use('/api/feedback', feedbackRouter);
+
+
+
+
+// use the jobs routers
+app.use('/api/job', jobsRouter);
+app.use('/api/jobtypes', jobTypesRouter)
 
 // Serve static files
 app.use(express.static('build'));
