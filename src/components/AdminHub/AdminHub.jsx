@@ -7,10 +7,12 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import useStyles from "../Styles/Styles";
 
 import "./AdminHub.css";
 
 const AdminHub = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const subs = useSelector((store) => store.setSubsListReducer);
 
@@ -73,7 +75,7 @@ const AdminHub = () => {
 
   return (
     <div className="adminHubPage">
-      <h1 className="tempHeader">WUT IT DO, ADMIN PAGE</h1>
+      <h1 className={classes.adminHeader}>Admin Page Header!</h1>
 
       <Container className="adminContainer">
         <div className="gridWrapper">
