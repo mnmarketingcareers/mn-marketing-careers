@@ -62,7 +62,7 @@ CREATE TABLE "job_types" (
 
 CREATE TABLE "company" (
 	"id" serial NOT NULL,
-	"company_name" varchar(500) NOT NULL,
+	"company_name" varchar(500) UNIQUE NOT NULL,
 	CONSTRAINT "company_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
