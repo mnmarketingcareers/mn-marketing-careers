@@ -1,0 +1,70 @@
+.tempHeader {
+    display: block;
+    position: relative;
+    color: #0087ca;
+    text-align: center;
+}
+
+.tempHeader::after {
+    content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transform-origin: center;
+  transition: transform 0.3s ease-out;
+}
+
+.tempHeader:hover::after {
+    transform: scaleX(.29);
+  transform-origin: center;
+}
+
+.adminContainer {
+    height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.getSubsButton {
+    font-size: 24px;
+    font-weight: bold;
+} 
+
+.gridL {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+  
+}
+
+.gridR {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.gridWrapper {
+    max-width: 1000px;
+margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  grid-gap: 16px;
+  padding: 0 50px;
+}
+
+img {
+    justify-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
