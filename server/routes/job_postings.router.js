@@ -8,7 +8,7 @@ const {
 /**
  * GET route template
  */
-router.get('/', rejectUnauthenticated, async (req, res) => {
+router.get('/', async (req, res) => {
   console.log('In GET for all recent, approved job postings');
   const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
@@ -49,7 +49,7 @@ router.get('/types', rejectUnauthenticated, (req, res) => {
 /**
  * GET by id here
  */
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/:id', (req, res) => {
     console.log('In GET by id', req.body.id);
     // if requiring access level check, uncomment the next 4 lines
     // if (req.user.access_level < 1) {
@@ -121,7 +121,7 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) =>{
     try {
         const query = `DELETE FROM "job_postings" WHERE "id" = $1`;
         const result = await pool.query(query, [req.params.id]);
-        console.log('Rows updated', results.rowCount);
+        console.log('Rows updated', result.rowCount);
         res.sendStatus(201);
         
         console.log('end of DELETE');
@@ -132,7 +132,7 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) =>{
 });
 
 /**
- * POST route template
+ * POST route for new job postings
  */
 router.post('/', rejectUnauthenticated, async (req, res) => {
   // TO DO: CLEAR OUT MOST OF THE CONSOLE LOGS
