@@ -56,7 +56,10 @@ function UnsubFeedbackPage() {
     }
     // function for text field
 
-    // both functions will need to go into setMessage
+    const textFieldValue = (event) => {
+        console.log('inside text field', event.target.value);
+        setMessage({...reason, message: event.target.value})
+    }
 
 
     // in this return I want a selection of reasons as radio/check buttons
@@ -104,7 +107,7 @@ function UnsubFeedbackPage() {
                 id="standard-basic" 
                 label="Other" 
                 variant="standard" 
-                onClick={(event) => setMessage(event.target.value)}/>
+                onChange={textFieldValue}/>
             </RadioGroup>
             <input onClick={handleSubmit} className="btn" type="submit" name="submit" value="submit feedback" />
             </FormControl>
