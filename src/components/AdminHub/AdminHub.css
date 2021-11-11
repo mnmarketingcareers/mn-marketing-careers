@@ -5,7 +5,11 @@
 }
 
 .adminContainer {
-    text-align: center;
+    height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .getSubsButton {
@@ -13,4 +17,28 @@
     font-weight: bold;
 } 
 
+.gridL {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+  
+}
 
+.gridR {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.gridWrapper {
+    max-width: 1000px;
+margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  grid-gap: 16px;
+  padding: 0 50px;
+}

@@ -1,12 +1,12 @@
 import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
-function* fetchAllSubs() {
+function* fetchAllSubs()  {
   try {
       console.log('Get all subs saga')
     const response = yield axios.get("/api/subs/");
-    yield put({ type: "SET_SUBS_LIST", payload: response });
-    console.log('response is:', response.data)
+    yield put({ type: "SET_SUBS_LIST", payload: response.data.members });
+    console.log('response is:', response.data.members)
   } catch (error) {
     console.log("Failure to GET ALL SUBS AND ALL INFO", error);
   }
