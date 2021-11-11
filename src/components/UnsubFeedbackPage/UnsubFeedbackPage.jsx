@@ -84,22 +84,22 @@ function UnsubFeedbackPage() {
                 onClick={radioButtonValue} 
                 />
                 <FormControlLabel 
-                value="reasonTwo" 
+                value="Found a Job Through Other Mediums" 
                 control={<Radio />} 
                 label="Found a Job Through Other Mediums"
-                onClick={(event) => setReason(event.target.value)} 
+                onClick={radioButtonValue} 
                 />
                 <FormControlLabel 
-                value="reasonThree" 
+                value="Content Not Relevant To My Search" 
                 control={<Radio />} 
                 label="Content Not Relevant To My Search" 
-                onClick={(event) => setReason(event.target.value)}
+                onClick={radioButtonValue}
                 />
                 <FormControlLabel 
-                value="reasonFour" 
+                value="I Did Not Sign Up to Receive These Emails" 
                 control={<Radio />} 
                 label="I Did Not Sign Up to Receive These Emails" 
-                onClick={(event) => setReason(event.target.value)}/>
+                onClick={radioButtonValue}/>
                 <TextField 
                 id="standard-basic" 
                 label="Other" 
