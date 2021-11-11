@@ -69,6 +69,9 @@ function UnsubFeedbackPage() {
     // send results to database on click submit
     // navigate back to main page option needs to be available
 
+    //fix margins for form, center on page or just increase margins on left side
+    //fix added select radio button to other field, on click, show text field
+
     return (
         <>
         <div>
