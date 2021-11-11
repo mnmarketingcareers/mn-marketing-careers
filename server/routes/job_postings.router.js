@@ -94,14 +94,19 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
         return;
     }
     try {
+        console.log('In Job Postings PUT, updating ID', req.body.id);
+        const query = `UPDATE "job_postings" SET "status" = $1 WHERE "id" = $2;`;
+        
+        const results = await pool.query(query, [req.body.status, req.body.id])
+        console.log('Rows updated', results.rowCount);
+        res.sendStatus(201);
         
         console.log('end of PUT');
-        // TO DO: send success!
     } catch (error) {
-        console.log(error);
+        console.log('ERROR in PUT',error);
         res.sendStatus(500);
     }
-})
+});
 
 /**
  * DELETE route here
