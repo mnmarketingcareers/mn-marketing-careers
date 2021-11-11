@@ -44,7 +44,7 @@ function Main() {
             <div className="tables-container">
                 <div className="job-postings-table">
                     
-
+                
                 </div>
 
             </div>
