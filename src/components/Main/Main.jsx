@@ -41,6 +41,13 @@ function Main() {
                 </div>
                 <div className="top-of-table"><h2>Companies Hiring</h2></div>
             </div>
+            <div className="tables-container">
+                <div className="job-postings-table">
+                    
+
+                </div>
+
+            </div>
         </>
     )
 
