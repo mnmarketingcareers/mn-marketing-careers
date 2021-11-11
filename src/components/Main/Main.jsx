@@ -76,8 +76,8 @@ function Main() {
                 </div>
                 <div className="submit">
                 Submit open positions to be included in an upcoming update <button>Submit</button>
-                    <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                {openModal ? <p></p> : <TableContainer component={Paper}>
+                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell key="company">
@@ -112,7 +112,7 @@ function Main() {
                                 </TableRow>
                             </TableBody>
                         </Table>
-                    </TableContainer>
+                    </TableContainer>}
                
 
 
