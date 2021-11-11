@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 // Handles GET request, get feedback data from database
 // Select for access level (secure submarine as an example)
 // wrap query around conditional that checks for access_level
-router.get('/feedbacklist', (req, res) => {
+router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
     console.log('in router.get', req.user);
     
     if (req.user.access_level === 1){
@@ -46,7 +46,7 @@ router.get('/feedbacklist', (req, res) => {
 
 // Handles PUT request, change feedback archived status to TRUE
 // Access level for admin-only access?
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
     
     if (req.user.access_level === 1) {
         // this query updates the archive boolean status of a job seeker's feedback
