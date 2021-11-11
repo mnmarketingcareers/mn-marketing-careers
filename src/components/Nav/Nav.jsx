@@ -24,6 +24,11 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
+
+            <Link className="navLink" to="/main">
+              <i>Main</i>
+            </Link>
+
             <Link className="navLink" to="/user">
               Home
             </Link>
@@ -33,7 +38,7 @@ function Nav() {
             </Link>
 
             <Link className="navLink" to="/adminhub">
-              Admin Hub
+              <i>Admin Hub</i>
             </Link>
 
             <LogOutButton className="navLink" />

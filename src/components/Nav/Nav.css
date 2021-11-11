@@ -37,6 +37,31 @@
   outline: 0;
 }
 
-.navLink:hover {
+/* .navLink:hover {
   background-color: #008183;
+} */
+
+.navLink {
+  /* display: block; */
+    position: relative;
+  text-align: center;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transform-origin: center;
+  transition: transform 0.3s ease-out;
+
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
 }
