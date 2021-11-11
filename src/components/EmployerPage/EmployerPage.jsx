@@ -257,7 +257,9 @@ function EmployerPage() {
                             <TextField
                                 type="text"
                                 placeholder="Description"
-                                variant="standard"
+                                sx={{ m: 1, width: 410 }}
+                                multiline rows={4}
+                                variant="outlined"
                                 className="description"
                                 onChange={setValues('description')}
                                 value={jobPostingsTable.description} ></TextField>
