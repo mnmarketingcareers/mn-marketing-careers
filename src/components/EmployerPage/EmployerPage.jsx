@@ -312,7 +312,6 @@ function EmployerPage() {
                                 type="text"
                                 placeholder="State"
                                 variant="standard"
-                                sx={{ textTransform: uppercase  }}
                                 className="state"
                                 onChange={setValues('job_state')}
                                 value={jobPostingsTable.job_state} ></TextField>
