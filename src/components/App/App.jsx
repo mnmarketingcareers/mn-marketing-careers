@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import EmployerPage from '../EmployerPage/EmployerPage';
 import AdminHub from '../AdminHub/AdminHub';
+import Main from '../Main/Main';
 
 import './App.css';
 
@@ -124,9 +125,16 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/EmployerPage"
+            path="/employerpage"
           >
             <EmployerPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/main"
+          >
+            <Main />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
