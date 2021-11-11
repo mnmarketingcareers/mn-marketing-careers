@@ -134,7 +134,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('what do all the job types look like?', allJobTypes);
 
     // loop over job types strings from client array, pushing their IDs to jobsByType array
-    const jobTypes = req.body.job_type_name;
+    const jobTypes = req.body.job_types;
     console.log('Job types from the client', jobTypes);
     for (let index in jobTypes) {
         console.log('looping through job Types from client');
