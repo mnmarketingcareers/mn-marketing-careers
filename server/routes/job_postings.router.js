@@ -87,7 +87,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 /**
  * PUT Route for changing STATUS here
  */
-router.put('/:id', rejectUnauthenticated, async, (req, res) => {
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
     try {
         
         console.log('end of PUT');
@@ -106,7 +106,7 @@ router.put('/:id', rejectUnauthenticated, async, (req, res) => {
  * POST route template
  */
 router.post('/', rejectUnauthenticated, async (req, res) => {
-  // POST route code here
+  // TO DO: CLEAR OUT MOST OF THE CONSOLE LOGS
   console.log('In job_postings router, POST');
   try {
     console.log('show me the monster:', req.body);

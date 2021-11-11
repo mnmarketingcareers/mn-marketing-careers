@@ -9,8 +9,13 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+
+
+
+// jobs routers
 const jobsRouter = require('./routes/job_postings.router');
 const jobTypesRouter = require('./routes/job_types.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -25,6 +30,11 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+
+
+
+
+// use the jobs routers
 app.use('/api/job', jobsRouter);
 app.use('/api/jobtypes', jobTypesRouter)
 
