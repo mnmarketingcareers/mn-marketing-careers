@@ -255,9 +255,11 @@ function EmployerPage() {
                         <Card>
                             <CardHeader title="Description" />
                             <TextField
+                                multiline rows={4}
+                                sx={{ m: 1, width: 410 }}
                                 type="text"
                                 placeholder="Description"
-                                variant="standard"
+                                variant='outlined'
                                 className="description"
                                 onChange={setValues('description')}
                                 value={jobPostingsTable.description} ></TextField>
@@ -310,7 +312,7 @@ function EmployerPage() {
                                 type="text"
                                 placeholder="State"
                                 variant="standard"
-                                maxLength="2"
+                                sx={{ textTransform: uppercase  }}
                                 className="state"
                                 onChange={setValues('job_state')}
                                 value={jobPostingsTable.job_state} ></TextField>
