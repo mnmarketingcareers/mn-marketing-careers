@@ -88,6 +88,11 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
  * PUT Route for changing STATUS here
  */
 router.put('/:id', rejectUnauthenticated, async (req, res) => {
+    // if requiring access level check, uncomment the next 4 lines
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level for this content');
+        return;
+    }
     try {
         
         console.log('end of PUT');
