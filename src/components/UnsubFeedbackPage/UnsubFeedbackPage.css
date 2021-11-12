@@ -1,0 +1,25 @@
+.unsubheader {
+    display: flex;
+    flex: 0 1 auto;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+}
+.unsubfeedback {
+    display: flex;
+    flex: 0 1 auto;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn:hover,
+.btn:hover::after{
+  cursor: pointer;
+  background-color: #5298a7;
+  transition: background-color 0.23s linear;
+}

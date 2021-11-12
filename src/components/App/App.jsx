@@ -25,6 +25,7 @@ import Main from '../Main/Main';
 
 // leaving space for other new Pages here
 import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
+import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 
 import './App.css';
 
@@ -91,6 +92,8 @@ function App() {
             <AdminHub />
           </ProtectedRoute>
 
+
+
           <Route
             exact
             path="/login"
@@ -133,20 +136,51 @@ function App() {
             }
           </Route>
 
-          <ProtectedRoute
+
+{/* 
+          <Route 
+          exact
+          path="/info"
+          >
+            <InfoPage />
+          </Route> */}
+
+
+          <Route 
+          exact
+          path="/unsubfeedbackpage"
+          >
+            <UnsubFeedbackPage />
+          </Route>
+
+
+
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/unsubfeedback"
+          >
+            <AboutPage />
+          </Route>
+
+
+
+          <Route
             exact
             path="/employerpage"
           >
             <EmployerPage />
-          </ProtectedRoute>
+          </Route>
 
-            {/* If this is the public list of Job postings, it does not need to ba a ProtectedRoute */}
-          <ProtectedRoute
+          <Route
             exact
             path="/main"
           >
             <Main />
-          </ProtectedRoute>
+          </Route>
+
+
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
