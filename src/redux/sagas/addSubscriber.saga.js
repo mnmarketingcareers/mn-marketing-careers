@@ -16,7 +16,7 @@ function* addNewSubscriber(action) {
     };
 };
 
-
+//listener - add a sub
 function* addSubscriberSaga() { 
     yield takeEvery("ADD_SUBSCRIBER", addNewSubscriber);
 }
