@@ -1,3 +1,12 @@
+
+/* The whole individual cards */
+.MuiPaper-root{
+    padding: 10px;
+    margin-right: 2px;
+    margin-bottom: 15px;
+}
+
+
 .MuiFormGroup-root {
     padding: 20px;
 }
@@ -7,14 +16,10 @@
 }
 
 .employer-form{
-    padding-left: 50px;
+    padding-left: 55px;
+    padding-bottom: 20px;
     display: grid;
     justify-content: center;
 }
 
 
-
-.state {
-    width: 41px;
-    text-transform: uppercase;
-}
