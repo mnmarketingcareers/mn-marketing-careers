@@ -41,6 +41,10 @@ function Nav() {
               <i>Admin Hub</i>
             </Link>
 
+            <Link className="navLink" to="/reviewsubmissions">
+              <i>Review New Posts</i>
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}

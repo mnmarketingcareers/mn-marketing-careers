@@ -23,6 +23,9 @@ import EmployerPage from '../EmployerPage/EmployerPage';
 import AdminHub from '../AdminHub/AdminHub';
 import Main from '../Main/Main';
 
+// leaving space for other new Pages here
+import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
+
 import './App.css';
 
 function App() {
@@ -48,7 +51,7 @@ function App() {
             exact
             path="/about"
           >
-            <AboutPage />
+            <Main />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -71,6 +74,13 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows ApproveSubmissions else shows LoginPage
+            exact
+            path="/reviewsubmissions"
+          >
+            <ApproveSubmissions />
+          </ProtectedRoute>
 
           <ProtectedRoute 
             // logged in shows InfoPage else shows LoginPage
@@ -130,6 +140,7 @@ function App() {
             <EmployerPage />
           </ProtectedRoute>
 
+            {/* If this is the public list of Job postings, it does not need to ba a ProtectedRoute */}
           <ProtectedRoute
             exact
             path="/main"
