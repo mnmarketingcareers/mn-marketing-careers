@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import PostingsList from './PostingsList';
+import { CircularProgress } from '@mui/material';
+
 
 function ApproveSubmissions() {
     //set imported hooks
@@ -14,27 +17,24 @@ function ApproveSubmissions() {
         });
     }, [])
 
+    const showJobPosting = postingsList ? true : false;
 
     return(
         <div>
             <h1>Review Job Postings</h1>
             <p>This page has a list of all job postings submitted by employers through this website that have status "PENDING_APPROVAL"</p>
             {JSON.stringify(postingsList)}
-            <ul>
+            {!showJobPosting && <CircularProgress />}
+            {showJobPosting &&
+            (<ul>
                 {postingsList.map((job, i) => {
                     return(
-                        <li key={job.id}>{job}</li>
+                        // <li key={job.id}>{job.available_role}</li>
+                        <PostingsList key={job.id} job={job} />
                     )
                     })}
-                <li>job, title, company, state, etc.</li>
-                <li>job, title, company, state, etc.</li>
-                <li>job, title, company, state, etc.</li>
-                <li>job, title, company, state, etc.</li>
-                <li>job, title, company, state, etc.</li>
-                <li>job, title, company, state, etc.</li>
-                <li>job, title, company, state, etc.</li>
-                <li>job, title, company, state, etc.</li>
-            </ul>
+
+            </ul>)}
         </div>
     )
 }

@@ -25,9 +25,7 @@ function Nav() {
         {user.id && (
           <>
 
-            <Link className="navLink" to="/main">
-              <i>Main</i>
-            </Link>
+            
 
             <Link className="navLink" to="/user">
               Home
