@@ -6,10 +6,10 @@ import { TextField, Grid } from "@mui/material/";
 import { FaWindowClose} from "react-icons/fa";
 
 function Modal({ closeModal }) {
-
   const history = useHistory();
   const dispatch = useDispatch();
 
+  
   const [userEmail, setUserEmail] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
@@ -42,10 +42,11 @@ function Modal({ closeModal }) {
     <div className="modalBackground">
       <div className="modalContainer">
         <div className="titleCloseBtn">
+
           <button onClick={() => closeModal(false)}><FaWindowClose /></button>
         </div>
         <div className="title">
-        <img src="./images/logo-small.png" />
+          <img src="./images/logo-small.png" />
           <p>
             Minnesota Marketing Careers is a weekly email update dedicated to
             sharing marketing, communications and digital career opportunities
@@ -61,11 +62,10 @@ function Modal({ closeModal }) {
               label="First name"
               variant="outlined"
               value={userFirstName}
-
               onChange={(event) => setUserFirstName(event.target.value)}
             />
+           
             <TextField
-              sx={{ m: 1, width: 410 }}
               id="lastName"
               label="Last name"
               variant="outlined"
@@ -80,16 +80,14 @@ function Modal({ closeModal }) {
               type="email"
               variant="outlined"
               value={userEmail}
-
               onChange={(event) => setUserEmail(event.target.value)}
             />
+
             <TextField
-              sx={{ m: 1, width: 410 }}
               id="zip"
               label="Zip Code"
               variant="outlined"
               value={userZip}
-
               onChange={(event) => setUserZip(event.target.value)}
               />
             <input
@@ -99,17 +97,12 @@ function Modal({ closeModal }) {
             />
         </form>
         </div>
+
+
       </div>
     </div>
   );
 }
 
 export default Modal;
-
-
-
-
-
-
-
 
