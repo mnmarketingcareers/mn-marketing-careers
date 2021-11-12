@@ -13,6 +13,9 @@ function Nav() {
         <h2 className="nav-title">MN Marketing Title</h2>
       </Link>
       <div>
+
+
+
         {/* If no user is logged in, show these links */}
         {user.id === null && (
           // If there's no user, show login/registration links
@@ -26,6 +29,8 @@ function Nav() {
             </Link> */}
           </>
         )}
+
+
 
         {/* If a user is logged in, show these links */}
         {user.id && (
@@ -41,6 +46,8 @@ function Nav() {
             <LogOutButton className="navLink" />
           </>
         )}
+
+
 
         <Link className="navLink" to="/main">
           <i>Main</i>
