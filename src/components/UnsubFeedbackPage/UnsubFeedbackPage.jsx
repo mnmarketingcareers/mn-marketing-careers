@@ -11,7 +11,6 @@ import { TextField } from '@mui/material';
 import './UnsubFeedbackPage.css';
 import FormGroup from '@mui/material/FormGroup';
 import axios from 'axios';
-// import { Feedback } from '@mui/icons-material';
 
 function UnsubFeedbackPage() {
 
@@ -24,7 +23,7 @@ function UnsubFeedbackPage() {
     });
     
 
-    const feedback = useSelector(store => store.unsubFeedbackReducer);     
+    const susbcribers = useSelector(store => store.setSubsListReducer);     
         
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,38 +32,11 @@ function UnsubFeedbackPage() {
             type: 'SUBMIT_UNSUB_FEEDBACK',
             payload: reason
         })
-        // axios.post('/api/feedback')
-        // .then(response => {
-        //     console.log('reponse is:', response.data);
-        //     console.log('reason is:', reason);
-        //     console.log('message is:', message);
-        //     setMessage(response.data);
-        // }).catch(err => {
-        //     console.log('error in handleSubmit', err);
-        // })
+        dispatch({
+            type: 'GET_SUBS',
+            payload: susbcribers
+        })
     }
-
-    // const postFeedback = () => {
-    //     dispatch({
-    //         type: 'SUBMIT_UNSUB_FEEDBACK',
-    //         payload: {
-    //             reason: reason,
-    //             message: message
-    //         }
-    //     })
-    //     axios({
-    //         method: 'POST',
-    //         url: '/api/feedback',
-    //         data: {
-    //             reason: feedback.reason,
-    //             message: feedback.message
-    //         }
-    //     }).then((response) => {
-    //         console.log('Post successful', response);
-    //     }).catch((err) => {
-    //         alert('Could not save feedback');
-    //     })
-    // }
 
     // switch statment function?
     const radioButtonValue = (event) => {
@@ -105,9 +77,6 @@ function UnsubFeedbackPage() {
     // there needs to be an other text field for comments
     // send results to database on click submit
     // navigate back to main page option needs to be available
-
-    //fix margins for form, center on page or just increase margins on left side
-    //fix added select radio button to other field, on click, show text field
 
     return (
         <>
