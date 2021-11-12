@@ -21,13 +21,14 @@ function UnsubFeedbackPage() {
         reason: '',
         message: ''
     });
+    const [userEmail, setUserEmail] = useState('');
     
 
-    //const suscribers = useSelector(store => store.setSubsListReducer);     
+    // const suscribers = useSelector(store => store.setSubsListReducer);     
         
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(event);
+        console.log('the event is', event);
         dispatch({
             type: 'SUBMIT_UNSUB_FEEDBACK',
             payload: reason
@@ -37,7 +38,11 @@ function UnsubFeedbackPage() {
 
     const handleUnsubscribers = () => {
         dispatch({
-            type: 'TOGGLE_SUB_STATUS'
+            type: 'TOGGLE_SUB_STATUS',
+            payload: {
+                status: 'unsubscribed',
+                subscriberHash: userEmail
+            } 
         })
     }
 
@@ -123,6 +128,7 @@ function UnsubFeedbackPage() {
                 variant="standard" 
                 onChange={textFieldValue}/></div>}
             </RadioGroup>
+            <input placeholder="confirm your email to unsubscribe" type="email" onChange={(event) => setUserEmail(event.target.value)} />
             <input onClick={handleSubmit} className="btn" type="submit" name="submit" value="submit feedback" />
             </FormControl>
         </div>
