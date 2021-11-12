@@ -29,8 +29,8 @@ function* approvePosting (action) {
             withCredentials: true,
           };
         console.log('in approve saga', action.payload);
-        const id = action.payload.id
-        const response = yield axios.put(`/api/job/${id}`, action.payload.status, config);
+        const id = action.payload.id;
+        const response = yield axios.put(`/api/job/${id}`, action.payload, config);
         // verify success with a console log
         console.log('What did the server send back?', response.data);
         yield put({ type: 'FETCH_PENDING_POSTINGS' });
@@ -46,7 +46,7 @@ function* deletePosting (action) {
             withCredentials: true,
           };
         console.log('in deny saga', action.payload);
-        const id = action.payload.id
+        const id = action.payload.id;
         const response = yield axios.delete(`/api/job/${id}`, config);
         // verify success with a console log
         console.log('What did the server send back?', response.data);

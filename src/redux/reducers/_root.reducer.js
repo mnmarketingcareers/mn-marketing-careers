@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import setSubsListReducer from './setSubsList.reducer';
+import unsubFeedbackReducer from './unsubFeedback.reducer';
 
 // Greg, leaving room for other imports
 import pendingPostings from './reviewPending.reducer';
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   setSubsListReducer,
+  unsubFeedbackReducer,
   pendingPostings,
 });
 

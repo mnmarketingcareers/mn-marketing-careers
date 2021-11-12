@@ -10,20 +10,20 @@ function PostingsList ({job}) {
 
     const dispatch = useDispatch();
     // const showJobPosting = job ? true : false;
-    const handleApprove = (idToApprove) => {
+    const handleApprove = () => {
         dispatch({
             type: 'APPROVE_POSTING', 
             payload: { 
-                id: idToApprove, 
+                id: job.id, 
                 status: 'APPROVED' 
             }
         });
     }
 
-    const handleDeny = (idToDeny) => {
+    const handleDeny = () => {
         dispatch({ 
             type: 'DELETE_POSTING', 
-            payload: {id: idToDeny}
+            payload: {id: job.id}
         });
     }
 
@@ -66,10 +66,10 @@ function PostingsList ({job}) {
                                 <TableCell>{job.date_posted}</TableCell>
                                 <TableCell>
                                     <label htmlFor="approve-btn">Approve without posting to list</label>
-                                    <Button color="success" variant="outlined" id="approve-btn" onClick={handleApprove(job.id)}>Approve</Button>
+                                    <Button color="success" variant="outlined" id="approve-btn" onClick={handleApprove}>Approve</Button>
                                     <br/>
                                     <label htmlFor="deny-btn">Deny and delete</label>
-                                    <Button color="error" variant="outlined" id="deny-btn" onClick={handleDeny(job.id)}>Deny</Button>
+                                    <Button color="error" variant="outlined" id="deny-btn" onClick={handleDeny}>Deny</Button>
                                 </TableCell>
                             </TableRow>
         
