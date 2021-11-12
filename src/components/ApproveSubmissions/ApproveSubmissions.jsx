@@ -23,7 +23,7 @@ function ApproveSubmissions() {
             <ul>
                 {postingsList.map((job, i) => {
                     return(
-                        <li key={job.id}>{job.title}</li>
+                        <li key={job.id}>{job}</li>
                     )
                     })}
                 <li>job, title, company, state, etc.</li>
