@@ -86,8 +86,6 @@ const AdminHub = () => {
     subStatus === "subscribed" ? newStatus = "unsubscribed" : newStatus = "subscribed";
     console.log("current status:", subStatus, 'for user:', id)
     dispatch({type: "TOGGLE_SUB_STATUS", payload: {status: newStatus, subscriberHash: id}
-    
-
     })
   }
 
