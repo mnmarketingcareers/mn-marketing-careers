@@ -23,7 +23,7 @@ function UnsubFeedbackPage() {
     });
     
 
-    const susbcribers = useSelector(store => store.setSubsListReducer);     
+    //const suscribers = useSelector(store => store.setSubsListReducer);     
         
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -32,9 +32,12 @@ function UnsubFeedbackPage() {
             type: 'SUBMIT_UNSUB_FEEDBACK',
             payload: reason
         })
+        handleUnsubscribers();
+    }
+
+    const handleUnsubscribers = () => {
         dispatch({
-            type: 'GET_SUBS',
-            payload: susbcribers
+            type: 'TOGGLE_SUB_STATUS'
         })
     }
 
