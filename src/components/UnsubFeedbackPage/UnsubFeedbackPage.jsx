@@ -34,6 +34,8 @@ function UnsubFeedbackPage() {
             payload: reason
         })
         handleUnsubscribers();
+        alert('Successfully unsuscribed, you can close this tab')
+        history.push('/main');
     }
 
     const handleUnsubscribers = () => {
@@ -66,7 +68,7 @@ function UnsubFeedbackPage() {
 
     const textFieldValue = (event) => {
         console.log('inside text field', event.target.value);
-        setMessage({...reason, message: event.target.value})
+        setReason({...reason, message: event.target.value})
     }
 
     // if an unsubscriber selects the "other option" 
@@ -76,6 +78,7 @@ function UnsubFeedbackPage() {
     // this changeState function is called in the click action firing the "other" radio button
     const changeState = () => {
         setToggleOther(!toggleOther);
+        setReason({...reason, reason: 'other'})
     }
 
 
@@ -85,6 +88,7 @@ function UnsubFeedbackPage() {
     // there needs to be an other text field for comments
     // send results to database on click submit
     // navigate back to main page option needs to be available
+
 
     return (
         <>
