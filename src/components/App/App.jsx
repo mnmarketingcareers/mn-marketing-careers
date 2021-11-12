@@ -20,9 +20,10 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import EmployerPage from '../EmployerPage/EmployerPage';
-import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 import AdminHub from '../AdminHub/AdminHub';
 import Main from '../Main/Main';
+
+import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 
 import './App.css';
 
