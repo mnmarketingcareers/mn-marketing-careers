@@ -22,6 +22,7 @@ const AdminAddJobPage = () => {
     const [remote, setRemote] = useState('no');
     const [shareContact, setShareContact] = useState(FALSE);
 
+    // considering having button options for the remote and share contact options
     return (
         <div className="adminHubPage">
       <Typography style={{fontSize: '40px', margin: 30}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
@@ -29,46 +30,56 @@ const AdminAddJobPage = () => {
       <Container className="adminContainer">
         <div className="gridWrapper">
           <div className="gridL">
-            <Typography variant="h4">Manual Subscriber Entry</Typography>
+            <Typography variant="h4">Manual Job Entry</Typography>
             <form onSubmit={() => validateEmail()}>
               <TextField
-                value={userEmail}
-                type="email"
-                id="email"
+                value={availableRole}
+                type="text"
+                id="role"
                 size="small"
-                placeholder="Email"
+                placeholder="Role"
                 style={{ width: "200px" }}
-                onChange={(event) => setUserEmail(event.target.value)}
+                onChange={(event) => setAvailableRole(event.target.value)}
               />{" "}
               <br />
               <TextField
-                value={userFirstName}
+                value={description}
                 type="text"
                 id="firstName"
                 size="small"
                 placeholder="First Name"
                 style={{ width: "200px" }}
-                onChange={(event) => setUserFirstName(event.target.value)}
+                onChange={(event) => setDescription(event.target.value)}
               />
               <br />
               <TextField
-                value={userLastName}
+                value={applicationLink}
                 type="text"
                 id="lastName"
                 size="small"
                 placeholder="Last Name"
                 style={{ width: "200px" }}
-                onChange={(event) => setUserLastName(event.target.value)}
+                onChange={(event) => setApplicationLink(event.target.value)}
               />
               <br />
               <TextField
-                value={userZip}
+                value={jobCity}
                 type="text"
                 id="email"
                 size="small"
                 placeholder="Zip Code"
                 style={{ width: "200px" }}
-                onChange={(event) => setUserZip(event.target.value)}
+                onChange={(event) => setJobCity(event.target.value)}
+              />
+              <br />
+              <TextField
+                value={jobState}
+                type="text"
+                id="email"
+                size="small"
+                placeholder="Zip Code"
+                style={{ width: "200px" }}
+                onChange={(event) => setJobState(event.target.value)}
               />
               <br />
               <Button className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
