@@ -65,10 +65,10 @@ function PostingsList ({job}) {
                                 </TableCell>
                                 <TableCell>{job.date_posted}</TableCell>
                                 <TableCell>
-                                    <label htmlFor="approve-btn">Approve without posting to list --></label>
+                                    <label htmlFor="approve-btn">Approve without posting to list</label>
                                     <Button color="success" variant="outlined" id="approve-btn" onClick={handleApprove(job.id)}>Approve</Button>
                                     <br/>
-                                    <label htmlFor="deny-btn">Deny and delete --></label>
+                                    <label htmlFor="deny-btn">Deny and delete</label>
                                     <Button color="error" variant="outlined" id="deny-btn" onClick={handleDeny(job.id)}>Deny</Button>
                                 </TableCell>
                             </TableRow>
