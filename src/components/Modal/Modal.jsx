@@ -101,8 +101,6 @@ function Modal({ closeModal }) {
             />
         </form>
         </div>
-
-
       </div>
     </div>
   );
