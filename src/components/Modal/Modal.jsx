@@ -6,88 +6,102 @@ import { TextField, Grid } from '@mui/material/';
 import { FaWindowClose } from "react-icons/fa";
 
 function Modal({ closeModal }) {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-    const history = useHistory();
-    const dispatch = useDispatch();
+  const [userEmail, setUserEmail] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+  const [userZip, setUserZip] = useState("");
 
-    const [info, setInfo] = useState({
-        first_name: '',
-        last_name: '',
-        email: '',
-        zip: ''
-    });
-
-    const setSubscriberInfo = (propertyName) => (event) => {
-        console.log('what is propertyName', propertyName);
-        console.log('what is event.target.value', event.target.value);
-        setInfo({ ...info, [propertyName]: event.target.value })
-    };
-
-    const submitFormToMailchimp = (event) => {
-        event.preventDefault();
-        console.log('in submit to mailchimp')
+    
+    const submitForm = () => {
+        const userAddress = {
+          addr1: "-",
+          city: "-",
+          state: "-",
+          zip: userZip,
+        };
         dispatch({
-            type: 'NEW_SUBSCRIPTION_TO_MAILCHIMP',
-            payload: info
-        })
-    }
-
-    return (
-        <div className="modalBackground">
-            <div className="modalContainer">
-                <div className="titleCloseBtn">
-                    <button onClick={() => closeModal(false)}><FaWindowClose /></button>
-                </div>
-                <div className="logo-pic">
-                    <img src="./images/logo-small.png" />
-                </div>
-                <div className="title">
-                    <p>Minnesota Marketing Careers is a weekly email
-                        update dedicated to sharing marketing,
-                        communications and
-                        digital career opportunities with Minnesota-based companies.
-                        Remote positions also included.</p>
-                </div>
-                <div className="body">
-                    <form className="subcribe-form" onSubmit={submitFormToMailchimp} >
-                        <TextField
-                            sx={{ m: 1, width: 410 }}
-                            id="first-name"
-                            type="text"
-                            label="First name"
-                            variant="outlined"
-                            onChange={setSubscriberInfo('first_name')}
-                            value={info.first_name} />
-                        <TextField
-                            sx={{ m: 1, width: 410 }}
-                            id="last-name"
-                            label="Last name"
-                            variant="outlined"
-                            onChange={setSubscriberInfo('last_name')}
-                            value={info.last_name} />
-                        <TextField
-                            sx={{ m: 1, width: 410 }}
-                            id="email"
-                            label="Email"
-                            variant="outlined"
-                            onChange={setSubscriberInfo('email')}
-                            value={info.email} />
-                        <TextField
-                            sx={{ m: 1, width: 410 }}
-                            id="zip"
-                            label="Zip Code"
-                            variant="outlined"
-                            onChange={setSubscriberInfo('zip')}
-                            value={info.zip} />
-                        <input className="submit-subscription-form-button" type='submit' value='Subscribe' />
-                    </form>
-                </div>
-                <div className="footer">
-                </div>
-            </div>
+          type: "ADD_SUBSCRIBER",
+          payload: {
+            email: userEmail,
+            firstName: userFirstName,
+            lastName: userLastName,
+            address: userAddress,
+          },
+        });
+        setUserEmail("");
+        setUserFirstName("");
+        setUserLastName("");
+        setUserZip("");
+      };
+      
+  return (
+    <div className="modalBackground">
+      <div className="modalContainer">
+        <div className="titleCloseBtn">
+          <button onClick={() => closeModal(false)}>X</button>
         </div>
-    )
+        <div className="title">
+          <p>
+            Minnesota Marketing Careers is a weekly email update dedicated to
+            sharing marketing, communications and digital career opportunities
+            with Minnesota-based companies. Remote positions also included.
+          </p>
+        </div>
+        <div className="body">
+          <form className="subcribe-form" onSubmit={() => submitForm()}>
+            <TextField
+              id="firstName"
+              type="text"
+              label="First name"
+              variant="outlined"
+              value={userFirstName}
+
+
+              onChange={(event) => setUserFirstName(event.target.value)}
+            />
+            <TextField
+              id="lastName"
+              label="Last name"
+              variant="outlined"
+              value={userLastName}
+
+              onChange={(event) => setUserLastName(event.target.value)}
+            />
+            <TextField
+              id="email"
+              label="Email"
+              type="email"
+              variant="outlined"
+              value={userEmail}
+
+
+              onChange={(event) => setUserEmail(event.target.value)}
+            />
+            <TextField
+              id="zip"
+              label="Zip Code"
+              variant="outlined"
+              value={userZip}
+
+              onChange={(event) => setUserZip(event.target.value)}
+              />
+            <input
+              className="submit-subscription-form-button"
+              type="submit"
+              value="Subscribe"
+            />
+        </form>
+        </div>
+        <div className="footer">
+          <button>Subscribe</button>
+          <button>another button</button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Modal
-
+export default Modal;
