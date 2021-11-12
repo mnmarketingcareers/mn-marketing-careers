@@ -13,9 +13,7 @@ function Modal({ closeModal }) {
   const [userLastName, setUserLastName] = useState("");
   const [userZip, setUserZip] = useState("");
 
-
-
-    // new subscriber admin post!
+    
     const submitForm = () => {
         const userAddress = {
           addr1: "-",
@@ -36,50 +34,8 @@ function Modal({ closeModal }) {
         setUserFirstName("");
         setUserLastName("");
         setUserZip("");
-    
       };
-    
-
-
-//   const [info, setInfo] = useState({
-//     email: "",
-//     firstName: "",
-//     lastName: "",
-//     address: {
-//       addr1: "modal test addr",
-//       city: "modal test city",
-//       state: "modal test STATE",
-//       // zip: ''
-//     },
-//   });
-
-//   const setSubscriberInfo = (propertyName) => (event) => {
-//     console.log("what is propertyName", propertyName);
-//     console.log("what is event.target.value", event.target.value);
-//     setInfo({ ...info, [propertyName]: event.target.value });
-//   };
-
-//   const submitFormToMailchimp = (event) => {
-//     const objectToSend = {
-//       email: info.email,
-//       firstName: info.firstName,
-//       lastName: info.lastName,
-//       address: {
-//         addr1: "modal test addr",
-//         city: "modal test city",
-//         state: "modal test STATE",
-//         zip: userZip,
-//       },
-//     };
-
-//     event.preventDefault();
-//     console.log("in submit to mailchimp:", info);
-//     dispatch({
-//       type: "ADD_SUBSCRIBER",
-//       payload: objectToSend,
-//     });
-//   };
-
+      
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -134,38 +90,7 @@ function Modal({ closeModal }) {
               type="submit"
               value="Subscribe"
             />
-          </form>
-          {/* <TextField
-                        type="text"
-                        id="first-name"
-                        variant="standard"
-                        placeholder="first name"
-                        onChange={setSubscriberInfo('first_name')}
-                        value={subscriberInfo.first_name} ></TextField> */}
-          {/* <TextField
-                        type="text"
-                        id="poster-name"
-                        variant="standard"
-                        placeholder="last name"
-                        className="poster-name"
-                        onChange={setSubscriberInfo('last_name')}
-                        value={subscriberInfo.last_name} ></TextField>
-                    <TextField
-                        type="text"
-                        id="poster-name"
-                        variant="standard"
-                        placeholder="email address"
-                        className="poster-name"
-                        onChange={setSubscriberInfo('email')}
-                        value={subscriberInfo.email} ></TextField>
-                    <TextField
-                        type="text"
-                        id="poster-name"
-                        variant="standard"
-                        placeholder="Zip code"
-                        className="poster-name"
-                        onChange={setSubscriberInfo('zip')}
-                        value={subscriberInfo.zip} ></TextField> */}
+        </form>
         </div>
         <div className="footer">
           <button>Subscribe</button>
