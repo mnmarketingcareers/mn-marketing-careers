@@ -6,6 +6,7 @@ import employerSaga from './employer.saga';
 import getSubsSaga from './getSubs.saga';
 import addSubscriberSaga from './addSubscriber.saga';
 import getFeedbackSaga from './unsubscribe.saga';
+import toggleSubscriberStatus from './modifySubStatus.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     employerSaga(),
     getSubsSaga(), //get from API
     addSubscriberSaga(), //post to API
-    getFeedbackSaga()
+    getFeedbackSaga(),
+    toggleSubscriberStatus() //PUT sub status to API
   ]);
 }
