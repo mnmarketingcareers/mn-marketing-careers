@@ -16,7 +16,7 @@
     position: relative;
     bottom: 150px;
     width: 500px;
-    height: 560px;
+    height: 580px;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -26,10 +26,11 @@
   }
   
   .modalContainer .title {
-    display: grid;
+    display: flex;
+    padding: 25px;
     justify-content: center;
     text-align: center;
-    font-size: .8rem;
+    font-size: .9rem;
     margin-top: 10px;
   }
   
@@ -71,5 +72,14 @@
     border-radius: 8px;
     font-size: 20px;
     cursor: pointer;
+
+    transition: background-color .4s linear;
   }
+
+.submit-subscription-form-button:hover,
+.submit-subscription-form-button:hover::after{
+  cursor: pointer;
+  background-color: #5298a7;
+  transition: background-color 0.23s linear;
+}
   
