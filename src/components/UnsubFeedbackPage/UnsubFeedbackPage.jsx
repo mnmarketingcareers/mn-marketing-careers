@@ -11,7 +11,7 @@ import { TextField } from '@mui/material';
 import './UnsubFeedbackPage.css';
 import FormGroup from '@mui/material/FormGroup';
 import axios from 'axios';
-import { Feedback } from '@mui/icons-material';
+// import { Feedback } from '@mui/icons-material';
 
 function UnsubFeedbackPage() {
 
@@ -22,22 +22,49 @@ function UnsubFeedbackPage() {
         reason: '',
         message: ''
     });
-    const [message, setMessage] = useState('');
+    
 
-    //const feedback = useSelector(store => store.feedback);     
+    const feedback = useSelector(store => store.unsubFeedbackReducer);     
         
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(event);
-
         dispatch({
-            type: 'SUBMIT_FEEDBACK',
-            payload: {
-                reason: reason,
-                message: message
-            }
+            type: 'SUBMIT_UNSUB_FEEDBACK',
+            payload: reason
         })
+        // axios.post('/api/feedback')
+        // .then(response => {
+        //     console.log('reponse is:', response.data);
+        //     console.log('reason is:', reason);
+        //     console.log('message is:', message);
+        //     setMessage(response.data);
+        // }).catch(err => {
+        //     console.log('error in handleSubmit', err);
+        // })
     }
+
+    // const postFeedback = () => {
+    //     dispatch({
+    //         type: 'SUBMIT_UNSUB_FEEDBACK',
+    //         payload: {
+    //             reason: reason,
+    //             message: message
+    //         }
+    //     })
+    //     axios({
+    //         method: 'POST',
+    //         url: '/api/feedback',
+    //         data: {
+    //             reason: feedback.reason,
+    //             message: feedback.message
+    //         }
+    //     }).then((response) => {
+    //         console.log('Post successful', response);
+    //     }).catch((err) => {
+    //         alert('Could not save feedback');
+    //     })
+    // }
 
     // switch statment function?
     const radioButtonValue = (event) => {

@@ -9,10 +9,11 @@ const {
 // Handles POST request with new job seeker feedback, responses to database
 // Additional POST to post feedback to DOM?
 router.post('/', (req, res) => {
+    console.log('req.body is', req.body);
     const reason = req.body.reason;
     const message = req.body.message;
     // the query that's responsible for inserting user feedback into the feedback database table
-    const queryText = `INSERT INTO "feedback" (reason, message)
+    const queryText = `INSERT INTO "feedback" ("reason", "message")
     VALUES ($1, $2) RETURNING id;`;
     // this pools the query text and datafields and sends the data on to the database 
     pool
