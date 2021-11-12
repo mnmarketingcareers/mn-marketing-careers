@@ -23,6 +23,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+
 import './EmployerPage.css';
 
 function EmployerPage() {
@@ -196,6 +197,7 @@ function EmployerPage() {
 
     return (
         <>
+
             <div className="form-container">
                 <form className="employer-form" onSubmit={submitEmployerJob}>
                     <Grid container spacing={2}>
@@ -368,6 +370,101 @@ function EmployerPage() {
                                     <RadioGroup
                                         aria-label="Is this job remote?"
                                         name="radio-buttons-group"
+            
+            <form className="employer-form" onSubmit={submitEmployerJob}>
+                <Grid container spacing={2}>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Your name" />
+                            <TextField
+                                type="text"
+                                id="poster-name"
+                                variant="standard"
+                                placeholder="name"
+                                className="poster-name"
+                                onChange={setValues('posting_contact_name')}
+                                value={jobPostingsTable.posting_contact_name} ></TextField>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Your email" />
+                            <TextField
+                                type="text"
+                                id="poster-email"
+                                variant="standard"
+                                placeholder="email"
+                                className="poster-email"
+                                onChange={setValues('posting_contact_email')}
+                                value={jobPostingsTable.posting_contact_email} ></TextField>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Company Name" />
+                            <TextField
+                                type="text"
+                                id="company"
+                                variant="standard"
+                                placeholder="company"
+                                className="company"
+                                onChange={setValues('company')}
+                                value={jobPostingsTable.company} ></TextField>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Title of Position Available" />
+                            <TextField
+                                type="text"
+                                placeholder="Title"
+                                variant="standard"
+                                className="title"
+                                onChange={setValues('available_role')}
+                                value={jobPostingsTable.available_role} ></TextField>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Link to Job Post Online" />
+                            <TextField
+                                type="text"
+                                placeholder="Link"
+                                variant="standard"
+                                className="application-link"
+                                onChange={setValues('application_link')}
+                                value={jobPostingsTable.application_link} ></TextField>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Description" />
+                            <TextField
+                                type="text"
+                                placeholder="Description"
+                                sx={{ m: 1, width: 410 }}
+                                multiline rows={4}
+                                variant="outlined"
+                                className="description"
+                                onChange={setValues('description')}
+                                value={jobPostingsTable.description} ></TextField>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Card>
+                            <CardHeader title="Select job types (Multiple selections allowed)" />
+                            <div>
+                                <FormControl sx={{ m: 1, width: 300 }}>
+                                    <InputLabel id="job-types">types</InputLabel>
+                                    <Select
+                                        labelId="job-types"
+                                        id="job-types"
+                                        multiple
+                                        value={job}
+                                        onChange={handleJob}
+                                        input={<OutlinedInput label="Types" />}
+                                        renderValue={(selected) => selected.join(', ')}
+                                        MenuProps={MenuProps}
                                     >
                                         <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
                                         <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
