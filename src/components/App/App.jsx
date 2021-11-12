@@ -83,6 +83,8 @@ function App() {
             <AdminHub />
           </ProtectedRoute>
 
+
+
           <Route
             exact
             path="/login"
@@ -124,12 +126,25 @@ function App() {
               <LandingPage />
             }
           </Route>
+
+
+{/* 
+          <Route 
+          exact
+          path="/info"
+          >
+            <InfoPage />
+          </Route> */}
+
+
           <Route 
           exact
           path="/unsubfeedbackpage"
           >
             <UnsubFeedbackPage />
           </Route>
+
+
 
           <Route
             // shows AboutPage at all times (logged in or not)
@@ -139,19 +154,24 @@ function App() {
             <AboutPage />
           </Route>
 
-          <ProtectedRoute
+
+
+          <Route
             exact
             path="/employerpage"
           >
             <EmployerPage />
-          </ProtectedRoute>
+          </Route>
 
-          <ProtectedRoute
+          <Route
             exact
             path="/main"
           >
             <Main />
-          </ProtectedRoute>
+          </Route>
+
+
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
