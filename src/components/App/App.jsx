@@ -23,6 +23,8 @@ import EmployerPage from '../EmployerPage/EmployerPage';
 import AdminHub from '../AdminHub/AdminHub';
 import Main from '../Main/Main';
 
+import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
+
 import './App.css';
 
 function App() {
@@ -121,6 +123,20 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
+          </Route>
+          <Route 
+          exact
+          path="/unsubfeedbackpage"
+          >
+            <UnsubFeedbackPage />
+          </Route>
+
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/unsubfeedback"
+          >
+            <AboutPage />
           </Route>
 
           <ProtectedRoute

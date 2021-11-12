@@ -66,6 +66,8 @@ function Modal({ closeModal }) {
             />
            
             <TextField
+                          sx={{ m: 1, width: 410 }}
+
               id="lastName"
               label="Last name"
               variant="outlined"
@@ -84,6 +86,8 @@ function Modal({ closeModal }) {
             />
 
             <TextField
+                          sx={{ m: 1, width: 410 }}
+
               id="zip"
               label="Zip Code"
               variant="outlined"
