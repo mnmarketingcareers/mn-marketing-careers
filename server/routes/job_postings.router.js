@@ -44,7 +44,7 @@ router.get('/pending', rejectUnauthenticated, (req, res) => {
         }
     const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
-                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                "job_city", "job_state", "remote", "share_contact", "date_posted", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
                 ARRAY_AGG("jt"."type") 
                 FROM "job_postings" AS "jp"
