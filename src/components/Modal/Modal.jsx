@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import "./Modal.css";
-import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { TextField, Grid } from "@mui/material/";
+import React, { useState } from 'react'
+import './Modal.css';
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { TextField, Grid } from '@mui/material/';
+import { FaWindowClose } from "react-icons/fa";
 
 function Modal({ closeModal }) {
   const history = useHistory();
@@ -58,6 +59,7 @@ function Modal({ closeModal }) {
               variant="outlined"
               value={userFirstName}
 
+
               onChange={(event) => setUserFirstName(event.target.value)}
             />
             <TextField
@@ -74,6 +76,7 @@ function Modal({ closeModal }) {
               type="email"
               variant="outlined"
               value={userEmail}
+
 
               onChange={(event) => setUserEmail(event.target.value)}
             />
