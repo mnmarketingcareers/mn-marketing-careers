@@ -2,7 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import PostingsList from './PostingsList';
-import { CircularProgress } from '@mui/material';
+import { 
+    CircularProgress,
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableSortLabel,
+    TableBody,
+    Paper,
+} from '@mui/material';
 
 
 function ApproveSubmissions() {
@@ -22,19 +32,36 @@ function ApproveSubmissions() {
     return(
         <div>
             <h1>Review Job Postings</h1>
-            <p>This page has a list of all job postings submitted by employers through this website that have status "PENDING_APPROVAL"</p>
-            {JSON.stringify(postingsList)}
+            <p>These job postings were submitted by employers and await your APPROVAL</p>
+            {/* {JSON.stringify(postingsList)} */}
             {!showJobPosting && <CircularProgress />}
             {showJobPosting &&
-            (<ul>
-                {postingsList.map((job, i) => {
-                    return(
-                        // <li key={job.id}>{job.available_role}</li>
-                        <PostingsList key={job.id} job={job} />
-                    )
-                    })}
-
-            </ul>)}
+            (<TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Company</TableCell>
+                            <TableCell>Job Title</TableCell>
+                            <TableCell>Description</TableCell>
+                            <TableCell>Link</TableCell>
+                            <TableCell>Job Location</TableCell>
+                            <TableCell>Remote?</TableCell>
+                            <TableCell>Application Contact info</TableCell>
+                            <TableCell>Date Created</TableCell>
+                            <TableCell>Approve or Deny</TableCell>                                
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {postingsList.map((job, i) => {
+                            return(
+                                // <li key={job.id}>{job.available_role}</li>
+                                <PostingsList key={job.id} job={job} />
+                                )
+                            })
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>)}
         </div>
     )
 }

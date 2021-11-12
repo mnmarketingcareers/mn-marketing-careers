@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { 
-    CircularProgress, 
     Button, 
+    TableRow,
+    TableCell,    
+    Link,
 } from '@mui/material';
 
 function PostingsList ({job}) {
@@ -27,7 +29,7 @@ function PostingsList ({job}) {
 
     return (
         <>
-            <li>
+            {/* <li>
                 {job.available_role}, &nbsp;
                 {job.company_name}, &nbsp;
                 {job.description}, &nbsp;
@@ -43,9 +45,33 @@ function PostingsList ({job}) {
                 <Button id="approve-btn" onClick={handleApprove(job.id)}>Approve</Button>
                 <label htmlFor="deny-btn">Deny and delete posting --></label>
                 <Button id="deny-btn" onClick={handleDeny(job.id)}>Deny</Button>
-            </li>
-        
-        
+            </li> */}
+            
+                            <TableRow>
+                                <TableCell>{job.available_role}</TableCell>
+                                <TableCell>{job.company_name}</TableCell>
+                                <TableCell>{job.description}</TableCell>
+                                <TableCell>
+                                    <Link href={job.application_link} underline="hover">{job.application_link}</Link>
+                                </TableCell>
+                                <TableCell>{job.job_city}, &nbsp;{job.job_state}</TableCell>
+                                <TableCell>{job.remote}</TableCell>
+                                <TableCell>
+                                    {(job.share_contact) ? (
+                                        <p>{job.hiring_contact_email, job.hiring_contact_name, job.title, job.phone}</p>
+                                        ) : (
+                                        <></>
+                                    )}
+                                </TableCell>
+                                <TableCell>{job.date_posted}</TableCell>
+                                <TableCell>
+                                    <label htmlFor="approve-btn">Approve without posting to list --></label>
+                                    <Button color="success" variant="outlined" id="approve-btn" onClick={handleApprove(job.id)}>Approve</Button>
+                                    <br/>
+                                    <label htmlFor="deny-btn">Deny and delete --></label>
+                                    <Button color="error" variant="outlined" id="deny-btn" onClick={handleDeny(job.id)}>Deny</Button>
+                                </TableCell>
+                            </TableRow>
         
         </>
     )
