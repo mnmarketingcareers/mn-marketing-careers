@@ -195,6 +195,10 @@ function EmployerPage() {
         setJobPostingsTable({ ...jobPostingsTable, job_types: value });
     };
 
+    const toAbout = (event) => {
+        history.push('/about');
+    }
+
     return (
         <>
 
@@ -208,28 +212,29 @@ function EmployerPage() {
                                     component="img"
                                     height="140"
                                     image="./images/employerform.jpeg"
+                                    sx={{ borderRadius: 3 }}
                                 />
                                 <CardContent>
-                                <Typography variant="body2" color="text.secondary">
-                                Minnesota Marketing Careers is a weekly email update dedicated to sharing marketing, communications and digital career opportunities with Minnesota-based
-                                companies.Remote positions and internships included.Submit opportunities within your organization including advertising, marketing, public relations,
-                                UX/software development, communications and digital.
-                                </Typography>
-                                <Typography padding="2" variant="body2" color="text.secondary">
-                                Curated by local Recruiter, Elizabeth Laukka, and local Marketer, Casey Tilli
-                                Questions?  Reach us at <a href="mnmarketingcareers@gamil.com">mnmarketingcareers@gmail.com</a> 
-                                </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Minnesota Marketing Careers is a weekly email update dedicated to sharing marketing, communications and digital career opportunities with Minnesota-based
+                                        companies.Remote positions and internships included.Submit opportunities within your organization including advertising, marketing, public relations,
+                                        UX/software development, communications and digital.
+                                    </Typography>
+                                    <Typography padding="2" variant="body2" color="text.secondary">
+                                        Curated by Minnesota-based Recruiter, Elizabeth Laukka and Marketing Consultant, Casey Tilli.
+                                        Questions?  Reach us at <a href="mnmarketingcareers@gamil.com">mnmarketingcareers@gmail.com</a>
+                                    </Typography>
                                 </CardContent>
                                 <CardActions>
-                                <Button size="small">Share</Button>
-                                <Button size="small">Learn More</Button>
+                                    <Button size="small">Share</Button>
+                                    <Button size="small" onClick={toAbout}>Learn More</Button>
                                 </CardActions>
                             </Card>
                         </Grid>
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="Your name" />
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
                                     id="poster-name"
@@ -243,7 +248,7 @@ function EmployerPage() {
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="Your email" />
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
                                     id="poster-email"
@@ -257,12 +262,12 @@ function EmployerPage() {
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="Company Name" />
-                                &nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
                                     id="company"
                                     variant="standard"
-                                    placeholder="Company"
+                                    placeholder="company"
                                     className="company"
                                     onChange={setValues('company')}
                                     value={jobPostingsTable.company} ></TextField>
@@ -271,10 +276,10 @@ function EmployerPage() {
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="Title of Position Available" />
-                                &nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
-                                    placeholder="Title"
+                                    placeholder="title"
                                     variant="standard"
                                     className="title"
                                     onChange={setValues('available_role')}
@@ -284,10 +289,10 @@ function EmployerPage() {
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="Link to Job Post Online" />
-                                &nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
-                                    placeholder="Link"
+                                    placeholder="link"
                                     variant="standard"
                                     className="application-link"
                                     onChange={setValues('application_link')}
@@ -313,7 +318,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Select job types (Multiple selections allowed)" />
                                 <div>
-                                    <FormControl sx={{ m: 1, width: 300 }}>
+                                    <FormControl sx={{ m: 1.1, width: 300 }}>
                                         <InputLabel id="job-types">types</InputLabel>
                                         <Select
                                             labelId="job-types"

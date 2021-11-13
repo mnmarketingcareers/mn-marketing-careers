@@ -8,7 +8,7 @@ const {
 /**
  * GET route template
  */
- router.get('/', rejectUnauthenticated, (req, res) => {
+ router.get('/', (req, res) => {
     const query = `SELECT * FROM "job_types";`;
     pool.query(query).then(result => {
         res.send(result.rows);
