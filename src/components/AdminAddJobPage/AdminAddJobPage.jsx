@@ -57,6 +57,16 @@ const AdminAddJobPage = () => {
           <div className="gridL">
             <Typography variant="h4">Manual Job Entry</Typography>
             <form onSubmit={() => validateEmail()}>
+            <TextField
+                value={companyName}
+                type="text"
+                id="role"
+                size="small"
+                placeholder="Company Name"
+                style={{ width: "200px" }}
+                onChange={(event) => setCompanyName(event.target.value)}
+              />
+              <br />
               <TextField
                 value={availableRole}
                 type="text"
