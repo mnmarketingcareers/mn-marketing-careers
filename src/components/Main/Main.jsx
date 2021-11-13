@@ -33,10 +33,10 @@ function Main() {
 
 
     //1 DATA FROM SERVER
-    // const rows = useSelector((store) => store.ToBeDetermined)
+    const rows = useSelector((store) => store.setJobsReducer)
 
     const columns = [
-        { field: 'company', headerName: 'Company', width: 150 },
+        { field: 'company_name', headerName: 'Company', width: 150 },
         { field: 'date_posted', headerName: 'Date posted', width: 150 },
         { field: 'available_role', headerName: 'Role', width: 150 },
         { field: 'description', headerName: 'Description', width: 150 },
@@ -46,6 +46,13 @@ function Main() {
             }
         },
     ];
+
+    // useEffect(() => {
+    const grabData = (event) => {
+        dispatch({ type: 'FETCH_MAIN_JOBS' });
+
+    }
+    // }, []);
 
 
     return (
@@ -59,6 +66,8 @@ function Main() {
                         and apply directly through the hiring company unless otherwise noted.
                     </div>
                 </div>
+                <p>{JSON.stringify(rows)}</p>
+                <button onClick={grabData}>Test</button>
                 {openModal && <Modal closeModal={setOpenModal} />}
                 <div className="top-of-table"><h2>Companies Hiring</h2></div>
             </div>
@@ -76,10 +85,10 @@ function Main() {
                     {openModal ? <p></p> : 
                         <>
                         
-                        {/* <DataGrid
+                        <DataGrid
                             rows={rows}
                             columns={columns}
-                        /> */}
+                        />
                     </>}
 
 
