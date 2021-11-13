@@ -43,6 +43,10 @@ function Nav() {
               <i>Admin Hub</i>
             </Link>
 
+            <Link className="navLink" to="/adminaddjob">
+              <i>Admin Add Jobs</i>
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}
