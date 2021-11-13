@@ -40,7 +40,7 @@ function Nav() {
             </Link>
 
             <Link className="navLink" to="/adminhub">
-              <i>Admin Hub</i>
+              Admin Hub
             </Link>
 
             <LogOutButton className="navLink" />
@@ -50,11 +50,11 @@ function Nav() {
 
 
         <Link className="navLink" to="/main">
-          <i>Main</i>
+          Main
         </Link>
 
         <Link className="navLink" to="/employerpage">
-          <i>Submit Job</i>
+          Submit Job
         </Link>
 
         <Link className="navLink" to="/about">
@@ -69,9 +69,9 @@ function Nav() {
           Info Page
         </Link> */}
 
-        <Link className="navLink" to="/login">
+        {/* <Link className="navLink" to="/login">
           Login / Register
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
