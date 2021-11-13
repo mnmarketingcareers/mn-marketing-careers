@@ -36,20 +36,11 @@ function Main() {
     const rows = useSelector((store) => store.setJobsReducer);
 
     const columns = [
-        { field: 'id', headerName: 'id', width: 150 },
+        { field: 'company_name', headerName: 'company', width: 150 },
+        { field: 'date_posted', headerName: 'date', width: 150 },
         { field: 'available_role', headerName: 'available role', width: 150 },
         { field: 'description', headerName: 'description', width: 150 },
         { field: 'application_link', headerName: 'link', width: 150 },
-        { field: 'job_city', headerName: 'city', width: 150 },
-        { field: 'job_state', headerName: 'State', width: 150 },
-        { field: 'remote', headerName: 'Remote?', width: 150 },
-        { field: 'date_posted', headerName: 'date', width: 150 },
-        { field: 'hiring_contact_email', headerName: 'Contact Email', width: 150 },
-        { field: 'hiring_contact_name', headerName: 'Contact Came', width: 150 },
-        { field: 'title', headerName: 'Title', width: 150 },
-        { field: 'phone', headerName: 'Phone', width: 150 },
-        { field: 'company_name', headerName: 'company', width: 150 },
-        { field: 'phone', headerName: 'Phone', width: 150, },
     ];
 
     // useEffect(() => {
@@ -90,10 +81,16 @@ function Main() {
                     {openModal ? <p></p> : 
                       
                         
-                        <DataGrid
-                            rows={rows}
-                            columns={columns}
-                        />
+                      <div style={{ height: 400, width: '100%' }}>
+                      <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={5}
+                        rowsPerPageOptions={[5]}
+                        checkboxSelection
+                        disableSelectionOnClick
+                      />
+                    </div>
                     }
 
 
