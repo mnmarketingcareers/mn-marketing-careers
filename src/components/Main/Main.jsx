@@ -31,6 +31,10 @@ function Main() {
 
     const [openModal, setOpenModal] = useState(false)
 
+    const toEmployerPage = () => {
+        history.push('/employerpage')
+    }
+
 
     //1 DATA FROM SERVER
     const rows = useSelector((store) => store.setJobsReducer);
@@ -77,7 +81,7 @@ function Main() {
                     Sign up to receive our weekly email update <button onClick={() => { setOpenModal(true) }}>Subscribe</button>
                 </div>
                 <div className="submit">
-                    Submit open positions to be included in an upcoming update <button>Submit</button>
+                    Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button>
                     {openModal ? <p></p> : 
                       
                         
