@@ -31,7 +31,7 @@ const AdminAddJobPage = () => {
         event.preventDefault();
         console.log('the event is', event);
         dispatch({
-            type: 'FETCH_MAIN_JOBS',
+            type: 'NEW_EMPLOYER_JOB_POST',
             payload: {
                 company_name: companyName,
                 available_role: availableRole,
@@ -65,7 +65,7 @@ const AdminAddJobPage = () => {
                 placeholder="Role"
                 style={{ width: "200px" }}
                 onChange={(event) => setAvailableRole(event.target.value)}
-              />{" "}
+              />
               <br />
               <TextField
                 value={description}
