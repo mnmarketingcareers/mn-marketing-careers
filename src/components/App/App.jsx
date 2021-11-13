@@ -52,7 +52,7 @@ function App() {
             exact
             path="/about"
           >
-            <Main />
+            <About />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
