@@ -22,8 +22,9 @@ const AdminAddJobPage = () => {
     const [applicationLink, setApplicationLink] = useState('');
     const [jobCity, setJobCity] = useState('');
     const [jobState, setJobState] = useState('');
-    const [remote, setRemote] = useState('no');
-    const [shareContact, setShareContact] = useState(false);
+    const [remote, setRemote] = useState('');
+    const [postingContactName, setPostingContactName] = useState('');
+    const [postingContactEmail, setPostingContactEmail] = useState('');
     const [status, setStatus] = useState('APPROVED');
 
     const handleSubmit = (event) => {
@@ -32,10 +33,20 @@ const AdminAddJobPage = () => {
         dispatch({
             type: 'FETCH_MAIN_JOBS',
             payload: {
-                company_name: companyName
+                company_name: companyName,
+                available_role: availableRole,
+                description: description,
+                application_link: applicationLink,
+                job_city: jobCity,
+                job_state: jobState,
+                remote: remote,
+                posting_contact_name: postingContactName,
+                posting_contact_email: postingContactEmail,
+                // add post contact info?
+                status: status
+
             }
         })
-        alert('Successfully added job!')
     }
 
     // considering having button options for the remote and share contact options
@@ -94,6 +105,36 @@ const AdminAddJobPage = () => {
                 placeholder="State"
                 style={{ width: "200px" }}
                 onChange={(event) => setJobState(event.target.value)}
+              />
+              <br />
+              <TextField
+                value={remote}
+                type="text"
+                id="state"
+                size="small"
+                placeholder="Remote?"
+                style={{ width: "200px" }}
+                onChange={(event) => setRemote(event.target.value)}
+              />
+              <br />
+              <TextField
+                value={postingContactName}
+                type="text"
+                id="state"
+                size="small"
+                placeholder="Posting Contact Name"
+                style={{ width: "200px" }}
+                onChange={(event) => setPostingContactName(event.target.value)}
+              />
+              <br />
+              <TextField
+                value={postingContactEmail}
+                type="text"
+                id="state"
+                size="small"
+                placeholder="Posting Contact Email"
+                style={{ width: "200px" }}
+                onChange={(event) => setPostingContactEmail(event.target.value)}
               />
               <br />
               <Button onClick={handleSubmit} className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
