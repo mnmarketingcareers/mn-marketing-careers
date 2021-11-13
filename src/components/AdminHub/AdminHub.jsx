@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Typography, Container, Button, Paper, TextField } from "@mui/material";
+import { Typography, Container, Button, Paper, TextField, IconButton } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+
+import ToggleOffIcon from '@mui/icons-material/ToggleOff'; 
+
 import useStyles from "../Styles/Styles"; //important paste this
 
 import "./AdminHub.css";
@@ -27,6 +30,9 @@ const AdminHub = () => {
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userZip, setUserZip] = useState("");
+
+  //user sub status
+  const [subStatus, setSubStatus] = useState('') //deletelater
 
   useEffect(() => {
     setIsLoading(true);
@@ -73,8 +79,15 @@ const AdminHub = () => {
     setUserFirstName("");
     setUserLastName("");
     setUserZip("");
-
   };
+
+  const toggleSubStatus = (subStatus, id) => {
+    let newStatus = '';
+    subStatus === "subscribed" ? newStatus = "unsubscribed" : newStatus = "subscribed";
+    console.log("current status:", subStatus, 'for user:', id)
+    dispatch({type: "TOGGLE_SUB_STATUS", payload: {status: newStatus, subscriberHash: id}
+    })
+  }
 
   return (
     <div className="adminHubPage">
@@ -171,6 +184,7 @@ const AdminHub = () => {
                       <TableRow key={item.id} className={classes.tableBodyRow}>
                         <TableCell
                           style={{
+                          
                             fontFamily: "Lato",
                             textAlign: "center",
                             fontSize: "16px",
@@ -201,7 +215,7 @@ const AdminHub = () => {
 
 
 
-                        <TableCell
+                        <TableCell 
                           style={{
                             fontFamily: "Lato",
                             textAlign: "center",
@@ -210,6 +224,7 @@ const AdminHub = () => {
                         >
                           {item.status}
                         </TableCell>
+                        <IconButton onClick={() => toggleSubStatus(item.status, item.contact_id)}><ToggleOffIcon/></IconButton>
                       </TableRow>
                     ))
                   ) : (
