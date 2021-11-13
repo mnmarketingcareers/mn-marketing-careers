@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import employerSaga from './employer.saga';
 import getSubsSaga from './getSubs.saga';
 import addSubscriberSaga from './addSubscriber.saga';
+import reviewPendingSaga from './reviewPending.saga';
 import getFeedbackSaga from './unsubscribe.saga';
 import toggleSubscriberStatus from './modifySubStatus.saga';
 import fetchJobsSaga from './fetchJobs.saga';
@@ -24,6 +25,7 @@ export default function* rootSaga() {
     employerSaga(),
     getSubsSaga(), //get from API
     addSubscriberSaga(), //post to API
+    reviewPendingSaga(), // Fetches all posts sent from employer saga
     getFeedbackSaga(),
     toggleSubscriberStatus(), //PUT sub status to API
     fetchJobsSaga(),
