@@ -6,7 +6,7 @@ function* fetchJobs()  {
   try {
     // console.log('in fetchJobs')
     const approvedJobs = yield axios.get("/api/job");
-    yield put({ type: "SET_JOBS", payload: approvedJobs.data });
+    yield put({ type: "SET_JOBS", payload: approvedJobs.data});
     console.log('approvedJobs.data is:', approvedJobs.data)
   } catch (error) {
     console.log("Failure to GET all approved jobs", error);

@@ -1,7 +1,7 @@
 const setJobsReducer = (state = [], action) => {
-    console.log('inside Jobs reducer, Data is:', action.payload)
+    // console.log('inside Jobs reducer, Data is:', action.payload)
     switch (action.type) {
-      case "SET_JOBS":
+      case 'SET_JOBS':
         return action.payload
       default:
         return state;
