@@ -30,6 +30,7 @@ import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 import AdminJobList from '../AdminJobList/AdminJobList';
 
 import './App.css';
+import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,7 +47,9 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/main" 
+          //UPDATED - changed this so localhost:3000 lands on /main instead of /home (home register - needs to be secret)
+          />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -101,6 +104,14 @@ function App() {
             path="/adminjoblist"
           >
             <AdminJobList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/adminaddjob"
+          >
+            <AdminAddJobPage />
           </ProtectedRoute>
 
           <Route
@@ -192,7 +203,9 @@ function App() {
 
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
+          <Route
+          //FIX make a 404 page with a return link to main
+          >
             <h1>404</h1>
           </Route>
         </Switch>

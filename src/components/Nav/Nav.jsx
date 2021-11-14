@@ -10,12 +10,14 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">MN Marketing Title</h2>
+        <img
+          className="nav-title"
+          width="500px"
+          style={{ margin: "20px" }}
+          src="./images/nav-horizontal-logo.png"
+        />
       </Link>
-      <div>
-
-
-
+      <div className="nav-words">
         {/* If no user is logged in, show these links */}
         {user.id === null && (
           // If there's no user, show login/registration links
@@ -30,39 +32,39 @@ function Nav() {
           </>
         )}
 
-
-
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
+            <LogOutButton className="navLink" />
+
             <Link className="navLink" to="/user">
               Home
             </Link>
 
             <Link className="navLink" to="/adminhub">
-              <i>Admin Hub</i>
+              Admin Hub
             </Link>
 
             <Link className="navLink" to="/adminjoblist">
               <i>Admin Jobs List</i>
             </Link>
 
-            <Link className="navLink" to="/reviewsubmissions">
-              <i>Review New Posts</i>
+            <Link className="navLink" to="/adminaddjob">
+              <i>Admin Add Jobs</i>
             </Link>
-
-            <LogOutButton className="navLink" />
+          
+            <Link className="navLink" to="/reviewsubmissions">
+              Review New Posts
+            </Link>
           </>
         )}
 
-
-
         <Link className="navLink" to="/main">
-          <i>Main</i>
+          Main
         </Link>
 
         <Link className="navLink" to="/employerpage">
-          <i>Submit Job</i>
+          Submit Job
         </Link>
 
         <Link className="navLink" to="/about">
