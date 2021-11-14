@@ -19,17 +19,45 @@ background: linear-gradient(180deg, rgb(192, 221, 238) 93%, rgba(231,242,248,0.7
   text-decoration: none;
 }
 
-.nav-words {
-  margin-right: 10px;
-  width: 500px;
-}
+
+
+/*--------NAV TITLE ON TOP LEFT--------*/
+/* 
+this is conditional: 
+screen size 768 and over = full bar logo
+screen size under 768 = only the circle portion of the logo 
+*/
 
 .nav-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #f2f2f2;
-  padding-left: 10px;
-  padding-bottom: 15px;
+  width: 400px;
+}
+
+
+@media screen and (max-width: 600px){ 
+  .nav-title {
+    display: none;
+  }
+
+}
+
+.nav-title-circle-only {
+  display: none;
+}
+
+@media screen and (max-width: 600px){ 
+  .nav-title-circle-only {
+    display: block;
+    position: relative;
+    margin: 15px;
+    width: 80px;
+  }
+}
+
+/*-----------Top-right word nav links-----------*/
+
+
+.nav-words {
+  margin-right: 10px;
 }
 
 .navLink {
@@ -40,24 +68,14 @@ background: linear-gradient(180deg, rgb(192, 221, 238) 93%, rgba(231,242,248,0.7
   padding: 24px 6px;
   text-decoration: none;
   font-size: 16px;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
   border: none;
   cursor: pointer;
   outline: 0;
-  
-}
-
-/* .navLink:hover {
-  background-color: #008183;
-} */
-
-.navLink {
-  /* display: block; */
-    position: relative;
+  position: relative;
   text-align: center;
 }
+
+
 
 .navLink::after {
   content: '';
@@ -76,4 +94,29 @@ background: linear-gradient(180deg, rgb(192, 221, 238) 93%, rgba(231,242,248,0.7
 .navLink:hover::after {
   transform: scaleX(1);
   transform-origin: center;
+}
+
+
+@media screen and (max-width: 850px){ 
+
+  .nav-words {
+    display: none;
+  }
+}
+
+
+/*-----------Hamburger-----------*/
+
+
+.hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 850px){ 
+  .hamburger {
+    display: block;
+    position: relative;
+    margin-right: 20px;
+    padding: 48px 10px;
+  }
 }
