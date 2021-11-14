@@ -83,7 +83,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
         return;
     }
     try {
-        console.log('In Job Postings PUT, updating ID', req.body.id);
+        console.log('In Job Postings PUT, updating ID', req.params.id);
         const query = `UPDATE "job_postings" SET "status" = $1 WHERE "id" = $2;`;
         
         const results = await pool.query(query, [req.body.status, req.params.id])
@@ -96,6 +96,31 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+/**
+ * PUT route to set all APPROVED jobs to POSTED
+ */
+ router.put('/tolist', rejectUnauthenticated, async (req, res) => {
+    // if requiring access level check, uncomment the next 4 lines
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level for this content');
+        return;
+    }
+    try {
+        console.log('In Job Postings PUT, updating status');
+        const query = `UPDATE "job_postings" SET "status" = 'POSTED' WHERE "status" = 'APPROVED';`;
+        
+        const results = await pool.query(query, [req.body.status, req.params.id])
+        console.log('Rows updated', results.rowCount);
+        res.sendStatus(201);
+        
+        console.log('end of PUT');
+    } catch (error) {
+        console.log('ERROR in PUT',error);
+        res.sendStatus(500);
+    }
+});
+
 
 /**
  * DELETE route here
