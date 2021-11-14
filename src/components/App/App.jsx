@@ -23,6 +23,8 @@ import EmployerPage from '../EmployerPage/EmployerPage';
 import AdminHub from '../AdminHub/AdminHub';
 import Main from '../Main/Main';
 
+// leaving space for other new Pages here
+import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
 import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 
 import './App.css';
@@ -74,6 +76,13 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows ApproveSubmissions else shows LoginPage
+            exact
+            path="/reviewsubmissions"
+          >
+            <ApproveSubmissions />
+          </ProtectedRoute>
 
           <ProtectedRoute 
             // logged in shows InfoPage else shows LoginPage

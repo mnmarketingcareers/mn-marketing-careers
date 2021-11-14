@@ -13,7 +13,7 @@ CREATE TABLE "job_postings" (
 	"posting_contact_id" integer NOT NULL,
 	"share_contact" BOOLEAN NOT NULL DEFAULT 'FALSE',
 	"hiring_contact_id" integer,
-	"user_id" integer NOT NULL DEFAULT '0',
+	"user_id" integer,
 	"status" varchar(255) NOT NULL DEFAULT 'PENDING_APPROVAL',
 	"archived" BOOLEAN NOT NULL DEFAULT 'FALSE',
 	CONSTRAINT "job_postings_pk" PRIMARY KEY ("id")

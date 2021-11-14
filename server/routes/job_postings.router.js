@@ -8,7 +8,7 @@ const {
 /**
  * GET route template
  */
-router.get('/', rejectUnauthenticated, async (req, res) => {
+router.get('/', async (req, res) => {
   console.log('In GET for all recent, approved job postings');
   const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
@@ -36,9 +36,29 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
 });
 
 // TO DO: check if this is used here
-router.get('/types', rejectUnauthenticated, (req, res) => {
-    const query = `SELECT * FROM "job_types";`;
+router.get('/pending', rejectUnauthenticated, (req, res) => {
+    console.log('In GET pending job posts', req.user);
+    if (req.user.access_level < 1) {
+            res.status(500).send('You do not have the correct access level for this content');
+            return;
+        }
+    const query = `
+                SELECT "jp"."id", "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "share_contact", "date_posted", "hc".hiring_contact_email, 
+                "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
+                ARRAY_AGG("jt"."type") 
+                FROM "job_postings" AS "jp"
+                JOIN "company" AS "co" ON "jp".company_id = "co".id
+                LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
+                LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
+                LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
+                WHERE "jp".archived = 'false' AND "jp".status = 'PENDING_APPROVAL'
+                AND "jp"."date_posted" > (current_date - interval '30' day)
+                GROUP BY "jp"."id", "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";`;
     pool.query(query).then(result => {
+        console.log('Sending rows to Admin for approval', result.rows);
         res.send(result.rows);
     }).catch(error => {
         console.log('ERROR fetching job types', error);
@@ -49,7 +69,7 @@ router.get('/types', rejectUnauthenticated, (req, res) => {
 /**
  * GET by id here
  */
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/:id', (req, res) => {
     console.log('In GET by id', req.body.id);
     // if requiring access level check, uncomment the next 4 lines
     // if (req.user.access_level < 1) {
@@ -88,29 +108,60 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
  * PUT Route for changing STATUS here
  */
 router.put('/:id', rejectUnauthenticated, async (req, res) => {
+    // if requiring access level check, uncomment the next 4 lines
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level for this content');
+        return;
+    }
     try {
+        console.log('In Job Postings PUT, updating ID', req.params.id, req.body.status);
+        const query = `UPDATE "job_postings" SET "status" = $1 WHERE "id" = $2;`;
+        
+        const results = await pool.query(query, [req.body.status, req.params.id])
+        // on success we should see a rowCount of 1
+        console.log('Rows updated', results.rowCount);
+        res.sendStatus(201);
         
         console.log('end of PUT');
-        // TO DO: send success!
     } catch (error) {
-        console.log(error);
+        console.log('ERROR in PUT',error);
         res.sendStatus(500);
     }
-})
+});
 
 /**
  * DELETE route here
  */
+router.delete('/:id', rejectUnauthenticated, async (req, res) =>{
+    // code here
+    // if requiring access level check, uncomment the next 4 lines
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level to delete this content');
+        return;
+    }
+    try {
+        const query = `DELETE FROM "job_postings" WHERE "id" = $1`;
+        const result = await pool.query(query, [req.params.id]);
+        console.log('Rows updated', result.rowCount);
+        res.sendStatus(201);
+        
+        console.log('end of DELETE');
+    } catch (error) {
+        console.log('ERROR in DELETE');
+        res.sendStatus(500);
+    }
+});
 
 /**
- * POST route template
+ * POST route for new job postings
  */
-router.post('/', rejectUnauthenticated, async (req, res) => {
+router.post('/', async (req, res) => {
   // TO DO: CLEAR OUT MOST OF THE CONSOLE LOGS
   console.log('In job_postings router, POST');
   try {
+      await pool.query('BEGIN');
     console.log('show me the monster:', req.body);
-    const userId = req.user.id;
+    // const userId = 0;
 
     // set queries for adding to tables, returning id's of newly generated rows
     // for adding to "posting_contact" table
@@ -131,8 +182,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     // for inserting to "job_postings" table
     const jobQuery = `INSERT INTO "job_postings" ("company_id", "available_role", "description", 
                         "application_link", "job_city", "job_state", "remote", "posting_contact_id", 
-                        "share_contact", "hiring_contact_id", "user_id", "status") 
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+                        "share_contact", "hiring_contact_id", "status") 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
                         RETURNING "id";`;
 
     // run the query for the posting contact table
@@ -178,7 +229,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 posting_contact_id,         // $8
                 req.body.share_contact,     // $9
                 hiring_contact_id,          // $10
-                userId,                     // $11
+                // userId,                     // $11
                 'PENDING_APPROVAL'          // $12
             ]
     );
@@ -218,9 +269,11 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                     [rowIdToAdd, jobTypeToAdd]);
     }
     console.log('POST SUCCESS');
-    res.sendStatus(200);
+    await pool.query('COMMIT');
+    res.sendStatus(201);
   } catch (error) {
-      console.log('ERROR in POST', error);
+      console.log('ERROR in POST; ROLLBACK', error);
+      await pool.query('ROLLBACK');
       res.sendStatus(500);
   }
 });

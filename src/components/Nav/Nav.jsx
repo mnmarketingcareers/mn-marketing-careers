@@ -20,11 +20,11 @@ function Nav() {
         {user.id === null && (
           // If there's no user, show login/registration links
           <>
-            {/* <Link className="navLink" to="/login">
+            <Link className="navLink" to="/login">
               Login / Register
             </Link>
 
-            <Link className="navLink" to="/info">
+            {/*<Link className="navLink" to="/info">
               Info Page
             </Link> */}
           </>
@@ -45,6 +45,9 @@ function Nav() {
 
             <Link className="navLink" to="/adminaddjob">
               <i>Admin Add Jobs</i>
+            </Link>
+            <Link className="navLink" to="/reviewsubmissions">
+              <i>Review New Posts</i>
             </Link>
 
             <LogOutButton className="navLink" />
@@ -73,9 +76,9 @@ function Nav() {
           Info Page
         </Link> */}
 
-        <Link className="navLink" to="/login">
+        {/* <Link className="navLink" to="/login">
           Login / Register
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
