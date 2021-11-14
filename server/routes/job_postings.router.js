@@ -140,14 +140,14 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) =>{
         return;
     }
     try {
+        console.log('In DELETE', req.params.id);
         const query = `DELETE FROM "job_postings" WHERE "id" = $1`;
         const result = await pool.query(query, [req.params.id]);
         console.log('Rows updated', result.rowCount);
         res.sendStatus(201);
         
-        console.log('end of DELETE');
     } catch (error) {
-        console.log('ERROR in DELETE');
+        console.log('ERROR in DELETE', error);
         res.sendStatus(500);
     }
 });
