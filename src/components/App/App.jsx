@@ -28,6 +28,7 @@ import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
 import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 
 import './App.css';
+import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -92,7 +93,13 @@ function App() {
             <AdminHub />
           </ProtectedRoute>
 
-
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/adminaddjob"
+          >
+            <AdminAddJobPage />
+          </ProtectedRoute>
 
           <Route
             exact
