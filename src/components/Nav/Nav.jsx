@@ -46,6 +46,7 @@ function Nav() {
             <Link className="navLink" to="/adminaddjob">
               <i>Admin Add Jobs</i>
             </Link>
+          
             <Link className="navLink" to="/reviewsubmissions">
               <i>Review New Posts</i>
             </Link>
