@@ -29,14 +29,19 @@ function AdminJobList() {
         { field: 'available_role', headerName: 'available role', width: 150 },
         { field: 'description', headerName: 'description', width: 150 },
         { field: 'application_link', headerName: 'link', width: 150 },
+        { field: 'job_city', headername: 'city', width: 150},
+        { field: 'job_state', headername: 'state', width: 150},
+        { field: 'array_agg', headername: 'job types', width: 150},
+        { field: 'remote', headername: 'remote', width: 150},
+        { field: 'hiring_contact_email', headername: 'hiring contact', width: 150},
     ];
 
-    // useEffect(() => {
-    const grabData = (event) => {
+    useEffect(() => {
+    // const grabData = (event) => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
 
-    }
-    // }, []);
+    // }
+    }, []);
 
 
     return (
@@ -51,7 +56,7 @@ function AdminJobList() {
                     </div>
                 </div>
                 <p>{JSON.stringify(rows)}</p>
-                <button onClick={grabData}>Test</button>
+                {/* <button onClick={grabData}>Test</button> */}
                 {openModal && <Modal closeModal={setOpenModal} />}
                 <div className="top-of-table"><h2>Companies Hiring</h2></div>
             </div>

@@ -9,6 +9,7 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.email}!</h2>
       <p>Your ID is: {user.id}</p>
+      <iframe src="https://us5.admin.mailchimp.com/campaigns/edit?id=5165845#0" frameBorder="1" height="500" width="500"></iframe>
       <LogOutButton className="btn" />
     </div>
   );
