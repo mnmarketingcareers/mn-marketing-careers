@@ -208,111 +208,18 @@ const AdminAddJobPage = () => {
         history.push('/about');
     }
 
-    // considering having button options for the remote and share contact options
-    return (
-    // <div className="adminAddJobPage">
-    //   <Container className="adminContainer">
-    //     <div className="gridWrapper">
-    //       <div className="gridL">
-    //         <Typography variant="h4">Manual Job Entry</Typography>
-    //         <form onSubmit={() => validateEmail()}>
-    //         <TextField
-    //             value={companyName}
-    //             type="text"
-    //             id="role"
-    //             size="small"
-    //             placeholder="Company Name"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setCompanyName(event.target.value)}
-    //           />
-    //           <br />
-    //           <TextField
-    //             value={availableRole}
-    //             type="text"
-    //             id="role"
-    //             size="small"
-    //             placeholder="Role"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setAvailableRole(event.target.value)}
-    //           />
-    //           <br />
-    //           <TextField
-    //             value={description}
-    //             type="text"
-    //             id="description"
-    //             size="small"
-    //             placeholder="Description"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setDescription(event.target.value)}
-    //           />
-    //           <br />
-    //           <TextField
-    //             value={applicationLink}
-    //             type="text"
-    //             id="link"
-    //             size="small"
-    //             placeholder="Job Link"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setApplicationLink(event.target.value)}
-    //           />
-    //           <br />
-    //           <TextField
-    //             value={jobCity}
-    //             type="text"
-    //             id="city"
-    //             size="small"
-    //             placeholder="City"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setJobCity(event.target.value)}
-    //           />
-    //           <br />
-    //           <TextField
-    //             value={jobState}
-    //             type="text"
-    //             id="state"
-    //             size="small"
-    //             placeholder="State"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setJobState(event.target.value)}
-    //           />
-    //           <br />
-    //           <TextField
-    //             value={remote}
-    //             type="text"
-    //             id="state"
-    //             size="small"
-    //             placeholder="Remote?"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setRemote(event.target.value)}
-    //           />
-    //           <br />
-    //           <TextField
-    //             value={postingContactName}
-    //             type="text"
-    //             id="state"
-    //             size="small"
-    //             placeholder="Posting Contact Name"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setPostingContactName(event.target.value)}
-    //           />
-    //           <br />
-    //           <TextField
-    //             value={postingContactEmail}
-    //             type="text"
-    //             id="state"
-    //             size="small"
-    //             placeholder="Posting Contact Email"
-    //             style={{ width: "200px" }}
-    //             onChange={(event) => setPostingContactEmail(event.target.value)}
-    //           />
-    //           <br />
-    //           <Button onClick={handleSubmit} className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
-    //         </form>
-    //       </div>
-    //     </div>
-    //   </Container> 
-    //     </div>
+    const [remoteStatus, setRemoteStatus] = useState('');
 
+    const textFieldValue = (event) => {
+        console.log('inside text field', event.target.value);
+        setRemoteStatus(event.target.value);
+        setValues('remote');
+
+    }
+
+    // put all of these inputs on one card?
+    // job success alert
+    return (
     <>
 
             <div className="form-container">
@@ -345,10 +252,10 @@ const AdminAddJobPage = () => {
                                     className="poster-name"
                                     onChange={setValues('posting_contact_name')}
                                     value={jobPostingsObject.posting_contact_name} ></TextField>
-                            </Card>
+                            {/* </Card>
                         </Grid>
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="Contact Email" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -359,10 +266,10 @@ const AdminAddJobPage = () => {
                                     className="poster-email"
                                     onChange={setValues('posting_contact_email')}
                                     value={jobPostingsObject.posting_contact_email} ></TextField>
-                            </Card>
+                            {/* </Card>
                         </Grid>
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="Company Name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -373,10 +280,10 @@ const AdminAddJobPage = () => {
                                     className="company"
                                     onChange={setValues('company')}
                                     value={jobPostingsObject.company} ></TextField>
-                            </Card>
+                            {/* </Card>
                         </Grid>
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="Title of Position Available" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -386,10 +293,10 @@ const AdminAddJobPage = () => {
                                     className="title"
                                     onChange={setValues('available_role')}
                                     value={jobPostingsObject.available_role} ></TextField>
-                            </Card>
+                            {/* </Card>
                         </Grid>
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="Link to Job Post Online" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -399,10 +306,10 @@ const AdminAddJobPage = () => {
                                     className="application-link"
                                     onChange={setValues('application_link')}
                                     value={jobPostingsObject.application_link} ></TextField>
-                            </Card>
+                            {/* </Card>
                         </Grid>
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="Description" />
                                 &nbsp;
                                 <TextField
@@ -414,10 +321,10 @@ const AdminAddJobPage = () => {
                                     className="description"
                                     onChange={setValues('description')}
                                     value={jobPostingsObject.description} ></TextField>
-                            </Card>
+                            {/* </Card>
                         </Grid>
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="Select job types (Multiple selections allowed)" />
                                 <div>
                                     <FormControl sx={{ m: 1.1, width: 300 }}>
@@ -441,11 +348,11 @@ const AdminAddJobPage = () => {
                                         </Select>
                                     </FormControl>
                                 </div>
-                            </Card>
+                            {/* </Card>
                         </Grid>
 
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="City" />
                                 &nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -455,10 +362,10 @@ const AdminAddJobPage = () => {
                                     className="city"
                                     onChange={setValues('job_city')}
                                     value={jobPostingsObject.job_city} ></TextField>
-                            </Card>
+                            {/* </Card>
                         </Grid>
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="State" />
                                 &nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -468,10 +375,10 @@ const AdminAddJobPage = () => {
                                     className="state"
                                     onChange={setValues('job_state')}
                                     value={jobPostingsObject.job_state} ></TextField>
-                            </Card>
+                            {/* </Card>
                         </Grid>
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="&nbsp;Is this job remote?" />
                                 <FormControl component="fieldset">
                                     <RadioGroup
@@ -480,15 +387,14 @@ const AdminAddJobPage = () => {
                                     >
                                         <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
                                         <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
-                                        <FormControlLabel value="other" onClick={changeState} control={<Radio />} label="Other" />
-                                        {toggleOther ? <p></p> : <div><TextField className="other" variant="standard" placeholder="details" onChange={setValues('remote')} ></TextField></div>}
+                                        <FormControlLabel placeholder="remote-no" value="hybrid" onClick={setValues('remote')} control={<Radio />} label="Hybrid" />
                                     </RadioGroup>
                                 </FormControl>
-                            </Card>
+                            {/* </Card>
                         </Grid>
 
                         <Grid item xs={8}>
-                            <Card>
+                            <Card> */}
                                 <CardHeader title="&nbsp;Can we share a contact person" />
                                 <FormControl component="fieldset">
                                     <RadioGroup
