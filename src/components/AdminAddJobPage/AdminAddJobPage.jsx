@@ -80,7 +80,7 @@ const AdminAddJobPage = () => {
     const shareContact = (event) => {
         console.log('what is event', event.target.value)
         console.log('in yes')
-        setJobPostingsTable({ ...jobPostingsTable, share_contact: true });
+        setJobPostingsObject({ ...jobPostingsObject, share_contact: true });
         changeContactView();
     };
 
@@ -90,20 +90,6 @@ const AdminAddJobPage = () => {
         console.log('the event is', event);
         dispatch({
             type: 'NEW_EMPLOYER_JOB_POST',
-            // payload: {
-            //     company_name: companyName,
-            //     available_role: availableRole,
-            //     description: description,
-            //     application_link: applicationLink,
-            //     job_city: jobCity,
-            //     job_state: jobState,
-            //     remote: remote,
-            //     posting_contact_name: postingContactName,
-            //     posting_contact_email: postingContactEmail,
-            //     // add post contact info?
-            //     status: status
-
-            // }
             payload: jobPostingsObject
         })
     }
@@ -334,24 +320,13 @@ const AdminAddJobPage = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Card>
-                                <CardHeader title="Hiring? Submit a job" />
+                                <CardHeader title="Submit a job" />
                                 <CardMedia
                                     component="img"
                                     height="140"
                                     image="./images/employerform.jpeg"
                                     sx={{ borderRadius: 3 }}
                                 />
-                                <CardContent>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Minnesota Marketing Careers is a weekly email update dedicated to sharing marketing, communications and digital career opportunities with Minnesota-based
-                                        companies.Remote positions and internships included.Submit opportunities within your organization including advertising, marketing, public relations,
-                                        UX/software development, communications and digital.
-                                    </Typography>
-                                    <Typography padding="2" variant="body2" color="text.secondary">
-                                        Curated by Minnesota-based Recruiter, Elizabeth Laukka and Marketing Consultant, Casey Tilli.
-                                        Questions?  Reach us at <a href="mnmarketingcareers@gamil.com">mnmarketingcareers@gmail.com</a>
-                                    </Typography>
-                                </CardContent>
                                 <CardActions>
                                     <Button size="small">Share</Button>
                                     <Button size="small" onClick={toAbout}>Learn More</Button>
@@ -360,7 +335,7 @@ const AdminAddJobPage = () => {
                         </Grid>
                         <Grid item xs={8}>
                             <Card>
-                                <CardHeader title="Your name" />
+                                <CardHeader title="Contact Name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
@@ -374,7 +349,7 @@ const AdminAddJobPage = () => {
                         </Grid>
                         <Grid item xs={8}>
                             <Card>
-                                <CardHeader title="Your email" />
+                                <CardHeader title="Contact Email" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
