@@ -8,18 +8,32 @@
     justify-content: center;
 }
 .unsubfeedback {
-    display: flex;
-    flex: 0 1 auto;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
 }
+
+@media screen and (max-width: 480px){
+  /* PLACE CSS HERE FOR PHONE SIZE.  - tbd */
+  
+}
+
 
 .btn:hover,
 .btn:hover::after{
   cursor: pointer;
   background-color: #5298a7;
   transition: background-color 0.23s linear;
+}
+
+.unsub-submit-div {
+
+
+}
+
+.submit-employer-form-button {
+display: block;
+margin-left: auto;
+margin-right: auto
 }
