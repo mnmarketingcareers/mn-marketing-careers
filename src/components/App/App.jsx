@@ -23,9 +23,12 @@ import EmployerPage from '../EmployerPage/EmployerPage';
 import AdminHub from '../AdminHub/AdminHub';
 import Main from '../Main/Main';
 
+// leaving space for other new Pages here
+import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
 import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 
 import './App.css';
+import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +45,9 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/main" 
+          //UPDATED - changed this so localhost:3000 lands on /main instead of /home (home register - needs to be secret)
+          />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -73,6 +78,13 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows ApproveSubmissions else shows LoginPage
+            exact
+            path="/reviewsubmissions"
+          >
+            <ApproveSubmissions />
+          </ProtectedRoute>
 
           <ProtectedRoute 
             // logged in shows InfoPage else shows LoginPage
@@ -83,7 +95,13 @@ function App() {
             <AdminHub />
           </ProtectedRoute>
 
-
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/adminaddjob"
+          >
+            <AdminAddJobPage />
+          </ProtectedRoute>
 
           <Route
             exact
@@ -174,7 +192,9 @@ function App() {
 
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
+          <Route
+          //FIX make a 404 page with a return link to main
+          >
             <h1>404</h1>
           </Route>
         </Switch>
