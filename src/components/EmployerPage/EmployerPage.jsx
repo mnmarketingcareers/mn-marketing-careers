@@ -81,7 +81,7 @@ function EmployerPage() {
         console.log('what is propertyName', propertyName);
         console.log('what is event.target.value', event.target.value);
         setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value });
-        setToggleOther(true);
+        // setToggleOther(true);
     };
 
 
