@@ -220,29 +220,211 @@ const AdminAddJobPage = () => {
     // put all of these inputs on one card?
     // job success alert
     return (
-    <>
+    // <>
 
-            <div className="form-container">
-                <form className="employer-form" onSubmit={handleSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Card>
-                                <CardHeader title="Submit a job" />
-                                <CardMedia
-                                    component="img"
-                                    height="140"
-                                    image="./images/employerform.jpeg"
-                                    sx={{ borderRadius: 3 }}
-                                />
-                                <CardActions>
-                                    <Button size="small">Share</Button>
-                                    <Button size="small" onClick={toAbout}>Learn More</Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <Card>
-                                <CardHeader title="Contact Name" />
+    //         <div className="form-container">
+    //             <form className="employer-form" onSubmit={handleSubmit}>
+    //                 <Grid container spacing={2}>
+    //                     <Grid item xs={12}>
+    //                         <Card>
+    //                             <CardHeader title="Submit a job" />
+    //                             <CardMedia
+    //                                 component="img"
+    //                                 height="140"
+    //                                 image="./images/employerform.jpeg"
+    //                                 sx={{ borderRadius: 3 }}
+    //                             />
+    //                             <CardActions>
+    //                                 <Button size="small">Share</Button>
+    //                                 <Button size="small" onClick={toAbout}>Learn More</Button>
+    //                             </CardActions>
+    //                         </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card>
+    //                             <CardHeader title="Contact Name" />
+    //                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    //                             <TextField
+    //                                 type="text"
+    //                                 id="poster-name"
+    //                                 variant="standard"
+    //                                 placeholder="name"
+    //                                 className="poster-name"
+    //                                 onChange={setValues('posting_contact_name')}
+    //                                 value={jobPostingsObject.posting_contact_name} ></TextField>
+    //                         {/* </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="Contact Email" />
+    //                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    //                             <TextField
+    //                                 type="text"
+    //                                 id="poster-email"
+    //                                 variant="standard"
+    //                                 placeholder="email"
+    //                                 className="poster-email"
+    //                                 onChange={setValues('posting_contact_email')}
+    //                                 value={jobPostingsObject.posting_contact_email} ></TextField>
+    //                         {/* </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="Company Name" />
+    //                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    //                             <TextField
+    //                                 type="text"
+    //                                 id="company"
+    //                                 variant="standard"
+    //                                 placeholder="company"
+    //                                 className="company"
+    //                                 onChange={setValues('company')}
+    //                                 value={jobPostingsObject.company} ></TextField>
+    //                         {/* </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="Title of Position Available" />
+    //                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    //                             <TextField
+    //                                 type="text"
+    //                                 placeholder="title"
+    //                                 variant="standard"
+    //                                 className="title"
+    //                                 onChange={setValues('available_role')}
+    //                                 value={jobPostingsObject.available_role} ></TextField>
+    //                         {/* </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="Link to Job Post Online" />
+    //                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    //                             <TextField
+    //                                 type="text"
+    //                                 placeholder="link"
+    //                                 variant="standard"
+    //                                 className="application-link"
+    //                                 onChange={setValues('application_link')}
+    //                                 value={jobPostingsObject.application_link} ></TextField>
+    //                         {/* </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="Description" />
+    //                             &nbsp;
+    //                             <TextField
+    //                                 multiline rows={4}
+    //                                 sx={{ m: 1, width: 450 }}
+    //                                 type="text"
+    //                                 placeholder="Description"
+    //                                 variant='outlined'
+    //                                 className="description"
+    //                                 onChange={setValues('description')}
+    //                                 value={jobPostingsObject.description} ></TextField>
+    //                         {/* </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="Select job types (Multiple selections allowed)" />
+    //                             <div>
+    //                                 <FormControl sx={{ m: 1.1, width: 300 }}>
+    //                                     <InputLabel id="job-types">types</InputLabel>
+    //                                     <Select
+    //                                         labelId="job-types"
+    //                                         id="job-types"
+    //                                         multiple
+    //                                         value={job}
+    //                                         onChange={handleJob}
+    //                                         input={<OutlinedInput label="Types" />}
+    //                                         renderValue={(selected) => selected.join(', ')}
+    //                                         MenuProps={MenuProps}
+    //                                     >
+    //                                         {names.map((name) => (
+    //                                             <MenuItem key={name.field} id={name.field} value={name.field}>
+    //                                                 <Checkbox checked={job.indexOf(name.field) > -1} />
+    //                                                 <ListItemText primary={name.field} />
+    //                                             </MenuItem>
+    //                                         ))}
+    //                                     </Select>
+    //                                 </FormControl>
+    //                             </div>
+    //                         {/* </Card>
+    //                     </Grid>
+
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="City" />
+    //                             &nbsp;&nbsp;&nbsp;
+    //                             <TextField
+    //                                 type="text"
+    //                                 placeholder="City"
+    //                                 variant="standard"
+    //                                 className="city"
+    //                                 onChange={setValues('job_city')}
+    //                                 value={jobPostingsObject.job_city} ></TextField>
+    //                         {/* </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="State" />
+    //                             &nbsp;&nbsp;&nbsp;
+    //                             <TextField
+    //                                 type="text"
+    //                                 placeholder="State"
+    //                                 variant="standard"
+    //                                 className="state"
+    //                                 onChange={setValues('job_state')}
+    //                                 value={jobPostingsObject.job_state} ></TextField>
+    //                         {/* </Card>
+    //                     </Grid>
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="&nbsp;Is this job remote?" />
+    //                             <FormControl component="fieldset">
+    //                                 <RadioGroup
+    //                                     aria-label="Is this job remote?"
+    //                                     name="radio-buttons-group"
+    //                                 >
+    //                                     <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
+    //                                     <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
+    //                                     <FormControlLabel placeholder="remote-no" value="hybrid" onClick={setValues('remote')} control={<Radio />} label="Hybrid" />
+    //                                 </RadioGroup>
+    //                             </FormControl>
+    //                         {/* </Card>
+    //                     </Grid>
+
+    //                     <Grid item xs={8}>
+    //                         <Card> */}
+    //                             <CardHeader title="&nbsp;Can we share a contact person" />
+    //                             <FormControl component="fieldset">
+    //                                 <RadioGroup
+    //                                     aria-label="Can we share a contact person?"
+    //                                     name="radio-buttons-group"
+    //                                 >
+    //                                     <FormControlLabel placeholder="yes" value="yes" onClick={shareContact} control={<Radio />} label="Yes" />
+    //                                     {toggleContact ? <p></p> : <div><TextField className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('name')} ></TextField>&nbsp;&nbsp;
+    //                                         &nbsp;<TextField className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('email')} ></TextField>&nbsp;
+    //                                         &nbsp;<TextField className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>&nbsp;
+    //                                         &nbsp;&nbsp;<TextField className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField></div>}
+    //                                     <FormControlLabel placeholder="no" value="no" onClick={handleDontShareContact} control={<Radio />} label="No" />
+    //                                 </RadioGroup>
+    //                             </FormControl>
+    //                         </Card>
+    //                     </Grid>
+    //                 </Grid>
+    //                 <input className="submit-employer-form-button" type='submit' value='Submit' />
+    //             </form>
+    //         </div>
+
+    //     </>
+                <>
+                    <div className="form-container">
+                        <form className="employer-form" onSubmit={handleSubmit}>
+                        <Card xs={12}>
+                        <Grid container item>
+                        <Grid item xs={12} md={6} lg={4} xl={3}>
+                            {/* <Card  direction="row"> */}
+                                <CardHeader title="Your name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
@@ -252,11 +434,11 @@ const AdminAddJobPage = () => {
                                     className="poster-name"
                                     onChange={setValues('posting_contact_name')}
                                     value={jobPostingsObject.posting_contact_name} ></TextField>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
-                        <Grid item xs={8}>
-                            <Card> */}
-                                <CardHeader title="Contact Email" />
+                        <Grid item xs={12} md={6} lg={4} xl={3}>
+                            {/* <Card> */}
+                                <CardHeader title="Your email" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
@@ -266,10 +448,10 @@ const AdminAddJobPage = () => {
                                     className="poster-email"
                                     onChange={setValues('posting_contact_email')}
                                     value={jobPostingsObject.posting_contact_email} ></TextField>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
-                        <Grid item xs={8}>
-                            <Card> */}
+                        <Grid item xs={12} md={6} lg={4} xl={3}>
+                            {/* <Card> */}
                                 <CardHeader title="Company Name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -280,10 +462,10 @@ const AdminAddJobPage = () => {
                                     className="company"
                                     onChange={setValues('company')}
                                     value={jobPostingsObject.company} ></TextField>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
-                        <Grid item xs={8}>
-                            <Card> */}
+                        <Grid item xs={12} md={6} lg={4} xl={3}>
+                            {/* <Card> */}
                                 <CardHeader title="Title of Position Available" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -293,10 +475,10 @@ const AdminAddJobPage = () => {
                                     className="title"
                                     onChange={setValues('available_role')}
                                     value={jobPostingsObject.available_role} ></TextField>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
-                        <Grid item xs={8}>
-                            <Card> */}
+                        <Grid item xs={12} md={6} lg={4} xl={3}>
+                            {/* <Card> */}
                                 <CardHeader title="Link to Job Post Online" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -306,25 +488,11 @@ const AdminAddJobPage = () => {
                                     className="application-link"
                                     onChange={setValues('application_link')}
                                     value={jobPostingsObject.application_link} ></TextField>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
-                        <Grid item xs={8}>
-                            <Card> */}
-                                <CardHeader title="Description" />
-                                &nbsp;
-                                <TextField
-                                    multiline rows={4}
-                                    sx={{ m: 1, width: 450 }}
-                                    type="text"
-                                    placeholder="Description"
-                                    variant='outlined'
-                                    className="description"
-                                    onChange={setValues('description')}
-                                    value={jobPostingsObject.description} ></TextField>
-                            {/* </Card>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <Card> */}
+                        
+                        <Grid item xs={12} md={6} lg={4} xl={3}>
+                            {/* <Card> */}
                                 <CardHeader title="Select job types (Multiple selections allowed)" />
                                 <div>
                                     <FormControl sx={{ m: 1.1, width: 300 }}>
@@ -348,11 +516,27 @@ const AdminAddJobPage = () => {
                                         </Select>
                                     </FormControl>
                                 </div>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
 
-                        <Grid item xs={8}>
-                            <Card> */}
+                        <Grid item xs={12} md={12} lg={12} xl={6}>
+                            {/* <Card> */}
+                                <CardHeader title="Description" />
+                                &nbsp;
+                                <TextField
+                                    multiline rows={4}
+                                    sx={{ m: 1, width: 450 }}
+                                    type="text"
+                                    placeholder="Description"
+                                    variant='outlined'
+                                    className="description"
+                                    onChange={setValues('description')}
+                                    value={jobPostingsObject.description} ></TextField>
+                            {/* </Card> */}
+                        </Grid>
+
+                        <Grid item xs={6} md={4} lg={2} xl={2}>
+                            {/* <Card> */}
                                 <CardHeader title="City" />
                                 &nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -362,10 +546,10 @@ const AdminAddJobPage = () => {
                                     className="city"
                                     onChange={setValues('job_city')}
                                     value={jobPostingsObject.job_city} ></TextField>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
-                        <Grid item xs={8}>
-                            <Card> */}
+                        <Grid item xs={6} md={4} lg={2} xl={2}>
+                            {/* <Card> */}
                                 <CardHeader title="State" />
                                 &nbsp;&nbsp;&nbsp;
                                 <TextField
@@ -375,10 +559,10 @@ const AdminAddJobPage = () => {
                                     className="state"
                                     onChange={setValues('job_state')}
                                     value={jobPostingsObject.job_state} ></TextField>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
-                        <Grid item xs={8}>
-                            <Card> */}
+                        <Grid item xs={12} md={6} lg={4} xl={3}>
+                            {/* <Card> */}
                                 <CardHeader title="&nbsp;Is this job remote?" />
                                 <FormControl component="fieldset">
                                     <RadioGroup
@@ -387,14 +571,16 @@ const AdminAddJobPage = () => {
                                     >
                                         <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
                                         <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
-                                        <FormControlLabel placeholder="remote-no" value="hybrid" onClick={setValues('remote')} control={<Radio />} label="Hybrid" />
+                                        <FormControlLabel placeholder="remote-hybrid" value="hybrid" onClick={setValues('remote')} control={<Radio />} label="Hybrid" />
+                                        {/* <FormControlLabel value="other" onClick={changeState} control={<Radio />} label="Other" />
+                                        {toggleOther ? <p></p> : <div><TextField className="other" variant="standard" placeholder="details" onChange={setValues('remote')} ></TextField></div>} */}
                                     </RadioGroup>
                                 </FormControl>
-                            {/* </Card>
+                            {/* </Card> */}
                         </Grid>
 
-                        <Grid item xs={8}>
-                            <Card> */}
+                        <Grid item xs={12} md={6} lg={4} xl={3}>
+                            {/* <Card> */}
                                 <CardHeader title="&nbsp;Can we share a contact person" />
                                 <FormControl component="fieldset">
                                     <RadioGroup
@@ -409,15 +595,14 @@ const AdminAddJobPage = () => {
                                         <FormControlLabel placeholder="no" value="no" onClick={handleDontShareContact} control={<Radio />} label="No" />
                                     </RadioGroup>
                                 </FormControl>
-                            </Card>
+                            {/* </Card> */}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <input className="submit-employer-form-button" type='submit' value='Submit' />
-                </form>
-            </div>
-
-        </>
-
+                        </Card>
+                        <input className="submit-employer-form-button" type='submit' value='Submit' />
+                        </form>
+                    </div>
+                </>
     );
 };
 
