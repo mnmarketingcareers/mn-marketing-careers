@@ -79,6 +79,8 @@ function UnsubFeedbackPage() {
     setReason({ ...reason, reason: "other" });
   };
 
+
+
   // in this return I want a selection of reasons as radio/check buttons
   // conditional rendering to the DOM
   // if a job seeker selects other
@@ -97,7 +99,7 @@ function UnsubFeedbackPage() {
             component="legend"
             style={{ textAlign: "center", paddingTop: "9px" }}
           >
-            This information is valuable to us, and we appreciate you taking the time to let us know why you'd like unsubscribe.
+            This information is valuable to us. We appreciate you taking the time to let us know why you'd like unsubscribe.
           </FormLabel>
           <RadioGroup aria-label="reason" name="radio-buttons-group">
             <FormControlLabel
@@ -143,9 +145,10 @@ function UnsubFeedbackPage() {
               </div>
             )}
           </RadioGroup>
-          <input
-            placeholder="confirm your email to unsubscribe"
-            type="email"
+          <TextField
+            label="Confirm Your Email to Unsubscribe"
+            variant="outlined"
+            type="email" 
             onChange={(event) => setUserEmail(event.target.value)}
           />
           <div className="unsub-submit-div">
