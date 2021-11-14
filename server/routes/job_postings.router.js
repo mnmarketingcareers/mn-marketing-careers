@@ -155,28 +155,28 @@ router.post('/', async (req, res) => {
   try {
     
     // validate inputs
- if (
-    req.body.posting_contact_name === '' ||
-    req.body.posting_contact_email === '' ||
-    req.body.company === '' ||
-    req.body.available_role === '' ||
-    req.body.application_link === '' ||
-    req.body.description === '' ||
-    req.body.job_city === '' ||
-    req.body.job_state === '' ||
-    req.body.remote === '' ||
-    req.body.share_contact === '' ||
-    req.body.name === '' ||
-    req.body.email === '' ||
-    req.body.title === '' ||
-    req.body.phone === '' ||
-    req.body.job_types.length === 0
-) {
-    // console.log('Form not added: missing fields');
-    const error = 'Error: Form not added - invalid input: missing fields';
-    throw error;
-    // res.sendStatus(500);
-}
+    if (
+        req.body.posting_contact_name === '' ||
+        req.body.posting_contact_email === '' ||
+        req.body.company === '' ||
+        req.body.available_role === '' ||
+        req.body.application_link === '' ||
+        req.body.description === '' ||
+        req.body.job_city === '' ||
+        req.body.job_state === '' ||
+        req.body.remote === '' ||
+        req.body.share_contact === '' ||
+        req.body.name === '' ||
+        req.body.email === '' ||
+        req.body.title === '' ||
+        req.body.phone === '' ||
+        req.body.job_types.length === 0
+    ) {
+        // define an error to match validation failure
+        const error = 'Invalid input: Form not added -  missing fields';
+        // this goes to the catch
+        throw error; 
+    }
     await pool.query('BEGIN');
     // const userId = 0;
 
