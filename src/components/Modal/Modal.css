@@ -44,6 +44,14 @@
     border: none;
     font-size: 25px;
     cursor: pointer;
+    transition: all 1s;
+    /* -webkit-transition: -webkit-transform 1s; */
+  }
+
+
+  .titleCloseBtn button:hover {
+    -webkit-transform: rotate(90deg) translateZ(0);
+    color: salmon
   }
   
   .modalContainer .body {
@@ -79,7 +87,7 @@
 .submit-subscription-form-button:hover,
 .submit-subscription-form-button:hover::after{
   cursor: pointer;
-  background-color: #5298a7;
+  background-color: #529bac;
   transition: background-color 0.23s linear;
 }
   
