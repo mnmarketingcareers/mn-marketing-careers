@@ -19,8 +19,18 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import EmployerPage from '../EmployerPage/EmployerPage';
+import AdminHub from '../AdminHub/AdminHub';
+import Main from '../Main/Main';
+
+// leaving space for other new Pages here
+import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
+import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
+
+import AdminJobList from '../AdminJobList/AdminJobList';
 
 import './App.css';
+import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +47,9 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/main" 
+          //UPDATED - changed this so localhost:3000 lands on /main instead of /home (home register - needs to be secret)
+          />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -66,6 +78,40 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows ApproveSubmissions else shows LoginPage
+            exact
+            path="/reviewsubmissions"
+          >
+            <ApproveSubmissions />
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+            // logged in shows InfoPage else shows LoginPage
+            // added by Mo 11/9/21 @ 10p
+            exact
+            path="/adminhub"
+          >
+            <AdminHub />
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+            // logged in shows InfoPage else shows LoginPage
+            // added by Mo 11/9/21 @ 10p
+            exact
+            path="/adminjoblist"
+          >
+            <AdminJobList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/adminaddjob"
+          >
+            <AdminAddJobPage />
           </ProtectedRoute>
 
           <Route
@@ -110,8 +156,56 @@ function App() {
             }
           </Route>
 
+
+{/* 
+          <Route 
+          exact
+          path="/info"
+          >
+            <InfoPage />
+          </Route> */}
+
+
+          <Route 
+          exact
+          path="/unsubfeedbackpage"
+          >
+            <UnsubFeedbackPage />
+          </Route>
+
+
+
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/about"
+          >
+            <AboutPage />
+          </Route>
+
+
+
+          <Route
+            exact
+            path="/employerpage"
+          >
+            <EmployerPage />
+          </Route>
+
+          <Route
+            exact
+            path="/main"
+          >
+            <Main />
+          </Route>
+
+
+
+
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
+          <Route
+          //FIX make a 404 page with a return link to main
+          >
             <h1>404</h1>
           </Route>
         </Switch>

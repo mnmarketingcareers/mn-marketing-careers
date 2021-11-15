@@ -2,6 +2,15 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
+import employerSaga from './employer.saga';
+import getSubsSaga from './getSubs.saga';
+import addSubscriberSaga from './addSubscriber.saga';
+import reviewPendingSaga from './reviewPending.saga';
+import getFeedbackSaga from './unsubscribe.saga';
+import toggleSubscriberStatus from './modifySubStatus.saga';
+import fetchJobsSaga from './fetchJobs.saga';
+
+import approvedPostingsSaga from './approvedPostings.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -15,5 +24,14 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    employerSaga(),
+    getSubsSaga(), //get from API
+    addSubscriberSaga(), //post to API
+    reviewPendingSaga(), // Fetches all posts sent from employer saga
+    getFeedbackSaga(),
+    toggleSubscriberStatus(), //PUT sub status to API
+    fetchJobsSaga(),
+
+    approvedPostingsSaga(),
   ]);
 }

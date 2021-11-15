@@ -2,19 +2,25 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
+  // use local state to store form inputs to compile as object for dispatch to server
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirsName] = useState('');
+  const [lastName, setLastName] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const registerUser = (event) => {
     event.preventDefault();
 
+    // Sends new user information to server via saga route 'REGISTER'
     dispatch({
       type: 'REGISTER',
       payload: {
         username: username,
         password: password,
+        first_name: firstName,
+        last_name: lastName,
       },
     });
   }; // end registerUser
@@ -29,9 +35,9 @@ function RegisterForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
+          Email:
           <input
-            type="text"
+            type="email"
             name="username"
             value={username}
             required
@@ -48,6 +54,30 @@ function RegisterForm() {
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="first-name">
+          First Name:
+          <input
+            type="text"
+            name="first-name"
+            value={firstName}
+            required
+            onChange={(event) => setFirsName(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="last-name">
+          Last Name:
+          <input
+            type="text"
+            name="last-name"
+            value={lastName}
+            required
+            onChange={(event) => setLastName(event.target.value)}
           />
         </label>
       </div>
