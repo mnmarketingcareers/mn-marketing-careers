@@ -3,84 +3,110 @@ import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
+import { Button, Typography } from "@mui/material";
+import VisitorDrawerMenu from "../VisitorDrawerMenu/VisitorDrawerMenu";
+import AdminDrawerMenu from "../AdminDrawerMenu/AdminDrawerMenu";
 
 function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
     <div className="nav">
-      <Link to="/home">
+      <div className="nav-title">
+        <Link to="/main">
+          <img
+            style={{ margin: "20px" }}
+            src="./images/nav-horizontal-logo.png"
+          />
+        </Link>
+      </div>
+
+      <Link to="/main">
         <img
-          className="nav-title"
-          width="500px"
-          style={{ margin: "20px" }}
-          src="./images/nav-horizontal-logo.png"
+          className="nav-title-circle-only"
+          src="./images/circle-logo-only-v2.png"
         />
       </Link>
-      <div className="nav-words">
-        {/* If no user is logged in, show these links */}
-        {user.id === null && (
-          // If there's no user, show login/registration links
-          <>
-            <Link className="navLink" to="/login">
-              Login / Register
-            </Link>
+      <div>
+        {/* ---------------------------------------------- */}
+        {/* WHAT WILL APPEAR FOR VISITOR - NO ADMIN LOGIN: */}
+        {/* ---------------------------------------------- */}
 
-            {/*<Link className="navLink" to="/info">
-              Info Page
-            </Link> */}
+        {user.id === undefined && (
+          <>
+            <div className="nav-words">
+              <Link className="navLink" to="/main">
+                Main
+              </Link>
+
+              <Link className="navLink" to="/employerpage">
+                Submit Job
+              </Link>
+
+              <Link className="navLink" to="/about">
+                About
+              </Link>
+
+              <Link className="navLink" to="/unsubfeedbackpage">
+                Unsubscribe
+              </Link>
+
+              {/* <Link style={{fontSize: "10px"}}className="navLink" to="/login">
+                Login
+              </Link> */}
+            </div>
+
+            {/* hamburger menu will only appear on screen size 768 and down */}
+            <div className="hamburger">
+              <VisitorDrawerMenu />
+            </div>
           </>
         )}
+
+        {/* ---------------------------------------------- */}
+        {/* ---WHAT WILL APPEAR FOR ADMIN IF LOGGED IN:--- */}
+        {/* ---------------------------------------------- */}
 
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <LogOutButton className="navLink" />
+            <div className="nav-words">
+              <LogOutButton />
 
-            <Link className="navLink" to="/user">
-              Home
-            </Link>
+              <Link className="navLink" to="/user">
+                Home
+              </Link>
 
-            <Link className="navLink" to="/adminhub">
-              Admin Hub
-            </Link>
+              <Link className="navLink" to="/main">
+                Jobs
+              </Link>
 
-            <Link className="navLink" to="/adminaddjob">
-              <i>Admin Add Jobs</i>
-            </Link>
-          
-            <Link className="navLink" to="/reviewsubmissions">
-              Review New Posts
-            </Link>
+              <Link className="navLink" to="/adminhub">
+                Admin Hub
+              </Link>
+
+              <Link className="navLink" to="/reviewsubmissions">
+                Review New Posts
+              </Link>
+            </div>
+
+            {/* hamburger menu will only appear on screen size 768 and down */}
+            <div className="hamburger">
+              <AdminDrawerMenu />
+            </div>
           </>
         )}
-
-        <Link className="navLink" to="/main">
-          Main
-        </Link>
-
-        <Link className="navLink" to="/employerpage">
-          Submit Job
-        </Link>
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
-
-        <Link className="navLink" to="/unsubfeedbackpage">
-          Unsubscribe
-        </Link>
-
-        {/* <Link className="navLink" to="/info">
-          Info Page
-        </Link> */}
-
-        {/* <Link className="navLink" to="/login">
-          Login / Register
-        </Link> */}
       </div>
     </div>
   );
 }
 
 export default Nav;
+
+//deletelater
+
+//-------------junk drawer------------//
+
+// <Link className="navLink" to="/info">
+//           Info Page
+//         </Link> */
