@@ -18,6 +18,7 @@ const feedbackRouter = require('./routes/feedback.router');
 // jobs routers
 const jobsRouter = require('./routes/job_postings.router');
 const jobTypesRouter = require('./routes/job_types.router');
+const searchJobsRouter = require('./routes/search_jobs.router');
 
 
 // Body parser middleware
@@ -42,7 +43,7 @@ app.use('/api/feedback', feedbackRouter);
 // use the jobs routers
 app.use('/api/job', jobsRouter);
 app.use('/api/jobtypes', jobTypesRouter)
-
+app.use('/api/search', searchJobsRouter)
 // Serve static files
 app.use(express.static('build'));
 

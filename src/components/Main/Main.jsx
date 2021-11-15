@@ -22,6 +22,7 @@ import Modal from "../Modal/Modal.jsx";
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import './Main.css';
+import  RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 
 
 function Main() {
@@ -44,19 +45,25 @@ function Main() {
     }
 
 
-    //1 DATA FROM SERVER
+    
     const rows = useSelector((store) => store.setJobsReducer);
+
+// The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
 
     const columns = [
         { field: 'company_name', headerName: 'company', width: 150 },
-        { field: 'remote', headerName: 'remote', width: 140}, 
         { field: 'date_posted', headerName: 'date', width: 110 },
         { field: 'available_role', headerName: 'available role', width: 150 },
         { field: 'description', headerName: 'description', width: 150 },
-        { field: 'application_link', headerName: 'link', width: 150, renderCell: (params) => {return <button><a href={`https://${params.row.application_link}`} target="_blank"> PUSH BUTTEN</a></button>} },
+        { field: 'application_link', headerName: 'link', width: 150, renderCell: (params) => {
+                                            if(params.row.application_link.includes('http')){
+                                                return <button><a href={`${params.row.application_link}`} target="_blank">Apply</a></button>
+                                            } else {
+                                                return <button><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
+                                            }
+                                            }},
         { field: 'array_agg', headName: 'array_agg', width: 350},
-    ];                                                                              
-    // params.row.application_link  
+    ];                                                                               
 
     // useEffect(() => {
     const grabData = (event) => {
@@ -80,7 +87,6 @@ function Main() {
                 <p>{JSON.stringify(rows)}</p>
                 <button onClick={grabData}>Test</button>
                 {openModal && <Modal closeModal={setOpenModal} />}
-                <div className="top-of-table"><h2>Companies Hiring</h2></div>
             </div>
             <div className="tables-container">
                 <div className="job-postings-table">
@@ -93,26 +99,25 @@ function Main() {
                 </div>
                 <div className="submit">
                     Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button>
+                    <div className="top-of-table"><h2>Companies Hiring</h2></div>
                     {openModal ? <p></p> : 
                       
                         
-                      <div style={{ height: 400, width: '100%' }}>
+                      <div style={{ height: 600, width: '100%' }}>
                       <DataGrid
                         rows={rows}
                         columns={columns}
-                        pageSize={5}
-                        rowsPerPageOptions={[5]}
+                        pageSize={8}
+                        rowsPerPageOptions={[8]}
                         checkboxSelection
                         disableSelectionOnClick
                       />
                     </div>
                     }
-
-
-
-
+                    <div className="top-of-table"><h2>Remote Opportunities</h2></div>
+                    <RemoteJobs />
+                    <div className="top-of-table"><h2>Internships</h2></div>
                 </div>
-
             </div>
         </>
     )
