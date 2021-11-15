@@ -4,22 +4,26 @@
 
 _Duration: 2 Week Sprint_
 
-This is an application to make life easier for the curators and subcribers to the MN Marketing Careers joblist sharing service. Our application will include MailChimp functionalty to allow the client to incorporate existing practices and subscriber contact data conveneintly and effectively into the application.
+This application provides improved and expanded functionality for the curators of the MN Marketing Careers joblist sharing service and increased accessibility to the the subscribers to that list, and employers looking to include new job openings. It aims to gather all current methods inuse by the client in one place. With that in mind, it was designed to continue to utilize MailChimp functionalty for the client to incorporate existing practices and subscriber contact data conveneintly and effectively into the application. The app was then customized for more interaction between employers looking to post jobs, job-seekers, and the joblist curators. The joblist now lives on a page where job seekers can see all previous postings up to 30 days after initiation, and can sort and filter results by a few predetermined categories. The joblist curator can also manage listings with more control. 
 
 
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
 
 ## Screen Shot
 
-Some things to consider...
-
-So classic
+First, lets get in the right frame of mind:
 
 ![Classic Lasagna](public/images/classic_lasagna.png)
 
-Wow, pretty!
+That's better!
+
+To gain a working understading of the data pathways, one might reference the following chart.
 
 ![Expensive Lucid Chart](public/images/lucid_chart.png)
+
+Additionally, an example of the site administrators form to add new job openings to the list.
+
+![Admin Add Job Form](public/images/mnmc_admin-add-jobs.png)
 
 
 ### Prerequisites
