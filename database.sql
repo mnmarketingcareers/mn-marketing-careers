@@ -4,7 +4,7 @@ CREATE TABLE "job_postings" (
 	"id" serial NOT NULL,
 	"company_id" integer NOT NULL,
 	"available_role" varchar(500) NOT NULL,
-	"description" varchar(500),
+	"description" varchar(2000),
 	"application_link" varchar(500) NOT NULL,
 	"job_city" varchar(255) NOT NULL,
 	"job_state" varchar(255) NOT NULL,

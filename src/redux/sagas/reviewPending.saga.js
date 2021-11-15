@@ -56,10 +56,27 @@ function* deletePosting (action) {
     }
 }
 
+function* postApprovedJobs() {
+    try {
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+          };
+        console.log('in post saga');
+        const response = yield axios.put(`/api/job/tolist`,config);
+        // verify success with a console log
+        console.log('What did the server send back?', response.data);
+        yield put({ type: 'FETCH_PENDING_POSTINGS' });
+    } catch (error) {
+        console.log("ERROR in posting approved postings", error);
+    }
+}
+
 function* reviewPendingSaga () {
     yield takeLatest('FETCH_PENDING_POSTINGS', fetchPendingPostings);
     yield takeLatest('APPROVE_POSTING', approvePosting);
     yield takeLatest('DELETE_POSTING', deletePosting);
+    yield takeLatest('POST_APPROVED_JOBS', postApprovedJobs)
 }
 
 export default reviewPendingSaga;
