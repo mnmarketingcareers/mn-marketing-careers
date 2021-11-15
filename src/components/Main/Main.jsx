@@ -35,17 +35,28 @@ function Main() {
         history.push('/employerpage')
     }
 
+    const testApply = (event) => {
+        console.log('in button, what is event.target.params', event.target.params);
+        console.log('in button, what is params', event.target.params);
+       const link = event.target.value ;
+       <a href="`${link}`"/>
+
+    }
+
 
     //1 DATA FROM SERVER
     const rows = useSelector((store) => store.setJobsReducer);
 
     const columns = [
         { field: 'company_name', headerName: 'company', width: 150 },
-        { field: 'date_posted', headerName: 'date', width: 150 },
+        { field: 'remote', headerName: 'remote', width: 140}, 
+        { field: 'date_posted', headerName: 'date', width: 110 },
         { field: 'available_role', headerName: 'available role', width: 150 },
         { field: 'description', headerName: 'description', width: 150 },
-        { field: 'application_link', headerName: 'link', width: 150 },
-    ];
+        { field: 'application_link', headerName: 'link', width: 150, renderCell: (params) => {return <button><a href={`https://${params.row.application_link}`} target="_blank"> PUSH BUTTEN</a></button>} },
+        { field: 'array_agg', headName: 'array_agg', width: 350},
+    ];                                                                              
+    // params.row.application_link  
 
     // useEffect(() => {
     const grabData = (event) => {
