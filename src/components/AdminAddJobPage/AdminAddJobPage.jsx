@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Typography, Container, Button, Paper, TextField, IconButton } from "@mui/material";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Button, TextField } from "@mui/material";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
@@ -14,11 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import { useHistory } from "react-router";
-import useStyles from "../Styles/Styles";
 
 const AdminAddJobPage = () => {
     const dispatch = useDispatch();
@@ -62,14 +58,15 @@ const AdminAddJobPage = () => {
         changeContactView();
     };
 
-    
+    // Push new job inputs to the database to be seen on the DOM in a different component
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('the event is', event);
         dispatch({
             type: 'NEW_EMPLOYER_JOB_POST',
             payload: jobPostingsObject
         })
+        history.push('/adminaddjob');
+        alert('New Job Submission Successful!');
     }
 
     const setValues = (propertyName) => (event) => {
@@ -90,6 +87,7 @@ const AdminAddJobPage = () => {
         });
     }
 
+    // Grid sizing conditions
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
