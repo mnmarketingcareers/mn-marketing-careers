@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Button, Typography } from "@mui/material";
+import VisitorDrawerMenu from "../VisitorDrawerMenu/VisitorDrawerMenu";
+import AdminDrawerMenu from "../AdminDrawerMenu/AdminDrawerMenu";
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -11,19 +13,17 @@ function Nav() {
   return (
     <div className="nav">
       <div className="nav-title">
-      <Link to="/home">
-        <img
-          
-          style={{ margin: "20px" }}
-          src="./images/nav-horizontal-logo.png"
-        />
-      </Link>
+        <Link to="/home">
+          <img
+            style={{ margin: "20px" }}
+            src="./images/nav-horizontal-logo.png"
+          />
+        </Link>
       </div>
 
       <Link to="/home">
         <img
           className="nav-title-circle-only"
-          // style={{ margin: "20px" }}
           src="./images/circle-logo-only-v2.png"
         />
       </Link>
@@ -50,11 +50,16 @@ function Nav() {
               <Link className="navLink" to="/unsubfeedbackpage">
                 Unsubscribe
               </Link>
+
+              {/* <Link style={{fontSize: "10px"}}className="navLink" to="/login">
+                Login
+              </Link> */}
+
             </div>
 
             {/* hamburger menu will only appear on screen size 768 and down */}
             <div className="hamburger">
-              <MenuIcon style={{ transform: "scale(2)" }} />
+              <VisitorDrawerMenu />
             </div>
           </>
         )}
@@ -84,7 +89,7 @@ function Nav() {
 
             {/* hamburger menu will only appear on screen size 768 and down */}
             <div className="hamburger">
-              <MenuIcon style={{ transform: "scale(2)" }} />
+              <AdminDrawerMenu />
             </div>
           </>
         )}
@@ -99,14 +104,6 @@ export default Nav;
 
 //-------------junk drawer------------//
 
-{
-  /* <Link className="navLink" to="/info">
-          Info Page
-        </Link> */
-}
-
-{
-  /* <Link className="navLink" to="/login">
-          Login / Register
-        </Link> */
-}
+// <Link className="navLink" to="/info">
+//           Info Page
+//         </Link> */

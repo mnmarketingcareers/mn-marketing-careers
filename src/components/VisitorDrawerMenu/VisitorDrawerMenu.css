@@ -1,0 +1,31 @@
+.drawerContainer {
+    display: column;
+justify-content: center;
+}
+
+.drawerIcons {
+    color: #263a3e;
+    transform: scale(2);
+margin: 6px;
+   border: none;
+   cursor: pointer;
+   outline: 0;
+   text-align: center;
+}
+
+.drawerIcons:active {
+    color: #263a3e;
+    transform: scale(2);
+  
+  
+   border: none;
+   cursor: pointer;
+   outline: 0;
+   text-align: center;
+}
+
+a {
+    color: #263a3e;
+
+}
+

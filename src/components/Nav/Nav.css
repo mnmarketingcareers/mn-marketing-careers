@@ -65,9 +65,9 @@ screen size under 768 = only the circle portion of the logo
   color: #263a3e;
   font-weight: bold;
   text-align: center;
-  padding: 24px 6px;
+  padding: 24px 7px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   cursor: pointer;
   outline: 0;
@@ -117,6 +117,9 @@ screen size under 768 = only the circle portion of the logo
     display: block;
     position: relative;
     margin-right: 20px;
-    padding: 48px 10px;
+    padding: 30px 10px;
   }
 }
+
+
+
