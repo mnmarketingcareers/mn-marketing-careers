@@ -40,7 +40,7 @@ const AdminHub = () => {
     dispatch({ type: "GET_SUBS" });
     setSubList(subs.data);
     console.log('user is:', user.first_name)
-  }, []);
+  }, [subList]);
 
   //check email - is it real? if keep required attribute //deletelater
   const validateEmail = () => {
