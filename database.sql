@@ -19,7 +19,7 @@ CREATE TABLE "company" (
 
 CREATE TABLE "job_types" (
 	"id" serial PRIMARY KEY,
-	"type" varchar(500) NOT NULL
+	"type" varchar(500) UNIQUE NOT NULL
 );
 
 
@@ -44,7 +44,7 @@ CREATE TABLE "job_postings" (
 	"company_id" INT NOT NULL REFERENCES "company" ON DELETE CASCADE ON UPDATE CASCADE,
 	"available_role" varchar(500) NOT NULL,
 	"description" TEXT,
-	"application_link" varchar(500) NOT NULL,
+	"application_link" varchar(1000) NOT NULL,
 	"job_city" varchar(255) NOT NULL,
 	"job_state" varchar(255) NOT NULL,
 	"remote" varchar(255) NOT NULL DEFAULT 'no',
