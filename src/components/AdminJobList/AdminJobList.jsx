@@ -1,25 +1,19 @@
-import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { Button } from '@mui/material';
+// import { Button } from '@mui/material';
 import Modal from "../Modal/Modal.jsx";
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import './AdminJobList.css';
-
+import ReadyToPost from '../PeadyToPostList/ReadyToPostList.jsx';
 
 
 function AdminJobList() {
 
-    const history = useHistory();
+    // const history = useHistory();
     const dispatch = useDispatch();
 
     const [openModal, setOpenModal] = useState(false)
 
-    const toEmployerPage = () => {
-        history.push('/employerpage')
-    }
-
-    const { approvedPostings } = useSelector(store => store);
     //1 DATA FROM SERVER
     const rows = useSelector((store) => store.setJobsReducer);
 
@@ -37,26 +31,8 @@ function AdminJobList() {
     ];
 
     useEffect(() => {
-    // const grabData = (event) => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
-        dispatch({ type: 'FETCH_APPROVED_POSTINGS'});
-    // }
     }, []);
-
-
-    const handleEdit = (id) => {
-        // go to edit page
-        console.log('eventually');
-    }
-
-    const handleDelete = (id) => {
-        dispatch({ type: 'DELETE_POSTING', payload: {id: id} });
-    }
-
-    const handlePostToList = () => {
-        dispatch({ type: 'POST_APPROVED_JOBS'});
-        history.go(0);
-    }
 
     return (
         <>
@@ -70,42 +46,12 @@ function AdminJobList() {
                 {openModal && <Modal closeModal={setOpenModal} />}
                 
             </div>
-            <div className="tables-container">
-                <h2>Job posts you've approved, ready to go to the list</h2>
-            <Button variant="outlined" extended onClick={handlePostToList}>Post All approved jobs to list</Button>
-                {/* {JSON.stringify(approvedPostings)} */}
-                <div className="job-postings-table">
-                    <ul>
-                        {approvedPostings.map((job) => {
-                            return(
-                                <li key={job.id}>
-                                    {job.available_role}, &nbsp;
-                                    {job.company_name}, &nbsp;
-                                    {job.description}, &nbsp;
-                                    <a href={job.application_link}>Click here to apply!</a>, &nbsp;
-                                    {job.job_city}, &nbsp;
-                                    {job.job_state}, &nbsp;
-                                    {job.remote}, &nbsp;
-                                    {(job.share_contact) ? (
-                                        <p>{job.hiring_contact_email, job.hiring_contact_name, job.title, job.phone}</p>
-                                    ) : (<></>)}
-                                    {job.date_posted} &nbsp; &nbsp; | &nbsp; &nbsp;
-                                    <label htmlFor="edit-btn"></label>
-                                    <Button id="edit-btn" onClick={() => handleEdit(job.id)}>Edit</Button> 
-                                    <Button onClick={() => handleDelete(job.id)}>JK, Delete it</Button>   
-                                </li>
-                            )
-                            })}
-                    </ul>
-                </div>
-            </div>
+            <ReadyToPost />
+
             <div className="links-container">
-                {/* <div className="subscribe">
-                    Receive this email from a friend?
-                    Sign up to receive our weekly email update <button onClick={() => { setOpenModal(true) }}>Subscribe</button>
-                </div> */}
+               
                 <div className="submit">
-                    {/* Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button> */}
+                    
                     {openModal ? <p></p> : 
                       
                         
@@ -121,9 +67,6 @@ function AdminJobList() {
                       />
                     </div>
                     }
-
-
-
 
                 </div>
 
