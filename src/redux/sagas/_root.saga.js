@@ -10,6 +10,8 @@ import getFeedbackSaga from './unsubscribe.saga';
 import toggleSubscriberStatus from './modifySubStatus.saga';
 import fetchJobsSaga from './fetchJobs.saga';
 
+import approvedPostingsSaga from './approvedPostings.saga';
+
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -29,5 +31,7 @@ export default function* rootSaga() {
     getFeedbackSaga(),
     toggleSubscriberStatus(), //PUT sub status to API
     fetchJobsSaga(),
+
+    approvedPostingsSaga(),
   ]);
 }

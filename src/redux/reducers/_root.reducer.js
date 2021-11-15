@@ -6,7 +6,7 @@ import unsubFeedbackReducer from './unsubFeedback.reducer';
 
 // Greg, leaving room for other imports
 import pendingPostings from './reviewPending.reducer';
-
+import approvedPostings from './approvedPosts.reducer';
 import setJobsReducer from './jobs.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -23,6 +23,8 @@ const rootReducer = combineReducers({
   unsubFeedbackReducer,
   pendingPostings,
   setJobsReducer,
+
+  approvedPostings,
 });
 
 export default rootReducer;

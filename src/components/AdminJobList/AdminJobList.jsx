@@ -19,7 +19,7 @@ function AdminJobList() {
         history.push('/employerpage')
     }
 
-
+    const { approvedPostings } = useSelector(store => store);
     //1 DATA FROM SERVER
     const rows = useSelector((store) => store.setJobsReducer);
 
@@ -39,7 +39,7 @@ function AdminJobList() {
     useEffect(() => {
     // const grabData = (event) => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
-
+        dispatch({ type: 'FETCH_APPROVED_POSTINGS'});
     // }
     }, []);
 
@@ -48,20 +48,17 @@ function AdminJobList() {
         <>
             <div className="parent">
                 <div className="logo">
-                    <h1>LOGO</h1>
-                    <div>
-                        In support of Minnesota’s marketing community, this weekly update is dedicated to sharing marketing
-                        career opportunities with Minnesota-based companies. We invite you to review the opportunities below
-                        and apply directly through the hiring company unless otherwise noted.
-                    </div>
+                    <h1>Job postings</h1>
+                    
                 </div>
-                <p>{JSON.stringify(rows)}</p>
+                {/* <p>{JSON.stringify(rows)}</p> */}
                 {/* <button onClick={grabData}>Test</button> */}
                 {openModal && <Modal closeModal={setOpenModal} />}
-                <div className="top-of-table"><h2>Companies Hiring</h2></div>
+                
             </div>
             <div className="tables-container">
                 <div className="job-postings-table">
+                    <ul>{JSON.stringify(approvedPostings)}</ul>
                 </div>
             </div>
             <div className="links-container">
@@ -75,6 +72,7 @@ function AdminJobList() {
                       
                         
                       <div style={{ height: 400, width: '100%' }}>
+                      <div className="top-of-table"><h2>Jobs already posted</h2></div>
                       <DataGrid
                         rows={rows}
                         columns={columns}
