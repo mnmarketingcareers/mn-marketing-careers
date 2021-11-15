@@ -31,6 +31,7 @@ import AdminJobList from '../AdminJobList/AdminJobList';
 
 import './App.css';
 import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
+import JobPostingIssuesPage from '../JobPostingIssuesPage/JobPostingIssuesPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -199,7 +200,12 @@ function App() {
             <Main />
           </Route>
 
-
+          <Route
+            exact
+            path="/jobpostingissue"
+          >
+            <JobPostingIssuesPage />
+          </Route>
 
 
           {/* If none of the other routes matched, we will show a 404. */}
