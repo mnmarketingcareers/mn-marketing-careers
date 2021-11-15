@@ -101,6 +101,31 @@ router.get('/:id', (req, res) => {
 });
 
 /**
+ * PUT route to set all APPROVED jobs to POSTED
+ */
+ router.put('/tolist', rejectUnauthenticated, async (req, res) => {
+    // if requiring access level check, uncomment the next 4 lines
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level for this content');
+        return;
+    }
+    try {
+        console.log('In Job Postings PUT, updating status');
+        const query = `UPDATE "job_postings" SET "status" = 'POSTED' WHERE "status" = 'APPROVED';`;
+        
+        const results = await pool.query(query)
+        console.log('Rows updated', results.rowCount);
+        console.log('end of PUT');
+        res.sendStatus(201);
+        
+        
+    } catch (error) {
+        console.log('ERROR in PUT',error);
+        res.sendStatus(500);
+    }
+});
+
+/**
  * GET QUERY HERE
  */
 
@@ -129,29 +154,6 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
     }
 });
 
-/**
- * PUT route to set all APPROVED jobs to POSTED
- */
- router.put('/tolist', rejectUnauthenticated, async (req, res) => {
-    // if requiring access level check, uncomment the next 4 lines
-    if (req.user.access_level < 1) {
-        res.status(500).send('You do not have the correct access level for this content');
-        return;
-    }
-    try {
-        console.log('In Job Postings PUT, updating status');
-        const query = `UPDATE "job_postings" SET "status" = 'POSTED' WHERE "status" = 'APPROVED';`;
-        
-        const results = await pool.query(query, [req.body.status, req.params.id])
-        console.log('Rows updated', results.rowCount);
-        res.sendStatus(201);
-        
-        console.log('end of PUT');
-    } catch (error) {
-        console.log('ERROR in PUT',error);
-        res.sendStatus(500);
-    }
-});
 
 
 /**
@@ -198,10 +200,6 @@ router.post('/', async (req, res) => {
         req.body.job_state === '' ||
         req.body.remote === '' ||
         req.body.share_contact === '' ||
-        req.body.name === '' ||
-        req.body.email === '' ||
-        req.body.title === '' ||
-        req.body.phone === '' ||
         req.body.job_types.length === 0
     ) {
         // define an error to match validation failure
@@ -265,6 +263,7 @@ router.post('/', async (req, res) => {
     // set the returned ID to a new variable 
     const company_id = companyQueryResult.rows[0].id;
  
+    
     // Insert the new Job posting, setting the returned ID to a variable
     const rowId = await pool.query(jobQuery, 
             [

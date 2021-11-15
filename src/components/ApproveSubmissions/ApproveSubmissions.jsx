@@ -12,6 +12,7 @@ import {
     TableSortLabel,
     TableBody,
     Paper,
+    Button,
 } from '@mui/material';
 
 
@@ -33,6 +34,7 @@ function ApproveSubmissions() {
         <div>
             <h1>Review Job Postings</h1>
             <p>These job postings were submitted by employers and await your APPROVAL</p>
+            <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button>
             {/* {JSON.stringify(postingsList)} */}
             {!showJobPosting && <CircularProgress />}
             {showJobPosting &&
