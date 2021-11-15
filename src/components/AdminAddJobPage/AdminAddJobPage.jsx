@@ -65,7 +65,7 @@ const AdminAddJobPage = () => {
             type: 'NEW_EMPLOYER_JOB_POST',
             payload: jobPostingsObject
         })
-        history.push('/adminaddjob');
+        history.go(0);
         alert('New Job Submission Successful!');
     }
 
@@ -174,7 +174,7 @@ const AdminAddJobPage = () => {
         setJobPostingsObject({...jobPostingsObject, job_types: value});
     };
 
-    const toAdminHub = (event) => {
+    const toAdminHub = () => {
         history.push('/adminhub');
     }
 
