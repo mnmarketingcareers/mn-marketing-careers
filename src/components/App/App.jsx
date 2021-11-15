@@ -27,6 +27,8 @@ import Main from '../Main/Main';
 import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
 import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
 
+import AdminJobList from '../AdminJobList/AdminJobList';
+
 import './App.css';
 import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
 
@@ -93,6 +95,15 @@ function App() {
             path="/adminhub"
           >
             <AdminHub />
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+            // logged in shows InfoPage else shows LoginPage
+            // added by Mo 11/9/21 @ 10p
+            exact
+            path="/adminjoblist"
+          >
+            <AdminJobList />
           </ProtectedRoute>
 
           <ProtectedRoute

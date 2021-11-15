@@ -67,6 +67,40 @@ router.get('/pending', rejectUnauthenticated, (req, res) => {
 });
 
 /**
+ * GET Approved postings here
+ */
+ router.get('/approved', rejectUnauthenticated, (req, res) => {
+    console.log('In GET approved job posts', req.user);
+    if (req.user.access_level < 1) {
+            res.status(500).send('You do not have the correct access level for this content');
+            return;
+        }
+    const query = `
+                SELECT "jp"."id", "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "share_contact", "date_posted", "hc".hiring_contact_email, 
+                "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
+                ARRAY_AGG("jt"."type") 
+                FROM "job_postings" AS "jp"
+                JOIN "company" AS "co" ON "jp".company_id = "co".id
+                LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
+                LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
+                LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
+                WHERE "jp".archived = 'false' AND "jp".status = 'APPROVED'
+                AND "jp"."date_posted" > (current_date - interval '30' day)
+                GROUP BY "jp"."id", "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";`;
+    pool.query(query).then(result => {
+        console.log('Sending rows to Admin to post to list', result.rows);
+        res.send(result.rows);
+    }).catch(error => {
+        console.log('ERROR fetching job types', error);
+        res.sendStatus(500);
+    });
+});
+
+
+/**
  * GET by id here
  */
 router.get('/:id', (req, res) => {
@@ -167,14 +201,14 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) =>{
         return;
     }
     try {
+        console.log('In DELETE', req.params.id);
         const query = `DELETE FROM "job_postings" WHERE "id" = $1`;
         const result = await pool.query(query, [req.params.id]);
         console.log('Rows updated', result.rowCount);
         res.sendStatus(201);
         
-        console.log('end of DELETE');
     } catch (error) {
-        console.log('ERROR in DELETE');
+        console.log('ERROR in DELETE', error);
         res.sendStatus(500);
     }
 });
