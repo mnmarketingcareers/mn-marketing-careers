@@ -54,7 +54,6 @@ function Nav() {
               {/* <Link style={{fontSize: "10px"}}className="navLink" to="/login">
                 Login
               </Link> */}
-
             </div>
 
             {/* hamburger menu will only appear on screen size 768 and down */}

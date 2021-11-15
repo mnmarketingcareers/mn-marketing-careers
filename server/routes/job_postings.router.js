@@ -101,6 +101,31 @@ router.get('/:id', (req, res) => {
 });
 
 /**
+ * PUT route to set all APPROVED jobs to POSTED
+ */
+ router.put('/tolist', rejectUnauthenticated, async (req, res) => {
+    // if requiring access level check, uncomment the next 4 lines
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level for this content');
+        return;
+    }
+    try {
+        console.log('In Job Postings PUT, updating status');
+        const query = `UPDATE "job_postings" SET "status" = 'POSTED' WHERE "status" = 'APPROVED';`;
+        
+        const results = await pool.query(query)
+        console.log('Rows updated', results.rowCount);
+        console.log('end of PUT');
+        res.sendStatus(201);
+        
+        
+    } catch (error) {
+        console.log('ERROR in PUT',error);
+        res.sendStatus(500);
+    }
+});
+
+/**
  * GET QUERY HERE
  */
 
@@ -128,6 +153,8 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+
 
 /**
  * DELETE route here
@@ -157,10 +184,30 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) =>{
  */
 router.post('/', async (req, res) => {
   // TO DO: CLEAR OUT MOST OF THE CONSOLE LOGS
-  console.log('In job_postings router, POST');
+  console.log('In job_postings router, POST', req.body);
+
   try {
-      await pool.query('BEGIN');
-    console.log('show me the monster:', req.body);
+    
+    // validate inputs
+    if (
+        req.body.posting_contact_name === '' ||
+        req.body.posting_contact_email === '' ||
+        req.body.company === '' ||
+        req.body.available_role === '' ||
+        req.body.application_link === '' ||
+        req.body.description === '' ||
+        req.body.job_city === '' ||
+        req.body.job_state === '' ||
+        req.body.remote === '' ||
+        req.body.share_contact === '' ||
+        req.body.job_types.length === 0
+    ) {
+        // define an error to match validation failure
+        const error = 'Invalid input: Form not added -  missing fields';
+        // this goes to the catch
+        throw error; 
+    }
+    await pool.query('BEGIN');
     // const userId = 0;
 
     // set queries for adding to tables, returning id's of newly generated rows
@@ -216,6 +263,7 @@ router.post('/', async (req, res) => {
     // set the returned ID to a new variable 
     const company_id = companyQueryResult.rows[0].id;
  
+    
     // Insert the new Job posting, setting the returned ID to a variable
     const rowId = await pool.query(jobQuery, 
             [
@@ -274,6 +322,7 @@ router.post('/', async (req, res) => {
   } catch (error) {
       console.log('ERROR in POST; ROLLBACK', error);
       await pool.query('ROLLBACK');
+    //   throw error;
       res.sendStatus(500);
   }
 });
