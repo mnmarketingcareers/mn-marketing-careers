@@ -43,7 +43,7 @@ function Modal({ closeModal }) {
       <div className="modalContainer">
         <div className="titleCloseBtn">
 
-          <button onClick={() => closeModal(false)}><FaWindowClose /></button>
+          <button className="exit-modal" onClick={() => closeModal(false)}><FaWindowClose /></button>
         </div>
         <div className="title">
           <img src="./images/logo-small.png" />
