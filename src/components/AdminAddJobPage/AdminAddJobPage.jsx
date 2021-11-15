@@ -58,13 +58,33 @@ const AdminAddJobPage = () => {
         changeContactView();
     };
 
-    
+    // Push new job inputs to the database to be seen on the DOM in a different component
     const handleSubmit = () => {
         dispatch({
             type: 'NEW_EMPLOYER_JOB_POST',
             payload: jobPostingsObject
         })
-        alert('Job Post Successful!')
+        alert('New Job Submission Successful!')
+    }
+
+    const handleReset = () => {
+        setJobPostingsObject({
+            posting_contact_name: '',
+            posting_contact_email: '',
+            company: '',
+            available_role: '',
+            application_link: '',
+            description: '',
+            job_city: '',
+            job_state: '',
+            remote: '',
+            share_contact: '',
+            name: '',
+            email: '',
+            title: '',
+            phone: '',
+            job_types: []
+        })
     }
 
     const setValues = (propertyName) => (event) => {
@@ -337,6 +357,7 @@ const AdminAddJobPage = () => {
                 </Card>
                 <input className="submit-employer-form-button" type='submit' value='Submit' />
                 </form>
+                <Button onClick={handleReset}>Reset Input Fields</Button>
                 <Button onClick={toAdminHub}>Back to Hub</Button>
             </div>
         </>
