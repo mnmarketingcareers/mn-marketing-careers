@@ -97,7 +97,7 @@ screen size under 768 = only the circle portion of the logo
 }
 
 
-@media screen and (max-width: 850px){ 
+@media screen and (max-width: 900px){ 
 
   .nav-words {
     display: none;
@@ -112,7 +112,7 @@ screen size under 768 = only the circle portion of the logo
   display: none;
 }
 
-@media screen and (max-width: 850px){ 
+@media screen and (max-width: 900px){ 
   .hamburger {
     display: block;
     position: relative;

@@ -66,16 +66,21 @@ const AdminDrawerMenu = () => {
             </Link>
           </ListItem>
           <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
+            <Link className="drawerLink" to="/main">
+              <h3>Jobs</h3>
+            </Link>
+          </ListItem>
+          <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
             <Link className="drawerLink" to="/adminhub">
               <h3>Admin Hub</h3>
             </Link>
           </ListItem>
-          <ListItem onClick={() => setOpen(false)}>
+          <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
             <Link className="drawerLink" to="/reviewsubmissions">
               <h3>Review Posts</h3>
             </Link>
           </ListItem>
-          <ListItem onClick={() => handleLogoutClick()}>
+          <ListItem className="drawerListItem" onClick={() => handleLogoutClick()}>
             <Link className="drawerLink" to="/main">
               <h3>Logout</h3>
             </Link>

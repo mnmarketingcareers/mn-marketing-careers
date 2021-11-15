@@ -13,7 +13,7 @@ function Nav() {
   return (
     <div className="nav">
       <div className="nav-title">
-        <Link to="/home">
+        <Link to="/main">
           <img
             style={{ margin: "20px" }}
             src="./images/nav-horizontal-logo.png"
@@ -21,7 +21,7 @@ function Nav() {
         </Link>
       </div>
 
-      <Link to="/home">
+      <Link to="/main">
         <img
           className="nav-title-circle-only"
           src="./images/circle-logo-only-v2.png"
@@ -76,6 +76,10 @@ function Nav() {
 
               <Link className="navLink" to="/user">
                 Home
+              </Link>
+
+              <Link className="navLink" to="/main">
+                Jobs
               </Link>
 
               <Link className="navLink" to="/adminhub">
