@@ -26,7 +26,7 @@ function Internships() {
                                                 return <button className="apply-button"><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
                                             }
                                             }},
-        { field: 'array_agg', headName: 'Job Field', width: 350},
+        { field: 'job type', headName: 'Job Field', width: 350},
     ];                                                                 
 
     useEffect(() => {

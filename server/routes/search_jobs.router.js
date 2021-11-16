@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
                   SELECT "jp"."id", "available_role", "description", "application_link", 
                   "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
                   "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
-                  ARRAY_AGG("jt"."type") 
+                  ARRAY_AGG("jt"."type") AS "job type"
                   FROM "job_postings" AS "jp"
                   JOIN "company" AS "co" ON "jp".company_id = "co".id
                   LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
@@ -41,14 +41,14 @@ router.get('/internships', async (req, res) => {
       SELECT "jp"."id", "available_role", "description", "application_link", 
       "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
       "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
-      ARRAY_AGG("jt"."type") 
+      ARRAY_AGG("jt"."type") AS "job type"
       FROM "job_postings" AS "jp"
       JOIN "company" AS "co" ON "jp".company_id = "co".id
       LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
       LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
       LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
       WHERE "jp".archived = 'false' AND "jp".status = 'POSTED'
-      AND "jt"."id" = '6'
+      AND "jt"."id" = '14'
       AND "jp"."date_posted" > (current_date - interval '30' day)
       GROUP BY "jp"."id", "available_role", "description", "application_link", 
       "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 

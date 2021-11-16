@@ -65,7 +65,7 @@ function Main() {
                 }
             }
         },
-        { field: 'array_agg', headName: 'Job Field', width: 350 },
+        { field: 'job type', headName: 'Job Type', width: 350 },
     ];
 
     useEffect(() => {
