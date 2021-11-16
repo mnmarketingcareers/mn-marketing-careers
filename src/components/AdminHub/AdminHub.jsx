@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 
 import ToggleOffIcon from '@mui/icons-material/ToggleOff'; 
 
+import NewSubmissions from "../NewSubmissionsAlert/NewSubmissionsAlert";
 import useStyles from "../Styles/Styles"; //important paste this
 
 import "./AdminHub.css";
@@ -105,6 +106,9 @@ const AdminHub = () => {
       <Typography style={{fontSize: '40px', margin: 30}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
 
       <Container className="adminContainer">
+      
+      <div className="gridL"><NewSubmissions /></div>
+
         <div className="gridWrapper">
           <div className="gridL">
             <Typography variant="h4">Manual Subscriber Entry</Typography>
