@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 
 import ToggleOffIcon from '@mui/icons-material/ToggleOff'; 
 
+import NewPostingsReady from "../../NewJobOpeningsReadyAlert/NewJobOpeningsReadyAlert";
 import NewSubmissions from "../NewSubmissionsAlert/NewSubmissionsAlert";
 import useStyles from "../Styles/Styles"; //important paste this
 
@@ -107,9 +108,12 @@ const AdminHub = () => {
 
       <Container className="adminContainer">
       
-      <div className="gridL"><NewSubmissions /></div>
 
         <div className="gridWrapper">
+          
+        <div className="gridL"><NewSubmissions /></div>
+        <div className="gridR"><NewPostingsReady /></div>
+
           <div className="gridL">
             <Typography variant="h4">Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
