@@ -25,6 +25,35 @@ Additionally, an example of the site administrators form to add new job openings
 
 ![Admin Add Job Form](public/images/mnmc_admin-add-jobs.png)
 
+## Important Codestuff
+
+Check out this amazing code, that will be so helpful for you when spinning up the project:
+
+```
+function ReturnLasagna(hunger) {
+  const lasagna = '';
+
+  const { dinner } = useSelector(store => store);
+
+  useEffect( () => {
+    dispatch({ type: 'FETCH_DINNER' });
+  }, []);
+
+  lasagna = dinner.map(food => <li key={food.id}>{food.item}</li>);
+
+  return (
+    <div>
+      <h2>It's what's for dinner!</h2>
+      <ul>
+        {lasagna}
+      </ul>
+    </div>
+
+  )
+}
+
+export default ReturnLasagna;
+```
 
 ### Prerequisites
 
@@ -45,9 +74,8 @@ Link to software that is required to install the app (e.g. node).
 - You will need to generate/locate your MailChimp api key (basic instructions here [mailchimp_gettingstarted](https://mailchimp.com/developer/marketing/guides/quick-start/#generate-your-api-key)). Use this to replace the text immediately after `MAILCHIMP_API_KEY=` in the lines below.
 - Your server prefix is found in the url of your MailChimp dashboard when logged in. It immediately follows the `https://` and precedes the first `.` Use this to replace the text immediately after `DC=` in the lines below.
 - Find you Audience Id in your Audience settings on your MailChimp account. Use this to replace the text immediately after `TEST_LIST_ID=` in the lines below.
-- Replacesample in each of the following 3 lines as mentioned above, and include in your .env file:
+- Replace sample text in each of the following 3 lines as mentioned above, and include in your .env file:
 
-SERVER_SESSION_SECRET=SuperDuperSecret
 DC=your_server_prefix
 MAILCHIMP_API_KEY=your_maichimp_api_key
 TEST_LIST_ID=your_account_id_number
