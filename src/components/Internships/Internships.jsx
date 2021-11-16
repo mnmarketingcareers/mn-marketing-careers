@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react';
 import Modal from "../Modal/Modal.jsx";
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-import './RemoteJobs.css';
+import './Internships.css';
 
-function RemoteJobs() {
+function Internships() {
 
     const dispatch = useDispatch();
 
-    const rows = useSelector((store) => store.setRemoteJobsReducer);
+    const rows = useSelector((store) => store.setInternshipsReducer); 
 
  
 
@@ -30,13 +30,13 @@ function RemoteJobs() {
     ];                                                                 
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_REMOTE_JOBS' });
+        dispatch({ type: 'FETCH_INTERNSHIPS' });
     }, []);
    
 
     return (
         <>
-            {/* <button onClick={getInternships}>Test Remote Jobs</button> */}
+            {/* <button onClick={getRemoteJobs}>Test Remote Jobs</button> */}
             <div style={{ height: 500, width: '100%' }}>
                       <DataGrid
                         rows={rows}
@@ -53,4 +53,4 @@ function RemoteJobs() {
 
 };
 
-export default RemoteJobs;
+export default Internships;
