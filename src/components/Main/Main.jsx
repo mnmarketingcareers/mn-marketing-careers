@@ -19,7 +19,7 @@ import { useState, useEffect } from 'react';
 // import ListItemText from '@mui/material/ListItemText';
 // import Select from '@mui/material/Select';
 import Modal from "../Modal/Modal.jsx";
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
+import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel, Link } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import './Main.css';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
