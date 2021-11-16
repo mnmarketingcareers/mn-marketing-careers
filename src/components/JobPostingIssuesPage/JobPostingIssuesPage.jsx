@@ -57,6 +57,11 @@ function JobPostingIssuesPage() {
         history.push("/main");
   };
 
+    // useEffect to trigger dispatches to fetch jobs on page load
+    useEffect(() => {
+        dispatch({ type: 'FETCH_MAIN_JOBS' }); 
+    }, [])
+
   // switch statment function?
   const radioButtonValue = (event) => {
     console.log("inside radio button", event.target.value);

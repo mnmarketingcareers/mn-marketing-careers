@@ -12,6 +12,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const subsRouter = require('./routes/subs.router');
 const feedbackRouter = require('./routes/feedback.router');
+const jobIssuesRouter = require('./routes/job_issues.router');
 
 
 
@@ -35,6 +36,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/subs', subsRouter);
 app.use('/api/feedback', feedbackRouter);
+app.use('/api/jobissues', jobIssuesRouter);
 
 
 
