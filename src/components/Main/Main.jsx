@@ -65,6 +65,10 @@ function Main() {
     }
     // }, []);
 
+    const toIssuePage = () => {
+        history.push(`/jobpostingissue/${rows.id}`)
+    }
+
 
     return (
         <>
