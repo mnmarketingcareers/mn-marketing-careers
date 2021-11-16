@@ -4,15 +4,20 @@ import { useState, useEffect } from 'react';
 import Modal from "../Modal/Modal.jsx";
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { Button } from '@material-ui/core';
 import './RemoteJobs.css';
 
 function RemoteJobs() {
+    const history = useHistory();
 
     const dispatch = useDispatch();
 
     const rows = useSelector((store) => store.setRemoteJobsReducer);
 
- 
+    // useparams history.push
+    const toIssuePage = (jobId) => {
+        history.push(`/jobpostingissue/${jobId}`)
+    }
 
     const columns = [
         { field: 'company_name', headerName: 'company', width: 150 },
@@ -26,7 +31,10 @@ function RemoteJobs() {
                                                 return <button><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
                                             }
                                             }},
-        { field: 'array_agg', headName: 'array_agg', width: 350},
+        // { field: 'array_agg', headName: 'array_agg', width: 350},
+        { field: 'array_agg', headName: 'array_agg', width: 350, renderCell: (params) => { 
+            return  <Button variant="contained" color="primary" size="small" onClick={toIssuePage}> Report Issue </Button>   
+        }},
     ];                                                                 
 
     // useEffect(() => {

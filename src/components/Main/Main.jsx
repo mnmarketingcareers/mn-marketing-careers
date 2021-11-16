@@ -18,6 +18,8 @@ import { useState, useEffect } from 'react';
 // import MenuItem from '@mui/material/MenuItem';
 // import ListItemText from '@mui/material/ListItemText';
 // import Select from '@mui/material/Select';
+import { Button } from '@material-ui/core';
+import { GridRenderCellParams } from '@mui/x-data-grid';
 import Modal from "../Modal/Modal.jsx";
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
@@ -44,6 +46,10 @@ function Main() {
 
     }
 
+    // useparams history.push
+    const toIssuePage = (jobId) => {
+        history.push(`/jobpostingissue/${jobId}`)
+    }
 
     
     const rows = useSelector((store) => store.setJobsReducer);
@@ -62,7 +68,9 @@ function Main() {
                                                 return <button><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
                                             }
                                             }},
-        { field: 'array_agg', headName: 'array_agg', width: 350},
+        { field: 'array_agg', headName: 'array_agg', width: 350, renderCell: (params) => { 
+            return  <Button onClick={toIssuePage}> Report Issue </Button>   
+        }},
     ];                                                                               
 
     // useEffect(() => {
@@ -72,11 +80,7 @@ function Main() {
     }
     // }, []);
 
-    const toIssuePage = () => {
-        history.push(`/jobpostingissue/${rows.id}`)
-    }
-
-
+    // call toIssuePage within grid?
     return (
         <>
             <div className="parent">
