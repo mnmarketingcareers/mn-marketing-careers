@@ -21,7 +21,7 @@ function NewPostingsReady() {
 
     return(
         <Card sx={{ minWidth: 275 }}>
-            <CardActionArea onClick={() => history.push('/reviewsubmissions') }>
+            <CardActionArea onClick={() => history.push('/adminjoblist') }>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         You have
