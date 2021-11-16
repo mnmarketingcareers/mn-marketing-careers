@@ -50,6 +50,7 @@ function ApproveSubmissions() {
                             <TableCell>Description</TableCell>
                             <TableCell>Link</TableCell>
                             <TableCell>Job Location</TableCell>
+                            <TableCell>Job Type</TableCell>
                             <TableCell>Remote?</TableCell>
                             <TableCell>Application Contact info</TableCell>
                             <TableCell>Date Created</TableCell>
