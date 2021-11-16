@@ -10,7 +10,7 @@ function Internships() {
 
     const dispatch = useDispatch();
 
-    const rows = useSelector((store) => store.setRemoteJobsReducer);
+    const rows = useSelector((store) => store.setInternshipsReducer); 
 
  
 
