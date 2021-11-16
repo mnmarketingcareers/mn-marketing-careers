@@ -123,59 +123,59 @@ function EmployerPage() {
     const names = [
         {
             order: 1,
-            field: 'Account Management'
+            field: ' Account Management'
         },
         {
             order: 2,
-            field: 'Advertising'
+            field: ' Advertising'
         },
         {
             order: 3,
-            field: 'Branding'
+            field: ' Branding'
         },
         {
             order: 4,
-            field: 'Communications'
+            field: ' Communications'
         },
         {
             order: 5,
-            field: 'Copywriting'
+            field: ' Copywriting'
         },
         {
             order: 6,
-            field: 'Digital Media'
+            field: ' Digital Media'
         },
         {
             order: 7,
-            field: 'Graphic Design'
+            field: ' Graphic Design'
         },
         {
             order: 8,
-            field: 'Marketing'
+            field: ' Marketing'
         },
         {
             order: 9,
-            field: 'Public Relations'
+            field: ' Public Relations'
         },
         {
             order: 10,
-            field: 'Social Media'
+            field: ' Social Media'
         },
         {
             order: 11,
-            field: 'Editorial'
+            field: ' Editorial'
         },
         {
             order: 12,
-            field: 'Ecommerce'
+            field: ' Ecommerce'
         },
         {
             order: 13,
-            field: 'Project Management'
+            field: ' Project Management'
         },
         {
             order: 14,
-            field: 'Internship'
+            field: ' Internship'
         },
     ];
 
