@@ -23,6 +23,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+// Snackbar button
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Stack from '@mui/material/Stack';
+import MuiAlert from '@mui/material/Alert';
+
+
+
 
 import './EmployerPage.css';
 
@@ -36,14 +45,18 @@ function EmployerPage() {
 
     const changeState = () => {
         setToggleOther(!toggleOther)
-    }
+    };
 
     // On the question: "Can we share contact person?"; toggles the input fields necessary to add person's contact info.
     const [toggleContact, setToggleContact] = useState(true);
 
     const changeContactView = () => {
         setToggleContact(!toggleContact)
-    }
+    };
+
+    // Success Button toggle
+
+    const [open, setOpen] = useState(false);
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
     const [jobPostingsTable, setJobPostingsTable] = useState({
@@ -71,9 +84,44 @@ function EmployerPage() {
         dispatch({
             type: 'NEW_EMPLOYER_JOB_POST',
             payload: jobPostingsTable
-        })
+        });
+        setOpen(true); setTimeout(() => {
+           history.push('/main')
+        }, 1000);
+    };
 
-    }
+
+// For the Snackbar button when Submit is pressed.
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+// For the Snackbar button when Submit is pressed.
+    const action = (
+        <React.Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+                UNDO
+            </Button>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </React.Fragment>
+    );
+
+    // For the Snackbar button when Submit is pressed.
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
 
 
 
@@ -81,7 +129,6 @@ function EmployerPage() {
         console.log('what is propertyName', propertyName);
         console.log('what is event.target.value', event.target.value);
         setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value });
-        // setToggleOther(true);
     };
 
 
@@ -182,9 +229,6 @@ function EmployerPage() {
 
 
     const handleJob = (event) => {
-        console.log('what is event?', event);
-        console.log('what is names?', names);
-        console.log('what is names?', names[0].field);
         const {
             target: { value },
         } = event;
@@ -407,7 +451,13 @@ function EmployerPage() {
                     <input className="submit-employer-form-button" type='submit' value='Submit' />
                 </form>
             </div>
-
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Job Submitted!
+                    </Alert>
+                </Snackbar>
+            </Stack>
         </>
     );
 }
