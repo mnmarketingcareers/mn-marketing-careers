@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import Radio from "@mui/material/Radio";
@@ -15,22 +15,45 @@ function JobPostingIssuesPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const { jobId } = useParams();
+
     // incorporate useParams?
-    // handle main page job issue trigger (useffect to trigger it)
+    // handle main page job issue trigger (useffect to trigger it?)
     // post route handle submit?
     // append that position on DOM as a header?
     // MUI radio button options underneath
+    // New saga to the server
+    // New router
+    // ON THIS PAGE
+    // One GET: job postings page
+    // One POST: issues page
+    // ON THE NEW ROUTER
+    // One GET: called from Admin hub
+    // One PUT: changed is_resolved to 'true'/toggle to 'not' like in feedback router
+    // One DELETE: maybe... (stretch)
+    // Main page will need a history.push('/jobpostingissue/${whateverId}') 
+
+    // figuring out the correct payload for the post is tricky
+    // issue_type vs a comment?
+    // who's email are we adding, the person who raised the issue?
+    const [issue, setIssue] = useState({
+        comment: '',
+        issue_type: '',
+        issues_email: ''
+    })
     
+    // get by ID route in job postings router
     const job = useSelector(store => store.setJobsReducer);
 
+    //will I need a new saga/reducer for this dispatch? POST route?
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("the event is", event);
         dispatch({
-            type: "SUBMIT_UNSUB_FEEDBACK",
-            payload: reason,
+            type: "SUBMIT_JOB_ISSUE",
+            payload: issue,
         });
-        alert("Successfully unsuscribed, you can close this tab");
+        alert("Thank you for your feedback!");
         history.push("/main");
   };
 
@@ -83,6 +106,12 @@ function JobPostingIssuesPage() {
             This information is valuable to us. We appreciate you taking the time to let us know what's wrong with this job posting.
           </FormLabel>
           <RadioGroup aria-label="reason" name="radio-buttons-group">
+            <FormControlLabel
+              value="Information on Job Posting Is Not Accurate"
+              control={<Radio />}
+              label="Information on Job Posting Is Not Accurate"
+              onClick={radioButtonValue}
+            />  
             <FormControlLabel
               value="This Position is No Longer Available"
               control={<Radio />}
