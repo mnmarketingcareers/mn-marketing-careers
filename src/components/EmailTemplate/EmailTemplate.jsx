@@ -10,7 +10,7 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
 } from "@mui/material";
 import useStyles from "../Styles/Styles";
 
@@ -26,8 +26,9 @@ const EmailTemplate = () => {
     dispatch({ type: "GET_TEMPLATES" }); //fetches all existing template IDs to choose from
   });
 
-  const handleSubmitPatchTemplate = () => { //submits template patch to selected
-    const bodyToSubmit = `<p>${templateBodyText}</p>`
+  const handleSubmitPatchTemplate = () => {
+    //submits template patch to selected
+    const bodyToSubmit = `<p>${templateBodyText}</p>`;
     console.log("in handleSubmitPatchTemplate");
     // setTemplateId('10043989');
     // console.log("templateId =", templateId); //updated uncomment  if patch
@@ -47,12 +48,17 @@ const EmailTemplate = () => {
 
   return (
     <div className={classes.templatePageContainer}>
-      <h1 style={{ textAlign: "center", margin: "30px" }}> Template </h1>
+      <h1 style={{ textAlign: "center", margin: "15px" }}> Template </h1>
+      <Typography style={{ textAlign: "center", margin: "15px 300px 30px" }}>
+        AS OF 11/16/21 @ 4:40 PM - this page allows a user to create a new email
+        template (POST) and give that template a name as well as a body. That
+        body is HTML and can be sent as plain text BUT...I need to BUILD EMAIL
+        STYLING...inception style
+      </Typography>
 
       <Paper className={classes.templatePaperContainer} elevation={12}>
         <form onSubmit={() => handleSubmitPatchTemplate()}>
-        
-        {/* <FormControl >
+          {/* <FormControl >
 
   <InputLabel id="demo-simple-select-label">Template ID</InputLabel>
   <Select
