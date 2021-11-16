@@ -10,7 +10,7 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
 } from "@mui/material";
 import useStyles from "../Styles/Styles";
 
@@ -18,37 +18,47 @@ const EmailTemplate = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [templateId, setTemplateId] = useState("");
+  const [templateId, setTemplateId] = useState(10043989);
   const [templateName, setTemplateName] = useState("");
-  const [templateBody, setTemplateBody] = useState("");
+  const [templateBodyText, setTemplateBodyText] = useState("");
 
   useEffect(() => {
     dispatch({ type: "GET_TEMPLATES" }); //fetches all existing template IDs to choose from
   });
 
-  const handleSubmitPatchTemplate = () => { //submits template patch to selected
+  const handleSubmitPatchTemplate = () => {
+    //submits template patch to selected
+    const bodyToSubmit = `<p>${templateBodyText}</p>`;
     console.log("in handleSubmitPatchTemplate");
-    console.log("templateId =", templateId);
+    // setTemplateId('10043989');
+    // console.log("templateId =", templateId); //updated uncomment  if patch
     console.log("templateName =", templateName);
-    console.log("templateBody =", templateBody);
+    console.log("templateBody =", templateBodyText);
+    console.log("bodyToSubmit =", bodyToSubmit);
+
     dispatch({
       type: "SEND_PATCH_TEMPLATE",
       payload: {
-        template_id: templateId,
+        // template_id: templateId, //updated uncomment if patch
         name: templateName,
-        html: templateBody,
+        html: bodyToSubmit,
       },
     });
   };
 
   return (
-    <div>
-      <h1 style={{ textAlign: "center", margin: "30px" }}> Template </h1>
+    <div className={classes.templatePageContainer}>
+      <h1 style={{ textAlign: "center", margin: "15px" }}> Template </h1>
+      <Typography style={{ textAlign: "center", margin: "15px 300px 30px" }}>
+        AS OF 11/16/21 @ 4:40 PM - this page allows a user to create a new email
+        template (POST) and give that template a name as well as a body. That
+        body is HTML and can be sent as plain text BUT...I need to BUILD EMAIL
+        STYLING...inception style
+      </Typography>
 
-      <Paper className={classes.campaignPaperContainer} elevation={8}>
+      <Paper className={classes.templatePaperContainer} elevation={12}>
         <form onSubmit={() => handleSubmitPatchTemplate()}>
-        
-        {/* <FormControl >
+          {/* <FormControl >
 
   <InputLabel id="demo-simple-select-label">Template ID</InputLabel>
   <Select
@@ -65,23 +75,20 @@ const EmailTemplate = () => {
   </Select>
   </FormControl> */}
 
-
-
-
-
           <TextField
             required
             className={classes.templateIdTextField}
-            onChange={() => setTemplateId(event.target.value)}
+            // onChange={() => setTemplateId(10043989)}
             id="template-id"
             label="Template ID"
             size="small"
             value={templateId}
+            //fix this ID is for plaintext
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
           />
           <TextField
-            className={classes.subjectTextField}
+            className={classes.templateNameField}
             onChange={() => setTemplateName(event.target.value)}
             id="template-name"
             label="New Template Name (optional)"
@@ -95,11 +102,11 @@ const EmailTemplate = () => {
             required
             multiline
             className={classes.bodyTextField}
-            onChange={() => setTemplateBody(event.target.value)}
+            onChange={() => setTemplateBodyText(event.target.value)}
             id="template-email-body"
             label="Email Body"
-            size="small"
-            value={templateBody}
+            size="large"
+            value={templateBodyText}
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
           />
