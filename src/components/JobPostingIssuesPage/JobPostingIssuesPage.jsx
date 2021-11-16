@@ -17,23 +17,24 @@ function JobPostingIssuesPage() {
 
     const { jobId } = useParams();
 
-    // incorporate useParams?
+    // TODO incorporate useParams?
     // handle main page job issue trigger (useffect to trigger it?)
     // post route handle submit?
-    // append that position on DOM as a header?
+    // TODO append that position on DOM as a header?
     // MUI radio button options underneath
     // New saga to the server
     // New router
     // ON THIS PAGE
     // One GET: job postings page
     // One POST: issues page
-    // ON THE NEW ROUTER
+    // TODO ON THE NEW ROUTER
+    // One POST? The Query is looking scary right now
     // One GET: called from Admin hub
     // One PUT: changed is_resolved to 'true'/toggle to 'not' like in feedback router
     // One DELETE: maybe... (stretch)
     // Main page will need a history.push('/jobpostingissue/${whateverId}') 
 
-    // figuring out the correct payload for the post is tricky
+    // TODO figuring out the correct payload for the post is tricky
     // issue_type vs a comment?
     // who's email are we adding, the person who raised the issue?
     const [issue, setIssue] = useState({
@@ -62,7 +63,7 @@ function JobPostingIssuesPage() {
         dispatch({ type: 'FETCH_MAIN_JOBS' }); 
     }, [])
 
-  // switch statment function?
+  // switch statment function for different radio button selection options
   const radioButtonValue = (event) => {
     console.log('inside radio button', event.target.value);
     switch (event.target.value) {
