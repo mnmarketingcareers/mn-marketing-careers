@@ -69,7 +69,7 @@ function Main() {
                                             }
                                             }},
         { field: 'array_agg', headName: 'array_agg', width: 350, renderCell: (params) => { 
-            return  <Button onClick={toIssuePage}> Report Issue </Button>   
+            return  <Button variant="contained" color="primary" size="small" onClick={toIssuePage}> Report Issue </Button>   
         }},
     ];                                                                               
 
