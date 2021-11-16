@@ -18,6 +18,7 @@ import { useState, useEffect } from 'react';
 // import MenuItem from '@mui/material/MenuItem';
 // import ListItemText from '@mui/material/ListItemText';
 // import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
 import Modal from "../Modal/Modal.jsx";
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel, Link } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
@@ -65,7 +66,7 @@ function Main() {
                 }
             }
         },
-        { field: 'job type', headName: 'Job Type', width: 350 },
+        { field: 'job type', headerName: 'Job Type', width: 400 },
     ];
 
     useEffect(() => {
