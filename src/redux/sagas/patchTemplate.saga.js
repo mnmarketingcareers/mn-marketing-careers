@@ -6,7 +6,7 @@ function* patchTemplate(action) {
     try {
         console.log("action.payload in PATCH TEMPLATE saga is:", action.payload)
         yield axios({
-            method: "patch", 
+            method: "post",  //updated from patch
             url: "/api/template", 
             data: action.payload
         });

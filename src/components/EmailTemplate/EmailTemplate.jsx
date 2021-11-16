@@ -18,26 +18,29 @@ const EmailTemplate = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [templateId, setTemplateId] = useState(10043709);
+  const [templateId, setTemplateId] = useState(10043989);
   const [templateName, setTemplateName] = useState("");
-  const [templateBody, setTemplateBody] = useState("");
+  const [templateBodyText, setTemplateBodyText] = useState("");
 
   useEffect(() => {
     dispatch({ type: "GET_TEMPLATES" }); //fetches all existing template IDs to choose from
   });
 
   const handleSubmitPatchTemplate = () => { //submits template patch to selected
+    const bodyToSubmit = `<p>${templateBodyText}</p>`
     console.log("in handleSubmitPatchTemplate");
-    // setTemplateId('10043709');
-    console.log("templateId =", templateId);
+    // setTemplateId('10043989');
+    // console.log("templateId =", templateId); //updated uncomment  if patch
     console.log("templateName =", templateName);
-    console.log("templateBody =", templateBody);
+    console.log("templateBody =", templateBodyText);
+    console.log("bodyToSubmit =", bodyToSubmit);
+
     dispatch({
       type: "SEND_PATCH_TEMPLATE",
       payload: {
-        template_id: templateId,
+        // template_id: templateId, //updated uncomment if patch
         name: templateName,
-        html: templateBody,
+        html: bodyToSubmit,
       },
     });
   };
@@ -66,14 +69,10 @@ const EmailTemplate = () => {
   </Select>
   </FormControl> */}
 
-
-
-
-
           <TextField
             required
             className={classes.templateIdTextField}
-            onChange={() => setTemplateId('10043709')}
+            // onChange={() => setTemplateId(10043989)}
             id="template-id"
             label="Template ID"
             size="small"
@@ -97,11 +96,11 @@ const EmailTemplate = () => {
             required
             multiline
             className={classes.bodyTextField}
-            onChange={() => setTemplateBody(event.target.value)}
+            onChange={() => setTemplateBodyText(event.target.value)}
             id="template-email-body"
             label="Email Body"
             size="large"
-            value={templateBody}
+            value={templateBodyText}
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
           />
