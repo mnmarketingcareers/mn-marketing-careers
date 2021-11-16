@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import LogOutButton from "../LogOutButton/LogOutButton";
 
-
 import {
   SwipeableDrawer,
   IconButton,
@@ -24,9 +23,9 @@ import "./AdminDrawerMenu.css";
 const AdminDrawerMenu = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(store => store.user)
+  const user = useSelector((store) => store.user);
 
-  console.log('drawer user is:', user.first_name)
+  console.log("drawer user is:", user.first_name);
 
   const handleLogoutClick = () => {
     dispatch({ type: "LOGOUT" });
@@ -40,27 +39,39 @@ const AdminDrawerMenu = () => {
       </IconButton>
 
       <SwipeableDrawer
-      className="drawer"
+        className="drawer"
         anchor="right"
         open={open}
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
       >
-       <h3 style={{textAlign: 'center', fontSize: '14px', color: 'gray', marginBottom: '10px'}}>{user.first_name}</h3>
-       <Divider />
+        <h3
+          style={{
+            textAlign: "center",
+            fontSize: "14px",
+            color: "gray",
+            marginBottom: "10px",
+          }}
+        >
+          {user.first_name}
+        </h3>
+        <Divider />
 
-        <div className="closeDrawerButton" style={{ textAlign: "center", margin: '8px 0'}}>
+        <div
+          className="closeDrawerButton"
+          style={{ textAlign: "center", margin: "8px 0" }}
+        >
           <IconButton
-            style={{ transform: "scale(2)", margin: '8cpx 0' }}
+            style={{ transform: "scale(2)", margin: "8cpx 0" }}
             onClick={() => setOpen(false)}
           >
             <ChevronRightIcon />
           </IconButton>
         </div>
-        <Divider style={{marginBottom: '16px'}} />
+        <Divider style={{ marginBottom: "16px" }} />
 
         <div className="drawerLinkColumn">
-        <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
+          <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
             <Link className="drawerLink" to="/home">
               <h3>Home</h3>
             </Link>
@@ -70,17 +81,34 @@ const AdminDrawerMenu = () => {
               <h3>Jobs</h3>
             </Link>
           </ListItem>
+
           <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
             <Link className="drawerLink" to="/adminhub">
               <h3>Admin Hub</h3>
             </Link>
           </ListItem>
+
+          <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
+            <Link className="drawerLink" to="/campaign">
+              <h3>Campaign</h3>
+            </Link>
+          </ListItem>
+
+          <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
+            <Link className="drawerLink" to="/emailtemplate">
+              <h3>Template</h3>
+            </Link>
+          </ListItem>
+
           <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
             <Link className="drawerLink" to="/reviewsubmissions">
               <h3>Review Posts</h3>
             </Link>
           </ListItem>
-          <ListItem className="drawerListItem" onClick={() => handleLogoutClick()}>
+          <ListItem
+            className="drawerListItem"
+            onClick={() => handleLogoutClick()}
+          >
             <Link className="drawerLink" to="/main">
               <h3>Logout</h3>
             </Link>

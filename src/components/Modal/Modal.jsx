@@ -46,7 +46,7 @@ function Modal({ closeModal }) {
           <button className="exit-modal" onClick={() => closeModal(false)}><FaWindowClose /></button>
         </div>
         <div className="title">
-          <img src="./images/logo-small.png" />
+          <img src="./images/small-circle-logo-only-v2.png" />
           <p>
             Minnesota Marketing Careers is a weekly email update dedicated to
             sharing marketing, communications and digital career opportunities
@@ -66,13 +66,11 @@ function Modal({ closeModal }) {
             />
            
             <TextField
-                          sx={{ m: 1, width: 410 }}
-
+              sx={{ m: 1, width: 410 }}
               id="lastName"
               label="Last name"
               variant="outlined"
               value={userLastName}
-
               onChange={(event) => setUserLastName(event.target.value)}
             />
             <TextField
@@ -86,8 +84,7 @@ function Modal({ closeModal }) {
             />
 
             <TextField
-                          sx={{ m: 1, width: 410 }}
-
+              sx={{ m: 1, width: 410 }}
               id="zip"
               label="Zip Code"
               variant="outlined"

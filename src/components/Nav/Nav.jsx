@@ -73,8 +73,12 @@ function Nav() {
             <div className="nav-words">
               <LogOutButton />
 
-              <Link className="navLink" to="/user">
-                Home
+              <Link className="navLink" to="/campaign">
+                Campaign
+              </Link>
+
+              <Link className="navLink" to="/emailtemplate">
+                Template
               </Link>
 
               <Link className="navLink" to="/main">

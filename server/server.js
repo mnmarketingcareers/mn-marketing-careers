@@ -12,8 +12,8 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const subsRouter = require('./routes/subs.router');
 const feedbackRouter = require('./routes/feedback.router');
-
-
+const campaignRouter = require('./routes/campaign.router'); //updated by Mo - work in progress
+const templateRouter = require('./routes/template.router');
 
 // jobs routers
 const jobsRouter = require('./routes/job_postings.router');
@@ -36,8 +36,8 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/subs', subsRouter);
 app.use('/api/feedback', feedbackRouter);
-
-
+app.use('/api/campaign', campaignRouter); //updated by Mo - work in progress
+app.use('/api/template', templateRouter); //updated by Mo - now for mailchimp templates
 
 
 // use the jobs routers
