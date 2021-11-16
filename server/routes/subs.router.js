@@ -27,7 +27,7 @@ client.setConfig({
   const response = await client.lists.getListMembersInfo(
     process.env.TEST_LIST_ID, {count: 30}) //MNMC will likely want more - if they even need this section
   .then((response) => {
-    console.log("response from GET LIST MEMBERS INFO:", response);
+    // console.log("response from GET LIST MEMBERS INFO:", response);
     res.send(response);
   })
   .catch((error) => {

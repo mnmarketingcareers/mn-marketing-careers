@@ -57,7 +57,7 @@ screen size under 768 = only the circle portion of the logo
 
 
 .nav-words {
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
 .navLink {
@@ -65,9 +65,9 @@ screen size under 768 = only the circle portion of the logo
   color: #263a3e;
   font-weight: bold;
   text-align: center;
-  padding: 24px 7px;
+  padding: 24px 6px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 17px;
   border: none;
   cursor: pointer;
   outline: 0;
@@ -97,7 +97,7 @@ screen size under 768 = only the circle portion of the logo
 }
 
 
-@media screen and (max-width: 900px){ 
+@media screen and (max-width: 970px){ 
 
   .nav-words {
     display: none;
@@ -112,7 +112,7 @@ screen size under 768 = only the circle portion of the logo
   display: none;
 }
 
-@media screen and (max-width: 900px){ 
+@media screen and (max-width: 970px){ 
   .hamburger {
     display: block;
     position: relative;

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import useStyles from "../Styles/Styles";
 
-function UserPage() {
+function Campaign() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
@@ -37,12 +37,12 @@ function UserPage() {
     console.log("Include pre-built footer?", event.target.checked);
   };
 
-  const handleCreateEmail = () => {
-    setEmailArray([])
+  //this function creates and SAVES an email
+  const handleCreateCampaign = () => {
+    setEmailArray([]);
     for (let email of subs[0]) {
       // emailArray.push({name: email.full_name, mail: email.email_address});
       emailArray.push(email.email_address); //deletelater ???
-
     }
     console.log("subs email array:", emailArray);
     console.log("Number of recipients:", emailArray.length);
@@ -50,17 +50,19 @@ function UserPage() {
     console.log("Title:", campaignTitle);
     console.log("Subject:", campaignSubject);
     console.log("Preview Text:", campaignPreviewText);
-    console.log("Body:", campaignBodyText);
     console.log("Footer?:", footerChecked);
     console.log("Recipients?:", subs[0]);
 
     dispatch({
       type: "CREATE_CAMPAIGN",
       payload: {
+        type: "regular", // this or plain text? Ask Casey
+        from_name: "MNMC Dev Team", // the "from" name that appears
+        reply_to: "cmochinski@gmail.com", // made up - do they have a real one?
+
         title: campaignTitle,
-        subject: campaignSubject,
-        previewText: campaignPreviewText,
-        body: campaignBodyText,
+        subject_line: campaignSubject,
+        preview_text: campaignPreviewText,
         footer: footerChecked,
         recipients: subs[0],
       },
@@ -74,24 +76,51 @@ function UserPage() {
     setCampaignBodyText("");
   };
 
+  // this function is part of the ternary operator that makes a button appear if all fields are filled out
+  // if any field is blank, this green SEND button does not show up
+  const sendEmailButton = () => {
+    return (
+      <Button
+        style={{ margin: "6px" }}
+        variant="contained"
+        color="success"
+        onClick={() => sendEmailNow()}
+      >
+        SEND
+      </Button>
+    );
+  };
+
+  // this is the function that SENDS the email
+  const sendEmailNow = () => {
+    console.log("in send email now! LOOK OUT BELOOWWWWW");
+    dispatch({
+      type: "SEND_EMAIL_NOW",
+      payload: { campaign_id: "fc3d6332b5" },
+    });
+  };
+
+
+  //fix
+  const getCampaigns = () => {
+    console.log('in getCampaigns function') 
+    dispatch({type: "GET_CAMPAIGN"})
+  };
+
   return (
     <div className="container">
       <br />
-      <Typography style={{ textAlign: "center" }} variant="h3">
+      <Typography style={{ textAlign: "center", marginBottom: '25px' }} variant="h3">
         New Email Campaign
       </Typography>
-      <Typography
-        style={{ textAlign: "center", marginBottom: "25px" }}
-        variant="h6"
-      >
-        This email will be sent to <u>{emailArray.length}</u> recipients
-      </Typography>
-      <Paper className={classes.userPagePaperContainer} elevation={6}>
-        <Typography variant="h6">
-          Follow the fields and prompts below to create and send a new email
-          campaign.
+
+      <Paper className={classes.campaignPaperContainer} elevation={6}>
+        <Typography variant="h6" style={{margin: '10px 50px'}}>
+          This page is used to create and save or send your finalized email
+          campaign. Follow the prompts below to continue. Once all fields are
+          filled out, the button to SEND NOW will appear.
         </Typography>
-        <form onSubmit={() => handleCreateEmail()}>
+        <form onSubmit={() => handleCreateCampaign()}>
           <TextField
             required
             className={classes.campaignTitleTextField}
@@ -110,7 +139,7 @@ function UserPage() {
             className={classes.subjectTextField}
             onChange={() => setCampaignSubject(event.target.value)}
             id="campaign-subject"
-            label="Subject Line"
+            label="Email Subject Line"
             size="small"
             value={campaignSubject}
             variant="outlined"
@@ -121,24 +150,13 @@ function UserPage() {
             className={classes.previewTextField}
             onChange={() => setCampaignPreviewText(event.target.value)}
             id="campaign-preview-text"
-            label="Preview Text"
+            label="Email Preview Text"
             size="small"
-
             value={campaignPreviewText}
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
           />
-          <TextField
-            required
-            className={classes.bodyTextField}
-            onChange={() => setCampaignBodyText(event.target.value)}
-            id="campaign-body"
-            multiline
-            size="large"
-            label="Email Body"
-            value={campaignBodyText}
-            InputLabelProps={{ style: { color: "#D3D3D3" } }}
-          />
+
           <div className={classes.footerCheckDiv}>
             <FormControlLabel
               control={
@@ -157,8 +175,20 @@ function UserPage() {
           </div>
           <div>
             <Button style={{ margin: "6px" }} variant="contained" type="submit">
-              CREATE
+              SAVE
             </Button>
+
+            
+
+            {campaignTitle &&
+            campaignSubject &&
+            campaignPreviewText &&
+            campaignBodyText ? (
+              sendEmailButton()
+            ) : (
+              <></>
+            )}
+
             <Button
               style={{ margin: "6px" }}
               variant="contained"
@@ -167,6 +197,14 @@ function UserPage() {
             >
               CLEAR
             </Button>
+            <br /><br />
+
+            <Button 
+            //important this button is strictly for developer aid
+            style={{ margin: "6px" }} variant="contained" color="secondary" onClick={() => getCampaigns()}>
+              TEMP - GET CAMPAIGN LIST <br />(terminal only)
+            </Button>
+
           </div>
         </form>
       </Paper>
@@ -176,4 +214,4 @@ function UserPage() {
 }
 
 // this allows us to use <App /> in index.js
-export default UserPage;
+export default Campaign;

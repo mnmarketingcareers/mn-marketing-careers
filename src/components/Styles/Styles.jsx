@@ -40,9 +40,9 @@ const useStyles = makeStyles(
       backgroundColor: "#FFA384",
     },
 
-    //-------------UserPage (admin email campaign page)-------------//
+    //-------------Campaign (formerly UserPage) (admin email campaign page)-------------//
 
-    userPagePaperContainer: {
+    campaignPaperContainer: {
       width: "90%",
       display: "block",
       margin: "auto",
