@@ -31,8 +31,8 @@ function ReadyToPost () {
 
     return (
         <div>
-            <h2>Job posts you've approved, ready to go to the list</h2>
-            <Button variant="outlined" extended onClick={handlePostToList}>Go Live</Button>
+            <h2>Job openings you've  added or approved, ready to go to the public list</h2>
+            <p>Click here: <Button variant="outlined" extended onClick={handlePostToList}>Go Live</Button> if you want to post all new job openings below to the public list</p>
                 {/* {JSON.stringify(approvedPostings)} */}
                 <div className="job-postings-table">
                     <ul>
@@ -42,17 +42,18 @@ function ReadyToPost () {
                                     {job.available_role}, &nbsp;
                                     {job.company_name}, &nbsp;
                                     {job.description}, &nbsp;
-                                    <a href={`https://${job.application_link}`}>Click here to apply!</a>, &nbsp;
+                                    <a href={`https://${job.application_link}`}>https://{job.application_link}</a>, &nbsp;
                                     {job.job_city}, &nbsp;
                                     {job.job_state}, &nbsp;
                                     {job.remote}, &nbsp;
                                     {(job.share_contact) ? (
                                         <p>{job.hiring_contact_email, job.hiring_contact_name, job.title, job.phone}</p>
                                     ) : (<></>)}
-                                    {job.date_posted} &nbsp; &nbsp; | &nbsp; &nbsp;
+                                    {job.date_posted} &nbsp; | &nbsp;
                                     <label htmlFor="edit-btn"></label>
-                                    <Button id="edit-btn" onClick={() => handleEdit(job.id)}>Edit</Button> 
-                                    <Button onClick={() => handleDelete(job.id)}>JK, Delete it</Button>   
+                                    <Button id="edit-btn" variant="outlined" color="success" onClick={() => handleEdit(job.id)}>Edit</Button> 
+                                    &nbsp;&nbsp;
+                                    <Button id="delete-btn" variant="outlined" color="error" onClick={() => handleDelete(job.id)}>JK, Delete dis</Button>   
                                 </li>
                             )
                             })}

@@ -52,13 +52,13 @@ function AdminJobList() {
 
     return (
         <>
-        <div>
+        <div className="admin-joblist-container">
             <h1>Job Postings</h1>
             
             <ReadyToPost />
             {/* <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
             {/* {JSON.stringify(postingsList)} */}
-            <h2>These job postings are currently on the main list, as seen by anyone who goes to your page.</h2>
+            <h2>These job openings are currently on the public list, viewable by who goes to your page.</h2>
             {!showJoblist && <CircularProgress />}
             {showJoblist &&
             (<TableContainer component={Paper}>

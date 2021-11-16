@@ -1,57 +1,5 @@
 /* <------------------ Styles here ---------------> */
 
-
-
-.form-container {
-    display: grid;
-    justify-content: center;
+.admin-joblist-container{
+    margin-left: 2rem;
 }
-
-/* Card container */
-
-
-/* The whole individual cards */
-.MuiPaper-root{
-    padding: 10px;
-    margin-right: 2px;
-    margin-bottom: 15px;
-}
-
-
-.MuiFormGroup-root {
-    padding: 20px;
-}
-
-.MuiPaper-root {
-    padding: 20px;
-}
-
-.employer-form{
-    padding-left: 55px;
-    padding-bottom: 20px;
-    display: grid;
-    justify-content: center;
-}
-
-.submit-employer-form-button {
-    width: 150px;
-    height: 45px;
-    margin: 10px;
-    border: none;
-    background-color: #74BDCB;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-
-    transition: background-color .4s linear;
-}
-
-.submit-employer-form-button:hover,
-.submit-employer-form-button:hover::after{
-  cursor: pointer;
-  background-color: #5298a7;
-  transition: background-color 0.23s linear;
-}
-
-
