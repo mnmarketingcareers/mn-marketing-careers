@@ -341,7 +341,7 @@ const AdminAddJobPage = () => {
                 </form>
                 <Button onClick={toAdminHub}>Back to Hub</Button>
 
-                <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button>
+                {/* <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button> */}
             </div>
         </>
     );

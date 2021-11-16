@@ -32,7 +32,7 @@ function ReadyToPost () {
     return (
         <div>
             <h2>Job posts you've approved, ready to go to the list</h2>
-            <Button variant="outlined" extended onClick={handlePostToList}>Post All approved jobs to list</Button>
+            <Button variant="outlined" extended onClick={handlePostToList}>Go Live</Button>
                 {/* {JSON.stringify(approvedPostings)} */}
                 <div className="job-postings-table">
                     <ul>
