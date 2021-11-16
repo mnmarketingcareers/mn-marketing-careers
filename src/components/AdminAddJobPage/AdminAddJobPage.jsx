@@ -183,7 +183,7 @@ const AdminAddJobPage = () => {
     return (
         <>
             <div className="form-container">
-                <form className="employer-form" onSubmit={handleSubmit}>
+                <form className="add-job-form" onSubmit={handleSubmit}>
                 <Card xs={12}>
                 <Grid container item>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
@@ -337,7 +337,7 @@ const AdminAddJobPage = () => {
                 </Grid>
                 </Grid>
                 </Card>
-                <input className="submit-employer-form-button" type='submit' value='Submit' />
+                <input className="submit-add-job-button" type='submit' value='Submit' />
                 </form>
                 <Button onClick={toAdminHub}>Back to Hub</Button>
 

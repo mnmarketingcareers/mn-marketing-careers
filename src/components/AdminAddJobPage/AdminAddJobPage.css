@@ -1,5 +1,3 @@
-/* <------------------ Styles here ---------------> */
-
 
 
 .form-container {
@@ -26,14 +24,14 @@
     padding: 20px;
 }
 
-.employer-form{
+.add-job-form{
     padding-left: 55px;
     padding-bottom: 20px;
     display: grid;
     justify-content: center;
 }
 
-.submit-employer-form-button {
+.submit-add-job-button {
     width: 150px;
     height: 45px;
     margin: 10px;
@@ -47,8 +45,8 @@
     transition: background-color .4s linear;
 }
 
-.submit-employer-form-button:hover,
-.submit-employer-form-button:hover::after{
+.submit-add-job-button:hover,
+.submit-add-job-button:hover::after{
   cursor: pointer;
   background-color: #5298a7;
   transition: background-color 0.23s linear;
