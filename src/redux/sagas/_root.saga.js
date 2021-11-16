@@ -13,6 +13,7 @@ import approvedPostingsSaga from './approvedPostings.saga';
 import campaignSaga from './campaign.saga';
 import sendEmailNow from './sendEmailNow.saga';
 import getCampaignsSaga from './getCampaign.saga';
+import patchTemplateSaga from './patchTemplate.saga';
 
 
 // rootSaga is the primary saga.
@@ -38,6 +39,7 @@ export default function* rootSaga() {
     campaignSaga(), //post create new email campaign
     sendEmailNow(), //post send campaign immediately UNDER CONSTRUCTION
     getCampaignsSaga(), //get campaign info (experimental)
+    patchTemplateSaga(), //PUT..er...patch - fix up template for new send
 
   ]);
 }

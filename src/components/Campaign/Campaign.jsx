@@ -100,26 +100,34 @@ function Campaign() {
     });
   };
 
-
   //fix
   const getCampaigns = () => {
-    console.log('in getCampaigns function') 
-    dispatch({type: "GET_CAMPAIGN"})
+    console.log("in getCampaigns function");
+    dispatch({ type: "GET_CAMPAIGN" });
   };
 
   return (
     <div className="container">
       <br />
-      <Typography style={{ textAlign: "center", marginBottom: '25px' }} variant="h3">
+      <Typography
+        style={{ textAlign: "center", marginBottom: "25px" }}
+        variant="h3"
+      >
         New Email Campaign
       </Typography>
 
+      <Typography style={{ textAlign: "center", margin: "15px 300px 30px" }}>
+        AS OF 11/16/21 @ 4:40 PM - this page allows a user to BUILD THE SENDABLE
+        EMAIL ATTRIBUTES - Campaign title (not sent - just for admin side),
+        email subject line, and email subject preview text
+      </Typography>
+
       <Paper className={classes.campaignPaperContainer} elevation={6}>
-        <Typography variant="h6" style={{margin: '10px 50px'}}>
+        {/* <Typography variant="h6" style={{ margin: "10px 50px" }}>
           This page is used to create and save or send your finalized email
           campaign. Follow the prompts below to continue. Once all fields are
           filled out, the button to SEND NOW will appear.
-        </Typography>
+        </Typography> */}
         <form onSubmit={() => handleCreateCampaign()}>
           <TextField
             required
@@ -178,8 +186,6 @@ function Campaign() {
               SAVE
             </Button>
 
-            
-
             {campaignTitle &&
             campaignSubject &&
             campaignPreviewText &&
@@ -197,14 +203,19 @@ function Campaign() {
             >
               CLEAR
             </Button>
-            <br /><br />
+            <br />
+            <br />
 
-            <Button 
-            //important this button is strictly for developer aid
-            style={{ margin: "6px" }} variant="contained" color="secondary" onClick={() => getCampaigns()}>
-              TEMP - GET CAMPAIGN LIST <br />(terminal only)
+            <Button
+              //important this button is strictly for developer aid
+              style={{ margin: "6px" }}
+              variant="contained"
+              color="secondary"
+              onClick={() => getCampaigns()}
+            >
+              TEMP - GET CAMPAIGN LIST <br />
+              (terminal only)
             </Button>
-
           </div>
         </form>
       </Paper>
