@@ -11,6 +11,7 @@ import toggleSubscriberStatus from './modifySubStatus.saga';
 import fetchJobsSaga from './fetchJobs.saga';
 
 import approvedPostingsSaga from './approvedPostings.saga';
+import addNewJobIssueSaga from './addJobIssue.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -33,5 +34,6 @@ export default function* rootSaga() {
     fetchJobsSaga(),
 
     approvedPostingsSaga(),
+    addNewJobIssueSaga(), //post to database
   ]);
 }

@@ -48,13 +48,13 @@ function JobPostingIssuesPage() {
     //will I need a new saga/reducer for this dispatch? POST route?
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("the event is", event);
+        console.log('the event is', event);
         dispatch({
-            type: "SUBMIT_JOB_ISSUE",
+            type: 'ADD_JOB_ISSUE',
             payload: issue,
         });
-        alert("Thank you for your feedback!");
-        history.push("/main");
+        alert('Thank you for your feedback!');
+        history.push('/main');
   };
 
     // useEffect to trigger dispatches to fetch jobs on page load
@@ -64,13 +64,13 @@ function JobPostingIssuesPage() {
 
   // switch statment function?
   const radioButtonValue = (event) => {
-    console.log("inside radio button", event.target.value);
+    console.log('inside radio button', event.target.value);
     switch (event.target.value) {
-      case "This Position is No Longer Available":
+      case 'This Position is No Longer Available':
         setReason({ ...reason, reason: event.target.value });
-      case "Issue With the Job Listing Website":
+      case 'Issue With the Job Listing Website':
         setReason({ ...reason, reason: event.target.value });
-      case "Content Not Relevant To My Search":
+      case 'Content Not Relevant To My Search':
         setReason({ ...reason, reason: event.target.value });
       default:
         return event;
@@ -79,7 +79,7 @@ function JobPostingIssuesPage() {
   // function for text field
 
   const textFieldValue = (event) => {
-    console.log("inside text field", event.target.value);
+    console.log('inside text field', event.target.value);
     setReason({ ...reason, message: event.target.value });
   };
 
@@ -90,7 +90,7 @@ function JobPostingIssuesPage() {
   // this changeState function is called in the click action firing the "other" radio button
   const changeState = () => {
     setToggleOther(!toggleOther);
-    setReason({ ...reason, reason: "other" });
+    setReason({ ...reason, reason: 'other' });
   };
 
 
