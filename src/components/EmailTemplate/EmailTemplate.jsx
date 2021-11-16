@@ -18,7 +18,7 @@ const EmailTemplate = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [templateId, setTemplateId] = useState("");
+  const [templateId, setTemplateId] = useState(10043709);
   const [templateName, setTemplateName] = useState("");
   const [templateBody, setTemplateBody] = useState("");
 
@@ -28,6 +28,7 @@ const EmailTemplate = () => {
 
   const handleSubmitPatchTemplate = () => { //submits template patch to selected
     console.log("in handleSubmitPatchTemplate");
+    // setTemplateId('10043709');
     console.log("templateId =", templateId);
     console.log("templateName =", templateName);
     console.log("templateBody =", templateBody);
@@ -42,10 +43,10 @@ const EmailTemplate = () => {
   };
 
   return (
-    <div>
+    <div className={classes.templatePageContainer}>
       <h1 style={{ textAlign: "center", margin: "30px" }}> Template </h1>
 
-      <Paper className={classes.campaignPaperContainer} elevation={8}>
+      <Paper className={classes.templatePaperContainer} elevation={12}>
         <form onSubmit={() => handleSubmitPatchTemplate()}>
         
         {/* <FormControl >
@@ -72,16 +73,17 @@ const EmailTemplate = () => {
           <TextField
             required
             className={classes.templateIdTextField}
-            onChange={() => setTemplateId(event.target.value)}
+            onChange={() => setTemplateId('10043709')}
             id="template-id"
             label="Template ID"
             size="small"
             value={templateId}
+            //fix this ID is for plaintext
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
           />
           <TextField
-            className={classes.subjectTextField}
+            className={classes.templateNameField}
             onChange={() => setTemplateName(event.target.value)}
             id="template-name"
             label="New Template Name (optional)"
@@ -98,7 +100,7 @@ const EmailTemplate = () => {
             onChange={() => setTemplateBody(event.target.value)}
             id="template-email-body"
             label="Email Body"
-            size="small"
+            size="large"
             value={templateBody}
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
