@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import PostingsList from './PostingsList';
+import ReadyToPost from '../PeadyToPostList/ReadyToPostList';
 import { 
     CircularProgress,
     TableContainer,
@@ -33,9 +34,11 @@ function ApproveSubmissions() {
     return(
         <div>
             <h1>Review Job Postings</h1>
-            <p>These job postings were submitted by employers and await your APPROVAL</p>
-            <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button>
+            
+            <ReadyToPost />
+            {/* <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
             {/* {JSON.stringify(postingsList)} */}
+            <h2>These job postings were submitted by employers and await your APPROVAL</h2>
             {!showJobPosting && <CircularProgress />}
             {showJobPosting &&
             (<TableContainer component={Paper}>
