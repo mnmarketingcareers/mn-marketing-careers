@@ -16,7 +16,6 @@ import {
 import useStyles from "../Styles/Styles";
 
 const EmailTemplate = () => {
-
   const templateList = useSelector((store) => store.setTemplatesReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -33,15 +32,14 @@ const EmailTemplate = () => {
   }, []);
 
   const handleSubmitPatchTemplate = () => {
-
     const bodyToSubmit = templateBodyText; //THIS is where the user's input is entering our crazy HTML
     console.log("in handleSubmitPatchTemplate");
-    console.log("templateId =", templateId); 
+    console.log("templateId =", templateId);
     console.log("templateName =", templateName);
     console.log("templateBody =", templateBodyText);
     console.log("bodyToSubmit =", bodyToSubmit);
 
-    if(newOrMod === "mod"){
+    if (newOrMod === "mod") {
       dispatch({
         type: "SEND_PATCH_TEMPLATE",
         payload: {
@@ -49,7 +47,7 @@ const EmailTemplate = () => {
           name: templateName,
           html: bodyToSubmit,
         },
-      })
+      });
     } else {
       dispatch({
         type: "SEND_POST_TEMPLATE",
@@ -57,12 +55,8 @@ const EmailTemplate = () => {
           name: templateName,
           html: bodyToSubmit,
         },
-      })
+      });
     }
-
-
-
-    
   };
 
   const handleSelectTemplateId = (event) => {
@@ -71,9 +65,9 @@ const EmailTemplate = () => {
   };
 
   const handleSelectNewOrMod = (event) => {
-    console.log("user has chosen", event.target.value)
-    setNewOrMod(event.target.value)
-  }
+    console.log("user has chosen", event.target.value);
+    setNewOrMod(event.target.value);
+  };
 
   return (
     <div className={classes.templatePageContainer}>
@@ -94,57 +88,51 @@ const EmailTemplate = () => {
 
       <Paper className={classes.templatePaperContainer} elevation={12}>
         <form onSubmit={() => handleSubmitPatchTemplate()}>
-
-        <FormControl required style={{ width: "30%" }}>
+          <FormControl required style={{ width: "30%" }}>
             <InputLabel id="new-or-mod-label">Select</InputLabel>
 
-            <Select className={classes.newOrModSelect}
+            <Select
+              className={classes.newOrModSelect}
               labelId="new-or-mod-label"
               id="template-id-select"
               label="Select"
               value={newOrMod}
               onChange={handleSelectNewOrMod}
             >
-  
-                <MenuItem value={"new"}>New Template</MenuItem>
-                <MenuItem value={"mod"}>Modify Template</MenuItem>
-
+              <MenuItem value={"new"}>New Template</MenuItem>
+              <MenuItem value={"mod"}>Modify Template</MenuItem>
             </Select>
           </FormControl>
 
-<br />
-<br />
+          <br />
+          <br />
 
+          {newOrMod === "new" || newOrMod === "" ? (
+            <></>
+          ) : (
+            <FormControl required style={{ width: "50%" }}>
+              <InputLabel id="template-id-select-label">Template</InputLabel>
 
-
-{newOrMod === "new" || newOrMod === '' ? <></> :
-          <FormControl required style={{ width: "50%" }}>
-            <InputLabel id="template-id-select-label">Template</InputLabel>
-
-            <Select className={classes.templateIdSelect}
-              labelId="template-id-select-label"
-              id="template-id-select"
-              label="template"
-              value={templateId}
-              onChange={handleSelectTemplateId}
-            >
-              {templateList.length > 0 ? (
-                templateList[0].map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
-                    {item.name}
-                  </MenuItem>
-                ))
-              ) : (
-                <img src="./images/Pendulum.gif" />
-              )}
-            </Select>
-          </FormControl>
-
-
-              }
-
-
-
+              <Select
+                className={classes.templateIdSelect}
+                labelId="template-id-select-label"
+                id="template-id-select"
+                label="template"
+                value={templateId}
+                onChange={handleSelectTemplateId}
+              >
+                {templateList.length > 0 ? (
+                  templateList[0].map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.name}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <img src="./images/Pendulum.gif" />
+                )}
+              </Select>
+            </FormControl>
+          )}
 
           <TextField
             className={classes.templateNameField}
@@ -157,14 +145,16 @@ const EmailTemplate = () => {
             inputProps={{ maxLength: 50 }}
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
           />
-<br /><br />
-{templateBodyText.length > 3000 ? 
-          <Button variant="contained" color="success" type="submit">
-            SUBMIT
-          </Button>
-: <></>
-}
-<br />
+          <br />
+          <br />
+          {templateBodyText.length > 3000 ? (
+            <Button variant="contained" color="success" type="submit">
+              SUBMIT
+            </Button>
+          ) : (
+            <></>
+          )}
+          <br />
           <TextField
             required
             multiline
@@ -178,15 +168,17 @@ const EmailTemplate = () => {
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
           />
           <br />
-          
-          <Button 
-          //this button is always here 
-            //  button above body text field 
+
+          <Button
+            //this button is always here
+            //  button above body text field
             //  appears at over 2k characters
-          variant="contained" color="success" type="submit">
+            variant="contained"
+            color="success"
+            type="submit"
+          >
             SUBMIT
           </Button>
-
         </form>
       </Paper>
     </div>

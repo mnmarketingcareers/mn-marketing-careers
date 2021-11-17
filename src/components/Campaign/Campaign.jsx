@@ -8,14 +8,20 @@ import {
   TextField,
   Checkbox,
   FormControlLabel,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import useStyles from "../Styles/Styles";
 
 function Campaign() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
-  const subs = useSelector((store) => store.setSubsListReducer); //incoming full subs list
+  // const user = useSelector((store) => store.user);
+  const subs = useSelector((store) => store.setSubsListReducer); //incoming full subs list from redux /mailchimp
+  const templateList = useSelector((store) => store.setTemplatesReducer); //incoming full templates list from redux /mailchimp
+
   const [subList, setSubList] = useState([]); //to set state of subs
 
   //states for fields
@@ -29,6 +35,7 @@ function Campaign() {
 
   useEffect(() => {
     dispatch({ type: "GET_SUBS" });
+    dispatch({ type: "GET_TEMPLATES" }); //get all existing template IDs to choose from!
     setSubList(subs.data);
     console.log("subList is:", subList);
   }, []);
@@ -98,7 +105,7 @@ function Campaign() {
     console.log("in send email now! LOOK OUT BELOOWWWWW");
     dispatch({
       type: "SEND_EMAIL_NOW",
-      payload: { campaign_id: "83c885d177" }, //updated NEED TO ALWAYS CHANGE THIS
+      payload: { campaign_id: "83c885d177" }, //FIX - need to get this from the SAVED campaign
     });
   };
 
@@ -107,6 +114,14 @@ function Campaign() {
     console.log("in getCampaigns function");
     dispatch({ type: "GET_CAMPAIGN" });
   };
+
+
+  const handleSelectTemplateId = (event) => {
+    console.log("selected template id:", event.target.value);
+    setTemplateId(event.target.value);
+  };
+
+
 
   return (
     <div className="container">
@@ -132,19 +147,30 @@ function Campaign() {
         </Typography> */}
         <form onSubmit={() => handleCreateCampaign()}>
 
-        <TextField
-            required
-            className={classes.templateIdTextField}
-            onChange={() => setTemplateId(event.target.value)}
-            id="template-id"
-            label="Template ID (DELETE LATER)"
-            size="small"
-            value={templateId}
-            variant="outlined"
-            inputProps={{ style: { fontSize: 18 } }}
-            InputLabelProps={{ style: { fontSize: 16, color: "#D3D3D3" } }}
-          />
+        <FormControl required style={{ width: "50%" }}>
+              <InputLabel id="template-id-select-label">Template</InputLabel>
 
+              <Select
+                className={classes.templateIdSelect}
+                labelId="template-id-select-label"
+                id="template-id-select"
+                label="template"
+                value={templateId}
+                onChange={handleSelectTemplateId}
+              >
+                {templateList.length > 0 ? (
+                  templateList[0].map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.name}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <img src="./images/Pendulum.gif" />
+                )}
+              </Select>
+            </FormControl>
+
+<br /><br />
 
           <TextField
             required
