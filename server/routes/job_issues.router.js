@@ -47,5 +47,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 // Handles PUT request which changes is_resolved from 'false' to 'true'
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    if (req.user.access_level === 1) {
+        // set is_resolved value to TRUE from its default value of FALSE
+        const queryText = `UPDATE "issues" SET "is_resolved" = 'TRUE' WHERE "id" = $1;`;
+        const queryValues = [req.body.id];
+        pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.log('Error completing UPDATE issues', err);
+            res.sendStatus(500);
+        })
+    }
+})
 
 module.exports = router;
