@@ -30,6 +30,9 @@ import MuiAlert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+import ShareOurApp from "../ShareOurApp/ShareOurApp.jsx";
+import Container from '@mui/material/Container';
+
 
 
 
@@ -270,7 +273,7 @@ function EmployerPage() {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">Share</Button>
+                                    <ShareOurApp />
                                     <Button size="small" onClick={toAbout}>Learn More</Button>
                                 </CardActions>
                             </Card>
