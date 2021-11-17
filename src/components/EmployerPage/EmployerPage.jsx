@@ -31,7 +31,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 // Google ReCaptcha import
-import ReCaptchaV2 from 'react-google-recaptcha'
+import ReCaptchaV2 from 'react-google-recaptcha';
 
 
 import './EmployerPage.css';
@@ -224,10 +224,27 @@ function EmployerPage() {
         },
     ];
 
+    /**
+     * Adds the token to the form object
+     *
+     * @param {string} token - response from ReCaptcha
+     */
+    const handleToken = (token) => {
+        setJobPostingsTable((jobPostingsTable) => {
+        return { ...jobPostingsTable, token }
+        });
+    }
+
+    /**
+     * Removes the token from the from object
+     */
+    const handleExpire = () => {
+        setJobPostingsTable((jobPostingsTable) => {
+        return { ...jobPostingsTable, token: null }
+        });
+    }
 
     const [job, setJob] = useState([]);
-    const jobType = [];
-
 
     const handleJob = (event) => {
         const {
@@ -242,6 +259,11 @@ function EmployerPage() {
 
     const toAbout = (event) => {
         history.push('/about');
+    }
+
+    const showtSitekey = (event) => {
+        event.preventDefault();
+        console.log(process.env.REACT_APP_SITE_KEY);
     }
 
     return (
@@ -451,7 +473,11 @@ function EmployerPage() {
                     </Grid>
 
                     <div className="recaptcha-container">
-                        <ReCaptchaV2 sitekey={process.env.MNMC_APP_SITE_KEY} />
+                        {/* <button onClick={showtSitekey}>Show SiteKey</button> */}
+                        <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
+                               onChange={handleToken}
+                               onExpire={handleExpire}
+                        />
                     </div>
 
                     <input className="submit-employer-form-button" type='submit' value='Submit' />
