@@ -2,9 +2,7 @@ const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
 const client = require("@mailchimp/mailchimp_marketing");
-const {
-  rejectUnauthenticated,
-} = require("../modules/authentication-middleware");
+
 
 
 //IMPORTANT - should be present on all pages
