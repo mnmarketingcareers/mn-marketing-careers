@@ -62,7 +62,7 @@ function JobPostingIssuesPage() {
             payload: issue, jobId
         });
         alert('Thank you for your feedback!');
-        //history.push('/main');
+        history.push('/main');
   };
 
     // useEffect to trigger dispatches to fetch jobs on page load
