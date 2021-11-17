@@ -1,6 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 // Handles POST request with new job issues raised by job seekers
 router.post('/', (req, res) => {
@@ -25,19 +28,24 @@ router.post('/', (req, res) => {
 })
 
 // Handles GET request which fetches data in the issues table, which involves a JOIN with the job_postings table
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('In GET for all job issues');
-    const queryText = `SELECT "i"."id", "comment", "issue_type", "is_resolved", "issues_email"   
-    FROM "issues" AS "i"
-    JOIN "job_postings" AS "jp" ON "jp"."id" = "i"."job_posting_id";
-    `;
-    pool.query(queryText).then((results) => {
-        console.log('Job issues to send', results.rows);
-        res.send(results.rows);
-    }).catch(error => {
-        console.log('ERROR in GET all job issues', error);
-        res.sendStatus(500);
-    })
+
+    if (req.user.access_level === 1) {
+        const queryText = `SELECT "i"."id", "comment", "issue_type", "is_resolved", "issues_email"   
+        FROM "issues" AS "i"
+        JOIN "job_postings" AS "jp" ON "jp"."id" = "i"."job_posting_id";
+        `;
+        pool.query(queryText).then((results) => {
+            console.log('Job issues to send', results.rows);
+            res.send(results.rows);
+        }).catch(error => {
+            console.log('ERROR in GET all job issues', error);
+            res.sendStatus(500);
+        })
+    }
 })
+
+// Handles PUT request which changes is_resolved from 'false' to 'true'
 
 module.exports = router;

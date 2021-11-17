@@ -28,8 +28,6 @@ function JobPostingIssuesPage() {
     // One GET: job postings page
     // One POST: issues page
     // TODO ON THE NEW ROUTER
-    // One POST? The Query is looking scary right now
-    // One GET: called from Admin hub
     // One PUT: changed is_resolved to 'true'/toggle to 'not' like in feedback router
     // One DELETE: maybe... (stretch)
     // Main page will need a history.push('/jobpostingissue/${whateverId}') 
