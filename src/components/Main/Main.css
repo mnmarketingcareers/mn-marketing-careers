@@ -3,6 +3,15 @@
     justify-content: center;
 }
 
+.filter {
+    display: flex;
+    justify-content: right;
+}
+
+.filter > button {
+    margin-left: 28px;
+}
+
 .apply-button {
     width: 75px;
     height: 33px;
@@ -10,7 +19,6 @@
     border: none;
     background-color: #74BDCB;
     text-decoration: none;
-    color: white;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;

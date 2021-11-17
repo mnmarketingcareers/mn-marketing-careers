@@ -9,7 +9,7 @@ const {
 // Handles POST request with new job seeker feedback, responses to database
 // Additional POST to post feedback to DOM?
 router.post('/', (req, res) => {
-    console.log('req.body is', req.body);
+    // console.log('req.body is', req.body);
     const reason = req.body.reason;
     const message = req.body.message;
     // the query that's responsible for inserting user feedback into the feedback database table
@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
 // Access level for admin-only access
 // wrap query around conditional that checks for access_level
 router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
-    console.log('in router.get', req.user);
+    // console.log('in router.get', req.user);
     
     if (req.user.access_level === 1){
         const queryText = `SELECT * FROM "feedback";`;

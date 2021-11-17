@@ -57,8 +57,8 @@ function EmployerPage() {
         setToggleContact(!toggleContact)
     };
 
+    
     // Success Button toggle
-
     const [open, setOpen] = useState(false);
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.

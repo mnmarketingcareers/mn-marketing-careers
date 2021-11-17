@@ -7,7 +7,7 @@ const router = express.Router();
 
 // GET jobs with Remote field as 'Yes' or 'Other'...
 router.get('/', (req, res) => {
-  console.log('In GET for all remote and hybrid job postings');
+  // console.log('In GET for all remote and hybrid job postings');
   const query = `
                   SELECT "jp"."id", "available_role", "description", "application_link", 
                   "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -36,7 +36,6 @@ router.get('/', (req, res) => {
 
 // GET jobs with the job type of 'Internship'.
 router.get('/internships', (req, res) => {
-  console.log('In GET for all internships');
   const query = `
       SELECT "jp"."id", "available_role", "description", "application_link", 
       "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 

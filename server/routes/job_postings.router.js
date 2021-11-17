@@ -9,7 +9,7 @@ const {
  * GET route template
  */
 router.get('/', async (req, res) => {
-  console.log('In GET for all non-remote and hybrid job postings');
+//   console.log('In GET for all non-remote and hybrid job postings');
   const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 
 // TO DO: check if this is used here
 router.get('/pending', rejectUnauthenticated, (req, res) => {
-    console.log('In GET pending job posts', req.user);
+    // console.log('In GET pending job posts', req.user);
     if (req.user.access_level < 1) {
             res.status(500).send('You do not have the correct access level for this content');
             return;
