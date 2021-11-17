@@ -19,6 +19,7 @@ client.setConfig({
  */
  router.get('/:age', (req, res) => {
     console.log('In GET for job postings, by time since post date');
+    console.log('params', req.params);
     const query = `
                   SELECT "jp"."id", "available_role", "description", "application_link", 
                   "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
