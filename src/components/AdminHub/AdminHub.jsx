@@ -11,7 +11,7 @@ import TableRow from "@mui/material/TableRow";
 
 import ToggleOffIcon from '@mui/icons-material/ToggleOff'; 
 
-import NewPostingsReady from "../../NewJobOpeningsReadyAlert/NewJobOpeningsReadyAlert";
+import NewPostingsReady from "../NewJobOpeningsReadyAlert/NewJobOpeningsReadyAlert";
 import NewSubmissions from "../NewSubmissionsAlert/NewSubmissionsAlert";
 import useStyles from "../Styles/Styles"; //important paste this
 
