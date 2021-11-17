@@ -224,6 +224,9 @@ function EmployerPage() {
         },
     ];
 
+    function onCaptchaChange(value) {
+        console.log("Captcha value:", value);
+      }
     /**
      * Adds the token to the form object
      *
@@ -476,7 +479,7 @@ function EmployerPage() {
                         {/* <button onClick={showtSitekey}>Show SiteKey</button> */}
                         <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
                                onChange={handleToken}
-                               onExpire={handleExpire}
+                               onExpired={handleExpire}
                         />
                     </div>
 
