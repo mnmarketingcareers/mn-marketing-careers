@@ -118,7 +118,7 @@ function Campaign() {
         New Email Campaign
       </Typography>
 
-      <Typography style={{ textAlign: "center", margin: "15px 300px 30px" }}>
+      <Typography style={{ textAlign: "center", margin: 'auto', paddingBottom: '30px', width: '80%' }}>
         AS OF 11/16/21 @ 4:40 PM - this page allows a user to BUILD THE SENDABLE
         EMAIL ATTRIBUTES - Campaign title (not sent - just for admin side),
         email subject line, and email subject preview text
