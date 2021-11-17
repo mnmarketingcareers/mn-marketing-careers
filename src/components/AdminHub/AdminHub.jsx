@@ -101,15 +101,14 @@ const AdminHub = () => {
 
   return (
     <div className="adminHubPage">
-      <Typography style={{fontSize: '40px', margin: 30, paddingBottom: '60px'}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
+      <Typography style={{fontSize: '40px', marginTop: "30px"}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
 
       <Container className="adminContainer" style={{textAlign: "center"}}>
-<br />
       <Button style={{margin: '5px'}}  variant="contained" size="large" color="primary" onClick={() =>  history.push('/emailtemplate')}>CREATE CAMPAIGN</Button>
             {/* <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button> */}
 <br />
 
-        <div className="gridWrapper">
+        <div style={{marginTop: '20px'}} className="gridWrapper">
           
         <div className="gridL"><NewSubmissions /></div>
         <div className="gridR"><NewPostingsReady /></div>

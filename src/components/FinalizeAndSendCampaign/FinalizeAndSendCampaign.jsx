@@ -26,11 +26,11 @@ function Campaign() {
 
 
   // this is the function that SENDS the email
-  const sendEmailNow = () => {
-    console.log("in send email now! LOOK OUT BELOOWWWWW");
+  const sendEmailNow = (campaignId) => {
+    console.log("in send email now! Campaign Id:", campaignId);
     dispatch({
       type: "SEND_EMAIL_NOW",
-      payload: { campaign_id: "83c885d177" }, //FIX - need to get this from the SAVED campaign
+      payload: { campaign_id: campaignId },
     });
   };
 
@@ -101,7 +101,7 @@ function Campaign() {
           variant="contained"
           color="success"
           size="large"
-          onClick={() => sendEmailNow()}
+          onClick={() => sendEmailNow(activeCampaign.id)}
         >
           SEND
         </Button>

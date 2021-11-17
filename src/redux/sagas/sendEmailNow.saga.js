@@ -10,7 +10,7 @@ function* pushEmail(action) {
             url: "/api/campaign/send", 
             data: action.payload
         });
-        // yield put({ type: "GET_SUBS" }); //FIX //IMPORTANT
+        // yield put({ type: "GET_SUBS" }); //FIX //IMPORTANT???????????????????
     } catch (error) {
         console.log("error in create campaign saga", error)
     };
