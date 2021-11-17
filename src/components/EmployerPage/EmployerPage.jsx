@@ -165,7 +165,7 @@ function EmployerPage() {
     const names = [
         {
             order: 1,
-            field: ' Account Management'
+            field: 'Account Management'
         },
         {
             order: 2,
