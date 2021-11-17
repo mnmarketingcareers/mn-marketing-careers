@@ -15,7 +15,8 @@ function JobPostingIssuesPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const { jobId } = useParams();
+    const allParams = useParams();
+    const jobId = allParams.id;
 
     // TODO incorporate useParams?
     // handle main page job issue trigger (useffect to trigger it?)
@@ -43,6 +44,7 @@ function JobPostingIssuesPage() {
     
     // get by ID route in job postings router
     const job = useSelector(store => store.setJobsReducer);
+    
 
     //will I need a new saga/reducer for this dispatch? POST route?
     const handleSubmit = (event) => {
@@ -58,7 +60,7 @@ function JobPostingIssuesPage() {
 
     // useEffect to trigger dispatches to fetch jobs on page load
     useEffect(() => {
-        dispatch({ type: 'FETCH_MAIN_JOBS' }); 
+        dispatch({ type: 'FETCH_MAIN_JOBS', payload: { id: jobId } }); 
     }, [])
 
   // switch statment function for different radio button selection options
@@ -100,6 +102,7 @@ function JobPostingIssuesPage() {
       </div>
       <div className="jobinquestion">
         <h2>Posting in Question: ...append marked job here</h2>
+        <p>{job.available_role}</p>
       </div>
       <div className="issueform">
         <FormControl component="fieldset">

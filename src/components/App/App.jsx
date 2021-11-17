@@ -202,7 +202,7 @@ function App() {
 
           <Route
             exact
-            path="/jobpostingissue/:jobId"
+            path="/jobpostingissue/:id"
           >
             <JobPostingIssuesPage />
           </Route>

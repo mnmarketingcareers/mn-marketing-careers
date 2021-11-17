@@ -45,14 +45,14 @@ function Main() {
        <a href="`${link}`"/>
 
     }
-
-    // useparams history.push
-    const toIssuePage = (jobId) => {
-        history.push(`/jobpostingissue/${jobId}`)
-    }
-
     
     const rows = useSelector((store) => store.setJobsReducer);
+
+    // useparams history.push
+    const toIssuePage = (id) => {
+        history.push(`/jobpostingissue/${id}`)
+    }
+
 
 // The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
 
@@ -68,7 +68,8 @@ function Main() {
                                                 return <button><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
                                             }
                                             }},
-        { field: 'array_agg', headName: 'array_agg', width: 350, renderCell: (params) => { 
+        { field: 'array_agg', headName: 'array_agg', width: 350 },
+        { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
             return  <Button variant="contained" color="primary" size="small" onClick={toIssuePage}> Report Issue </Button>   
         }},
     ];                                                                               
