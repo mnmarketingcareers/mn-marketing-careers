@@ -46,11 +46,6 @@ function Main() {
 
     }
     
-    
-    
-
-    //check what's in this reducer
-    console.log('what is in setJobsReducer', rows);
 
     // useparams history.push
     const toIssuePage = (rowId) => {

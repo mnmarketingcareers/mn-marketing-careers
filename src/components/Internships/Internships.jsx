@@ -10,9 +10,16 @@ function Internships() {
 
     const dispatch = useDispatch();
 
-    const rows = useSelector((store) => store.setInternshipsReducer); 
+    const rows = useSelector((store) => store.setInternshipsReducer);
 
- 
+    console.log('whats in setInternships reducer', rows);
+    
+    const history = useHistory();
+
+    // useparams history.push
+    const toIssuePage = (rowId) => {
+        history.push(`/jobpostingissue/${rowId}`)
+    }
 
     const columns = [
         { field: 'company_name', headerName: 'Company', width: 150 },
@@ -27,6 +34,10 @@ function Internships() {
                                             }
                                             }},
         { field: 'job type', headName: 'Job Field', width: 350},
+        { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
+            return  <Button variant="contained" color="primary" size="small" 
+            onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>  
+        }},
     ];                                                                 
 
     useEffect(() => {
