@@ -3,12 +3,8 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* fetchJobs()  {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
     const approvedJobs = yield axios.get("/api/job");
-    yield put({ type: "SET_JOBS", payload: approvedJobs.data}, config);
+    yield put({ type: "SET_JOBS", payload: approvedJobs.data});
   } catch (error) {
     console.log("Failure to GET all approved jobs", error);
   }
@@ -16,11 +12,7 @@ function* fetchJobs()  {
 
 function* fetchRemoteJobs(){
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
-    const approvedRemoteJobs = yield axios.get("/api/search/", config);
+    const approvedRemoteJobs = yield axios.get("/api/search/");
     yield put({ type: "SET_REMOTE_JOBS", payload: approvedRemoteJobs.data})
   } catch (error){
     console.log("Error in GET Remote Jobs", error);
@@ -29,11 +21,7 @@ function* fetchRemoteJobs(){
 
 function* fetchInternships(){
   try{
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
-    const approvedInternships = yield axios.get("/api/search/internships", config);
+    const approvedInternships = yield axios.get("/api/search/internships");
     console.log('approvedInternships is', approvedInternships);
     yield put({ type: "SET_INTERNSHIPS", payload: approvedInternships.data})
   } catch (error){
@@ -43,12 +31,8 @@ function* fetchInternships(){
 
 function* fetchJobsByAge(action) {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
     const age = action.payload.age;
-    const jobsByAgeResponse = yield axios.get(`/api/recentjob/${age}`, config);
+    const jobsByAgeResponse = yield axios.get(`/api/recentjob/${age}`);
     console.log("jobs by age", age, "response", jobsByAgeResponse.data);
     yield put({ type: 'SET_RECENT_JOBS', payload: jobsByAgeResponse.data})
   } catch (error) {

@@ -1,12 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const {
-  rejectUnauthenticated,
-} = require('../modules/authentication-middleware');
+// const {
+//   rejectUnauthenticated,
+// } = require('../modules/authentication-middleware');
 
 // GET jobs with Remote field as 'Yes' or 'Other'...
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
   console.log('In GET for all remote and hybrid job postings');
   const query = `
                   SELECT "jp"."id", "available_role", "description", "application_link", 
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET jobs with the job type of 'Internship'.
-router.get('/internships', async (req, res) => {
+router.get('/internships', (req, res) => {
   console.log('In GET for all internships');
   const query = `
       SELECT "jp"."id", "available_role", "description", "application_link", 

@@ -49,6 +49,7 @@ function Main() {
 
 
     const rows = useSelector((store) => store.setJobsReducer);
+    const recentJobs = useSelector(store => store.setRecentJobs);
 
     // The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
 
@@ -73,6 +74,9 @@ function Main() {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
 
+    const fetchRecentJobs = () => {
+        dispatch({ type: 'FETCH_RECENT_JOBS', payload: {age: '3'} })
+    }
 
     return (
         <>
@@ -106,9 +110,12 @@ function Main() {
                 {openModal ? <p></p> : 
                     <>
                     <span>See jobs posted within the last</span>
-                    <button onClick={ () => dispatch({ type: 'FETCH_RECENT_JOBS', payload: {age: 3} })}>
+                    <button onClick={fetchRecentJobs}>
                         3 days
                     </button>
+                    <ul>
+                        <li>{JSON.stringify(recentJobs)}</li>
+                    </ul>
                     </>
                 }
                 {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}
