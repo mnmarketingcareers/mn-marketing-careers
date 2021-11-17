@@ -46,7 +46,7 @@ const useStyles = makeStyles(
       width: "90%",
       display: "block",
       margin: "auto",
-      jusitfyContent: "center",
+      justifyContent: "center",
       textAlign: "center",
     },
 
@@ -77,6 +77,35 @@ const useStyles = makeStyles(
       margin: "18px 0 40px",
 
     },
+
+    //-------------Template (admin email template page)-------------//
+
+
+    templatePageContainer: {
+      justifyContent: 'center',
+      textAlign: 'center'
+    },
+
+    templatePaperContainer: {
+      width: "90%",
+      display: "block",
+      margin: "auto",
+      justifyContent: "center",
+      textAlign: "center",
+    },
+
+    templateIdTextField: {
+      width: "40%",
+      margin: "12px 0",
+    },
+
+
+    templateNameField: {
+      width: "80%",
+      margin: "12px 0",
+    },
+
+
   },
   { index: 1 }
 );
