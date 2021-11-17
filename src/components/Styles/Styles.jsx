@@ -112,6 +112,13 @@ const useStyles = makeStyles(
       margin: "24px 0 12px",
     },
 
+    //-------------EMAIL CONFIRM PAGE (final before send)-------------//
+
+
+    emailConfirmText: {
+      fontSize: '20px',
+    }
+
 
   },
   { index: 1 }

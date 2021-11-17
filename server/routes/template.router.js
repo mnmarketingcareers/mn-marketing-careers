@@ -26,7 +26,7 @@ client.setConfig({
 router.get('/', (req, res) => {
   const response = client.templates.list()
   .then((response) => {
-    console.log('inside get templates response:', response)
+    // console.log('inside get templates response:', response)
     res.send(response);
   })
   .catch((error) => {
@@ -75,7 +75,7 @@ router.get('/', (req, res) => {
 
   .then((response) => {
     console.log('response from TEMPLATE POST is:', response);
-    res.send(response);
+    res.sendStatus(200);
   })
   .catch((error) => {
     res.sendStatus(500);
@@ -115,7 +115,7 @@ router.get('/', (req, res) => {
   })
   .then((response) => {
     console.log('response from TEMPLATE PATCH is:', response);
-    res.send(response);
+    res.sendStatus(200);
   })
   .catch((error) => {
     res.sendStatus(500);

@@ -1,33 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import {
   Typography,
   Button,
   Paper,
   TextField,
-  Checkbox,
   FormControlLabel,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  Box,
 } from "@mui/material";
 import useStyles from "../Styles/Styles";
 
 const EmailTemplate = () => {
+  const history = useHistory();
   const templateList = useSelector((store) => store.setTemplatesReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [newOrMod, setNewOrMod] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [templateId, setTemplateId] = useState("");
   const [templateName, setTemplateName] = useState("");
   const [templateBodyText, setTemplateBodyText] = useState("");
 
   useEffect(() => {
-    // setIsLoading(true);
     dispatch({ type: "GET_TEMPLATES" }); //get all existing template IDs to choose from!
   }, []);
 
@@ -56,7 +54,8 @@ const EmailTemplate = () => {
           html: bodyToSubmit,
         },
       });
-    }
+    };
+    history.push('/campaign')
   };
 
   const handleSelectTemplateId = (event) => {
@@ -111,7 +110,7 @@ const EmailTemplate = () => {
             <></>
           ) : (
             <FormControl required style={{ width: "50%" }}>
-              <InputLabel id="template-id-select-label">Template</InputLabel>
+              <InputLabel id="template-id-select-label">Select Template</InputLabel>
 
               <Select
                 className={classes.templateIdSelect}
@@ -138,7 +137,7 @@ const EmailTemplate = () => {
             className={classes.templateNameField}
             onChange={() => setTemplateName(event.target.value)}
             id="template-name"
-            label="New Template Name (optional)"
+            label="New Template Name"
             size="small"
             value={templateName}
             variant="outlined"

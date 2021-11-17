@@ -10,7 +10,7 @@ function* postNewTemplate(action) {
             url: "/api/template/", 
             data: action.payload
         });
-        yield put({ type: "SET_TEMPLATES_LIST" });
+        yield put({ type: "GET_TEMPLATES" });
     } catch (error) {
         console.log("error in posting new template to Mailchimp", error)
     };

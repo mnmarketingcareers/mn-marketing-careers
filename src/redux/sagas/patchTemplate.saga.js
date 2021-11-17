@@ -10,7 +10,7 @@ function* patchTemplate(action) {
             url: "/api/template/", 
             data: action.payload
         });
-        yield put({ type: "SET_TEMPLATES_LIST" }); 
+        yield put({ type: "GET_TEMPLATES" }); 
     } catch (error) {
         console.log("error PATCHING old template in MailChimp", error)
     };

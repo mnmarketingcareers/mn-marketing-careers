@@ -94,20 +94,20 @@ const AdminHub = () => {
   }
 
 
-  const navToCreateCampaignPage = () => {
-      history.push('/campaign')
-  }
 
-  const navToCreateTemplatePage = () => {
-    history.push('/emailtemplate')
-  }
+  // const navToCreateTemplatePage = () => {
+  //   history.push('/emailtemplate')
+  // }
 
   return (
     <div className="adminHubPage">
-      <Typography style={{fontSize: '40px', margin: 30}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
+      <Typography style={{fontSize: '40px', margin: 30, paddingBottom: '60px'}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
 
-      <Container className="adminContainer">
-      
+      <Container className="adminContainer" style={{textAlign: "center"}}>
+<br />
+      <Button style={{margin: '5px'}}  variant="contained" size="large" color="primary" onClick={() =>  history.push('/emailtemplate')}>CREATE CAMPAIGN</Button>
+            {/* <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button> */}
+<br />
 
         <div className="gridWrapper">
           
@@ -160,8 +160,6 @@ const AdminHub = () => {
               <Button style={{margin: '10px'}} className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
             </form>
 <br />
-            <Button style={{margin: '5px'}}  variant="outlined" onClick={() => navToCreateCampaignPage()}>Create Campaign</Button>
-            <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button>
 
           </div>
 

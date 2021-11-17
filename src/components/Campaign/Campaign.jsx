@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import {
   Typography,
   Button,
@@ -16,13 +17,16 @@ import {
 import useStyles from "../Styles/Styles";
 
 function Campaign() {
+  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   // const user = useSelector((store) => store.user);
-  const subs = useSelector((store) => store.setSubsListReducer); //incoming full subs list from redux /mailchimp
   const templateList = useSelector((store) => store.setTemplatesReducer); //incoming full templates list from redux /mailchimp
 
   const [subList, setSubList] = useState([]); //to set state of subs
+
+  const [newOrMod, setNewOrMod] = useState(""); //set if user wants to use a new or old campaign
+
 
   //states for fields
   const [templateId, setTemplateId] = useState(""); //updated
@@ -34,10 +38,8 @@ function Campaign() {
   const [emailArray, setEmailArray] = useState([]);
 
   useEffect(() => {
-    dispatch({ type: "GET_SUBS" });
     dispatch({ type: "GET_TEMPLATES" }); //get all existing template IDs to choose from!
-    setSubList(subs.data);
-    console.log("subList is:", subList);
+    dispatch({ type: "GET_CAMPAIGNS" });
   }, []);
 
   const toggleCheckBox = (event) => {
@@ -47,11 +49,7 @@ function Campaign() {
 
   //this function creates and SAVES an email
   const handleCreateCampaign = () => {
-    // setEmailArray([]);
-    // for (let email of subs[0]) {
-    //   emailArray.push({name: email.full_name, mail: email.email_address});
-    //   emailArray.push(email.email_address); //deletelater ???
-    // }
+   
     console.log("subs email array:", emailArray);
     console.log("Number of recipients:", emailArray.length);
     console.log('Template ID:', parseInt(templateId)); //updated
@@ -59,7 +57,7 @@ function Campaign() {
     console.log("Subject:", campaignSubject);
     console.log("Preview Text:", campaignPreviewText);
     console.log("Footer?:", footerChecked);
-    console.log("Recipients?:", subs[0]);
+    // console.log("Recipients?:", subs[0]);
 
     dispatch({
       type: "CREATE_CAMPAIGN",
@@ -71,54 +69,37 @@ function Campaign() {
         title: campaignTitle,
         subject_line: campaignSubject,
         preview_text: campaignPreviewText,
-        // footer: footerChecked,
-        recipients: subs[0],
+        footer: false,
+
       },
     });
+    history.push('/finalizeandsendcampaign')
+
   };
 
   const clearInputs = () => {
-    setTemplateId(""); //updated
+    setNewOrMod("");
+    setTemplateId("");
     setCampaignTitle("");
     setCampaignSubject("");
     setCampaignPreviewText("");
     setCampaignBodyText("");
   };
 
-  // this function is part of the ternary operator that makes a button appear if all fields are filled out
-  // if any field is blank, this green SEND button does not show up
-  const sendEmailButton = () => {
-    return (
-      <Button
-        style={{ margin: "6px" }}
-        variant="contained"
-        color="success"
-        onClick={() => sendEmailNow()}
-      >
-        SEND
-      </Button>
-    );
-  };
-
-  // this is the function that SENDS the email
-  const sendEmailNow = () => {
-    console.log("in send email now! LOOK OUT BELOOWWWWW");
-    dispatch({
-      type: "SEND_EMAIL_NOW",
-      payload: { campaign_id: "83c885d177" }, //FIX - need to get this from the SAVED campaign
-    });
-  };
-
-  //fix
-  const getCampaigns = () => {
-    console.log("in getCampaigns function");
-    dispatch({ type: "GET_CAMPAIGN" });
-  };
 
 
   const handleSelectTemplateId = (event) => {
     console.log("selected template id:", event.target.value);
     setTemplateId(event.target.value);
+  };
+
+  const handleSelectCampaignId = () => {
+    console.log("selected campaign id:", event.target.value)
+  }
+
+  const handleSelectNewOrMod = (event) => {
+    console.log("user has chosen", event.target.value);
+    setNewOrMod(event.target.value);
   };
 
 
@@ -133,11 +114,6 @@ function Campaign() {
         New Email Campaign
       </Typography>
 
-      <Typography style={{ textAlign: "center", margin: 'auto', paddingBottom: '30px', width: '80%' }}>
-        AS OF 11/16/21 @ 4:40 PM - this page allows a user to BUILD THE SENDABLE
-        EMAIL ATTRIBUTES - Campaign title (not sent - just for admin side),
-        email subject line, and email subject preview text
-      </Typography>
 
       <Paper className={classes.campaignPaperContainer} elevation={6}>
         {/* <Typography variant="h6" style={{ margin: "10px 50px" }}>
@@ -147,8 +123,58 @@ function Campaign() {
         </Typography> */}
         <form onSubmit={() => handleCreateCampaign()}>
 
+{/* 
+        <FormControl required style={{ width: "30%" }}>
+            <InputLabel id="new-or-mod-campaign-label">Select</InputLabel>
+
+            <Select
+              className={classes.newOrModCampaignSelect}
+              labelId="new-or-mod-campaign-label"
+              id="campaign-id-select"
+              label="Select"
+              value={newOrMod}
+              onChange={handleSelectNewOrMod}
+            >
+              <MenuItem value={"new"}>New Campaign</MenuItem>
+              <MenuItem value={"mod"}>Modify Campaign</MenuItem>
+            </Select>
+          </FormControl> */}
+
+          <br />
+
+          {newOrMod === "new" || newOrMod === "" ? (
+            <></>
+          ) : (
+        <FormControl required style={{ width: "50%" }}
+        //important DROPDOWN OF CAMPAIGNS
+        >
+              <InputLabel id="template-id-select-label">Select Campaign</InputLabel>
+
+              <Select
+                className={classes.templateIdSelect}
+                labelId="template-id-select-label"
+                id="template-id-select"
+                label="template"
+                value={templateId}
+                onChange={handleSelectCampaignId}
+              >
+                {templateList.length > 0 ? (//IMPORTANT MAP LIST OF CAMPAIGNS!
+                  templateList[0].map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.name}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <img src="./images/Pendulum.gif" />
+                )}
+              </Select>
+            </FormControl>
+          )}
+            <br/><br />
+
+
         <FormControl required style={{ width: "50%" }}>
-              <InputLabel id="template-id-select-label">Template</InputLabel>
+              <InputLabel id="template-id-select-label">Select Template</InputLabel>
 
               <Select
                 className={classes.templateIdSelect}
@@ -226,9 +252,12 @@ function Campaign() {
           </div>
           <div>
             <Button style={{ margin: "6px" }} variant="contained" type="submit">
-              SAVE
+              SAVE & NEXT
             </Button>
 
+
+           
+{/* 
             {templateId &&
             campaignTitle &&
             campaignSubject &&
@@ -236,7 +265,9 @@ function Campaign() {
               sendEmailButton()
             ) : (
               <></>
-            )}
+            )} */}
+
+
 
             <Button
               style={{ margin: "6px" }}
@@ -249,28 +280,11 @@ function Campaign() {
             <br />
             <br />
 
-        
-        {/* //-------------DEV SECTION BELOW (DELETE LATER)----------------// */}
-
-
-
-            <Button
-              //important this button is strictly for developer aid
-              style={{ margin: "6px" }}
-              variant="contained"
-              color="secondary"
-              onClick={() => getCampaigns()}
-            >
-              TEMP - GET CAMPAIGN LIST <br />
-              (terminal only)
-            </Button>
           </div>
         </form>
       </Paper>
-      {/* {JSON.stringify(subs[0][0].email_address)} */}
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
 export default Campaign;
