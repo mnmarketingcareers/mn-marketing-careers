@@ -6,13 +6,13 @@ function* patchTemplate(action) {
     try {
         console.log("action.payload in PATCH TEMPLATE saga is:", action.payload)
         yield axios({
-            method: "post",  //updated from patch
-            url: "/api/template", 
+            method: "patch",  
+            url: "/api/template/", 
             data: action.payload
         });
-        // yield put({ type: "GET_SUBS" });
+        yield put({ type: "SET_TEMPLATES_LIST" }); 
     } catch (error) {
-        console.log("error in sending new subscriber to mailchimp!", error)
+        console.log("error PATCHING old template in MailChimp", error)
     };
 };
 

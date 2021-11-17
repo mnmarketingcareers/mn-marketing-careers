@@ -99,15 +99,17 @@ const useStyles = makeStyles(
       textAlign: "center",
     },
 
-    templateIdTextField: {
-      width: "40%",
-      margin: "12px 0",
+    newOrModSelect: {
+    },
+
+    templateIdSelect: {
+
     },
 
 
     templateNameField: {
       width: "80%",
-      margin: "12px 0",
+      margin: "24px 0 12px",
     },
 
 
