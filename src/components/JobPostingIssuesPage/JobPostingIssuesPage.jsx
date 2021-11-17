@@ -10,6 +10,7 @@ import FormLabel from "@mui/material/FormLabel";
 import { TextField } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import axios from "axios";
+import JobIssuesItem from "./JobIssuesItem";
 
 function JobPostingIssuesPage() {
     const history = useHistory();
@@ -17,6 +18,14 @@ function JobPostingIssuesPage() {
 
     const allParams = useParams();
     const jobId = allParams.id;
+
+    const [issue, setIssue] = useState({
+        job_posting_id: jobId,
+        comment: '',
+        issue_type: '',
+        is_resolved: 'FALSE',
+        issues_email: ''
+    })
 
     // TODO incorporate useParams?
     // handle main page job issue trigger (useffect to trigger it?)
@@ -36,14 +45,12 @@ function JobPostingIssuesPage() {
     // TODO figuring out the correct payload for the post is tricky
     // issue_type vs a comment?
     // who's email are we adding, the person who raised the issue?
-    const [issue, setIssue] = useState({
-        comment: '',
-        issue_type: '',
-        issues_email: ''
-    })
+    
     
     // get by ID route in job postings router
     const job = useSelector(store => store.setJobsReducer);
+
+    console.log('whats in setJobsReducer in job issue page', job);
     
 
     //will I need a new saga/reducer for this dispatch? POST route?
@@ -52,10 +59,10 @@ function JobPostingIssuesPage() {
         console.log('the event is', event);
         dispatch({
             type: 'ADD_JOB_ISSUE',
-            payload: issue,
+            payload: issue, jobId
         });
         alert('Thank you for your feedback!');
-        history.push('/main');
+        //history.push('/main');
   };
 
     // useEffect to trigger dispatches to fetch jobs on page load
@@ -68,11 +75,11 @@ function JobPostingIssuesPage() {
     console.log('inside radio button', event.target.value);
     switch (event.target.value) {
       case 'This Position is No Longer Available':
-        setReason({ ...reason, reason: event.target.value });
+        setIssue({ ...issue, issue_type: event.target.value });
       case 'Issue With the Job Listing Website':
-        setReason({ ...reason, reason: event.target.value });
+        setIssue({ ...issue, issue_type: event.target.value });
       case 'Content Not Relevant To My Search':
-        setReason({ ...reason, reason: event.target.value });
+        setIssue({ ...issue, issue_type: event.target.value });
       default:
         return event;
     }
@@ -81,8 +88,13 @@ function JobPostingIssuesPage() {
 
   const textFieldValue = (event) => {
     console.log('inside text field', event.target.value);
-    setReason({ ...reason, message: event.target.value });
+    setIssue({ ...issue, comment: event.target.value });
   };
+
+  const emailTextFieldValue = (event) => {
+    console.log('inside email text field', event.target.value);
+    setIssue({...issue, issues_email: event.target.value});
+  }
 
   // if an unsubscriber selects the "other option"
   // we want to toggle from true to false for the ternerary operator
@@ -91,19 +103,19 @@ function JobPostingIssuesPage() {
   // this changeState function is called in the click action firing the "other" radio button
   const changeState = () => {
     setToggleOther(!toggleOther);
-    setReason({ ...reason, reason: 'other' });
+    setIssue({ ...issue, issue_type: 'other' });
   };
 
-
+  // I may need to map through jobs to get this to appear on the dom, child component and props might be needed
     return (
         <>
       <div className="issueheader">
         <h2>Hit a Snag Applying? Let Us Know What's Going On</h2>
       </div>
       <div className="jobinquestion">
-        <h2>Posting in Question: ...append marked job here</h2>
-        { JSON.stringify(allParams) }
-        <p>{job.available_role}</p>
+        {job.map((jobIssue) => {
+            return(<JobIssuesItem key={jobIssue.id} jobIssue={jobIssue}/>)
+        })}
       </div>
       <div className="issueform">
         <FormControl component="fieldset">
@@ -150,6 +162,12 @@ function JobPostingIssuesPage() {
                 />
               </div>
             )}
+            <TextField
+                  id="standard-basic"
+                  label="Please Confirm Your Email"
+                  variant="standard"
+                  onChange={emailTextFieldValue}
+                />
           </RadioGroup>
           <div className="unsub-submit-div">
             <input
