@@ -47,10 +47,14 @@ function Main() {
     }
     
     const rows = useSelector((store) => store.setJobsReducer);
+    
+
+    //check what's in this reducer
+    console.log('what is in setJobsReducer', rows);
 
     // useparams history.push
-    const toIssuePage = (id) => {
-        history.push(`/jobpostingissue/${id}`)
+    const toIssuePage = (rowId) => {
+        history.push(`/jobpostingissue/${rowId}`)
     }
 
 
@@ -70,7 +74,8 @@ function Main() {
                                             }},
         { field: 'array_agg', headName: 'array_agg', width: 350 },
         { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
-            return  <Button variant="contained" color="primary" size="small" onClick={toIssuePage}> Report Issue </Button>   
+            return  <Button variant="contained" color="primary" size="small" 
+            onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>  
         }},
     ];                                                                               
 

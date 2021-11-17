@@ -102,6 +102,7 @@ function JobPostingIssuesPage() {
       </div>
       <div className="jobinquestion">
         <h2>Posting in Question: ...append marked job here</h2>
+        { JSON.stringify(allParams) }
         <p>{job.available_role}</p>
       </div>
       <div className="issueform">
