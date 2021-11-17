@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { Typography, Container, Button, Paper, TextField, IconButton } from "@mui/material";
 import Table from "@mui/material/Table";
@@ -10,11 +11,14 @@ import TableRow from "@mui/material/TableRow";
 
 import ToggleOffIcon from '@mui/icons-material/ToggleOff'; 
 
+import NewPostingsReady from "../NewJobOpeningsReadyAlert/NewJobOpeningsReadyAlert";
+import NewSubmissions from "../NewSubmissionsAlert/NewSubmissionsAlert";
 import useStyles from "../Styles/Styles"; //important paste this
 
 import "./AdminHub.css";
 
 const AdminHub = () => {
+  const history = useHistory();
   const classes = useStyles(); //important paste this
   const dispatch = useDispatch();
   const subs = useSelector((store) => store.setSubsListReducer);
@@ -89,12 +93,27 @@ const AdminHub = () => {
     })
   }
 
+
+  const navToCreateCampaignPage = () => {
+      history.push('/campaign')
+  }
+
+  const navToCreateTemplatePage = () => {
+    history.push('/emailtemplate')
+  }
+
   return (
     <div className="adminHubPage">
       <Typography style={{fontSize: '40px', margin: 30}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
 
       <Container className="adminContainer">
+      
+
         <div className="gridWrapper">
+          
+        <div className="gridL"><NewSubmissions /></div>
+        <div className="gridR"><NewPostingsReady /></div>
+
           <div className="gridL">
             <Typography variant="h4">Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
@@ -138,8 +157,12 @@ const AdminHub = () => {
                 onChange={(event) => setUserZip(event.target.value)}
               />
               <br />
-              <Button className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
+              <Button style={{margin: '10px'}} className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
             </form>
+<br />
+            <Button style={{margin: '5px'}}  variant="outlined" onClick={() => navToCreateCampaignPage()}>Create Campaign</Button>
+            <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button>
+
           </div>
 
           <div className="gridR">

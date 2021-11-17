@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import './ApproveSubmissions.css';
 import PostingsList from './PostingsList';
 import ReadyToPost from '../PeadyToPostList/ReadyToPostList';
 import { 
@@ -32,13 +33,15 @@ function ApproveSubmissions() {
     const showJobPosting = postingsList ? true : false;
 
     return(
-        <div>
-            <h1>Review Job Postings</h1>
+        <div className="pending-jobs-container">
+            <h1>Review Job Openings</h1>
             
             <ReadyToPost />
             {/* <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
             {/* {JSON.stringify(postingsList)} */}
-            <h2>These job postings were submitted by employers and await your APPROVAL</h2>
+            <h2>These job openings were submitted by employers and await your APPROVAL</h2>
+            <p><b>NOTE:</b> Clicking "APPROVE" will <b>not</b> post job openings to the main list right away. They will simply be ready and waiting to go live when you click the "GO LIVE" button.</p>
+            <p>Clicking "DENY" will permanently delete the request to post a job opening.</p>
             {!showJobPosting && <CircularProgress />}
             {showJobPosting &&
             (<TableContainer component={Paper}>
@@ -50,6 +53,7 @@ function ApproveSubmissions() {
                             <TableCell>Description</TableCell>
                             <TableCell>Link</TableCell>
                             <TableCell>Job Location</TableCell>
+                            <TableCell>Job Type</TableCell>
                             <TableCell>Remote?</TableCell>
                             <TableCell>Application Contact info</TableCell>
                             <TableCell>Date Created</TableCell>

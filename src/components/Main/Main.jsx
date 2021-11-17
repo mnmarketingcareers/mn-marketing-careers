@@ -18,13 +18,13 @@ import { useState, useEffect } from 'react';
 // import MenuItem from '@mui/material/MenuItem';
 // import ListItemText from '@mui/material/ListItemText';
 // import Select from '@mui/material/Select';
-import { Button } from '@material-ui/core';
-import { GridRenderCellParams } from '@mui/x-data-grid';
+import Button from '@mui/material/Button';
 import Modal from "../Modal/Modal.jsx";
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
+import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel, Link } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import './Main.css';
-import  RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
+import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
+import Internships from '../Internships/Internships.jsx';
 
 
 function Main() {
@@ -41,12 +41,12 @@ function Main() {
     const testApply = (event) => {
         console.log('in button, what is event.target.params', event.target.params);
         console.log('in button, what is params', event.target.params);
-       const link = event.target.value ;
-       <a href="`${link}`"/>
+        const link = event.target.value;
+        <a href="`${link}`" />
 
     }
     
-    const rows = useSelector((store) => store.setJobsReducer);
+    
     
 
     //check what's in this reducer
@@ -58,7 +58,12 @@ function Main() {
     }
 
 
-// The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
+
+
+    const rows = useSelector((store) => store.setJobsReducer);
+    const recentJobs = useSelector(store => store.setRecentJobs);
+
+    // The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
 
     const columns = [
         { field: 'company_name', headerName: 'company', width: 150 },
@@ -79,14 +84,14 @@ function Main() {
         }},
     ];                                                                               
 
-    // useEffect(() => {
-    const grabData = (event) => {
+    useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
+    }, []);
 
+    const fetchRecentJobs = () => {
+        dispatch({ type: 'FETCH_RECENT_JOBS', payload: {age: '3'} })
     }
-    // }, []);
-
-    // call toIssuePage within grid?
+    
     return (
         <>
             <div className="parent">
@@ -98,8 +103,8 @@ function Main() {
                         and apply directly through the hiring company unless otherwise noted.
                     </div>
                 </div>
-                <p>{JSON.stringify(rows)}</p>
-                <button onClick={grabData}>Test</button>
+                {/* <p>{JSON.stringify(rows)}</p>
+                <button onClick={grabData}>Test</button> */}
                 {openModal && <Modal closeModal={setOpenModal} />}
             </div>
             <div className="tables-container">
@@ -113,24 +118,39 @@ function Main() {
                 </div>
                 <div className="submit">
                     Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button>
-                    <div className="top-of-table"><h2>Companies Hiring</h2></div>
-                    {openModal ? <p></p> : 
-                      
-                        
-                      <div style={{ height: 600, width: '100%' }}>
-                      <DataGrid
-                        rows={rows}
-                        columns={columns}
-                        pageSize={8}
-                        rowsPerPageOptions={[8]}
-                        checkboxSelection
-                        disableSelectionOnClick
-                      />
+                    <div className="top-of-table"><h2>Companies Hiring</h2>
+                </div>
+
+                {openModal ? <p></p> : 
+                    <>
+                    <span>See jobs posted within the last</span>
+                    <button onClick={fetchRecentJobs}>
+                        3 days
+                    </button>
+                    <ul>
+                        <li>{JSON.stringify(recentJobs)}</li>
+                    </ul>
+                    </>
+                }
+                {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}
+                {openModal ? <p></p> :
+                    <div style={{ height: 500, width: '100%' }}>
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            pageSize={8}
+                            rowsPerPageOptions={[8]}
+                            checkboxSelection
+                            disableSelectionOnClick
+                        />
                     </div>
-                    }
+                }
+                {openModal ? <p></p> :
                     <div className="top-of-table"><h2>Remote Opportunities</h2></div>
-                    <RemoteJobs />
+                }
+                {openModal ? <p></p> : <RemoteJobs />}
                     <div className="top-of-table"><h2>Internships</h2></div>
+                {openModal ? <p></p> : <Internships />}
                 </div>
             </div>
         </>

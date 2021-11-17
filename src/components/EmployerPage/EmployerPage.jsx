@@ -22,6 +22,18 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+// Snackbar button
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+
+import ShareOurApp from "../ShareOurApp/ShareOurApp.jsx";
+import Container from '@mui/material/Container';
+
+
 
 
 import './EmployerPage.css';
@@ -36,14 +48,18 @@ function EmployerPage() {
 
     const changeState = () => {
         setToggleOther(!toggleOther)
-    }
+    };
 
     // On the question: "Can we share contact person?"; toggles the input fields necessary to add person's contact info.
     const [toggleContact, setToggleContact] = useState(true);
 
     const changeContactView = () => {
         setToggleContact(!toggleContact)
-    }
+    };
+
+    // Success Button toggle
+
+    const [open, setOpen] = useState(false);
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
     const [jobPostingsTable, setJobPostingsTable] = useState({
@@ -67,28 +83,57 @@ function EmployerPage() {
 
     const submitEmployerJob = (event) => {
         event.preventDefault();
-        console.log('what is jobPostingsTable', jobPostingsTable)
         dispatch({
             type: 'NEW_EMPLOYER_JOB_POST',
             payload: jobPostingsTable
-        })
+        });
+        setOpen(true); setTimeout(() => {
+           history.push('/main')
+        }, 1000);
+    };
 
-    }
+
+// For the Snackbar button when Submit is pressed.
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+// For the Snackbar button when Submit is pressed.
+    const action = (
+        <React.Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+                UNDO
+            </Button>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </React.Fragment>
+    );
+
+    // For the Snackbar button when Submit is pressed.
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
 
 
 
     const setValues = (propertyName) => (event) => {
-        console.log('what is propertyName', propertyName);
-        console.log('what is event.target.value', event.target.value);
         setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value });
-        // setToggleOther(true);
     };
 
 
     // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
-        console.log('what is event', event.target.value)
-        console.log('in yes')
         setJobPostingsTable({ ...jobPostingsTable, share_contact: true });
         changeContactView();
     };
@@ -182,9 +227,6 @@ function EmployerPage() {
 
 
     const handleJob = (event) => {
-        console.log('what is event?', event);
-        console.log('what is names?', names);
-        console.log('what is names?', names[0].field);
         const {
             target: { value },
         } = event;
@@ -226,7 +268,7 @@ function EmployerPage() {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">Share</Button>
+                                    <ShareOurApp />
                                     <Button size="small" onClick={toAbout}>Learn More</Button>
                                 </CardActions>
                             </Card>
@@ -407,7 +449,13 @@ function EmployerPage() {
                     <input className="submit-employer-form-button" type='submit' value='Submit' />
                 </form>
             </div>
-
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Job Submitted!
+                    </Alert>
+                </Snackbar>
+            </Stack>
         </>
     );
 }

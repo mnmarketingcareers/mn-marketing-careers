@@ -9,12 +9,12 @@ const {
  * GET route template
  */
 router.get('/', async (req, res) => {
-  console.log('In GET for all recent, approved job postings');
+  console.log('In GET for all non-remote and hybrid job postings');
   const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
-                ARRAY_AGG("jt"."type") 
+                ARRAY_AGG("jt"."type") AS "job type"
                 FROM "job_postings" AS "jp"
                 JOIN "company" AS "co" ON "jp".company_id = "co".id
                 LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
@@ -47,7 +47,7 @@ router.get('/pending', rejectUnauthenticated, (req, res) => {
                 SELECT "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "share_contact", "date_posted", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
-                ARRAY_AGG("jt"."type") 
+                ARRAY_AGG("jt"."type") AS "job type"
                 FROM "job_postings" AS "jp"
                 JOIN "company" AS "co" ON "jp".company_id = "co".id
                 LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
@@ -80,7 +80,7 @@ router.get('/pending', rejectUnauthenticated, (req, res) => {
                 SELECT "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "share_contact", "date_posted", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
-                ARRAY_AGG("jt"."type") 
+                ARRAY_AGG("jt"."type") AS "job type" 
                 FROM "job_postings" AS "jp"
                 JOIN "company" AS "co" ON "jp".company_id = "co".id
                 LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
@@ -115,7 +115,7 @@ router.get('/:id', (req, res) => {
                 SELECT "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
-                ARRAY_AGG("jt"."type") 
+                ARRAY_AGG("jt"."type") AS "job type" 
                 FROM "job_postings" AS "jp"
                 JOIN "company" AS "co" ON "jp".company_id = "co".id
                 LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id

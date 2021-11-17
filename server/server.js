@@ -15,11 +15,14 @@ const feedbackRouter = require('./routes/feedback.router');
 const jobIssuesRouter = require('./routes/job_issues.router');
 
 
+const campaignRouter = require('./routes/campaign.router'); //updated by Mo - work in progress
+const templateRouter = require('./routes/template.router');
 
 // jobs routers
 const jobsRouter = require('./routes/job_postings.router');
 const jobTypesRouter = require('./routes/job_types.router');
 const searchJobsRouter = require('./routes/search_jobs.router');
+const jobsByAgeSearch = require('./routes/posting_age.router');
 
 
 // Body parser middleware
@@ -40,12 +43,16 @@ app.use('/api/feedback', feedbackRouter);
 app.use('/api/jobissues', jobIssuesRouter);
 
 
+app.use('/api/campaign', campaignRouter); //updated by Mo - work in progress
+app.use('/api/template', templateRouter); //updated by Mo - now for mailchimp templates
 
 
 // use the jobs routers
 app.use('/api/job', jobsRouter);
-app.use('/api/jobtypes', jobTypesRouter)
-app.use('/api/search', searchJobsRouter)
+app.use('/api/jobtypes', jobTypesRouter);
+app.use('/api/search', searchJobsRouter);
+app.use('/api/recentjob', jobsByAgeSearch);
+
 // Serve static files
 app.use(express.static('build'));
 

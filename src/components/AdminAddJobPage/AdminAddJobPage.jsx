@@ -102,59 +102,59 @@ const AdminAddJobPage = () => {
     const names = [
         {
             order: 1,
-            field: 'Account Management'
+            field: ' Account Management'
         },
         {
             order: 2,
-            field: 'Advertising'
+            field: ' Advertising'
         },
         {
             order: 3,
-            field: 'Branding'
+            field: ' Branding'
         },
         {
             order: 4,
-            field: 'Communications'
+            field: ' Communications'
         },
         {
             order: 5,
-            field: 'Copywriting'
+            field: ' Copywriting'
         },
         {
             order: 6,
-            field: 'Digital Media'
+            field: ' Digital Media'
         },
         {
             order: 7,
-            field: 'Graphic Design'
+            field: ' Graphic Design'
         },
         {
             order: 8,
-            field: 'Marketing'
+            field: ' Marketing'
         },
         {
             order: 9,
-            field: 'Public Relations'
+            field: ' Public Relations'
         },
         {
             order: 10,
-            field: 'Social Media'
+            field: ' Social Media'
         },
         {
             order: 11,
-            field: 'Editorial'
+            field: ' Editorial'
         },
         {
             order: 12,
-            field: 'Ecommerce'
+            field: ' Ecommerce'
         },
         {
             order: 13,
-            field: 'Project Management'
+            field: ' Project Management'
         },
         {
             order: 14,
-            field: 'Internship'
+            field: ' Internship'
         },
     ];
 
@@ -183,7 +183,7 @@ const AdminAddJobPage = () => {
     return (
         <>
             <div className="form-container">
-                <form className="employer-form" onSubmit={handleSubmit}>
+                <form className="add-job-form" onSubmit={handleSubmit}>
                 <Card xs={12}>
                 <Grid container item>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
@@ -337,11 +337,11 @@ const AdminAddJobPage = () => {
                 </Grid>
                 </Grid>
                 </Card>
-                <input className="submit-employer-form-button" type='submit' value='Submit' />
+                <input className="submit-add-job-button" type='submit' value='Submit' />
                 </form>
                 <Button onClick={toAdminHub}>Back to Hub</Button>
 
-                <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button>
+                {/* <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button> */}
             </div>
         </>
     );

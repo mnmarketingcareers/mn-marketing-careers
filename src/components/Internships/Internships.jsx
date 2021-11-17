@@ -4,20 +4,15 @@ import { useState, useEffect } from 'react';
 import Modal from "../Modal/Modal.jsx";
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-import { Button } from '@material-ui/core';
-import './RemoteJobs.css';
+import './Internships.css';
 
-function RemoteJobs() {
-    const history = useHistory();
+function Internships() {
 
     const dispatch = useDispatch();
 
-    const rows = useSelector((store) => store.setRemoteJobsReducer);
+    const rows = useSelector((store) => store.setInternshipsReducer); 
 
-    // useparams history.push
-    const toIssuePage = (jobId) => {
-        history.push(`/jobpostingissue/${jobId}`)
-    }
+ 
 
     const columns = [
         { field: 'company_name', headerName: 'Company', width: 150 },
@@ -31,23 +26,17 @@ function RemoteJobs() {
                                                 return <button className="apply-button"><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
                                             }
                                             }},
-        // { field: 'array_agg', headName: 'array_agg', width: 350},
-        { field: 'array_agg', headName: 'array_agg', width: 350 },
-        { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
-            return  <Button variant="contained" color="primary" size="small" 
-            onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>   
-        }},
         { field: 'job type', headName: 'Job Field', width: 350},
     ];                                                                 
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_REMOTE_JOBS' });
+        dispatch({ type: 'FETCH_INTERNSHIPS' });
     }, []);
    
 
     return (
         <>
-            {/* <button onClick={getInternships}>Test Remote Jobs</button> */}
+            {/* <button onClick={getRemoteJobs}>Test Remote Jobs</button> */}
             <div style={{ height: 500, width: '100%' }}>
                       <DataGrid
                         rows={rows}
@@ -64,4 +53,4 @@ function RemoteJobs() {
 
 };
 
-export default RemoteJobs;
+export default Internships;
