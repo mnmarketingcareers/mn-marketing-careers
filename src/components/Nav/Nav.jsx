@@ -81,7 +81,7 @@ function Nav() {
                 Template
               </Link>
 
-              <Link className="navLink" to="/main">
+              <Link className="navLink" to="/adminjoblist">
                 Jobs
               </Link>
 

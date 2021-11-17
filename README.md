@@ -4,23 +4,56 @@
 
 _Duration: 2 Week Sprint_
 
-This is an application to make life easier for the curators and subcribers to the MN Marketing Careers joblist sharing service. Our application will include MailChimp functionalty to allow the client to incorporate existing practices and subscriber contact data conveneintly and effectively into the application.
+This application provides improved and expanded functionality for the curators of the MN Marketing Careers joblist sharing service and increased accessibility to the the subscribers to that list, and employers looking to include new job openings. It aims to gather all current methods inuse by the client in one place. With that in mind, it was designed to continue to utilize MailChimp functionalty for the client to incorporate existing practices and subscriber contact data conveneintly and effectively into the application. The app was then customized for more interaction between employers looking to post jobs, job-seekers, and the joblist curators. The joblist now lives on a page where job seekers can see all previous postings up to 30 days after initiation, and can sort and filter results by a few predetermined categories. The joblist curator can also manage listings with more control. 
 
 
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
 
 ## Screen Shot
 
-Some things to consider...
-
-So classic
+First, lets get in the right frame of mind:
 
 ![Classic Lasagna](public/images/classic_lasagna.png)
 
-Wow, pretty!
+That's better!
+
+To gain a working understading of the data pathways, one might reference the following chart.
 
 ![Expensive Lucid Chart](public/images/lucid_chart.png)
 
+Additionally, an example of the site administrators form to add new job openings to the list.
+
+![Admin Add Job Form](public/images/mnmc_admin-add-jobs.png)
+
+## Important Codestuff
+
+Check out this amazing code, that will be so helpful for you when spinning up the project:
+
+```
+function ReturnLasagna(hunger) {
+  const lasagna = '';
+
+  const { dinner } = useSelector(store => store);
+
+  useEffect( () => {
+    dispatch({ type: 'FETCH_DINNER' });
+  }, []);
+
+  lasagna = dinner.map(food => <li key={food.id}>{food.item}</li>);
+
+  return (
+    <div>
+      <h2>It's what's for dinner!</h2>
+      <ul>
+        {lasagna}
+      </ul>
+    </div>
+
+  )
+}
+
+export default ReturnLasagna;
+```
 
 ### Prerequisites
 
@@ -32,13 +65,24 @@ Link to software that is required to install the app (e.g. node).
 
 ## Installation
 
-_This will be important for our client to spin this up on their own. Let's make sure to write it as clearly, simply, and exact as possible, being aware of possible assumptions we might make from our perspective._
+*this section requres further edits by 11/20/2021*
 
-*this section is un-edited, as of 11/05/2021*
+- Before spinning up the project, make sure you have an active MailChimp account, to which to link the project. 
+- Create a .env file at the root of the project and paste this line into the file:
+  SERVER_SESSION_SECRET=superDuperSecret 
+  While you're in your new .env file, take the time to replace superDuperSecret with some long random string like 25POUbVtx6RKVNWszd9ERB9Bb6 to keep your application secure. Here's a site that can help you: https://passwordsgenerator.net/. If you don't do this step, create a secret with less than eight characters, or leave it as superDuperSecret, you will get a warning.
+- You will need to generate/locate your MailChimp api key (basic instructions here [mailchimp_gettingstarted](https://mailchimp.com/developer/marketing/guides/quick-start/#generate-your-api-key)). Use this to replace the text immediately after `MAILCHIMP_API_KEY=` in the lines below.
+- Your server prefix is found in the url of your MailChimp dashboard when logged in. It immediately follows the `https://` and precedes the first `.` Use this to replace the text immediately after `DC=` in the lines below.
+- Find you Audience Id in your Audience settings on your MailChimp account. Use this to replace the text immediately after `TEST_LIST_ID=` in the lines below.
+- Replace sample text in each of the following 3 lines as mentioned above, and include in your .env file:
 
-How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
+DC=your_server_prefix
+MAILCHIMP_API_KEY=your_maichimp_api_key
+TEST_LIST_ID=your_account_id_number
 
-If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
+- Make sure your .env is in your .gitignore!
+
+Next:
 
 1. Create a database named `mn_marketing_careers`,
 2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 

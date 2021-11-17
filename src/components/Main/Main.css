@@ -3,3 +3,30 @@
     justify-content: center;
 }
 
+.apply-button {
+    width: 75px;
+    height: 33px;
+    margin: 10px;
+    border: none;
+    background-color: #74BDCB;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+
+    transition: background-color .4s linear;
+}
+
+.apply-button:hover,
+.apply-button:hover::after{
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #5298a7;    
+    transition: background-color 0.23s linear;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}

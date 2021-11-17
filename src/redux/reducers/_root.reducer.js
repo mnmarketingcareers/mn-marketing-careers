@@ -8,6 +8,8 @@ import unsubFeedbackReducer from './unsubFeedback.reducer';
 import pendingPostings from './reviewPending.reducer';
 import approvedPostings from './approvedPosts.reducer';
 import setJobsReducer from './jobs.reducer';
+import setRemoteJobsReducer from './remote_jobs.reducer';
+import setInternshipsReducer from './internships.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,7 +25,8 @@ const rootReducer = combineReducers({
   unsubFeedbackReducer,
   pendingPostings,
   setJobsReducer,
-
+  setRemoteJobsReducer,
+  setInternshipsReducer,
   approvedPostings,
 });
 

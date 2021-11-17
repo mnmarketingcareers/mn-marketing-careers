@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { 
     Button, 
     TableRow,
@@ -6,21 +7,23 @@ import {
     Link,
 } from '@mui/material';
 
-function PostingsList ({job}) {
-
+function AdminJobListItem ({job}) {
+    // set React hooks
     const dispatch = useDispatch();
-    // const showJobPosting = job ? true : false;
-    const handleApprove = () => {
+    const defaultRow = {
+        // Job posting keys here
+    }
+    const [rowToEdit, setRowToEdit] = useState(defaultRow);
+
+    // define button handlers
+    const handleEdit = () => {
         dispatch({
-            type: 'APPROVE_POSTING', 
-            payload: { 
-                id: job.id, 
-                status: 'APPROVED' 
-            }
+            type: 'EDIT_POSTING',
+            payload: rowToEdit
         });
     }
 
-    const handleDeny = () => {
+    const handleDelete = () => {
         dispatch({ 
             type: 'DELETE_POSTING', 
             payload: {id: job.id}
@@ -48,15 +51,13 @@ function PostingsList ({job}) {
                 </TableCell>
                 <TableCell>{job.date_posted}</TableCell>
                 <TableCell>
-                    {/* <label htmlFor="approve-btn">Approve without posting to list</label> */}
-                    <Button color="success" variant="outlined" id="approve-btn" onClick={handleApprove}>Approve</Button>
+                    <Button color="success" variant="outlined" id="edit-btn" onClick={handleEdit}>Edit</Button>
                     <br />
-                    {/* <label htmlFor="deny-btn">Deny and delete</label> */}
-                    <Button color="error" variant="outlined" id="deny-btn" onClick={handleDeny}>Deny</Button>
+                    <Button color="error" variant="outlined" id="delete-btn" onClick={handleDelete}>Delete</Button>
                 </TableCell>
             </TableRow>
         </>
     )
 }
 
-export default PostingsList;
+export default AdminJobListItem
