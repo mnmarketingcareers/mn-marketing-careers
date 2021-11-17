@@ -49,7 +49,7 @@ const EmailTemplate = () => {
   return (
     <div className={classes.templatePageContainer}>
       <h1 style={{ textAlign: "center", margin: "15px" }}> Template </h1>
-      <Typography style={{ textAlign: "center", margin: "15px 300px 30px" }}>
+      <Typography style={{ textAlign: "center", margin: 'auto', paddingBottom: '30px', width: '80%' }}>
         AS OF 11/16/21 @ 4:40 PM - this page allows a user to create a new email
         template (POST) and give that template a name as well as a body. That
         body is HTML and can be sent as plain text BUT...I need to BUILD EMAIL

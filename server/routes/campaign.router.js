@@ -61,8 +61,8 @@ client.setConfig({
  */
 router.post("/", (req, res) => {
   console.log("At router, info is showing up as:", req.body);
-  const listId = process.env.TEST_LIST_ID;
-  const template_id = parseInt(process.env.REGULAR_TEMPLATE_ID);
+  const listId = process.env.TEST_LIST_ID; //standard - same always for her/us
+  const template_id = parseInt(req.body.template_id); //now bringing this in from client - NEED TO WIRE THIS U P
   const campaignDetails = req.body;
   console.log("campaign details:", req.body);
   console.log("TEMPLATE ID IS:", template_id);
@@ -80,8 +80,8 @@ router.post("/", (req, res) => {
         template_id: template_id, //working - currently REGULAR (hee hee)
         from_name: campaignDetails.from_name,
         reply_to: campaignDetails.reply_to,
-        to_name: "*|FNAME|*", //fix
-        auto_footer: campaignDetails.footer,
+        // to_name: "*|FNAME|*", //fix
+        // auto_footer: campaignDetails.footer,
         // inline_css: true, //research
       },
       tracking: {
@@ -120,9 +120,7 @@ router.post("/send", (req, res) => {
   const campaign_id = req.body.campaign_id; 
   console.log("And now, the campaign_id variable is officially:", campaign_id);
 
-
-  const response = client.campaigns.send(campaignId); //fix MAKE VARIABLE
-  console.log(response)
+  const response = client.campaigns.send(campaign_id)
     .then((response) => {
       console.log("response from CAMPAIGN POST is:", response);
       res.send(response);

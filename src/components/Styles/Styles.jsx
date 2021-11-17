@@ -50,6 +50,11 @@ const useStyles = makeStyles(
       textAlign: "center",
     },
 
+    templateIdTextField: {
+      width: "60%",
+      margin: "12px 0",
+    },
+
     campaignTitleTextField: {
       width: "90%",
       margin: "12px 0",

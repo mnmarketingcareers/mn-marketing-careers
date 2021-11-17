@@ -19,6 +19,7 @@ function Campaign() {
   const [subList, setSubList] = useState([]); //to set state of subs
 
   //states for fields
+  const [templateId, setTemplateId] = useState(""); //updated
   const [campaignTitle, setCampaignTitle] = useState("");
   const [campaignSubject, setCampaignSubject] = useState("");
   const [campaignPreviewText, setCampaignPreviewText] = useState("");
@@ -39,14 +40,14 @@ function Campaign() {
 
   //this function creates and SAVES an email
   const handleCreateCampaign = () => {
-    setEmailArray([]);
-    for (let email of subs[0]) {
-      // emailArray.push({name: email.full_name, mail: email.email_address});
-      emailArray.push(email.email_address); //deletelater ???
-    }
+    // setEmailArray([]);
+    // for (let email of subs[0]) {
+    //   emailArray.push({name: email.full_name, mail: email.email_address});
+    //   emailArray.push(email.email_address); //deletelater ???
+    // }
     console.log("subs email array:", emailArray);
     console.log("Number of recipients:", emailArray.length);
-
+    console.log('Template ID:', parseInt(templateId)); //updated
     console.log("Title:", campaignTitle);
     console.log("Subject:", campaignSubject);
     console.log("Preview Text:", campaignPreviewText);
@@ -59,17 +60,18 @@ function Campaign() {
         type: "regular", // this or plain text? Ask Casey
         from_name: "MNMC Dev Team", // the "from" name that appears
         reply_to: "cmochinski@gmail.com", // made up - do they have a real one?
-
+        template_id: parseInt(templateId), //coming back from template creation //updated
         title: campaignTitle,
         subject_line: campaignSubject,
         preview_text: campaignPreviewText,
-        footer: footerChecked,
+        // footer: footerChecked,
         recipients: subs[0],
       },
     });
   };
 
   const clearInputs = () => {
+    setTemplateId(""); //updated
     setCampaignTitle("");
     setCampaignSubject("");
     setCampaignPreviewText("");
@@ -96,7 +98,7 @@ function Campaign() {
     console.log("in send email now! LOOK OUT BELOOWWWWW");
     dispatch({
       type: "SEND_EMAIL_NOW",
-      payload: { campaign_id: "fc3d6332b5" },
+      payload: { campaign_id: "83c885d177" }, //updated NEED TO ALWAYS CHANGE THIS
     });
   };
 
@@ -116,7 +118,7 @@ function Campaign() {
         New Email Campaign
       </Typography>
 
-      <Typography style={{ textAlign: "center", margin: "15px 300px 30px" }}>
+      <Typography style={{ textAlign: "center", margin: 'auto', paddingBottom: '30px', width: '80%' }}>
         AS OF 11/16/21 @ 4:40 PM - this page allows a user to BUILD THE SENDABLE
         EMAIL ATTRIBUTES - Campaign title (not sent - just for admin side),
         email subject line, and email subject preview text
@@ -129,6 +131,21 @@ function Campaign() {
           filled out, the button to SEND NOW will appear.
         </Typography> */}
         <form onSubmit={() => handleCreateCampaign()}>
+
+        <TextField
+            required
+            className={classes.templateIdTextField}
+            onChange={() => setTemplateId(event.target.value)}
+            id="template-id"
+            label="Template ID (DELETE LATER)"
+            size="small"
+            value={templateId}
+            variant="outlined"
+            inputProps={{ style: { fontSize: 18 } }}
+            InputLabelProps={{ style: { fontSize: 16, color: "#D3D3D3" } }}
+          />
+
+
           <TextField
             required
             className={classes.campaignTitleTextField}
@@ -186,10 +203,10 @@ function Campaign() {
               SAVE
             </Button>
 
-            {campaignTitle &&
+            {templateId &&
+            campaignTitle &&
             campaignSubject &&
-            campaignPreviewText &&
-            campaignBodyText ? (
+            campaignPreviewText ? (
               sendEmailButton()
             ) : (
               <></>
@@ -205,6 +222,11 @@ function Campaign() {
             </Button>
             <br />
             <br />
+
+        
+        {/* //-------------DEV SECTION BELOW (DELETE LATER)----------------// */}
+
+
 
             <Button
               //important this button is strictly for developer aid
