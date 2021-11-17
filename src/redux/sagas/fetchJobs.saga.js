@@ -29,10 +29,22 @@ function* fetchInternships(){
   }
 }
 
+function* fetchJobsByAge(action) {
+  try {
+    const age = action.payload.age;
+    const jobsByAgeResponse = yield axios.get(`/api/recentjob/${age}`);
+    console.log("jobs by age", age, "response", jobsByAgeResponse.data);
+    yield put({ type: 'SET_RECENT_JOBS', payload: jobsByAgeResponse.data})
+  } catch (error) {
+    console.log('ERROR in GET jobs by age', error);
+  }
+}
+
 function* fetchJobsSaga() {
   yield takeEvery("FETCH_MAIN_JOBS", fetchJobs);
   yield takeEvery("FETCH_REMOTE_JOBS", fetchRemoteJobs);
-  yield takeEvery("FETCH_INTERNSHIPS", fetchInternships)
+  yield takeEvery("FETCH_INTERNSHIPS", fetchInternships);
+  yield takeEvery("FETCH_RECENT_JOBS", fetchJobsByAge);
 }
 
 export default fetchJobsSaga;

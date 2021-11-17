@@ -19,6 +19,7 @@ const templateRouter = require('./routes/template.router');
 const jobsRouter = require('./routes/job_postings.router');
 const jobTypesRouter = require('./routes/job_types.router');
 const searchJobsRouter = require('./routes/search_jobs.router');
+const jobsByAgeSearch = require('./routes/posting_age.router');
 
 
 // Body parser middleware
@@ -42,8 +43,10 @@ app.use('/api/template', templateRouter); //updated by Mo - now for mailchimp te
 
 // use the jobs routers
 app.use('/api/job', jobsRouter);
-app.use('/api/jobtypes', jobTypesRouter)
-app.use('/api/search', searchJobsRouter)
+app.use('/api/jobtypes', jobTypesRouter);
+app.use('/api/search', searchJobsRouter);
+app.use('/api/recentjob', jobsByAgeSearch);
+
 // Serve static files
 app.use(express.static('build'));
 
