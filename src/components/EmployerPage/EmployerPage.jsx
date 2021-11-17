@@ -30,7 +30,8 @@ import MuiAlert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-
+// Google ReCaptcha import
+import ReCaptchaV2 from 'react-google-recaptcha'
 
 
 import './EmployerPage.css';
@@ -448,6 +449,11 @@ function EmployerPage() {
                             </Card>
                         </Grid>
                     </Grid>
+
+                    <div className="recaptcha-container">
+                        <ReCaptchaV2 sitekey={process.env.MNMC_APP_SITE_KEY} />
+                    </div>
+
                     <input className="submit-employer-form-button" type='submit' value='Submit' />
                 </form>
             </div>
