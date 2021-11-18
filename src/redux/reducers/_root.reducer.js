@@ -12,6 +12,14 @@ import setRemoteJobsReducer from './remote_jobs.reducer';
 import setInternshipsReducer from './internships.reducer';
 import lasagna from './captcha.reducer';
 
+// import setRecentJobs from './moreRecentJobs.reducer';
+
+import setTemplatesReducer from './setTemplates.reducer';
+import setActiveCampaignReducer from './setActiveCampaign.reducer';
+import setCampaignsReducer from './setCampaigns.reducer';
+import setRecentJobs from './moreRecentJobs.reducer';
+
+
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -30,6 +38,15 @@ const rootReducer = combineReducers({
   setInternshipsReducer,
   approvedPostings,
   lasagna,
+
+ 
+
+  setTemplatesReducer,
+  setActiveCampaignReducer,
+  setCampaignsReducer,
+  setRecentJobs,
+
+
 });
 
 export default rootReducer;

@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 120px;
 
  
   margin: 0;
@@ -67,7 +68,8 @@ screen size under 768 = only the circle portion of the logo
   text-align: center;
   padding: 24px 6px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 14px;
+  /* //IMPORTANT font size of nav words up top! */
   border: none;
   cursor: pointer;
   outline: 0;
@@ -97,7 +99,8 @@ screen size under 768 = only the circle portion of the logo
 }
 
 
-@media screen and (max-width: 970px){ 
+
+@media screen and (max-width: 900px){ 
 
   .nav-words {
     display: none;
@@ -112,7 +115,7 @@ screen size under 768 = only the circle portion of the logo
   display: none;
 }
 
-@media screen and (max-width: 970px){ 
+@media screen and (max-width: 900px){ 
   .hamburger {
     display: block;
     position: relative;

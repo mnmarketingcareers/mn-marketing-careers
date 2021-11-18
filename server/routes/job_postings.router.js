@@ -10,7 +10,7 @@ const {
  * GET route template
  */
 router.get('/', async (req, res) => {
-  console.log('In GET for all recent, approved job postings');
+//   console.log('In GET for all non-remote and hybrid job postings');
   const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -22,7 +22,8 @@ router.get('/', async (req, res) => {
                 LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
                 LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
                 WHERE "jp".archived = 'false' AND "jp".status = 'POSTED'
-                AND "jp".remote = 'no'
+                AND "jp".remote != 'yes'
+                AND "jt"."id" != '14'
                 AND "jp"."date_posted" > (current_date - interval '30' day)
                 GROUP BY "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -39,7 +40,7 @@ router.get('/', async (req, res) => {
 
 // TO DO: check if this is used here
 router.get('/pending', rejectUnauthenticated, (req, res) => {
-    console.log('In GET pending job posts', req.user);
+    // console.log('In GET pending job posts', req.user);
     if (req.user.access_level < 1) {
             res.status(500).send('You do not have the correct access level for this content');
             return;

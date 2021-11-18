@@ -25,10 +25,10 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import './Main.css';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 import Internships from '../Internships/Internships.jsx';
-
+import useStyles from '../Styles/Styles';
 
 function Main() {
-
+    const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -45,35 +45,51 @@ function Main() {
         <a href="`${link}`" />
 
     }
+    
+
+    // useparams history.push
+    const toIssuePage = (rowId) => {
+        history.push(`/jobpostingissue/${rowId}`)
+    }
+
 
 
 
     const rows = useSelector((store) => store.setJobsReducer);
+    const recentJobs = useSelector(store => store.setRecentJobs);
 
     // The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
 
     const columns = [
-        { field: 'company_name', headerName: 'Company', width: 150 },
-        { field: 'date_posted', headerName: 'Date', width: 110 },
-        { field: 'available_role', headerName: 'Available role', width: 150 },
-        { field: 'description', headerName: 'Description', width: 150 },
-        {
-            field: 'application_link', headerName: 'Link', width: 150, renderCell: (params) => {
-                if (params.row.application_link.includes('http')) {
-                    return <button className="apply-button"><a href={`${params.row.application_link}`} target="_blank">Apply</a></button>
-                } else {
-                    return <button className="apply-button"><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button>
-                }
-            }
-        },
-        { field: 'job type', headerName: 'Job Type', width: 400 },
-    ];
+        { field: 'company_name', headerName: 'company', width: 150 },
+        { field: 'date_posted', headerName: 'date', width: 110 },
+        { field: 'available_role', headerName: 'available role', width: 150 },
+        { field: 'description', headerName: 'description', width: 150 },
+        { field: 'application_link', headerName: 'link', width: 150, renderCell: (params) => {
+                                            if(params.row.application_link.includes('http')){
+                                                return <Button style={{backgroundColor: '#E7F2F8'}} variant="contained"><a style={{color: 'black', fontWeight: '500'}} href={`${params.row.application_link}`} target="_blank">Apply</a></Button>
+                                            } else {
+                                                return <Button style={{backgroundColor: '#E7F2F8'}} variant="contained"><a style={{color: 'black', fontWeight: '500'}} href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
+                                            }
+                                            }},
+        { field: 'job type', headName: 'Job Field', width: 350 },
+        { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
+            return  <Button variant="contained" style={{backgroundColor: '#FFA384', color: 'white', fontWeight: '600'}} size="small" 
+            onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>  
+        }},
+    ];                                                                               
 
     useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
 
-
+// Fetches jobs by date.
+    const fetchRecentJobs = (event) => {
+        dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } });
+        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } });
+        dispatch({ type: 'FETCH_RECENT_INTERNSHIPS', payload: { age: event } });
+    }
+    
     return (
         <>
             <div className="parent">
@@ -85,8 +101,6 @@ function Main() {
                         and apply directly through the hiring company unless otherwise noted.
                     </div>
                 </div>
-                {/* <p>{JSON.stringify(rows)}</p>
-                <button onClick={grabData}>Test</button> */}
                 {openModal && <Modal closeModal={setOpenModal} />}
             </div>
             <div className="tables-container">
@@ -102,6 +116,35 @@ function Main() {
                     Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button>
                     <div className="top-of-table"><h2>Companies Hiring</h2>
                     </div>
+
+                    {openModal ? <p></p> :
+                        <>
+                            <span>See jobs posted within the last</span>
+                            <div className="filter">
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('1')}>
+                                    24 hours
+                                </Button>
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('3')}>
+                                    3 days
+                                </Button>
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('7')}>
+                                    7 days
+                                </Button>
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('14')}>
+                                    14 days
+                                </Button>
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('30')}>
+                                    30 days
+                                </Button>
+                            </div>
+                            {/* <ul> */}
+                                {/* <li>{JSON.stringify(recentJobs)}</li> */}
+                                {/* {recentJobs.map((job) => (
+                                    <li>{job.date_posted}</li> */}
+                                {/* ))} */}
+                            {/* </ul> */}
+                        </>
+                    }
                     {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}
                     {openModal ? <p></p> :
                         <div style={{ height: 500, width: '100%' }}>
@@ -116,7 +159,8 @@ function Main() {
                         </div>
                     }
                     {openModal ? <p></p> :
-                        <div className="top-of-table"><h2>Remote Opportunities</h2></div>}
+                        <div className="top-of-table"><h2>Remote Opportunities</h2></div>
+                    }
                     {openModal ? <p></p> : <RemoteJobs />}
                     <div className="top-of-table"><h2>Internships</h2></div>
                     {openModal ? <p></p> : <Internships />}

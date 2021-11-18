@@ -23,6 +23,7 @@ import EmployerPage from '../EmployerPage/EmployerPage';
 import AdminHub from '../AdminHub/AdminHub';
 import Main from '../Main/Main';
 import EmailTemplate from '../EmailTemplate/EmailTemplate';
+import FinalizeAndSendCampaign from '../FinalizeAndSendCampaign/FinalizeAndSendCampaign';
 
 // leaving space for other new Pages here
 import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
@@ -32,6 +33,7 @@ import AdminJobList from '../AdminJobList/AdminJobList';
 
 import './App.css';
 import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
+import JobPostingIssuesPage from '../JobPostingIssuesPage/JobPostingIssuesPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +67,15 @@ function App() {
             Visiting localhost:3000/user will show the Campaign if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+            <ProtectedRoute
+            // logged in shows Campaign else shows LoginPage
+            exact
+            path="/emailtemplate"
+          >
+            <EmailTemplate />
+          </ProtectedRoute>
+          
+          
           <ProtectedRoute
             // logged in shows Campaign else shows LoginPage
             exact
@@ -74,13 +85,16 @@ function App() {
           </ProtectedRoute>
 
 
+        
+
           <ProtectedRoute
             // logged in shows Campaign else shows LoginPage
             exact
-            path="/emailtemplate"
+            path="/finalizeandsendcampaign"
           >
-            <EmailTemplate />
+            <FinalizeAndSendCampaign />
           </ProtectedRoute>
+
 
 
           <ProtectedRoute
@@ -210,7 +224,12 @@ function App() {
             <Main />
           </Route>
 
-
+          <Route
+            exact
+            path="/jobpostingissue/:id"
+          >
+            <JobPostingIssuesPage />
+          </Route>
 
 
           {/* If none of the other routes matched, we will show a 404. */}

@@ -5,12 +5,13 @@ import { put, takeEvery } from "redux-saga/effects";
 function* createCampaign(action) {
     try {
         console.log("action.payload in CREATE CAMPAIGN SAGA is:", action.payload)
-        yield axios({
+        const response = yield axios({
             method: "POST", 
             url: "/api/campaign", 
             data: action.payload
         });
-        // yield put({ type: "GET_SUBS" }); //FIX //IMPORTANT
+        yield put({ type: "SET_ACTIVE_CAMPAIGN", payload: response.data });  //updated hope this works?
+        console.log('please have a campaign response:', response.data)
     } catch (error) {
         console.log("error in create campaign saga", error)
     };

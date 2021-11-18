@@ -77,7 +77,7 @@ const AdminDrawerMenu = () => {
             </Link>
           </ListItem>
           <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
-            <Link className="drawerLink" to="/main">
+            <Link className="drawerLink" to="/adminjoblist">
               <h3>Jobs</h3>
             </Link>
           </ListItem>

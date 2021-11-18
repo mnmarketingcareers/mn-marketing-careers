@@ -1,7 +1,9 @@
 const setInternshipsReducer = (state = [], action) => {
-    // console.log('inside Internships reducer, Data is:', action.payload)
+    console.log('inside Internships reducer, Data is:', action.payload)
     switch (action.type) {
       case 'SET_INTERNSHIPS':
+        return action.payload
+      case 'SET_RECENT_INTERNSHIPS':
         return action.payload
       default:
         return state;
