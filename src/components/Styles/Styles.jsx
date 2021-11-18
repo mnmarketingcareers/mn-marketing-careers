@@ -99,15 +99,38 @@ const useStyles = makeStyles(
       textAlign: "center",
     },
 
-    templateIdTextField: {
-      width: "40%",
-      margin: "12px 0",
+    newOrModSelect: {
+    },
+
+    templateIdSelect: {
+
     },
 
 
     templateNameField: {
       width: "80%",
-      margin: "12px 0",
+      margin: "24px 0 12px",
+    },
+
+    //-------------EMAIL CONFIRM PAGE (final before send)-------------//
+
+
+    emailConfirmText: {
+      fontSize: '20px',
+    },
+
+
+        //-------------LOGIN PAGE / FORM (Mo 11/17 @ 9 PM)-------------//
+
+
+
+    loginButton: {
+      color: 'white',
+      backgroundColor: '#FFA384', //fix!!!!!!
+      fontWeight: 'bold',
+      marginTop: '18px',
+      padding: '1px',
+      fontSize: '20px',
     },
 
 
