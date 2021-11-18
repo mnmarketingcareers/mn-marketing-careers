@@ -30,6 +30,9 @@ import MuiAlert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+import ShareOurApp from "../ShareOurApp/ShareOurApp.jsx";
+import Container from '@mui/material/Container';
+
 
 
 
@@ -80,7 +83,6 @@ function EmployerPage() {
 
     const submitEmployerJob = (event) => {
         event.preventDefault();
-        console.log('what is jobPostingsTable', jobPostingsTable)
         dispatch({
             type: 'NEW_EMPLOYER_JOB_POST',
             payload: jobPostingsTable
@@ -126,16 +128,12 @@ function EmployerPage() {
 
 
     const setValues = (propertyName) => (event) => {
-        console.log('what is propertyName', propertyName);
-        console.log('what is event.target.value', event.target.value);
         setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value });
     };
 
 
     // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
-        console.log('what is event', event.target.value)
-        console.log('in yes')
         setJobPostingsTable({ ...jobPostingsTable, share_contact: true });
         changeContactView();
     };
@@ -270,7 +268,7 @@ function EmployerPage() {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">Share</Button>
+                                    <ShareOurApp />
                                     <Button size="small" onClick={toAbout}>Learn More</Button>
                                 </CardActions>
                             </Card>

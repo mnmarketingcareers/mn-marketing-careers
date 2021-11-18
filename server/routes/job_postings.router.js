@@ -9,7 +9,7 @@ const {
  * GET route template
  */
 router.get('/', async (req, res) => {
-  console.log('In GET for all recent, approved job postings');
+  console.log('In GET for all non-remote and hybrid job postings');
   const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
