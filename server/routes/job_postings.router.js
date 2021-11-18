@@ -224,7 +224,17 @@ router.post('/', async (req, res) => {
   console.log('In job_postings router, POST', req.body);
 
   try {
-    
+
+    const secretKey = process.env.REACT_APP_SECRET_KEY;
+    const token = req.body.token;
+    const validate = await axios.post(`
+    https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}
+    `)
+    console.log('validation response', validate.data.success);
+    if (validate.data.success != true) {
+        const error = 'Captcha not validated';
+        throw error;
+    }
     // validate inputs
     if (
         req.body.posting_contact_name === '' ||
@@ -244,6 +254,8 @@ router.post('/', async (req, res) => {
         // this goes to the catch
         throw error; 
     }
+
+
     await pool.query('BEGIN');
     // const userId = 0;
 
