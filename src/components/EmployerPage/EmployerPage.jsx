@@ -275,10 +275,10 @@ function EmployerPage() {
         history.push('/about');
     }
 
-    const showtSitekey = (event) => {
-        event.preventDefault();
-        console.log(process.env.REACT_APP_SITE_KEY);
-    }
+    // const showtSitekey = (event) => {
+    //     event.preventDefault();
+    //     console.log(process.env.REACT_APP_SITE_KEY);
+    // }
 
     return (
         <>
