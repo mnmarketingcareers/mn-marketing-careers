@@ -25,8 +25,8 @@ client.setConfig({
     axios.post(`
         https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}
     `).then(result => {
-        console.log('verification response', result);
-        res.send(result);
+        console.log('verification response', result.data);
+        res.send(result.data);
     }).catch(error => {
         console.log(error);
         res.sendStatus(500);

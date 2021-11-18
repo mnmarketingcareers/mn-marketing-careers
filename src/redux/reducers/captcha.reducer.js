@@ -1,9 +1,9 @@
-const lasagna = (state = [], action) => {
+const lasagna = (state = {}, action) => {
     switch(action.type) {
         case 'SET_LASAGNA':
             return action.payload;
         case 'RESET_LASAGNA':
-            return [];
+            return {};
         default:
             return state;
     }

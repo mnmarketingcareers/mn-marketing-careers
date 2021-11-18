@@ -1,11 +1,11 @@
-import {takeLatest } from 'redux-saga/effects'
+import { put, takeLatest } from 'redux-saga/effects'
 import axios from 'axios';
 
 function* lasagna(action){
     try {
       console.log('verifying token', action.payload)
         const token = action.payload;
-        const response = yield axios.post('/api/verify', token);
+        const response = yield axios.post('/api/verify', {token: token});
         console.log('Did it verify?', response.data);
         yield put({ type: 'SET_LASAGNA', payload: response.data });
       } catch(err) {

@@ -32,7 +32,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 // Google ReCaptcha import
 import ReCaptchaV2 from 'react-google-recaptcha';
-
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import './EmployerPage.css';
 
@@ -236,6 +236,7 @@ function EmployerPage() {
      */
     const handleToken = (token) => {
         console.log('recaptcha token: ', token);
+        dispatch({ type: 'LASAGNA', payload: token });
         setJobPostingsTable((jobPostingsTable) => {
         return { ...jobPostingsTable, token }
         });
@@ -480,6 +481,8 @@ function EmployerPage() {
 
                     <div className="recaptcha-container">
                         {/* <button onClick={showtSitekey}>Show SiteKey</button> */}
+                        {/* <ReCAPTCHA sitekey={(process.env.REACT_APP_SITE_KEY)}/> */}
+                        
                         <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
                                onChange={handleToken}
                                onExpired={handleExpire}
