@@ -26,15 +26,15 @@ function RemoteJobs() {
         { field: 'description', headerName: 'Description', width: 150 },
         { field: 'application_link', headerName: 'Link', width: 150, renderCell: (params) => {
                                             if(params.row.application_link.includes('http')){
-                                                return <Button variant="outlined"><a href={`${params.row.application_link}`} target="_blank">Apply</a></Button>
+                                                return <Button style={{backgroundColor: '#E7F2F8'}} variant="contained"><a style={{color: 'black', fontWeight: '500'}} href={`${params.row.application_link}`} target="_blank">Apply</a></Button>
                                             } else {
-                                                return <Button variant="outlined"><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
+                                                return <Button style={{backgroundColor: '#E7F2F8'}} variant="contained"><a style={{color: 'black', fontWeight: '500'}} href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
                                             }
                                             }},
         // { field: 'array_agg', headName: 'array_agg', width: 350},
         { field: 'job type', headName: 'Job Field', width: 350 },
         { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
-            return  <Button variant="contained" color="primary" size="small" 
+            return  <Button style={{backgroundColor: '#FFA384', color: 'white', fontWeight: '600'}} variant="contained" color="primary" size="small" 
             onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>   
         }},
         { field: 'job type', headName: 'Job Field', width: 350},
