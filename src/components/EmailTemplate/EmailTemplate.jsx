@@ -54,8 +54,8 @@ const EmailTemplate = () => {
           html: bodyToSubmit,
         },
       });
-    };
-    history.push('/campaign')
+    }
+    history.push("/campaign");
   };
 
   const handleSelectTemplateId = (event) => {
@@ -66,6 +66,13 @@ const EmailTemplate = () => {
   const handleSelectNewOrMod = (event) => {
     console.log("user has chosen", event.target.value);
     setNewOrMod(event.target.value);
+  };
+
+  const clearFields = () => {
+    setNewOrMod("");
+    setTemplateId("");
+    setTemplateName("");
+    setTemplateBodyText("");
   };
 
   return (
@@ -110,7 +117,9 @@ const EmailTemplate = () => {
             <></>
           ) : (
             <FormControl required style={{ width: "50%" }}>
-              <InputLabel id="template-id-select-label">Select Template</InputLabel>
+              <InputLabel id="template-id-select-label">
+                Select Template
+              </InputLabel>
 
               <Select
                 className={classes.templateIdSelect}
@@ -174,9 +183,19 @@ const EmailTemplate = () => {
             //  appears at over 2k characters
             variant="contained"
             color="success"
+            style={{margin: '4px'}}
+
             type="submit"
           >
             SUBMIT
+          </Button>
+          <Button
+            onClick={() => clearFields()}
+            variant="contained"
+            color="error"
+            style={{margin: '4px'}}
+          >
+            CLEAR
           </Button>
         </form>
       </Paper>
