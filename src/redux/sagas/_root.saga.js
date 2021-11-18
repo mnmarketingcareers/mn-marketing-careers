@@ -10,6 +10,7 @@ import getFeedbackSaga from './unsubscribe.saga';
 import toggleSubscriberStatus from './modifySubStatus.saga';
 import fetchJobsSaga from './fetchJobs.saga';
 import approvedPostingsSaga from './approvedPostings.saga';
+import addNewJobIssueSaga from './addJobIssue.saga';
 import campaignSaga from './campaign.saga';
 import sendEmailNow from './sendEmailNow.saga';
 import getCampaignsSaga from './getCampaign.saga';
@@ -38,6 +39,7 @@ export default function* rootSaga() {
     toggleSubscriberStatus(), //PUT sub status to API
     fetchJobsSaga(),
     approvedPostingsSaga(),
+    addNewJobIssueSaga(), //post to database
     campaignSaga(), //post create new email campaign
     sendEmailNow(), //post send campaign immediately UNDER CONSTRUCTION
     getCampaignsSaga(), //get campaign info (experimental)

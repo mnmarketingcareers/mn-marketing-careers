@@ -45,6 +45,13 @@ function Main() {
         <a href="`${link}`" />
 
     }
+    
+
+    // useparams history.push
+    const toIssuePage = (rowId) => {
+        history.push(`/jobpostingissue/${rowId}`)
+    }
+
 
 
 
@@ -54,21 +61,23 @@ function Main() {
     // The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
 
     const columns = [
-        { field: 'company_name', headerName: 'Company', width: 150 },
-        { field: 'date_posted', headerName: 'Date', width: 110 },
-        { field: 'available_role', headerName: 'Available role', width: 150 },
-        { field: 'description', headerName: 'Description', width: 150 },
-        {
-            field: 'application_link', headerName: 'Link', width: 150, renderCell: (params) => {
-                if (params.row.application_link.includes('http')) {
-                    return <button className="apply-button"><a href={`${params.row.application_link}`} target="_blank">Apply</a></button>
-                } else {
-                    return <button className="apply-button"><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button>
-                }
-            }
-        },
-        { field: 'job type', headerName: 'Job Type', width: 400 },
-    ];
+        { field: 'company_name', headerName: 'company', width: 150 },
+        { field: 'date_posted', headerName: 'date', width: 110 },
+        { field: 'available_role', headerName: 'available role', width: 150 },
+        { field: 'description', headerName: 'description', width: 150 },
+        { field: 'application_link', headerName: 'link', width: 150, renderCell: (params) => {
+                                            if(params.row.application_link.includes('http')){
+                                                return <button><a href={`${params.row.application_link}`} target="_blank">Apply</a></button>
+                                            } else {
+                                                return <button><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
+                                            }
+                                            }},
+        { field: 'array_agg', headName: 'array_agg', width: 350 },
+        { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
+            return  <Button variant="contained" color="primary" size="small" 
+            onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>  
+        }},
+    ];                                                                               
 
     useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
@@ -80,7 +89,7 @@ function Main() {
         dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } })
         dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } })
     }
-
+    
     return (
         <>
             <div className="parent">
