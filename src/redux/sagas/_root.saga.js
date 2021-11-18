@@ -5,6 +5,19 @@ import userSaga from './user.saga';
 import employerSaga from './employer.saga';
 import getSubsSaga from './getSubs.saga';
 import addSubscriberSaga from './addSubscriber.saga';
+import reviewPendingSaga from './reviewPending.saga';
+import getFeedbackSaga from './unsubscribe.saga';
+import toggleSubscriberStatus from './modifySubStatus.saga';
+import fetchJobsSaga from './fetchJobs.saga';
+import approvedPostingsSaga from './approvedPostings.saga';
+import addNewJobIssueSaga from './addJobIssue.saga';
+import campaignSaga from './campaign.saga';
+import sendEmailNow from './sendEmailNow.saga';
+import getCampaignsSaga from './getCampaign.saga';
+import patchTemplateSaga from './patchTemplate.saga';
+import getTemplatesSaga from './getTemplates.saga';
+import postNewTemplateSaga from './postTemplate.saga';
+
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,6 +33,18 @@ export default function* rootSaga() {
     userSaga(),
     employerSaga(),
     getSubsSaga(), //get from API
-    addSubscriberSaga() //post to API
+    addSubscriberSaga(), //post to API
+    reviewPendingSaga(), // Fetches all posts sent from employer saga
+    getFeedbackSaga(),
+    toggleSubscriberStatus(), //PUT sub status to API
+    fetchJobsSaga(),
+    approvedPostingsSaga(),
+    addNewJobIssueSaga(), //post to database
+    campaignSaga(), //post create new email campaign
+    sendEmailNow(), //post send campaign immediately UNDER CONSTRUCTION
+    getCampaignsSaga(), //get campaign info (experimental)
+    patchTemplateSaga(), //PUT..er...patch - fix up template for new send
+    getTemplatesSaga(), //GET all templates (for dropdown when building email)
+    postNewTemplateSaga(), //POST new template from scratch
   ]);
 }

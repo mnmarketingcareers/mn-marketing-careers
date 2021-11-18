@@ -1,0 +1,55 @@
+
+
+.form-container {
+    display: grid;
+    justify-content: center;
+}
+
+/* Card container */
+
+
+/* The whole individual cards */
+.MuiPaper-root{
+    padding: 10px;
+    margin-right: 2px;
+    margin-bottom: 15px;
+}
+
+
+.MuiFormGroup-root {
+    padding: 20px;
+}
+
+.MuiPaper-root {
+    padding: 20px;
+}
+
+.add-job-form{
+    padding-left: 55px;
+    padding-bottom: 20px;
+    display: grid;
+    justify-content: center;
+}
+
+.submit-add-job-button {
+    width: 150px;
+    height: 45px;
+    margin: 10px;
+    border: none;
+    background-color: #74BDCB;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: background-color .4s linear;
+}
+
+.submit-add-job-button:hover,
+.submit-add-job-button:hover::after{
+  cursor: pointer;
+  background-color: #5298a7;
+  transition: background-color 0.23s linear;
+}
+
+

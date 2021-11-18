@@ -3,49 +3,81 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 120px;
 
-  margin: 0 0 30px;
-  background-color: #00acb0;
-  overflow: hidden;
+ 
+  margin: 0;
+  margin-bottom: 20px;
+
+  background: rgb(143, 178, 198);
+background: linear-gradient(180deg, rgb(192, 221, 238) 93%, rgba(231,242,248,0.7217261904761905) 100%);
+
+
+  /* overflow: hidden; */
 }
 
 .nav a {
   text-decoration: none;
 }
 
+
+
+/*--------NAV TITLE ON TOP LEFT--------*/
+/* 
+this is conditional: 
+screen size 768 and over = full bar logo
+screen size under 768 = only the circle portion of the logo 
+*/
+
 .nav-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #f2f2f2;
-  padding-left: 10px;
-  margin: 0;
+  width: 400px;
+}
+
+
+@media screen and (max-width: 600px){ 
+  .nav-title {
+    display: none;
+  }
+
+}
+
+.nav-title-circle-only {
+  display: none;
+}
+
+@media screen and (max-width: 600px){ 
+  .nav-title-circle-only {
+    display: block;
+    position: relative;
+    margin: 15px;
+    width: 80px;
+  }
+}
+
+/*-----------Top-right word nav links-----------*/
+
+
+.nav-words {
+  margin-right: 8px;
 }
 
 .navLink {
   display: inline-block;
-  color: #f2f2f2;
-  background-color: #00acb0;
+  color: #263a3e;
+  font-weight: bold;
   text-align: center;
-  padding: 24px 10px;
+  padding: 24px 6px;
   text-decoration: none;
-  font-size: 15px;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
+  font-size: 14px;
+  /* //IMPORTANT font size of nav words up top! */
   border: none;
   cursor: pointer;
   outline: 0;
-}
-
-/* .navLink:hover {
-  background-color: #008183;
-} */
-
-.navLink {
-  /* display: block; */
-    position: relative;
+  position: relative;
   text-align: center;
 }
+
+
 
 .navLink::after {
   content: '';
@@ -55,7 +87,7 @@
   height: 4px;
   bottom: 0;
   left: 0;
-  background-color: black;
+  background-color: #263a3e;
   transform-origin: center;
   transition: transform 0.3s ease-out;
 
@@ -65,3 +97,32 @@
   transform: scaleX(1);
   transform-origin: center;
 }
+
+
+
+@media screen and (max-width: 900px){ 
+
+  .nav-words {
+    display: none;
+  }
+}
+
+
+/*-----------Hamburger-----------*/
+
+
+.hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 900px){ 
+  .hamburger {
+    display: block;
+    position: relative;
+    margin-right: 20px;
+    padding: 30px 10px;
+  }
+}
+
+
+

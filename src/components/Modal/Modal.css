@@ -1,0 +1,93 @@
+.modalBackground {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(200, 200, 200);
+    position: fixed;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo-pic {
+    justify-content: center;
+  }
+
+  .modalContainer {
+    position: relative;
+    bottom: 150px;
+    width: 500px;
+    height: 580px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+  }
+  
+  .modalContainer .title {
+    display: flex;
+    padding: 25px;
+    justify-content: center;
+    text-align: center;
+    font-size: .9rem;
+    margin-top: 10px;
+  }
+  
+  .titleCloseBtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .titleCloseBtn button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    transition: all 1s;
+    /* -webkit-transition: -webkit-transform 1s; */
+  }
+
+
+  .titleCloseBtn button:hover {
+    -webkit-transform: rotate(90deg) translateZ(0);
+    color: salmon
+  }
+  
+  .modalContainer .body {
+    flex: 50%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    text-align: center;
+  }
+  
+  .modalContainer .footer {
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.submit-subscription-form-button {
+    width: 150px;
+    height: 45px;
+    margin: 10px;
+    border: none;
+    background-color: #74BDCB;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: background-color .4s linear;
+  }
+
+.submit-subscription-form-button:hover,
+.submit-subscription-form-button:hover::after{
+  cursor: pointer;
+  background-color: #529bac;
+  transition: background-color 0.23s linear;
+}
+  

@@ -100,7 +100,7 @@ This code is also heavily commented. We recommend reading through the comments, 
   - Nav/Nav
   - AboutPage/AboutPage
   - InfoPage/InfoPage
-  - UserPage/UserPage
+  - UserPage/UserPage (changed to "Campaign" by Mo 11/16/21 @ 10 am)
   - LoginPage/LoginPage
   - RegisterPage/RegisterPage
   - LogOutButton/LogOutButton

@@ -1,0 +1,41 @@
+.unsubheader {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 450px;
+  text-align: center;
+}
+.unsubfeedback {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 450px;
+}
+
+@media screen and (max-width: 480px) {
+
+  
+  .unsubfeedback {
+    width: 90%;
+
+  }
+
+}
+  
+
+
+.btn:hover,
+.btn:hover::after {
+  cursor: pointer;
+  background-color: #5298a7;
+  transition: background-color 0.23s linear;
+}
+
+.unsub-submit-div {
+}
+
+.submit-employer-form-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -9,10 +9,11 @@ const {
 // Handles POST request with new job seeker feedback, responses to database
 // Additional POST to post feedback to DOM?
 router.post('/', (req, res) => {
+    // console.log('req.body is', req.body);
     const reason = req.body.reason;
     const message = req.body.message;
     // the query that's responsible for inserting user feedback into the feedback database table
-    const queryText = `INSERT INTO "feedback" (reason, message)
+    const queryText = `INSERT INTO "feedback" ("reason", "message")
     VALUES ($1, $2) RETURNING id;`;
     // this pools the query text and datafields and sends the data on to the database 
     pool
@@ -25,10 +26,10 @@ router.post('/', (req, res) => {
 })
 
 // Handles GET request, get feedback data from database
-// Select for access level (secure submarine as an example)
+// Access level for admin-only access
 // wrap query around conditional that checks for access_level
-router.get('/feedbacklist', (req, res) => {
-    console.log('in router.get', req.user);
+router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
+    // console.log('in router.get', req.user);
     
     if (req.user.access_level === 1){
         const queryText = `SELECT * FROM "feedback";`;
@@ -45,8 +46,8 @@ router.get('/feedbacklist', (req, res) => {
 });
 
 // Handles PUT request, change feedback archived status to TRUE
-// Access level for admin-only access?
-router.put('/:id', (req, res) => {
+// Access level for admin-only access
+router.put('/:id', rejectUnauthenticated, (req, res) => {
     
     if (req.user.access_level === 1) {
         // this query updates the archive boolean status of a job seeker's feedback

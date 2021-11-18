@@ -2,11 +2,11 @@ import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
 
-function* addNewSubscriber(action) {
+function* modifySubStatus(action) {
     try {
-        console.log("action.payload in addNewSubscriber saga is:", action.payload)
+        console.log("action.payload in PUT MOD SUB saga is:", action.payload)
         yield axios({
-            method: "POST", 
+            method: "put", 
             url: "/api/subs", 
             data: action.payload
         });
@@ -16,9 +16,9 @@ function* addNewSubscriber(action) {
     };
 };
 
-
-function* addSubscriberSaga() { 
-    yield takeEvery("ADD_SUBSCRIBER", addNewSubscriber);
+//listener - add a sub
+function* toggleSubscriberStatus() { 
+    yield takeEvery("TOGGLE_SUB_STATUS", modifySubStatus);
 }
 
-export default addSubscriberSaga;
+export default toggleSubscriberStatus;

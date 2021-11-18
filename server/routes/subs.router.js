@@ -3,27 +3,31 @@ const pool = require("../modules/pool");
 const router = express.Router();
 const client = require("@mailchimp/mailchimp_marketing");
 const { default: axios } = require("axios");
+// const {
+//   rejectUnauthenticated,
+// } = require("../modules/authentication-middleware");
 
 
 //IMPORTANT 
-//this will be replaced by MNMC API and list information
-//see .env file for format
+
 client.setConfig({
     apiKey: process.env.MAILCHIMP_API_KEY,
     server: process.env.DC,
   });
 
+
   //GET
 /** 
  * @api {get} /subscribe Get LIST info 
  * @apiName GetList
- * @apiGroup Subscribe
+ * @apiGroup Subs
  * https://mailchimp.com/developer/marketing/api/lists/get-lists-info/
  */
  router.get('/', async (req, res) => {
-  const response = await client.lists.getListMembersInfo(process.env.TEST_LIST_ID)
+  const response = await client.lists.getListMembersInfo(
+    process.env.TEST_LIST_ID, {count: 30}) //MNMC will likely want more - if they even need this section
   .then((response) => {
-    console.log("response from GET LIST MEMBERS INFO:", response);
+    // console.log("response from GET LIST MEMBERS INFO:", response);
     res.send(response);
   })
   .catch((error) => {
@@ -36,7 +40,7 @@ client.setConfig({
 /**
  * @api {post} /subscribe Send new subscriber email to mailing list
  * @apiName PostSubscriber
- * @apiGroup Subscribe
+ * @apiGroup Subs
  * @apiDescription Sends the new subscriber email and status to MailChimp
  *
  * @apiBody {string} email - required
@@ -56,13 +60,12 @@ client.setConfig({
  * Mo's 'Audience ID' = 7dcef6c713
  *
  */
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
   console.log('At router, info is showing up as:', req.body )
   const listId = process.env.TEST_LIST_ID; 
   const subscribingUser = req.body; 
-  console.log("we are using these:", listId, subscribingUser);
 
-  const response = await client.lists.addListMember(listId, {
+  const response = client.lists.addListMember(listId, {
     email_address: subscribingUser.email,
     status: "subscribed",
     merge_fields: {
@@ -82,31 +85,33 @@ router.post("/", async (req, res) => {
 });
 
 
-
-    //GET //fix later - separate router
-/** 
- * @api {get} /subscribe Get ADMIN info 
- * strictly info about the mailing list -
- * company, name, address of admin 
- * @apiName GetAdmin
- * @apiGroup subs
- * @apiDescription Get detailed list of subscribers and 
- * everything about them that they've provided
+//PUT
+/**
+ * @api {put} /subscribe modify subscription status
+ * @apiName ModifyStatus
+ * @apiGroup subscribe
+ * 
+ * @apiSource https://mailchimp.com/developer/marketing/api/list-members/add-or-update-list-member/
  *
- * @apiIssues this is TAKING A WHILE to come back (several seconds)
- *
- * @api let's fix this documentation later, huh?
  */
-router.get("/listinfo", async (req, res) => {
-  const response = await client.lists
-    .getList(process.env.TEST_LIST_ID)
-    .then((response) => {
-      console.log("response is:", response);
-      res.send(response);
-    })
-    .catch((error) => {
-      res.sendStatus(500);
-    });
+ router.put("/", (req, res) => {
+  console.log('Modifying user #', req.body.subscriberHash,'to status of', req.body.status)
+  const listId = process.env.TEST_LIST_ID; 
+  const statusChange = req.body.status; 
+  const userHash = req.body.subscriberHash;
+
+   const response = client.lists.setListMember(
+    listId, //name it this
+    userHash, //name it this
+    { status: statusChange }
+  ).then((response) => {
+    console.log('response from PUT is:', response);
+    res.send(response);
+  })
+  .catch((error) => {
+    res.sendStatus(500);
+    console.log('error in PUT on router page:', error)
+  });
 });
 
 

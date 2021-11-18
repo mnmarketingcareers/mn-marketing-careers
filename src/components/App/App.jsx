@@ -14,7 +14,7 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+import Campaign from '../Campaign/Campaign';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -22,8 +22,18 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import EmployerPage from '../EmployerPage/EmployerPage';
 import AdminHub from '../AdminHub/AdminHub';
 import Main from '../Main/Main';
+import EmailTemplate from '../EmailTemplate/EmailTemplate';
+import FinalizeAndSendCampaign from '../FinalizeAndSendCampaign/FinalizeAndSendCampaign';
+
+// leaving space for other new Pages here
+import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
+import UnsubFeedbackPage from '../UnsubFeedbackPage/UnsubFeedbackPage';
+
+import AdminJobList from '../AdminJobList/AdminJobList';
 
 import './App.css';
+import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
+import JobPostingIssuesPage from '../JobPostingIssuesPage/JobPostingIssuesPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,7 +50,9 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/main" 
+          //UPDATED - changed this so localhost:3000 lands on /main instead of /home (home register - needs to be secret)
+          />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -52,16 +64,38 @@ function App() {
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
+            Visiting localhost:3000/user will show the Campaign if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            <ProtectedRoute
+            // logged in shows Campaign else shows LoginPage
             exact
-            path="/user"
+            path="/emailtemplate"
           >
-            <UserPage />
+            <EmailTemplate />
           </ProtectedRoute>
+          
+          
+          <ProtectedRoute
+            // logged in shows Campaign else shows LoginPage
+            exact
+            path="/campaign"
+          >
+            <Campaign />
+          </ProtectedRoute>
+
+
+        
+
+          <ProtectedRoute
+            // logged in shows Campaign else shows LoginPage
+            exact
+            path="/finalizeandsendcampaign"
+          >
+            <FinalizeAndSendCampaign />
+          </ProtectedRoute>
+
+
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -71,6 +105,13 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows ApproveSubmissions else shows LoginPage
+            exact
+            path="/reviewsubmissions"
+          >
+            <ApproveSubmissions />
+          </ProtectedRoute>
 
           <ProtectedRoute 
             // logged in shows InfoPage else shows LoginPage
@@ -81,6 +122,23 @@ function App() {
             <AdminHub />
           </ProtectedRoute>
 
+          <ProtectedRoute 
+            // logged in shows InfoPage else shows LoginPage
+            // added by Mo 11/9/21 @ 10p
+            exact
+            path="/adminjoblist"
+          >
+            <AdminJobList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/adminaddjob"
+          >
+            <AdminAddJobPage />
+          </ProtectedRoute>
+
           <Route
             exact
             path="/login"
@@ -88,7 +146,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/adminhub" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -102,7 +160,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/adminhub" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -116,29 +174,68 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/adminhub" />
               :
               // Otherwise, show the Landing page
               <LandingPage />
             }
           </Route>
 
-          <ProtectedRoute
+
+{/* 
+          <Route 
+          exact
+          path="/info"
+          >
+            <InfoPage />
+          </Route> */}
+
+
+          <Route 
+          exact
+          path="/unsubfeedbackpage"
+          >
+            <UnsubFeedbackPage />
+          </Route>
+
+
+
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/about"
+          >
+            <AboutPage />
+          </Route>
+
+
+
+          <Route
             exact
             path="/employerpage"
           >
             <EmployerPage />
-          </ProtectedRoute>
+          </Route>
 
-          <ProtectedRoute
+          <Route
             exact
             path="/main"
           >
             <Main />
-          </ProtectedRoute>
+          </Route>
+
+          <Route
+            exact
+            path="/jobpostingissue/:id"
+          >
+            <JobPostingIssuesPage />
+          </Route>
+
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
+          <Route
+          //FIX make a 404 page with a return link to main
+          >
             <h1>404</h1>
           </Route>
         </Switch>

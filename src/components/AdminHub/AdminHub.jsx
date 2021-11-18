@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { Typography, Container, Button, Paper, TextField } from "@mui/material";
+import { Typography, Container, Button, Paper, TextField, IconButton } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+
+import ToggleOffIcon from '@mui/icons-material/ToggleOff'; 
+
+import NewPostingsReady from "../NewJobOpeningsReadyAlert/NewJobOpeningsReadyAlert";
+import NewSubmissions from "../NewSubmissionsAlert/NewSubmissionsAlert";
 import useStyles from "../Styles/Styles"; //important paste this
 
 import "./AdminHub.css";
 
 const AdminHub = () => {
+  const history = useHistory();
   const classes = useStyles(); //important paste this
   const dispatch = useDispatch();
   const subs = useSelector((store) => store.setSubsListReducer);
@@ -28,13 +35,16 @@ const AdminHub = () => {
   const [userLastName, setUserLastName] = useState("");
   const [userZip, setUserZip] = useState("");
 
+  //user sub status
+  const [subStatus, setSubStatus] = useState('') //deletelater
+
   useEffect(() => {
     setIsLoading(true);
     console.log("page loaded - fetching subscribers...");
     dispatch({ type: "GET_SUBS" });
     setSubList(subs.data);
     console.log('user is:', user.first_name)
-  }, []);
+  }, [subList]);
 
   //check email - is it real? if keep required attribute //deletelater
   const validateEmail = () => {
@@ -73,15 +83,36 @@ const AdminHub = () => {
     setUserFirstName("");
     setUserLastName("");
     setUserZip("");
-
   };
+
+  const toggleSubStatus = (subStatus, id) => {
+    let newStatus = '';
+    subStatus === "subscribed" ? newStatus = "unsubscribed" : newStatus = "subscribed";
+    console.log("current status:", subStatus, 'for user:', id)
+    dispatch({type: "TOGGLE_SUB_STATUS", payload: {status: newStatus, subscriberHash: id}
+    })
+  }
+
+
+
+  // const navToCreateTemplatePage = () => {
+  //   history.push('/emailtemplate')
+  // }
 
   return (
     <div className="adminHubPage">
-      <Typography style={{fontSize: '40px', margin: 30}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
+      <Typography style={{fontSize: '40px', marginTop: "30px"}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
 
-      <Container className="adminContainer">
-        <div className="gridWrapper">
+      <Container className="adminContainer" style={{textAlign: "center"}}>
+      <Button style={{margin: '5px'}}  variant="contained" size="large" color="primary" onClick={() =>  history.push('/emailtemplate')}>CREATE CAMPAIGN</Button>
+            {/* <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button> */}
+<br />
+
+        <div style={{marginTop: '20px'}} className="gridWrapper">
+          
+        <div className="gridL"><NewSubmissions /></div>
+        <div className="gridR"><NewPostingsReady /></div>
+
           <div className="gridL">
             <Typography variant="h4">Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
@@ -125,8 +156,10 @@ const AdminHub = () => {
                 onChange={(event) => setUserZip(event.target.value)}
               />
               <br />
-              <Button className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
+              <Button style={{margin: '10px'}} className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
             </form>
+<br />
+
           </div>
 
           <div className="gridR">
@@ -171,18 +204,19 @@ const AdminHub = () => {
                       <TableRow key={item.id} className={classes.tableBodyRow}>
                         <TableCell
                           style={{
-                            fontFamily: "Lato",
+                          
+                            fontFamily: "Red Hat Text",
                             textAlign: "center",
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {item.full_name}
                         </TableCell>
                         <TableCell
                           style={{
-                            fontFamily: "Lato",
+                            fontFamily: "Red Hat Text",
                             textAlign: "center",
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {item.email_address}
@@ -191,9 +225,9 @@ const AdminHub = () => {
 
                         <TableCell
                           style={{
-                            fontFamily: "Lato",
+                            fontFamily: "Red Hat Text",
                             textAlign: "center",
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {item.merge_fields.ADDRESS.zip}
@@ -201,15 +235,16 @@ const AdminHub = () => {
 
 
 
-                        <TableCell
+                        <TableCell 
                           style={{
-                            fontFamily: "Lato",
+                            fontFamily: "Red Hat Text",
                             textAlign: "center",
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {item.status}
                         </TableCell>
+                        <IconButton onClick={() => toggleSubStatus(item.status, item.contact_id)}><ToggleOffIcon/></IconButton>
                       </TableRow>
                     ))
                   ) : (
