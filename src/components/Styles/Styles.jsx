@@ -117,7 +117,21 @@ const useStyles = makeStyles(
 
     emailConfirmText: {
       fontSize: '20px',
-    }
+    },
+
+
+        //-------------LOGIN PAGE / FORM (Mo 11/17 @ 9 PM)-------------//
+
+
+
+    loginButton: {
+      color: 'white',
+      backgroundColor: '#FFA384', //fix!!!!!!
+      fontWeight: 'bold',
+      marginTop: '18px',
+      padding: '1px',
+      fontSize: '20px',
+    },
 
 
   },
