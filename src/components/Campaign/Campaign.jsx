@@ -116,30 +116,7 @@ function Campaign() {
 
 
       <Paper className={classes.campaignPaperContainer} elevation={6}>
-        {/* <Typography variant="h6" style={{ margin: "10px 50px" }}>
-          This page is used to create and save or send your finalized email
-          campaign. Follow the prompts below to continue. Once all fields are
-          filled out, the button to SEND NOW will appear.
-        </Typography> */}
         <form onSubmit={() => handleCreateCampaign()}>
-
-{/* 
-        <FormControl required style={{ width: "30%" }}>
-            <InputLabel id="new-or-mod-campaign-label">Select</InputLabel>
-
-            <Select
-              className={classes.newOrModCampaignSelect}
-              labelId="new-or-mod-campaign-label"
-              id="campaign-id-select"
-              label="Select"
-              value={newOrMod}
-              onChange={handleSelectNewOrMod}
-            >
-              <MenuItem value={"new"}>New Campaign</MenuItem>
-              <MenuItem value={"mod"}>Modify Campaign</MenuItem>
-            </Select>
-          </FormControl> */}
-
           <br />
 
           {newOrMod === "new" || newOrMod === "" ? (

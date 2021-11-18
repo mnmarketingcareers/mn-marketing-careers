@@ -118,7 +118,7 @@ router.post("/", (req, res) => {
  */
 router.post("/send", (req, res) => {
   const campaign_id = req.body.campaign_id; 
-  console.log("And now, the campaign_id variable is officially:", campaign_id);
+  console.log("Campaign ID:", campaign_id);
 
   const response = client.campaigns.send(campaign_id)
     .then((response) => {
