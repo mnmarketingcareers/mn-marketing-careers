@@ -1,13 +1,46 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 
 const EmailBody = () => {
 
+    const jobInfo = useSelector(store => store.approvedPostings)
+    // const user = useSelector(store => store.user);
+    const dispatch = useDispatch();
 
-    
+    useEffect(() => {
+        dispatch({type: 'FETCH_APPROVED_POSTINGS'})
+        console.log('store is', jobInfo)
+    },[])
+
+    const createList = () => {
+        for(let listItem of jobInfo){
+            return (
+                <li>
+                <a href={listItem.application_link} target="_blank">{listItem.company_name}</a> - {listItem.available_role}
+                </li> 
+                
+            )
+        }
+        
+        //     jobInfo.length > 0 ? (
+        //  jobInfo.map((listItem) => (
+        //  <li>
+        //  <a href={listItem.application_link} target="_blank">{listItem.company_name}</a> - {listItem.available_role}
+        //  </li>
+        //  ))
+        //  ) 
+        //  : 
+        //  (<></>)
+     
+    }
+   
+
     return (
-       `
-       <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+  
+
+ 
+      
+      `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
        <!doctype html>
        <html>
            <!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i|Lato:400,400i,700,700i" rel="stylesheet"><!--<![endif]-->                 <link rel="stylesheet" href="https://us2.campaign-archive.com/css/archivebar-desktop.css" mc:nocompile="">  <style type="text/css">
@@ -451,7 +484,7 @@ const EmailBody = () => {
                                    <table border="0" cellspacing="0" class="mcnTextContentContainer" width="100%" style="min-width: 100% !important;background-color: #3A8DAD;border: 1px none;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                        <tbody><tr>
                                            <td valign="top" class="mcnTextContent" style="padding: 18px;color: #F2F2F2;font-family: Arvo, Courier, Georgia, serif;font-size: 14px;font-weight: normal;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height: 150%;">
-                                               <span style="font-size:24px"><span style="font-family:arvo,courier,georgia,serif">Minnesota Marketing Careers</span></span>
+                                               <span style="font-size:24px"><span style="font-family:arvo,courier,georgia,serif"><b>Minnesota Marketing Careers</b></span></span>
                                            </td>
                                        </tr>
                                    </tbody></table>
@@ -595,9 +628,14 @@ const EmailBody = () => {
                                
                                <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px;font-family: Lato, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;line-height: 200%;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;text-align: left;">
                                
+
+
                                    <ul>
-               COMPANIES-NOW-HIRING-GO-HERE
-       </ul>
+                                  ${createList}
+                                  </ul>
+
+
+
        
                                </td>
                            </tr>
@@ -936,8 +974,9 @@ const EmailBody = () => {
                        </tr>
                    </table>
                </center>
-           </body>     </html>
-       `
+           </body>     </html>` 
+
+
     )
 }
 

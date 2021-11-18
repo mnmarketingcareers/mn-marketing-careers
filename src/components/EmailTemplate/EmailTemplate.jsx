@@ -80,6 +80,13 @@ const EmailTemplate = () => {
 
   return (
     <div className={classes.templatePageContainer}>
+
+
+
+      <EmailBody />
+
+
+
       <h1 style={{ textAlign: "center", margin: "15px" }}> Template </h1>
       <Typography
         style={{
@@ -166,7 +173,7 @@ const EmailTemplate = () => {
             <></>
           )}
           <br />
-          <TextField
+          {/* <TextField
             required
             multiline
             className={classes.bodyTextField}
@@ -177,7 +184,7 @@ const EmailTemplate = () => {
             value={templateBodyText}
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
-          />
+          /> */}
           <br />
 
           <Button
