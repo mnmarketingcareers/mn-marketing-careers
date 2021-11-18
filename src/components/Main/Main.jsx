@@ -49,6 +49,7 @@ function Main() {
 
 
     const rows = useSelector((store) => store.setJobsReducer);
+    const recentJobs = useSelector(store => store.setRecentJobs);
 
     // The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
 
@@ -73,6 +74,9 @@ function Main() {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
 
+    const fetchRecentJobs = () => {
+        dispatch({ type: 'FETCH_RECENT_JOBS', payload: {age: '3'} })
+    }
 
     return (
         <>
@@ -101,25 +105,38 @@ function Main() {
                 <div className="submit">
                     Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button>
                     <div className="top-of-table"><h2>Companies Hiring</h2>
+                </div>
+
+                {openModal ? <p></p> : 
+                    <>
+                    <span>See jobs posted within the last</span>
+                    <button onClick={fetchRecentJobs}>
+                        3 days
+                    </button>
+                    <ul>
+                        <li>{JSON.stringify(recentJobs)}</li>
+                    </ul>
+                    </>
+                }
+                {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}
+                {openModal ? <p></p> :
+                    <div style={{ height: 500, width: '100%' }}>
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            pageSize={8}
+                            rowsPerPageOptions={[8]}
+                            checkboxSelection
+                            disableSelectionOnClick
+                        />
                     </div>
-                    {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}
-                    {openModal ? <p></p> :
-                        <div style={{ height: 500, width: '100%' }}>
-                            <DataGrid
-                                rows={rows}
-                                columns={columns}
-                                pageSize={8}
-                                rowsPerPageOptions={[8]}
-                                checkboxSelection
-                                disableSelectionOnClick
-                            />
-                        </div>
-                    }
-                    {openModal ? <p></p> :
-                        <div className="top-of-table"><h2>Remote Opportunities</h2></div>}
-                    {openModal ? <p></p> : <RemoteJobs />}
+                }
+                {openModal ? <p></p> :
+                    <div className="top-of-table"><h2>Remote Opportunities</h2></div>
+                }
+                {openModal ? <p></p> : <RemoteJobs />}
                     <div className="top-of-table"><h2>Internships</h2></div>
-                    {openModal ? <p></p> : <Internships />}
+                {openModal ? <p></p> : <Internships />}
                 </div>
             </div>
         </>
