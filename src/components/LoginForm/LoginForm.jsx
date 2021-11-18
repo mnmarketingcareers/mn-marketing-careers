@@ -30,31 +30,21 @@ function LoginForm() {
 
   return (
 
-    <Paper elevation={6} style={{width: '40%', margin: '50px auto', textAlign: 'center', padding: '30px 0'}}>
+    <Paper elevation={6} className={classes.loginRegisterPaper} >
 
     <form 
-    // className="formPanel" 
     onSubmit={login}>
-      <Typography variant="h4">LOGIN</Typography> 
-      <br />
+      <Typography variant="h4" style={{marginBottom: '30px'}}>LOGIN</Typography> 
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
       )}
-        {/* <label htmlFor="username"> */}
-          {/* Email: */}
-          {/* <input
-            name="username"
-            required
-            value={username}
-          /> */}
 
 
 
 
-
-<div style={{marginBottom: '8px'}}>
+<div  className={classes.loginRegisterSpacing}>
 
         <TextField 
         required            
@@ -67,7 +57,7 @@ function LoginForm() {
         onChange={(event) => setUsername(event.target.value)}
         />
 </div >
-<div>
+<div className={classes.loginRegisterSpacing}>
 
 <TextField 
         required            

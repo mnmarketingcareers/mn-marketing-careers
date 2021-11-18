@@ -123,15 +123,31 @@ const useStyles = makeStyles(
         //-------------LOGIN PAGE / FORM (Mo 11/17 @ 9 PM)-------------//
 
 
+        loginRegisterPaper: {
+          width: '70%', 
+          margin: '50px auto 30px', 
+          textAlign: 'center', 
+          padding: '30px 0'
+          
+        },
 
     loginButton: {
       color: 'white',
-      backgroundColor: '#FFA384', //fix!!!!!!
+      backgroundColor: '#FFA384',
       fontWeight: 'bold',
       marginTop: '18px',
       padding: '1px',
       fontSize: '20px',
+      transitionDuration: '1s',
+      '&:hover': {
+        transitionDuration: '.7s',
+        backgroundColor: '#008183',
+      }
     },
+
+    loginRegisterSpacing: {
+      margin: '8px',
+    }
 
 
   },
