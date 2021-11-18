@@ -46,7 +46,7 @@ const EmailTemplate = () => {
         payload: {
           template_id: templateId,
           name: templateName,
-          html: emailBody, //important cross fingers...
+          html: 'test', //important email body coming in from EmailBody component
         },
       });
     } else {
@@ -54,7 +54,7 @@ const EmailTemplate = () => {
         type: "SEND_POST_TEMPLATE",
         payload: {
           name: templateName,
-          html: emailBody, //important cross fingers...
+          html: 'test', //important email body coming in from EmailBody component
         },
       });
     }
@@ -83,7 +83,7 @@ const EmailTemplate = () => {
 
 
 
-      <EmailBody />
+      {/* <EmailBody /> */}
 
 
 

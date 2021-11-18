@@ -3,6 +3,43 @@ const pool = require("../modules/pool");
 const router = express.Router();
 const client = require("@mailchimp/mailchimp_marketing");
 const { default: axios } = require("axios");
+
+// this is our email body
+let emailTemplate = require('../modules/emailTemplate');
+
+console.log('template is:', emailTemplate);
+
+
+const jobs = [
+   'marketer',
+   'coder',
+   'instructor'
+];
+
+// create replacement string
+let jobsList = '<ul>';
+
+// create HTML for each job from the DB
+for(let job of jobs) {
+  jobsList += `
+    <li>${job}</li>
+  `
+}
+
+jobsList += '</ul>';
+
+// actually replace text in the big string
+let finalBody = emailTemplate.replace('**jobs**', jobsList);
+finalBody = finalBody.replace('**cities**', 'hello');
+
+console.log('final body', finalBody);
+
+let stuff = {
+  html: finalBody,
+};
+
+// send to mailchimp
+
 // const {
 //   rejectUnauthenticated,
 // } = require("../modules/authentication-middleware");
