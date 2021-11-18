@@ -72,7 +72,7 @@ function Main() {
                                                 return <button><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
                                             }
                                             }},
-        { field: 'array_agg', headName: 'array_agg', width: 350 },
+        { field: 'job type', headName: 'Job Field', width: 350 },
         { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
             return  <Button variant="contained" color="primary" size="small" 
             onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>  
