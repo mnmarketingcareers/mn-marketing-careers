@@ -36,6 +36,8 @@ import ReCaptchaV2 from 'react-google-recaptcha';
 
 import './EmployerPage.css';
 
+const grecaptchaObject = window.grecaptcha
+
 function EmployerPage() {
 
     const history = useHistory();
@@ -233,6 +235,7 @@ function EmployerPage() {
      * @param {string} token - response from ReCaptcha
      */
     const handleToken = (token) => {
+        console.log('recaptcha token: ', token);
         setJobPostingsTable((jobPostingsTable) => {
         return { ...jobPostingsTable, token }
         });
