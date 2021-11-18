@@ -2,7 +2,7 @@
 const setJobIssueListReducer = (state = [], action) => {
     switch(action.type) {
         case "SET_JOB_ISSUE_LIST":
-            return [...state, action.payload];
+            return action.payload;
         default:
             return state;
     }

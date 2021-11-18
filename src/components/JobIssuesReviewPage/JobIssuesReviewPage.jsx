@@ -29,7 +29,7 @@ function JobIssuesReviewPage() {
 
     return (
         <>
-        <div className="admin-joblist-container">
+        <div className="admin-issuelist-container">
             <h1>Pending Issues</h1>
             
             {/* <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
@@ -41,10 +41,9 @@ function JobIssuesReviewPage() {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Company</TableCell>
                             <TableCell>Job Title</TableCell>
-                            <TableCell>City</TableCell>
-                            <TableCell>State</TableCell>
+                            <TableCell>Company Name</TableCell>
+                            <TableCell>City, State</TableCell>
                             <TableCell>Date Posted</TableCell>
                             <TableCell>Link</TableCell>
                             <TableCell>Issue Type</TableCell>
@@ -55,7 +54,7 @@ function JobIssuesReviewPage() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {jobIssueList.map((issue, i) => {
+                        {jobIssueList.map((issue) => {
                             return(
                                 <JobIssuesReviewItem key={issue.id} issue={issue} />
                                 )
@@ -65,8 +64,7 @@ function JobIssuesReviewPage() {
                 </Table>
             </TableContainer>)}
         </div>
-            
-        </>
+        </>  
     )
 }
 
