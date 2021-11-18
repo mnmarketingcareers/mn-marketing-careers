@@ -32,9 +32,15 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('In GET for all job issues');
 
     if (req.user.access_level === 1) {
-        const queryText = `SELECT "i"."id", "comment", "issue_type", "is_resolved", "issues_email"   
+        const queryText = `SELECT "i"."id", "comment", "issue_type", "is_resolved", 
+        "issues_email", "jp"."available_role", "jp"."application_link", "c"."company_name", "jp"."job_city",
+        "jp"."job_state", "jp"."date_posted"     
         FROM "issues" AS "i"
-        JOIN "job_postings" AS "jp" ON "jp"."id" = "i"."job_posting_id";
+        JOIN "job_postings" AS "jp" ON "jp"."id" = "i"."job_posting_id"
+        JOIN "company" AS "c" ON "c"."id" = "jp"."company_id"
+        GROUP BY "i"."id", "comment", "issue_type", "is_resolved", 
+        "issues_email", "jp"."available_role", "jp"."application_link", "c"."company_name", "jp"."job_city",
+        "jp"."job_state", "jp"."date_posted";
         `;
         pool.query(queryText).then((results) => {
             console.log('Job issues to send', results.rows);
