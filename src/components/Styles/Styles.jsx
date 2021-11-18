@@ -20,13 +20,14 @@ const useStyles = makeStyles(
       fontWeight: "bold",
       fontSize: 22,
       textAlign: "center",
-      fontFamily: "Lato",
+      fontFamily: "Red Hat Text",
     },
 
     tableHeaderCell: {
-      fontFamily: "Lato",
+      fontFamily: "Red Hat Text",
       textAlign: "center",
-      fontSize: "25px",
+      fontSize: "22px",
+      fontWeight: '600',
       paddingLeft: 0,
       paddingRight: 0,
     },
@@ -43,11 +44,16 @@ const useStyles = makeStyles(
     //-------------Campaign (formerly UserPage) (admin email campaign page)-------------//
 
     campaignPaperContainer: {
-      width: "90%",
+      width: "93%",
       display: "block",
       margin: "auto",
       justifyContent: "center",
       textAlign: "center",
+    },
+
+    loginTextField: {
+      width: "22ch",
+
     },
 
     templateIdTextField: {
@@ -124,7 +130,7 @@ const useStyles = makeStyles(
 
 
         loginRegisterPaper: {
-          width: '70%', 
+          width: '80%', 
           margin: '50px auto 30px', 
           textAlign: 'center', 
           padding: '30px 0'
@@ -147,7 +153,13 @@ const useStyles = makeStyles(
 
     loginRegisterSpacing: {
       margin: '8px',
-    }
+    },
+
+    loginHeaderText: {
+      fontFamily: 'Red Hat Text',
+      fontWeight: '500',
+      fontSize: '36px',
+    },
 
 
   },

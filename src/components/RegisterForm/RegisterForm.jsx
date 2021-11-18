@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Paper, Typography, TextField, Button } from '@material-ui/core';
+import { Paper, Typography, TextField, Button, IconButton, InputAdornment } from '@material-ui/core';
 import useStyles from '../Styles/Styles';
+
+//for password visibility:
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 function RegisterForm() {
 const classes = useStyles(); 
@@ -27,11 +30,18 @@ const classes = useStyles();
     });
   }; // end registerUser
 
+// for showing password on icon click
+const [showPassword, setShowPassword] = useState(false);
+const handleClickShowPassword = () => setShowPassword(!showPassword);
+const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+
+
   return (
     <Paper className={classes.loginRegisterPaper}  elevation={6}>
 
     <form onSubmit={registerUser}>
-    <Typography variant="h4" style={{marginBottom: '30px'}}>REGISTER</Typography> 
+    <Typography  className={classes.loginHeaderText} style={{marginBottom: '30px'}}>REGISTER</Typography> 
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -43,6 +53,8 @@ const classes = useStyles();
       <div className={classes.loginRegisterSpacing}>
 
       <TextField 
+                  className={classes.loginTextField}
+
         required            
         type="email"
         id="register-username"
@@ -55,6 +67,8 @@ const classes = useStyles();
 </div >
 <div className={classes.loginRegisterSpacing}>
 <TextField 
+            className={classes.loginTextField}
+
         required            
         type="password"
         id="register-password"
@@ -62,13 +76,31 @@ const classes = useStyles();
         variant="outlined"
         size="small"
         value={password}
+        type={showPassword ? "text" : "password"}
+
           onChange={(event) => setPassword(event.target.value)}
+          InputProps={{ 
+            // This is where the toggle button is added.
+            endAdornment: ( 
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
 
       </div>
       <div className={classes.loginRegisterSpacing}>
 
       <TextField 
+                  className={classes.loginTextField}
+
         required            
         type="text"
         id="register-first-name"
@@ -86,7 +118,10 @@ const classes = useStyles();
      
 
      <TextField 
-        required            
+                 className={classes.loginTextField}
+
+        required      
+              
         type="text"
         id="register-last-name"
         label="Last Name"
