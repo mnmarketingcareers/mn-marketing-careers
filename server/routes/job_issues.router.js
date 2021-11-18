@@ -67,4 +67,22 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     }
 })
 
+// Handles DELETE request that removes issue column from the database
+router.delete('/:id', rejectUnauthenticated, async (req, res) => {
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level to delete this content');
+        return;
+    }
+    try {
+        console.log('In Delete', req.params.id);
+        const queryText = `DELETE FROM "issues" WHERE "id" = $1;`;
+        const result = await pool.query(queryText, [req.params.id])
+        console.log('Rows updated', result.rowCount);
+        res.sendStatus(201);
+    } catch (error) {
+        console.log('Error in Delete', error);
+        res.sendStatus(500);
+    }
+})
+
 module.exports = router;
