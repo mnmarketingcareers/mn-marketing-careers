@@ -67,9 +67,9 @@ function Main() {
         { field: 'description', headerName: 'description', width: 150 },
         { field: 'application_link', headerName: 'link', width: 150, renderCell: (params) => {
                                             if(params.row.application_link.includes('http')){
-                                                return <button><a href={`${params.row.application_link}`} target="_blank">Apply</a></button>
+                                                return <Button variant="contained"><a href={`${params.row.application_link}`} target="_blank">Apply</a></Button>
                                             } else {
-                                                return <button><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
+                                                return <Button variant="contained"><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
                                             }
                                             }},
         { field: 'job type', headName: 'Job Field', width: 350 },
@@ -85,9 +85,9 @@ function Main() {
 
 // Fetches jobs by date.
     const fetchRecentJobs = (event) => {
-        console.log('what is event?', event);
-        dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } })
-        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } })
+        dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } });
+        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } });
+        dispatch({ type: 'FETCH_RECENT_INTERNSHIPS', payload: { age: event } });
     }
     
     return (
