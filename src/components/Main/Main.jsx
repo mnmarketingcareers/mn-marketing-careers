@@ -74,10 +74,11 @@ function Main() {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
 
+// Fetches jobs by date.
     const fetchRecentJobs = (event) => {
         console.log('what is event?', event);
-
         dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } })
+        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } })
     }
 
     return (
