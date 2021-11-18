@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+import axios from 'axios';
 const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
@@ -222,6 +223,16 @@ router.post('/', async (req, res) => {
   console.log('In job_postings router, POST', req.body);
 
   try {
+    // verify token
+    console.log('In reCaptcha verification', req.body.token);
+    const secretKey = process.env.REACT_APP_SECRET_KEY;
+    const token = req.body.token;
+
+
+    const verification = axios.post(`
+        https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}
+    `)
+    console.log('verification response', verification);
     
     // validate inputs
     if (

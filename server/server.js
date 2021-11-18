@@ -19,7 +19,7 @@ const templateRouter = require('./routes/template.router');
 const jobsRouter = require('./routes/job_postings.router');
 const jobTypesRouter = require('./routes/job_types.router');
 const searchJobsRouter = require('./routes/search_jobs.router');
-
+const grecaptcha = require('./routes/grecaptcha.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -38,12 +38,12 @@ app.use('/api/subs', subsRouter);
 app.use('/api/feedback', feedbackRouter);
 app.use('/api/campaign', campaignRouter); //updated by Mo - work in progress
 app.use('/api/template', templateRouter); //updated by Mo - now for mailchimp templates
-
+app.use('/api/verify', grecaptcha);
 
 // use the jobs routers
 app.use('/api/job', jobsRouter);
-app.use('/api/jobtypes', jobTypesRouter)
-app.use('/api/search', searchJobsRouter)
+app.use('/api/jobtypes', jobTypesRouter);
+app.use('/api/search', searchJobsRouter);
 // Serve static files
 app.use(express.static('build'));
 

@@ -3,7 +3,6 @@ const pool = require("../modules/pool");
 const router = express.Router();
 const client = require("@mailchimp/mailchimp_marketing");
 const { default: axios } = require("axios");
-const { default: LoginPage } = require("../../src/components/LoginPage/LoginPage");
 // const {
 //   rejectUnauthenticated,
 // } = require("../modules/authentication-middleware");
@@ -18,7 +17,7 @@ client.setConfig({
 
 
  router.post('/', (req, res) => { 
-     console.log('In reCaptcha verification', req.body.token);
+    console.log('In reCaptcha verification', req.body.token);
     const secretKey = process.env.REACT_APP_SECRET_KEY;
     const token = req.body.token;
 
