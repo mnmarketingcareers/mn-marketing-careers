@@ -17,6 +17,7 @@ import getCampaignsSaga from './getCampaign.saga';
 import patchTemplateSaga from './patchTemplate.saga';
 import getTemplatesSaga from './getTemplates.saga';
 import postNewTemplateSaga from './postTemplate.saga';
+import getJobIssuesSaga from './getJobIssue.saga';
 
 
 // rootSaga is the primary saga.
