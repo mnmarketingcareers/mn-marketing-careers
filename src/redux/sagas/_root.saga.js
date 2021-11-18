@@ -46,5 +46,6 @@ export default function* rootSaga() {
     patchTemplateSaga(), //PUT..er...patch - fix up template for new send
     getTemplatesSaga(), //GET all templates (for dropdown when building email)
     postNewTemplateSaga(), //POST new template from scratch
+    getJobIssuesSaga(), //GET job issues from database
   ]);
 }
