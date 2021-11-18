@@ -14,6 +14,8 @@ import campaignSaga from './campaign.saga';
 import sendEmailNow from './sendEmailNow.saga';
 import getCampaignsSaga from './getCampaign.saga';
 import patchTemplateSaga from './patchTemplate.saga';
+import getTemplatesSaga from './getTemplates.saga';
+import postNewTemplateSaga from './postTemplate.saga';
 
 
 // rootSaga is the primary saga.
@@ -40,6 +42,7 @@ export default function* rootSaga() {
     sendEmailNow(), //post send campaign immediately UNDER CONSTRUCTION
     getCampaignsSaga(), //get campaign info (experimental)
     patchTemplateSaga(), //PUT..er...patch - fix up template for new send
-
+    getTemplatesSaga(), //GET all templates (for dropdown when building email)
+    postNewTemplateSaga(), //POST new template from scratch
   ]);
 }

@@ -2,23 +2,24 @@ import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
 
-function* patchTemplate(action) {
+function* postNewTemplate(action) {
     try {
-        console.log("action.payload in PATCH TEMPLATE saga is:", action.payload)
+        console.log("action.payload in POST TEMPLATE saga is:", action.payload)
         yield axios({
-            method: "patch",  
-            url: "/api/template", 
+            method: "post",  
+            url: "/api/template/", 
             data: action.payload
         });
-        // yield put({ type: "GET_SUBS" }); //fix
+        yield put({ type: "GET_TEMPLATES" });
     } catch (error) {
-        console.log("error in sending new subscriber to mailchimp!", error)
+        console.log("error in posting new template to Mailchimp", error)
     };
 };
 
 //listener - add a sub
-function* patchTemplateSaga() { 
-    yield takeEvery("SEND_PATCH_TEMPLATE", patchTemplate);
+function* postNewTemplateSaga() { 
+    yield takeEvery("SEND_POST_TEMPLATE", postNewTemplate);
 }
 
-export default patchTemplateSaga;
+export default postNewTemplateSaga;
+

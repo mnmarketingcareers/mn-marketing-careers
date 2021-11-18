@@ -15,26 +15,26 @@ client.setConfig({
   });
 
 
-  //GET //deletelater
+  //GET 
 /** 
- * @api {get} /campaign/getcampaign
- * @apiName Get Campaign
- * @apiGroup Campaign
+ * @api {get} /campaign/getinfo
+ * @apiName Get Campaigns
+ * @apiGroup Campaigns
  * 
- * @apiDescription get information for a specific campaign
- * this is experimental as of 11/16 - seeing what we can get back! //fix
+ * @apiDescription get ALL campaigns' info!
+ * this is experimental as of 11/16 - seeing what we can get back!
  */
  router.get('/getinfo', (req, res) => {
      console.log('in get campaign ROUTER parteeeeeee')
-    const response = client.campaigns.getContent("8590181")
-    .then((response) => {
-      console.log("response from GET CAMPAIGN INFO:", response);
+     const response = client.campaigns.list()
+     .then((response) => {
+      // console.log("response from GET CAMPAIGNS INFO:", response);
       res.send(response);
     })
     .catch((error) => {
       res.sendStatus(500);
     });
-  }) //deletelater
+  }) 
 
 
 
@@ -100,9 +100,9 @@ router.post("/", (req, res) => {
     });
 });
 
-//POST
+//POST - EMAIL FINAL SEND
 /**
- * @api {post} /campaign/send SEND a campaign by ID
+ * @api {post} /campaign/send SEND / EMAIL OUT a campaign by ID
  * @apiName Send Campaign By ID
  * @apiGroup Campaign
  * @apiDescription Sends a campaign that has already been created
