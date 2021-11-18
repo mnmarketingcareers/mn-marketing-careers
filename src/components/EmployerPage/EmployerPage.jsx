@@ -32,11 +32,8 @@ import CloseIcon from '@mui/icons-material/Close';
 
 // Google ReCaptcha import
 import ReCaptchaV2 from 'react-google-recaptcha';
-import ReCAPTCHA from 'react-google-recaptcha'
 
 import './EmployerPage.css';
-
-const grecaptchaObject = window.grecaptcha
 
 function EmployerPage() {
 
@@ -226,9 +223,7 @@ function EmployerPage() {
         },
     ];
 
-    function onCaptchaChange(value) {
-        console.log("Captcha value:", value);
-      }
+
     /**
      * Adds the token to the form object
      *
