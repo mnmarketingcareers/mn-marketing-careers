@@ -49,7 +49,7 @@ function JobIssuesReviewPage() {
                             <TableCell>Issue Type</TableCell>
                             <TableCell>Comments</TableCell>
                             <TableCell>Job Seeker Email</TableCell>
-                            <TableCell>Resolved?</TableCell>
+                            {/* <TableCell>Resolved?</TableCell> */}
                             <TableCell>Delete Issue</TableCell>                                
                         </TableRow>
                     </TableHead>

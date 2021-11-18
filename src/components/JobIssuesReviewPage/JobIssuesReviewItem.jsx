@@ -26,7 +26,7 @@ function JobIssuesReviewItem({issue}) {
 
     const handleDelete = () => {
         dispatch({ 
-            type: 'DELETE_POSTING', 
+            type: 'DELETE_ISSUE', 
             payload: {id: issue.id}
         });
     }
@@ -38,13 +38,13 @@ function JobIssuesReviewItem({issue}) {
                 <TableCell>{issue.company_name}</TableCell>
                 <TableCell>{issue.job_city}, &nbsp;{issue.job_state}</TableCell>
                 <TableCell>{issue.date_posted}</TableCell>
-                <TableCell>{issue.description}</TableCell>
                 <TableCell>
                     <Link href={issue.application_link} underline="hover">{issue.application_link}</Link>
                 </TableCell>
                 <TableCell>{issue.issue_type}</TableCell>
+                <TableCell>{issue.comment}</TableCell>
                 <TableCell>{issue.issues_email}</TableCell>
-                <TableCell>{issue.is_resolved}</TableCell>
+                {/* <TableCell>{issue.is_resolved}</TableCell> */}
                 {/* <TableCell>
                     {(job.share_contact) ? (
                         <p>{job.hiring_contact_email, job.hiring_contact_name, job.title, job.phone}</p>
