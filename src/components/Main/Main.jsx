@@ -74,8 +74,11 @@ function Main() {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
 
-    const fetchRecentJobs = () => {
-        dispatch({ type: 'FETCH_RECENT_JOBS', payload: {age: '3'} })
+// Fetches jobs by date.
+    const fetchRecentJobs = (event) => {
+        console.log('what is event?', event);
+        dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } })
+        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } })
     }
 
     return (
@@ -89,8 +92,6 @@ function Main() {
                         and apply directly through the hiring company unless otherwise noted.
                     </div>
                 </div>
-                {/* <p>{JSON.stringify(rows)}</p>
-                <button onClick={grabData}>Test</button> */}
                 {openModal && <Modal closeModal={setOpenModal} />}
             </div>
             <div className="tables-container">
@@ -105,38 +106,55 @@ function Main() {
                 <div className="submit">
                     Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button>
                     <div className="top-of-table"><h2>Companies Hiring</h2>
-                </div>
-
-                {openModal ? <p></p> : 
-                    <>
-                    <span>See jobs posted within the last</span>
-                    <button onClick={fetchRecentJobs}>
-                        3 days
-                    </button>
-                    <ul>
-                        <li>{JSON.stringify(recentJobs)}</li>
-                    </ul>
-                    </>
-                }
-                {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}
-                {openModal ? <p></p> :
-                    <div style={{ height: 500, width: '100%' }}>
-                        <DataGrid
-                            rows={rows}
-                            columns={columns}
-                            pageSize={8}
-                            rowsPerPageOptions={[8]}
-                            checkboxSelection
-                            disableSelectionOnClick
-                        />
                     </div>
-                }
-                {openModal ? <p></p> :
-                    <div className="top-of-table"><h2>Remote Opportunities</h2></div>
-                }
-                {openModal ? <p></p> : <RemoteJobs />}
+
+                    {openModal ? <p></p> :
+                        <>
+                            <span>See jobs posted within the last</span>
+                            <div className="filter">
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('1')}>
+                                    24 hours
+                                </Button>
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('3')}>
+                                    3 days
+                                </Button>
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('7')}>
+                                    7 days
+                                </Button>
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('14')}>
+                                    14 days
+                                </Button>
+                                <Button variant="outlined" onClick={() => fetchRecentJobs('30')}>
+                                    30 days
+                                </Button>
+                            </div>
+                            {/* <ul> */}
+                                {/* <li>{JSON.stringify(recentJobs)}</li> */}
+                                {/* {recentJobs.map((job) => (
+                                    <li>{job.date_posted}</li> */}
+                                {/* ))} */}
+                            {/* </ul> */}
+                        </>
+                    }
+                    {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}
+                    {openModal ? <p></p> :
+                        <div style={{ height: 500, width: '100%' }}>
+                            <DataGrid
+                                rows={rows}
+                                columns={columns}
+                                pageSize={8}
+                                rowsPerPageOptions={[8]}
+                                checkboxSelection
+                                disableSelectionOnClick
+                            />
+                        </div>
+                    }
+                    {openModal ? <p></p> :
+                        <div className="top-of-table"><h2>Remote Opportunities</h2></div>
+                    }
+                    {openModal ? <p></p> : <RemoteJobs />}
                     <div className="top-of-table"><h2>Internships</h2></div>
-                {openModal ? <p></p> : <Internships />}
+                    {openModal ? <p></p> : <Internships />}
                 </div>
             </div>
         </>
