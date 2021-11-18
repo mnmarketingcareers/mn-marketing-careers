@@ -183,6 +183,8 @@ const EmailTemplate = () => {
             //  appears at over 2k characters
             variant="contained"
             color="success"
+            style={{margin: '4px'}}
+
             type="submit"
           >
             SUBMIT
@@ -191,6 +193,7 @@ const EmailTemplate = () => {
             onClick={() => clearFields()}
             variant="contained"
             color="error"
+            style={{margin: '4px'}}
           >
             CLEAR
           </Button>
