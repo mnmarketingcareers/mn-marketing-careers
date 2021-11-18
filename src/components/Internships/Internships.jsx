@@ -28,9 +28,9 @@ function Internships() {
         { field: 'description', headerName: 'Description', width: 150 },
         { field: 'application_link', headerName: 'Link', width: 150, renderCell: (params) => {
                                             if(params.row.application_link.includes('http')){
-                                                return <button className="apply-button"><a href={`${params.row.application_link}`} target="_blank">Apply</a></button>
+                                                return <Button variant="outlined"><a href={`${params.row.application_link}`} target="_blank">Apply</a></Button>
                                             } else {
-                                                return <button className="apply-button"><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
+                                                return <Button variant="outlined"><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
                                             }
                                             }},
         { field: 'job type', headName: 'Job Field', width: 350},
