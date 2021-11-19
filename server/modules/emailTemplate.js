@@ -442,7 +442,10 @@ let emailText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w
                             <table border="0" cellspacing="0" class="mcnTextContentContainer" width="100%" style="min-width: 100% !important;background-color: #3A8DAD;border: 1px none;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                 <tbody><tr>
                                     <td valign="top" class="mcnTextContent" style="padding: 18px;color: #F2F2F2;font-family: Arvo, Courier, Georgia, serif;font-size: 14px;font-weight: normal;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height: 150%;">
-                                        <span style="font-size:24px"><span style="font-family:arvo,courier,georgia,serif"><b>Minnesota Marketing Careers</b></span></span>
+                                        <span style="font-size:24px"><span style="font-family:arvo,courier,georgia,serif"><b><a style="color: #F2F2F2" href="https://eepurl.us2.list-manage.com/subscribe?u=988880c6e24cb98ce8f81835c&id=84d7f9664e" target="_blank">Minnesota Marketing Careers</a></b></span></span>
+
+                                       
+
                                     </td>
                                 </tr>
                             </tbody></table>
