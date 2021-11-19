@@ -63,8 +63,8 @@ function Campaign() {
       type: "CREATE_CAMPAIGN",
       payload: {
         type: "regular", // this or plain text? Ask Casey
-        from_name: "MNMC Dev Team", // the "from" name that appears
-        reply_to: "cmochinski@gmail.com", // made up - do they have a real one?
+        from_name: "Minnesota Marketing Careers", // the "from" name that appears
+        reply_to: "mnmarketingcareers@gmail.com", // made up - do they have a real one?
         template_id: parseInt(templateId), //coming back from template creation //updated
         title: campaignTitle,
         subject_line: campaignSubject,
@@ -199,7 +199,7 @@ function Campaign() {
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
           />
-          <TextField
+          {/* <TextField
             required
             className={classes.previewTextField}
             onChange={() => setCampaignPreviewText(event.target.value)}
@@ -209,9 +209,9 @@ function Campaign() {
             value={campaignPreviewText}
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
-          />
+          /> */}
 
-          <div className={classes.footerCheckDiv}>
+          {/* <div className={classes.footerCheckDiv}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -226,23 +226,14 @@ function Campaign() {
               }
               label="Include Footer?"
             />
-          </div>
+          </div> */}
           <div>
             <Button style={{ margin: "6px" }} variant="contained" type="submit">
               SAVE & NEXT
             </Button>
 
 
-           
-{/* 
-            {templateId &&
-            campaignTitle &&
-            campaignSubject &&
-            campaignPreviewText ? (
-              sendEmailButton()
-            ) : (
-              <></>
-            )} */}
+
 
 
 
