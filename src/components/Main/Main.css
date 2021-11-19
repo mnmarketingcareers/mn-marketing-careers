@@ -1,6 +1,11 @@
 .parent {
+    margin-left: 2em;
     display: grid;
     justify-content: center;
+}
+
+.links-container {
+    margin-left: 2em;
 }
 
 .filter {
