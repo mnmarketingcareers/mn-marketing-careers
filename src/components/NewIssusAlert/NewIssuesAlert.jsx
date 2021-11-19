@@ -21,7 +21,7 @@ function NewIssues() {
 
     return(
         <Card sx={{}}>
-            <CardActionArea onClick={() => history.push('/reviewsubmissions') }>
+            <CardActionArea onClick={() => history.push('/adminjobissuelist') }>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         There are

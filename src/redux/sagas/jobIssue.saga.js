@@ -9,7 +9,7 @@ function* fetchJobIssues(action) {
             withCredentials: true,
         };
         console.log('action.payload is:', action.payload);
-        const response = yield axios.get('/api/jobissues/', config);
+        const response = yield axios.get('/api/jobissues', config);
         console.log('response.data is:', response.data);
         // this database information is then added to the reducer
         yield put({ type: 'SET_JOB_ISSUE_LIST', payload: response.data});

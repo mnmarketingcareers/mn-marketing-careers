@@ -94,7 +94,7 @@ function Main() {
         <>
             <div className="parent">
                 <div className="logo">
-                    <h1>LOGO</h1>
+                    <h1 >REALLY BIG AWESOME LOGO</h1>
                     <div>
                         In support of Minnesota’s marketing community, this weekly update is dedicated to sharing marketing
                         career opportunities with Minnesota-based companies. We invite you to review the opportunities below
