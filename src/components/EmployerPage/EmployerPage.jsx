@@ -49,7 +49,7 @@ function EmployerPage() {
         dispatch({ type: 'RESET_LASAGNA'});
     }, []);
     // get verification from reducer
-    const lasagna = useSelector(store => store.lasagna)
+    const lasagna = useSelector(store => store.lasagna);
 
     // On the question : "Is this job remote?"; toggles whether other input field is displayed or not.
     const [toggleOther, setToggleOther] = useState(true);
