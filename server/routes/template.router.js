@@ -7,7 +7,7 @@ const { default: axios } = require("axios");
 // this is our email body
 let emailTemplate = require("../modules/emailTemplate");
 
-console.log("template is:", emailTemplate);
+// console.log("template is:", emailTemplate);
 
 // let stuff = {
 //   html: finalBody,
