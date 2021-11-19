@@ -13,12 +13,14 @@ import {
   MenuItem,
 } from "@mui/material";
 import useStyles from "../Styles/Styles";
+import EmailBody from "../EmailBody/EmailBody"; //important this is the huge HTML string for email world
 
 const EmailTemplate = () => {
   const history = useHistory();
   const templateList = useSelector((store) => store.setTemplatesReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const emailBody = EmailBody(); //important inside a variable
 
   const [newOrMod, setNewOrMod] = useState("");
   const [templateId, setTemplateId] = useState("");
@@ -26,10 +28,12 @@ const EmailTemplate = () => {
   const [templateBodyText, setTemplateBodyText] = useState("");
 
   useEffect(() => {
-    dispatch({ type: "GET_TEMPLATES" }); //get all existing template IDs to choose from!
+    console.log('email body is:', emailBody)
+    dispatch({ type: "GET_TEMPLATES" }); 
   }, []);
 
   const handleSubmitPatchTemplate = () => {
+   
     const bodyToSubmit = templateBodyText; //THIS is where the user's input is entering our crazy HTML
     console.log("in handleSubmitPatchTemplate");
     console.log("templateId =", templateId);
@@ -43,7 +47,7 @@ const EmailTemplate = () => {
         payload: {
           template_id: templateId,
           name: templateName,
-          html: bodyToSubmit,
+          html: 'test', //important email body coming in from EmailBody component
         },
       });
     } else {
@@ -51,7 +55,7 @@ const EmailTemplate = () => {
         type: "SEND_POST_TEMPLATE",
         payload: {
           name: templateName,
-          html: bodyToSubmit,
+          html: 'test', //important email body coming in from EmailBody component
         },
       });
     }
@@ -77,6 +81,13 @@ const EmailTemplate = () => {
 
   return (
     <div className={classes.templatePageContainer}>
+
+
+
+      {/* <EmailBody /> */}
+
+
+
       <h1 style={{ textAlign: "center", margin: "15px" }}> Template </h1>
       <Typography
         style={{
@@ -163,7 +174,7 @@ const EmailTemplate = () => {
             <></>
           )}
           <br />
-          <TextField
+          {/* <TextField
             required
             multiline
             className={classes.bodyTextField}
@@ -174,7 +185,7 @@ const EmailTemplate = () => {
             value={templateBodyText}
             variant="outlined"
             InputLabelProps={{ style: { color: "#D3D3D3" } }}
-          />
+          /> */}
           <br />
 
           <Button

@@ -32,9 +32,15 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('In GET for all job issues');
 
     if (req.user.access_level === 1) {
-        const queryText = `SELECT "i"."id", "comment", "issue_type", "is_resolved", "issues_email"   
+        const queryText = `SELECT "i"."id", "comment", "issue_type", "is_resolved", 
+        "issues_email", "jp"."available_role", "jp"."application_link", "c"."company_name", "jp"."job_city",
+        "jp"."job_state", "jp"."date_posted"     
         FROM "issues" AS "i"
-        JOIN "job_postings" AS "jp" ON "jp"."id" = "i"."job_posting_id";
+        JOIN "job_postings" AS "jp" ON "jp"."id" = "i"."job_posting_id"
+        JOIN "company" AS "c" ON "c"."id" = "jp"."company_id"
+        GROUP BY "i"."id", "comment", "issue_type", "is_resolved", 
+        "issues_email", "jp"."available_role", "jp"."application_link", "c"."company_name", "jp"."job_city",
+        "jp"."job_state", "jp"."date_posted";
         `;
         pool.query(queryText).then((results) => {
             console.log('Job issues to send', results.rows);
@@ -58,6 +64,24 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             console.log('Error completing UPDATE issues', err);
             res.sendStatus(500);
         })
+    }
+})
+
+// Handles DELETE request that removes issue column from the database
+router.delete('/:id', rejectUnauthenticated, async (req, res) => {
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level to delete this content');
+        return;
+    }
+    try {
+        console.log('In Delete', req.params.id);
+        const queryText = `DELETE FROM "issues" WHERE "id" = $1;`;
+        const result = await pool.query(queryText, [req.params.id])
+        console.log('Rows updated', result.rowCount);
+        res.sendStatus(201);
+    } catch (error) {
+        console.log('Error in Delete', error);
+        res.sendStatus(500);
     }
 })
 
