@@ -33,7 +33,7 @@ client.setConfig({
   .catch((error) => {
     res.sendStatus(500);
   });
-}) 
+});
 
 
 //POST
