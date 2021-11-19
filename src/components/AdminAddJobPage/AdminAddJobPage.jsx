@@ -15,6 +15,7 @@ import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardHeader from '@mui/material/CardHeader';
 import { useHistory } from "react-router";
+import './AdminAddJobPage.css';
 
 const AdminAddJobPage = () => {
     const dispatch = useDispatch();

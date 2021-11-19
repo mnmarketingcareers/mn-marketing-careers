@@ -31,6 +31,7 @@
     justify-content: center;
 }
 
+
 .submit-add-job-button {
     width: 150px;
     height: 45px;
@@ -51,5 +52,3 @@
   background-color: #5298a7;
   transition: background-color 0.23s linear;
 }
-
-

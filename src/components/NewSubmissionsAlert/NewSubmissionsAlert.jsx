@@ -20,7 +20,7 @@ function NewSubmissions() {
     }, []);
 
     return(
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ }}>
             <CardActionArea onClick={() => history.push('/reviewsubmissions') }>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
