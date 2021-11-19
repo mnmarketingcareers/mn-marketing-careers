@@ -40,14 +40,17 @@ function Campaign() {
     <div className="container">
       <br />
       <Typography
-        style={{ textAlign: "center", marginBottom: "25px" }}
+        style={{ textAlign: "center", marginBottom: "30px", fontFamily: 'Red Hat Text'}}
         variant="h3"
       >
         Ready To Send?
       </Typography>
 
       <Paper className={classes.campaignPaperContainer} elevation={6}>
+
+
         {activeCampaign.id != undefined ? (
+          <>
           <Container>
                 <Typography className={classes.emailConfirmText}>Campaign ID: {activeCampaign.id}</Typography>
                 <Typography className={classes.emailConfirmText}>
@@ -88,14 +91,11 @@ function Campaign() {
               </a>
             </Container>
           </Container>
-        ) : (
-          <img src="./images/Pendulum.gif" />
-        )}
+      
 
         <br />
         <br />
 
-        <br />
 
         <Button
           style={{ margin: "6px", padding: "14px, 18px", fontSize: "22px" }}
@@ -126,6 +126,16 @@ function Campaign() {
         >
           CANCEL
         </Button>
+
+</>
+) : (
+  <div style={{margin: '50px'}}>
+  <img src="./images/Pendulum.gif" width="90px" />
+  <Typography variant="h6" style={{marginTop: '20px', fontFamily: 'Red Hat Text'}}>Building Email...</Typography>
+  </div>
+)}
+
+        
         <br />
         <br />
       </Paper>
