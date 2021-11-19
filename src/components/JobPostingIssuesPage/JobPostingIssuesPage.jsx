@@ -25,27 +25,7 @@ function JobPostingIssuesPage() {
         issue_type: '',
         is_resolved: 'FALSE',
         issues_email: ''
-    })
-
-    // TODO incorporate useParams?
-    // handle main page job issue trigger (useffect to trigger it?)
-    // post route handle submit?
-    // TODO append that position on DOM as a header?
-    // MUI radio button options underneath
-    // New saga to the server
-    // New router
-    // ON THIS PAGE
-    // One GET: job postings page
-    // One POST: issues page
-    // TODO ON THE NEW ROUTER
-    // One PUT: changed is_resolved to 'true'/toggle to 'not' like in feedback router
-    // One DELETE: maybe... (stretch)
-    // Main page will need a history.push('/jobpostingissue/${whateverId}') 
-
-    // TODO figuring out the correct payload for the post is tricky
-    // issue_type vs a comment?
-    // who's email are we adding, the person who raised the issue?
-    
+    })   
     
     // get by ID route in job postings router
     const job = useSelector(store => store.setJobsReducer);
@@ -108,20 +88,17 @@ function JobPostingIssuesPage() {
     setIssue({ ...issue, issue_type: 'other' });
   };
 
-  // I may need to map through jobs to get this to appear on the dom, child component and props might be needed
     return (
         <>
       <div className="issueheader">
         <h2>Hit a Snag Applying? Let Us Know What's Going On</h2>
       </div>
       <div className="jobinquestion">
-        {/* {job.map((jobIssue) => {
-            return(<JobIssuesItem key={jobIssue.id} jobIssue={jobIssue}/>)
-        })} */}
         <h3>Position in Question: {thisJob.available_role}</h3>
       </div>
       <div className="issueform">
-        <FormControl component="fieldset">
+        <form onSubmit={handleSubmit}>
+        <FormControl required component="fieldset">
           <FormLabel
             component="legend"
             style={{ textAlign: "center", paddingTop: "9px" }}
@@ -166,6 +143,8 @@ function JobPostingIssuesPage() {
               </div>
             )}
             <TextField
+              required
+              type="email"
               id="standard-basic"
               label="Please Confirm Your Email"
               variant="standard"
@@ -174,7 +153,6 @@ function JobPostingIssuesPage() {
           </RadioGroup>
           <div className="unsub-submit-div">
             <input
-              onClick={handleSubmit}
               className="submit-employer-form-button"
               type="submit"
               name="submit"
@@ -182,6 +160,7 @@ function JobPostingIssuesPage() {
             />
           </div>
         </FormControl>
+        </form>
       </div>
     </>
     );
