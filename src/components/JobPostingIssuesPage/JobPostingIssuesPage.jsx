@@ -12,6 +12,9 @@ import FormGroup from "@mui/material/FormGroup";
 import axios from "axios";
 import JobIssuesItem from "./JobIssuesItem";
 
+import ReCaptchaV2 from 'react-google-recaptcha';
+import './JobPostingIssuePage.css'
+
 function JobPostingIssuesPage() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -29,6 +32,7 @@ function JobPostingIssuesPage() {
     
     // get by ID route in job postings router
     const job = useSelector(store => store.setJobsReducer);
+    const lasagna = useSelector(store => store.lasagna);
 
     const thisJob = job[0];
 
@@ -81,6 +85,34 @@ function JobPostingIssuesPage() {
   // if an unsubscriber selects the "other option"
   // we want to toggle from true to false for the ternerary operator
   const [toggleOther, setToggleOther] = useState(true);
+  const [showButton, setShowButton] = useState(false);
+  // let showButton = lasagna.success ? true : false;
+  /**
+   * Adds the token to the form object
+   *
+   * @param {string} token - response from ReCaptcha
+   */
+  const handleToken = (token) => {
+    console.log('recaptcha token: ', token);
+    // dispatch({ type: 'LASAGNA', payload: token });
+    setShowButton(true);
+    setIssue((issue) => {
+      return { ...issue, token }
+    });
+  }
+
+  /**
+   * Removes the token from the from object
+   */
+  const handleExpire = () => {
+    dispatch({ type: 'RESET_LASAGNA' });
+    console.log('showbutton is: ', showButton);
+    setShowButton(false);
+    console.log('showButton is: ', showButton);
+    setIssue((issue) => {
+      return { ...issue, token: null }
+    });
+  }
 
   // this changeState function is called in the click action firing the "other" radio button
   const changeState = () => {
@@ -151,13 +183,28 @@ function JobPostingIssuesPage() {
               onChange={emailTextFieldValue}
             />
           </RadioGroup>
-          <div className="unsub-submit-div">
+          {/* <div className="unsub-submit-div">
+
             <input
               className="submit-employer-form-button"
               type="submit"
               name="submit"
               value="Submit"
             />
+          </div> */}
+          <div className="recaptcha-container">
+            {
+              !showButton &&     
+            <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
+              onChange={handleToken}
+              onExpired={handleExpire}
+              onErrored={err => console.error(`Recaptcha error: ${err}`)}
+            />
+            }
+            {
+              showButton &&
+              <input className="submit-issues-form-button" type='submit' value='Submit' />
+            }
           </div>
         </FormControl>
         </form>
