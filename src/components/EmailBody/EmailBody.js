@@ -595,9 +595,7 @@ const EmailBody = () => {
                             
 
 
-                                <ul>
                                LASAGNA1
-                               </ul>
 
 
 

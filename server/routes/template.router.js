@@ -10,33 +10,20 @@ let emailTemplate = require('../modules/emailTemplate');
 console.log('template is:', emailTemplate);
 
 
-const jobs = [
-   'marketer',
-   'coder',
-   'instructor'
-];
 
-// create replacement string
-let jobsList = '<ul>';
+  
 
-// create HTML for each job from the DB
-for(let job of jobs) {
-  jobsList += `
-    <li>${job}</li>
-  `
-}
 
-jobsList += '</ul>';
+// let stuff = {
+//   html: finalBody,
+// };
 
-// actually replace text in the big string
-let finalBody = emailTemplate.replace('**jobs**', jobsList);
-finalBody = finalBody.replace('**cities**', 'hello');
 
-console.log('final body', finalBody);
 
-let stuff = {
-  html: finalBody,
-};
+
+
+
+
 
 // send to mailchimp
 
@@ -101,26 +88,63 @@ router.get('/', (req, res) => {
  * @apiSuccess - TBD
  * 
  */ 
- router.post("/", (req, res) => { 
-  console.log('Adding new template with name', req.body.name)
+ router.post("/", async (req, res) => {   
+ try {console.log('Adding new template with name', req.body.name)
+
+
+ const query = `
+                SELECT "jp"."id", "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "share_contact", "date_posted", "hc".hiring_contact_email, 
+                "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
+                ARRAY_AGG("jt"."type") AS "job type" 
+                FROM "job_postings" AS "jp"
+                JOIN "company" AS "co" ON "jp".company_id = "co".id
+                LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
+                LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
+                LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
+                WHERE "jp".archived = 'false' AND "jp".status = 'APPROVED'
+                AND "jp"."date_posted" > (current_date - interval '30' day)
+                GROUP BY "jp"."id", "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";`;
+
+const jobs = await pool.query(query)
+console.log('jobs is:', jobs.rows)
+
+let jobsList = '<ul>';
+
+// create HTML for each job from the DB
+for(let job of jobs.rows) {
+  jobsList += `<li><a href=${job.application_link} target="_blank">${job.company_name}</a> - ${job.available_role}</li>`
+} 
+jobsList += '</ul>';
+
+
+
+
+
+
+
+// actually replace text in the big string
+let finalBody = emailTemplate.replace('LASAGNA1', jobsList);
+finalBody = finalBody.replace('LASAGNA2', 'hello');
+finalBody = finalBody.replace('LASAGNA3', 'FINAL HELLOOOOOO');
+
+
+console.log('final body', finalBody);
+
+
+
   const nameChange = req.body.name; 
   const bodyChange = req.body.html;
-  const response = client.templates.create({
+  const response = await client.templates.create({
     name: nameChange,
-    html: bodyChange,
+    html: finalBody    
+  })}
+  catch(error){
+    res.sendStatus(500)
+  }
   })
-
-  .then((response) => {
-    console.log('response from TEMPLATE POST is:', response);
-    res.sendStatus(200);
-  })
-  .catch((error) => {
-    res.sendStatus(500);
-    console.log('error in template POST page:', error)
-  });
-});
-
-
 
 
 

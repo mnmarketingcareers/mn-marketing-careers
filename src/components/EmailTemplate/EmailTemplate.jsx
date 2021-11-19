@@ -33,6 +33,7 @@ const EmailTemplate = () => {
   }, []);
 
   const handleSubmitPatchTemplate = () => {
+   
     const bodyToSubmit = templateBodyText; //THIS is where the user's input is entering our crazy HTML
     console.log("in handleSubmitPatchTemplate");
     console.log("templateId =", templateId);
