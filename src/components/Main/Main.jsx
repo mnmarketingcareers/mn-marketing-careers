@@ -95,14 +95,24 @@ function Main() {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
 
+    // Changes what the snackbar displayed depending on which filter button was pressed ie: Pressing the 7 days button
+    // will have the snackbar display "Filtering by the last 7 days" and clicking the 3 days button will display 
+    // "Filtering by the last 3 days" fetchRecentJobs is called.
+    const [snackBarValue, setSnackBarValue] = useState('0')
+
     // Fetches jobs by date.
     const fetchRecentJobs = (event) => {
+        setSnackBarValue(event);
+        setOpen(true); 
         dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } });
         dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } });
         dispatch({ type: 'FETCH_RECENT_INTERNSHIPS', payload: { age: event } });
     }
 
-    // For the snackbar button
+
+
+
+    // For the snackbar button.
     const [open, setOpen] = useState(false);
 
     // For the Snackbar button when one of the date buttons in pressed.
