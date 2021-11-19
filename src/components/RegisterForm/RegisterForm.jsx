@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Paper, Typography, TextField, Button, IconButton, InputAdornment } from '@material-ui/core';
+import useStyles from '../Styles/Styles';
+
+//for password visibility:
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 function RegisterForm() {
-  // use local state to store form inputs to compile as object for dispatch to server
+const classes = useStyles(); 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setFirsName] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
@@ -25,66 +30,114 @@ function RegisterForm() {
     });
   }; // end registerUser
 
+// for showing password on icon click
+const [showPassword, setShowPassword] = useState(false);
+const handleClickShowPassword = () => setShowPassword(!showPassword);
+const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+
+
   return (
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+    <Paper className={classes.loginRegisterPaper}  elevation={6}>
+
+    <form onSubmit={registerUser}>
+    <Typography  className={classes.loginHeaderText} style={{marginBottom: '30px'}}>REGISTER</Typography> 
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
-      <div>
-        <label htmlFor="username">
-          Email:
-          <input
-            type="email"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
+
+
+
+      <div className={classes.loginRegisterSpacing}>
+
+      <TextField 
+                  className={classes.loginTextField}
+
+        required            
+        type="email"
+        id="register-username"
+        label="Username"
+        variant="outlined"
+        size="small"
+        value={username}
+        onChange={(event) => setUsername(event.target.value)}
+        />
+</div >
+<div className={classes.loginRegisterSpacing}>
+<TextField 
+            className={classes.loginTextField}
+
+        required            
+        type="password"
+        id="register-password"
+        label="Password"
+        variant="outlined"
+        size="small"
+        value={password}
+        type={showPassword ? "text" : "password"}
+
+          onChange={(event) => setPassword(event.target.value)}
+          InputProps={{ 
+            // This is where the toggle button is added.
+            endAdornment: ( 
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+
+      </div>
+      <div className={classes.loginRegisterSpacing}>
+
+      <TextField 
+                  className={classes.loginTextField}
+
+        required            
+        type="text"
+        id="register-first-name"
+        label="First Name"
+        variant="outlined"
+        size="small"
+        value={firstName}
+          onChange={(event) => setFirstName(event.target.value)}
+        />
+
+</div>
+      <div className={classes.loginRegisterSpacing}>
+
+      
+     
+
+     <TextField 
+                 className={classes.loginTextField}
+
+        required      
+              
+        type="text"
+        id="register-last-name"
+        label="Last Name"
+        variant="outlined"
+        size="small"
+        value={lastName}
+          onChange={(event) => setLastName(event.target.value)}
+        />
+
+      
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="first-name">
-          First Name:
-          <input
-            type="text"
-            name="first-name"
-            value={firstName}
-            required
-            onChange={(event) => setFirsName(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="last-name">
-          Last Name:
-          <input
-            type="text"
-            name="last-name"
-            value={lastName}
-            required
-            onChange={(event) => setLastName(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <Button className={classes.loginButton} type="submit" color="primary" name="submit" variant="contained" size="small" value="Register">GO</Button>
       </div>
     </form>
+    </Paper>
   );
 }
 

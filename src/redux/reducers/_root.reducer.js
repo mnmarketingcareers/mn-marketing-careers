@@ -10,10 +10,15 @@ import approvedPostings from './approvedPosts.reducer';
 import setJobsReducer from './jobs.reducer';
 import setRemoteJobsReducer from './remote_jobs.reducer';
 import setInternshipsReducer from './internships.reducer';
+import lasagna from './captcha.reducer';
+
+// import setRecentJobs from './moreRecentJobs.reducer';
+
 import setTemplatesReducer from './setTemplates.reducer';
 import setActiveCampaignReducer from './setActiveCampaign.reducer';
 import setCampaignsReducer from './setCampaigns.reducer';
 import setRecentJobs from './moreRecentJobs.reducer';
+import setJobIssueListReducer from './jobIssues.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -33,11 +38,16 @@ const rootReducer = combineReducers({
   setRemoteJobsReducer,
   setInternshipsReducer,
   approvedPostings,
+  lasagna,
+
+ 
+
   setTemplatesReducer,
   setActiveCampaignReducer,
   setCampaignsReducer,
   setRecentJobs,
 
+  setJobIssueListReducer,
 });
 
 export default rootReducer;

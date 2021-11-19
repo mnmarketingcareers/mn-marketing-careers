@@ -7,7 +7,7 @@ const router = express.Router();
 
 // GET jobs with Remote field as 'Yes' or 'Other'...
 router.get('/', (req, res) => {
-  console.log('In GET for all remote and hybrid job postings');
+  // console.log('In GET for all remote and hybrid job postings');
   const query = `
                   SELECT "jp"."id", "available_role", "description", "application_link", 
                   "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -19,7 +19,8 @@ router.get('/', (req, res) => {
                   LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
                   LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
                   WHERE "jp".archived = 'false' AND "jp".status = 'POSTED'
-                  AND "jp"."remote" != 'no'
+                  AND "jp"."remote" = 'no'
+                  AND "jt"."id" != '14'
                   AND "jp"."date_posted" > (current_date - interval '30' day)
                   GROUP BY "jp"."id", "available_role", "description", "application_link", 
                   "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -36,7 +37,6 @@ router.get('/', (req, res) => {
 
 // GET jobs with the job type of 'Internship'.
 router.get('/internships', (req, res) => {
-  console.log('In GET for all internships');
   const query = `
       SELECT "jp"."id", "available_role", "description", "application_link", 
       "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 

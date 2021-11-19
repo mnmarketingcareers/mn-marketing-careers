@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const axios = require( 'axios' );
 const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
@@ -9,7 +10,7 @@ const {
  * GET route template
  */
 router.get('/', async (req, res) => {
-  console.log('In GET for all non-remote and hybrid job postings');
+//   console.log('In GET for all non-remote and hybrid job postings');
   const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -21,7 +22,8 @@ router.get('/', async (req, res) => {
                 LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
                 LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
                 WHERE "jp".archived = 'false' AND "jp".status = 'POSTED'
-                AND "jp".remote = 'no'
+                AND "jp".remote != 'yes'
+                AND "jt"."id" != '14'
                 AND "jp"."date_posted" > (current_date - interval '30' day)
                 GROUP BY "jp"."id", "available_role", "description", "application_link", 
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
@@ -38,7 +40,7 @@ router.get('/', async (req, res) => {
 
 // TO DO: check if this is used here
 router.get('/pending', rejectUnauthenticated, (req, res) => {
-    console.log('In GET pending job posts', req.user);
+    // console.log('In GET pending job posts', req.user);
     if (req.user.access_level < 1) {
             res.status(500).send('You do not have the correct access level for this content');
             return;
@@ -222,7 +224,17 @@ router.post('/', async (req, res) => {
   console.log('In job_postings router, POST', req.body);
 
   try {
-    
+
+    const secretKey = process.env.REACT_APP_SECRET_KEY;
+    const token = req.body.token;
+    const validate = await axios.post(`
+    https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}
+    `)
+    console.log('validation response', validate.data.success);
+    if (validate.data.success != true) {
+        const error = 'Captcha not validated';
+        throw error;
+    }
     // validate inputs
     if (
         req.body.posting_contact_name === '' ||
@@ -242,6 +254,8 @@ router.post('/', async (req, res) => {
         // this goes to the catch
         throw error; 
     }
+
+
     await pool.query('BEGIN');
     // const userId = 0;
 

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -12,6 +12,9 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const subsRouter = require('./routes/subs.router');
 const feedbackRouter = require('./routes/feedback.router');
+const jobIssuesRouter = require('./routes/job_issues.router');
+
+
 const campaignRouter = require('./routes/campaign.router'); //updated by Mo - work in progress
 const templateRouter = require('./routes/template.router');
 
@@ -19,12 +22,16 @@ const templateRouter = require('./routes/template.router');
 const jobsRouter = require('./routes/job_postings.router');
 const jobTypesRouter = require('./routes/job_types.router');
 const searchJobsRouter = require('./routes/search_jobs.router');
+const grecaptcha = require('./routes/grecaptcha.router');
 const jobsByAgeSearch = require('./routes/posting_age.router');
 
 
 // Body parser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 // Passport Session Configuration //
 app.use(sessionMiddleware);
@@ -37,9 +44,12 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/subs', subsRouter);
 app.use('/api/feedback', feedbackRouter);
+app.use('/api/jobissues', jobIssuesRouter);
+
+
 app.use('/api/campaign', campaignRouter); //updated by Mo - work in progress
 app.use('/api/template', templateRouter); //updated by Mo - now for mailchimp templates
-
+app.use('/api/verify', grecaptcha);
 
 // use the jobs routers
 app.use('/api/job', jobsRouter);

@@ -22,7 +22,7 @@ function* fetchRemoteJobs(){
 function* fetchInternships(){
   try{
     const approvedInternships = yield axios.get("/api/search/internships");
-    console.log('approvedInternships is', approvedInternships);
+    // console.log('approvedInternships is', approvedInternships);
     yield put({ type: "SET_INTERNSHIPS", payload: approvedInternships.data})
   } catch (error){
     console.log("Error in GET Internships ");
@@ -33,10 +33,32 @@ function* fetchJobsByAge(action) {
   try {
     const age = action.payload.age;
     const jobsByAgeResponse = yield axios.get(`/api/recentjob/${age}`);
-    console.log("jobs by age", age, "response", jobsByAgeResponse.data);
+    // console.log("jobs by age", age, "response", jobsByAgeResponse.data);
     yield put({ type: 'SET_RECENT_JOBS', payload: jobsByAgeResponse.data})
   } catch (error) {
     console.log('ERROR in GET jobs by age', error);
+  }
+}
+
+function* fetchRemoteJobsByAge(action) {
+  try {
+    const age = action.payload.age;
+    const remoteJobsByAgeResponse = yield axios.get(`/api/recentjob/remote/${age}`);
+    // console.log("jobs by age", age, "response", remoteJobsByAgeResponse.data);
+    yield put({ type: 'SET_RECENT_REMOTE_JOBS', payload: remoteJobsByAgeResponse.data})
+  } catch (error) {
+    console.log('ERROR in GET remote jobs by age', error);
+  }
+}
+
+function* fetchInternshipsByAge(action) {
+  try {
+    const age = action.payload.age;
+    const remoteInternshipsByAgeResponse = yield axios.get(`/api/recentjob/internships/${age}`);
+    console.log("jobs by age", age, "response", remoteInternshipsByAgeResponse.data);
+    yield put({ type: 'SET_RECENT_INTERNSHIPS', payload: remoteInternshipsByAgeResponse.data})
+  } catch (error) {
+    console.log('ERROR in GET remote jobs by age', error);
   }
 }
 
@@ -45,6 +67,8 @@ function* fetchJobsSaga() {
   yield takeEvery("FETCH_REMOTE_JOBS", fetchRemoteJobs);
   yield takeEvery("FETCH_INTERNSHIPS", fetchInternships);
   yield takeEvery("FETCH_RECENT_JOBS", fetchJobsByAge);
+  yield takeEvery("FETCH_RECENT_REMOTE_JOBS", fetchRemoteJobsByAge);
+  yield takeEvery("FETCH_RECENT_INTERNSHIPS", fetchInternshipsByAge);
 }
 
 export default fetchJobsSaga;
