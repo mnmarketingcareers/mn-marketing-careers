@@ -92,6 +92,9 @@ function Nav() {
               <Link className="navLink" to="/reviewsubmissions">
                 Review New Posts
               </Link>
+              <Link className="navLink" to="/adminjobissuelist">
+                Review Job Issues
+              </Link>
             </div>
 
             {/* hamburger menu will only appear on screen size 768 and down */}
