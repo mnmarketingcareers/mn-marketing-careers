@@ -53,7 +53,7 @@ function ReadyToPost () {
                                     <label htmlFor="edit-btn"></label>
                                     <Button id="edit-btn" variant="outlined" color="success" onClick={() => handleEdit(job.id)}>Edit</Button> 
                                     &nbsp;&nbsp;
-                                    <Button id="delete-btn" variant="outlined" color="error" onClick={() => handleDelete(job.id)}>JK, Delete dis</Button>   
+                                    <Button id="delete-btn" variant="outlined" color="error" onClick={() => handleDelete(job.id)}>Delete</Button>   
                                 </li>
                             )
                             })}

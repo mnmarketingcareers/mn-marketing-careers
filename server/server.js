@@ -13,7 +13,7 @@ const userRouter = require('./routes/user.router');
 const subsRouter = require('./routes/subs.router');
 const feedbackRouter = require('./routes/feedback.router');
 const jobIssuesRouter = require('./routes/job_issues.router');
-
+const empRouter = require('./routes/employer.router');
 
 const campaignRouter = require('./routes/campaign.router'); //updated by Mo - work in progress
 const templateRouter = require('./routes/template.router');
@@ -45,7 +45,7 @@ app.use('/api/user', userRouter);
 app.use('/api/subs', subsRouter);
 app.use('/api/feedback', feedbackRouter);
 app.use('/api/jobissues', jobIssuesRouter);
-
+app.use('/api/employer', empRouter);
 
 app.use('/api/campaign', campaignRouter); //updated by Mo - work in progress
 app.use('/api/template', templateRouter); //updated by Mo - now for mailchimp templates
