@@ -88,15 +88,15 @@ const AdminDrawerMenu = () => {
             </Link>
           </ListItem>
 
-          <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
+          {/* <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
             <Link className="drawerLink" to="/campaign">
               <h3>Campaign</h3>
             </Link>
-          </ListItem>
+          </ListItem> */}
 
           <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
             <Link className="drawerLink" to="/emailtemplate">
-              <h3>Template</h3>
+              <h3>Send Email</h3>
             </Link>
           </ListItem>
 

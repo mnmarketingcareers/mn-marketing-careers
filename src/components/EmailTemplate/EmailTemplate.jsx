@@ -83,25 +83,8 @@ const EmailTemplate = () => {
     <div className={classes.templatePageContainer}>
 
 
-
-      {/* <EmailBody /> */}
-
-
-
-      <h1 style={{ textAlign: "center", margin: "15px" }}> Template </h1>
-      <Typography
-        style={{
-          textAlign: "center",
-          margin: "auto",
-          paddingBottom: "30px",
-          width: "80%",
-        }}
-      >
-        AS OF 11/16/21 @ 4:40 PM - this page allows a user to create a new email
-        template (POST) and give that template a name as well as a body. That
-        body is HTML and can be sent as plain text BUT...I need to BUILD EMAIL
-        STYLING...inception style
-      </Typography>
+      <h1 style={{ textAlign: "center", margin: "15px" }}> New Email </h1>
+     
 
       <Paper className={classes.templatePaperContainer} elevation={12}>
         <form onSubmit={() => handleSubmitPatchTemplate()}>
@@ -114,6 +97,7 @@ const EmailTemplate = () => {
               id="template-id-select"
               label="Select"
               value={newOrMod}
+              
               onChange={handleSelectNewOrMod}
             >
               <MenuItem value={"new"}>New Template</MenuItem>
