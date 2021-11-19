@@ -50,7 +50,9 @@ function JobPostingIssuesPage() {
     // get by ID route in job postings router
     const job = useSelector(store => store.setJobsReducer);
 
-    console.log('whats in setJobsReducer in job issue page', job);
+    const thisJob = job[0];
+
+    console.log('whats in setJobsReducer in job issue page', thisJob.available_role);
     
 
     //will I need a new saga/reducer for this dispatch? POST route?
@@ -59,7 +61,7 @@ function JobPostingIssuesPage() {
         console.log('the event is', event);
         dispatch({
             type: 'ADD_JOB_ISSUE',
-            payload: issue, jobId
+            payload: issue
         });
         alert('Thank you for your feedback!');
         history.push('/main');
@@ -113,9 +115,10 @@ function JobPostingIssuesPage() {
         <h2>Hit a Snag Applying? Let Us Know What's Going On</h2>
       </div>
       <div className="jobinquestion">
-        {job.map((jobIssue) => {
+        {/* {job.map((jobIssue) => {
             return(<JobIssuesItem key={jobIssue.id} jobIssue={jobIssue}/>)
-        })}
+        })} */}
+        <h3>Position in Question: {thisJob.available_role}</h3>
       </div>
       <div className="issueform">
         <FormControl component="fieldset">
@@ -163,11 +166,11 @@ function JobPostingIssuesPage() {
               </div>
             )}
             <TextField
-                  id="standard-basic"
-                  label="Please Confirm Your Email"
-                  variant="standard"
-                  onChange={emailTextFieldValue}
-                />
+              id="standard-basic"
+              label="Please Confirm Your Email"
+              variant="standard"
+              onChange={emailTextFieldValue}
+            />
           </RadioGroup>
           <div className="unsub-submit-div">
             <input
