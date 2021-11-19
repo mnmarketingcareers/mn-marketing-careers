@@ -657,8 +657,8 @@ let emailText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w
                         
                         <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px;font-family: Lato, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;line-height: 200%;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;text-align: left;">
                         
-                            <ul>
-LASAGNA2       </ul>
+                            
+LASAGNA2      
 
                         </td>
                     </tr>
@@ -724,10 +724,9 @@ LASAGNA2       </ul>
                         
                         <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px;font-family: Lato, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;line-height: 200%;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;text-align: left;">
                         
-                            <ul>
+                          
        LASAGNA3
 
-</ul>
 
                         </td>
                     </tr>
