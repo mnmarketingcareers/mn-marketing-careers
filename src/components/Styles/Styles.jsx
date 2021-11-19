@@ -57,7 +57,7 @@ const useStyles = makeStyles(
     },
 
     templateIdTextField: {
-      width: "60%",
+      width: "70%",
       margin: "12px 0",
     },
 
@@ -106,6 +106,7 @@ const useStyles = makeStyles(
     },
 
     newOrModSelect: {
+      width: "90%",
     },
 
     templateIdSelect: {

@@ -32,6 +32,7 @@ function Campaign() {
       type: "SEND_EMAIL_NOW",
       payload: { campaign_id: campaignId },
     });
+    history.push('/adminhub')
   };
 
 
