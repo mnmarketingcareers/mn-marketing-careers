@@ -142,21 +142,21 @@ router.post("/", async (req, res) => {
     // console.log("jobs is:", remoteJobs.rows);
     // console.log("jobs is:", internships.rows);
 
-    let jobsList = "<ul>";
+    let jobsList = '<ul style="margin-left: 10px; margin-right: 10px">';
     // create HTML for LASAGNA1
     for (let job of jobs.rows) {
       jobsList += `<li><a href=${job.application_link} target="_blank">${job.company_name}</a> - ${job.available_role}</li>`;
     }
     jobsList += "</ul>";
 
-    let remoteJobList = "<ul>";
+    let remoteJobList = '<ul style="margin-left: 10px; margin-right: 10px">';
     // create HTML for LASAGNA2
     for (let remoteJob of remoteJobs.rows) {
       remoteJobList += `<li><a href=${remoteJob.application_link} target="_blank">${remoteJob.company_name}</a> - ${remoteJob.available_role}</li>`;
     }
     remoteJobList += "</ul>";
 
-    let internshipList = "<ul>";
+    let internshipList = '<ul style="margin-left: 10px; margin-right: 10px">';
     // create HTML for LASAGNA3
     for (let internship of internships.rows) {
       internshipList += `<li><a href=${internship.application_link} target="_blank">${internship.company_name}</a> - ${internship.available_role}</li>`;
@@ -267,21 +267,21 @@ GROUP BY "jp"."id", "available_role", "description", "application_link",
     // console.log("jobs is:", remoteJobs.rows);
     // console.log("jobs is:", internships.rows);
 
-    let jobsList = "<ul>";
+    let jobsList = '<ul style="margin-left: 10px; margin-right: 10px">';
     // create HTML for LASAGNA1
     for (let job of jobs.rows) {
       jobsList += `<li><a href=${job.application_link} target="_blank">${job.company_name}</a> - ${job.available_role}</li>`;
     }
     jobsList += "</ul>";
 
-    let remoteJobList = "<ul>";
+    let remoteJobList = '<ul style="margin-left: 10px; margin-right: 10px">';
     // create HTML for LASAGNA2
     for (let remoteJob of remoteJobs.rows) {
       remoteJobList += `<li><a href=${remoteJob.application_link} target="_blank">${remoteJob.company_name}</a> - ${remoteJob.available_role}</li>`;
     }
     remoteJobList += "</ul>";
 
-    let internshipList = "<ul>";
+    let internshipList = '<ul style="margin-left: 10px; margin-right: 10px">';
     // create HTML for LASAGNA3
     for (let internship of internships.rows) {
       internshipList += `<li><a href=${internship.application_link} target="_blank">${internship.company_name}</a> - ${internship.available_role}</li>`;
