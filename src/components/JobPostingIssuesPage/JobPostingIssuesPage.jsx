@@ -64,7 +64,7 @@ function JobPostingIssuesPage() {
         setIssue({ ...issue, issue_type: event.target.value });
       case 'Issue With the Job Listing Website':
         setIssue({ ...issue, issue_type: event.target.value });
-      case 'Content Not Relevant To My Search':
+      case 'Information on Job Posting Is Not Accurate':
         setIssue({ ...issue, issue_type: event.target.value });
       default:
         return event;

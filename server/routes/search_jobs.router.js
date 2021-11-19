@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
                   "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";
               ;`
   pool.query(query).then((results) => {
-    console.log('Resulting Rows to send', results.rows);
+    console.log('Resulting Rows to send', results.rowCount);
     res.send(results.rows);
   }).catch(error => {
     console.log('ERROR in GET all job postings', error);
@@ -55,7 +55,7 @@ router.get('/internships', (req, res) => {
       "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";   
               ;`
   pool.query(query).then((results) => {
-    console.log('Resulting Rows to send', results.rows);
+    console.log('Resulting Rows to send', results.rowCount);
     res.send(results.rows);
   }).catch(error => {
     console.log('ERROR in GET all job postings', error);

@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";
             ;`
     pool.query(query).then((results) => {
-        console.log('Resulting Rows to send', results.rows);
+        console.log('Resulting Rows to send', results.rowCount);
         res.send(results.rows);
     }).catch(error => {
         console.log('ERROR in GET all job postings', error);
@@ -94,7 +94,7 @@ router.get('/pending', rejectUnauthenticated, (req, res) => {
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";`;
     pool.query(query).then(result => {
-        console.log('Sending rows to Admin to post to list', result.rows);
+        console.log('Sending rows to Admin to post to list', result.rowCount);
         res.send(result.rows);
     }).catch(error => {
         console.log('ERROR fetching job types', error);
