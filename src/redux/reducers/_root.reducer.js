@@ -10,6 +10,7 @@ import approvedPostings from './approvedPosts.reducer';
 import setJobsReducer from './jobs.reducer';
 import setRemoteJobsReducer from './remote_jobs.reducer';
 import setInternshipsReducer from './internships.reducer';
+import lasagna from './captcha.reducer';
 
 // import setRecentJobs from './moreRecentJobs.reducer';
 
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   setRemoteJobsReducer,
   setInternshipsReducer,
   approvedPostings,
+  lasagna,
 
  
 

@@ -25,10 +25,10 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import './Main.css';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 import Internships from '../Internships/Internships.jsx';
-
+import useStyles from '../Styles/Styles';
 
 function Main() {
-
+    const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -67,14 +67,14 @@ function Main() {
         { field: 'description', headerName: 'description', width: 150 },
         { field: 'application_link', headerName: 'link', width: 150, renderCell: (params) => {
                                             if(params.row.application_link.includes('http')){
-                                                return <button><a href={`${params.row.application_link}`} target="_blank">Apply</a></button>
+                                                return <Button style={{backgroundColor: '#E7F2F8'}} variant="contained"><a style={{color: 'black', fontWeight: '500'}} href={`${params.row.application_link}`} target="_blank">Apply</a></Button>
                                             } else {
-                                                return <button><a href={`https://${params.row.application_link}`} target="_blank">Apply</a></button> 
+                                                return <Button style={{backgroundColor: '#E7F2F8'}} variant="contained"><a style={{color: 'black', fontWeight: '500'}} href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
                                             }
                                             }},
         { field: 'job type', headName: 'Job Field', width: 350 },
         { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
-            return  <Button variant="contained" color="primary" size="small" 
+            return  <Button variant="contained" style={{backgroundColor: '#FFA384', color: 'white', fontWeight: '600'}} size="small" 
             onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>  
         }},
     ];                                                                               
@@ -85,9 +85,9 @@ function Main() {
 
 // Fetches jobs by date.
     const fetchRecentJobs = (event) => {
-        console.log('what is event?', event);
-        dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } })
-        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } })
+        dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } });
+        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } });
+        dispatch({ type: 'FETCH_RECENT_INTERNSHIPS', payload: { age: event } });
     }
     
     return (

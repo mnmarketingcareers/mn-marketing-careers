@@ -205,18 +205,18 @@ const AdminHub = () => {
                         <TableCell
                           style={{
                           
-                            fontFamily: "Lato",
+                            fontFamily: "Red Hat Text",
                             textAlign: "center",
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {item.full_name}
                         </TableCell>
                         <TableCell
                           style={{
-                            fontFamily: "Lato",
+                            fontFamily: "Red Hat Text",
                             textAlign: "center",
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {item.email_address}
@@ -225,9 +225,9 @@ const AdminHub = () => {
 
                         <TableCell
                           style={{
-                            fontFamily: "Lato",
+                            fontFamily: "Red Hat Text",
                             textAlign: "center",
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {item.merge_fields.ADDRESS.zip}
@@ -237,9 +237,9 @@ const AdminHub = () => {
 
                         <TableCell 
                           style={{
-                            fontFamily: "Lato",
+                            fontFamily: "Red Hat Text",
                             textAlign: "center",
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {item.status}

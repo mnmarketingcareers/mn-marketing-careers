@@ -1,5 +1,4 @@
 const pendingPostings = (state = [], action) => {
-    console.log('In pendingPostings Reducer', action);
     switch(action.type) {
         case 'SET_PENDING_POSTINGS':
             return action.payload;

@@ -15,10 +15,11 @@ import campaignSaga from './campaign.saga';
 import sendEmailNow from './sendEmailNow.saga';
 import getCampaignsSaga from './getCampaign.saga';
 import patchTemplateSaga from './patchTemplate.saga';
+import captchaSaga from './capthca.saga';
 import getTemplatesSaga from './getTemplates.saga';
 import postNewTemplateSaga from './postTemplate.saga';
 import jobIssuesSaga from './jobIssue.saga';
-
+import buildEmailJobListSaga from './builtEmailJobList.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -45,8 +46,10 @@ export default function* rootSaga() {
     sendEmailNow(), //post send campaign immediately UNDER CONSTRUCTION
     getCampaignsSaga(), //get campaign info (experimental)
     patchTemplateSaga(), //PUT..er...patch - fix up template for new send
+    captchaSaga(),
     getTemplatesSaga(), //GET all templates (for dropdown when building email)
     postNewTemplateSaga(), //POST new template from scratch
     jobIssuesSaga(), //GET job issues from database
+    buildEmailJobListSaga(), //IMPORTANT
   ]);
 }

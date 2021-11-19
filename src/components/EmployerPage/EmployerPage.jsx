@@ -30,9 +30,10 @@ import MuiAlert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+// Google ReCaptcha import
+import ReCaptchaV2 from 'react-google-recaptcha';
 import ShareOurApp from "../ShareOurApp/ShareOurApp.jsx";
 import Container from '@mui/material/Container';
-
 
 
 
@@ -42,6 +43,13 @@ function EmployerPage() {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    // actions to perform on page load
+    useEffect( () => {
+        dispatch({ type: 'RESET_LASAGNA'});
+    }, []);
+    // get verification from reducer
+    const lasagna = useSelector(store => store.lasagna)
 
     // On the question : "Is this job remote?"; toggles whether other input field is displayed or not.
     const [toggleOther, setToggleOther] = useState(true);
@@ -221,10 +229,36 @@ function EmployerPage() {
         },
     ];
 
+    const [showButton, setShowButton] = useState(false);
+    // let showButton = lasagna.success ? true : false;
+    /**
+     * Adds the token to the form object
+     *
+     * @param {string} token - response from ReCaptcha
+     */
+    const handleToken = (token) => {
+        console.log('recaptcha token: ', token);
+        // dispatch({ type: 'LASAGNA', payload: token });
+        setShowButton(true);
+        setJobPostingsTable((jobPostingsTable) => {
+        return { ...jobPostingsTable, token }
+        });
+    }
+
+    /**
+     * Removes the token from the from object
+     */
+    const handleExpire = () => {
+        dispatch({ type: 'RESET_LASAGNA'});
+        console.log('showbutton is: ', showButton);
+        setShowButton(false);
+        console.log('showButton is: ', showButton);
+        setJobPostingsTable((jobPostingsTable) => {
+        return { ...jobPostingsTable, token: null }
+        });
+    }
 
     const [job, setJob] = useState([]);
-    const jobType = [];
-
 
     const handleJob = (event) => {
         const {
@@ -240,6 +274,11 @@ function EmployerPage() {
     const toAbout = (event) => {
         history.push('/about');
     }
+
+    // const showtSitekey = (event) => {
+    //     event.preventDefault();
+    //     console.log(process.env.REACT_APP_SITE_KEY);
+    // }
 
     return (
         <>
@@ -277,7 +316,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Your name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     id="poster-name"
                                     variant="standard"
@@ -291,7 +330,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Your email" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     id="poster-email"
                                     variant="standard"
@@ -305,7 +344,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Company Name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     id="company"
                                     variant="standard"
@@ -319,7 +358,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Title of Position Available" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     placeholder="title"
                                     variant="standard"
@@ -332,7 +371,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Link to Job Post Online" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     placeholder="link"
                                     variant="standard"
@@ -362,7 +401,7 @@ function EmployerPage() {
                                 <div>
                                     <FormControl sx={{ m: 1.1, width: 300 }}>
                                         <InputLabel id="job-types">types</InputLabel>
-                                        <Select
+                                        <Select required
                                             labelId="job-types"
                                             id="job-types"
                                             multiple
@@ -401,7 +440,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="State" />
                                 &nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     placeholder="State"
                                     variant="standard"
@@ -413,7 +452,7 @@ function EmployerPage() {
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="&nbsp;Is this job remote?" />
-                                <FormControl component="fieldset">
+                                <FormControl required component="fieldset">
                                     <RadioGroup
                                         aria-label="Is this job remote?"
                                         name="radio-buttons-group"
@@ -430,7 +469,7 @@ function EmployerPage() {
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="&nbsp;Can we share a contact person" />
-                                <FormControl component="fieldset">
+                                <FormControl required component="fieldset">
                                     <RadioGroup
                                         aria-label="Can we share a contact person?"
                                         name="radio-buttons-group"
@@ -446,7 +485,21 @@ function EmployerPage() {
                             </Card>
                         </Grid>
                     </Grid>
-                    <input className="submit-employer-form-button" type='submit' value='Submit' />
+
+                    <div className="recaptcha-container">
+                        {
+                        !showButton &&     
+                        <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
+                               onChange={handleToken}
+                               onExpired={handleExpire}
+                               onErrored={err => console.error(`Recaptcha error: ${err}`)}
+                        />
+                        }
+                        {
+                        showButton &&
+                            <input className="submit-employer-form-button" type='submit' value='Submit' />
+                        }
+                    </div>
                 </form>
             </div>
             <Stack spacing={2} sx={{ width: '100%' }}>
