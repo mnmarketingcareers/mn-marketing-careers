@@ -219,22 +219,22 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) =>{
 /**
  * POST route for new job postings
  */
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
   // TO DO: CLEAR OUT MOST OF THE CONSOLE LOGS
-  console.log('In job_postings router, POST', req.body);
+  console.log('In Admin job_postings router, POST', req.body);
 
   try {
 
-    const secretKey = process.env.REACT_APP_SECRET_KEY;
-    const token = req.body.token;
-    const validate = await axios.post(`
-    https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}
-    `)
-    console.log('validation response', validate.data.success);
-    if (validate.data.success != true) {
-        const error = 'Captcha not validated';
-        throw error;
-    }
+    // const secretKey = process.env.REACT_APP_SECRET_KEY;
+    // const token = req.body.token;
+    // const validate = await axios.post(`
+    // https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}
+    // `)
+    // console.log('validation response', validate.data.success);
+    // if (validate.data.success != true) {
+    //     const error = 'Captcha not validated';
+    //     throw error;
+    // }
     // validate inputs
     if (
         req.body.posting_contact_name === '' ||
@@ -242,7 +242,7 @@ router.post('/', async (req, res) => {
         req.body.company === '' ||
         req.body.available_role === '' ||
         req.body.application_link === '' ||
-        req.body.description === '' ||
+        // req.body.description === '' ||
         req.body.job_city === '' ||
         req.body.job_state === '' ||
         req.body.remote === '' ||
@@ -255,6 +255,15 @@ router.post('/', async (req, res) => {
         throw error; 
     }
 
+   
+    let status = '';
+    if (req.body.status === '') {
+        status = null;
+    } else {
+        status = req.body.status;
+    }
+
+    console.log('Status sent from client', status);
 
     await pool.query('BEGIN');
     // const userId = 0;
@@ -326,8 +335,8 @@ router.post('/', async (req, res) => {
                 posting_contact_id,         // $8
                 req.body.share_contact,     // $9
                 hiring_contact_id,          // $10
-                // userId,                     // $11
-                'PENDING_APPROVAL'          // $12
+                // userId,                     
+                status          // $11
             ]
     );
     

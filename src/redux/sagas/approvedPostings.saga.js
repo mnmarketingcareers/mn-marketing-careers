@@ -24,8 +24,20 @@ function* fetchApprovedPostings () {
     }
 }
 
+function* addApprovedPosting (action) {
+    try {
+        console.log('First saga wired up', action.payload)
+          const newJob = action.payload;
+          yield axios.post('/api/job', newJob);
+          
+        } catch(err) {
+          console.log(err)
+        }
+}
+
 function* approvedPostingsSaga () {
     yield takeLatest('FETCH_APPROVED_POSTINGS', fetchApprovedPostings);
+    yield takeLatest('ADD_APPROVED_JOB_POST', addApprovedPosting);
 }
 
 export default approvedPostingsSaga;
