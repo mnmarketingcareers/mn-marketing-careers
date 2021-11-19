@@ -8,27 +8,27 @@ import {
     Typography,
 } from '@mui/material';
 
-function NewPostingsReady() {
+function NewIssues() {
     // setup react hooks
     const history = useHistory();
     const dispatch = useDispatch();
-    const { approvedPostings } = useSelector(store => store);
+    const { setJobIssueListReducer } = useSelector(store => store);
 
     // Populate the pendingPostings reducer
     useEffect( () => {
-        dispatch({ type: 'FETCH_APPROVED_POSTINGS' });
+        dispatch({ type: 'FETCH_JOB_ISSUES' });
     }, []);
 
     return(
-        <Card sx={{ }}>
-            <CardActionArea onClick={() => history.push('/adminjoblist') }>
+        <Card sx={{}}>
+            <CardActionArea onClick={() => history.push('/reviewsubmissions') }>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        You have
+                        There are
                         <Typography variant="h5" color="primary" component="div">
-                        {approvedPostings.length}
+                        {setJobIssueListReducer.length}
                         </Typography>
-                        Job openings ready to be posted to the live page
+                        issues with current job listings
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         <i>click to view</i>
@@ -39,4 +39,4 @@ function NewPostingsReady() {
     )
 }
 
-export default NewPostingsReady;
+export default NewIssues

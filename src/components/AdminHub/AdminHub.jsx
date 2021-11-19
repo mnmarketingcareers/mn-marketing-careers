@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { Typography, Container, Button, Paper, TextField, IconButton } from "@mui/material";
+import { Grid, Typography, Container, Button, Paper, TextField, IconButton } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,6 +13,7 @@ import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 
 import NewPostingsReady from "../NewJobOpeningsReadyAlert/NewJobOpeningsReadyAlert";
 import NewSubmissions from "../NewSubmissionsAlert/NewSubmissionsAlert";
+import NewIssues from "../NewIssusAlert/NewIssuesAlert";
 import useStyles from "../Styles/Styles"; //important paste this
 
 import "./AdminHub.css";
@@ -93,7 +94,9 @@ const AdminHub = () => {
     })
   }
 
-
+  const handleAddJob = () => {
+    history.push('/adminaddjob');
+  }
 
   // const navToCreateTemplatePage = () => {
   //   history.push('/emailtemplate')
@@ -107,12 +110,19 @@ const AdminHub = () => {
       <Button style={{margin: '5px'}}  variant="contained" size="large" color="primary" onClick={() =>  history.push('/emailtemplate')}>CREATE CAMPAIGN</Button>
             {/* <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button> */}
 <br />
-
+        <Button onClick={handleAddJob} >Add Some Jobs</Button>
         <div style={{marginTop: '20px'}} className="gridWrapper">
-          
-        <div className="gridL"><NewSubmissions /></div>
-        <div className="gridR"><NewPostingsReady /></div>
-
+        <Grid container spacing={2}>  
+          <Grid item xs={4}>
+            <div className="gridL"><NewSubmissions /></div>
+          </Grid>
+          <Grid item xs={4}>
+            <div className="something"><NewIssues /></div>
+          </Grid>
+          <Grid item xs={4}>
+            <div className="gridR"><NewPostingsReady /></div>
+          </Grid>
+        </Grid>
           <div className="gridL">
             <Typography variant="h4">Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
