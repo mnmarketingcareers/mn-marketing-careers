@@ -22,13 +22,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+
 
 // Snackbar button
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Slide from '@mui/material/Slide';
 
 // Google ReCaptcha import
 import ReCaptchaV2 from 'react-google-recaptcha';
@@ -66,7 +68,7 @@ function EmployerPage() {
     };
 
     
-    // Success Button toggle
+    // Submit Button toggle
     const [open, setOpen] = useState(false);
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
@@ -95,9 +97,10 @@ function EmployerPage() {
             type: 'NEW_EMPLOYER_JOB_POST',
             payload: jobPostingsTable
         });
-        setOpen(true); setTimeout(() => {
-           history.push('/main')
-        }, 1000);
+        setOpen(true); 
+        // setTimeout(() => {
+        //    history.push('/main')
+        // }, 1000);
     };
 
 
@@ -502,9 +505,9 @@ function EmployerPage() {
                     </div>
                 </form>
             </div>
-            <Stack spacing={2} sx={{ width: '100%' }}>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            <Stack spacing={2} sx={{ width: '350px' }}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} TransitionComponent={Slide}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '350px' }}>
                         Job Submitted!
                     </Alert>
                 </Snackbar>

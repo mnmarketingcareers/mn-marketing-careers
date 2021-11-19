@@ -1,3 +1,4 @@
+import React from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
@@ -26,6 +27,14 @@ import './Main.css';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 import Internships from '../Internships/Internships.jsx';
 import useStyles from '../Styles/Styles';
+
+// Snackbar button
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Slide from '@mui/material/Slide';
 
 function Main() {
     const classes = useStyles();
@@ -83,12 +92,51 @@ function Main() {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
 
+const [snackBarValue, setSnackBarValue] = useState('0')
+
 // Fetches jobs by date.
     const fetchRecentJobs = (event) => {
+        setSnackBarValue(event);
+        setOpen(true); 
         dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } });
         dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } });
         dispatch({ type: 'FETCH_RECENT_INTERNSHIPS', payload: { age: event } });
     }
+
+// For the snackbar button
+    const [open, setOpen] = useState(false);
+
+// For the Snackbar button when one of the date buttons in pressed.
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+// For the Snackbar button when one of the date buttons in pressed.
+    const action = (
+        <React.Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+                UNDO
+            </Button>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </React.Fragment>
+    );
+
+// For the Snackbar button when one of the date buttons in pressed.
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
     
     return (
         <>
@@ -121,7 +169,7 @@ function Main() {
                         <>
                             <span>See jobs posted within the last</span>
                             <div className="filter">
-                                <Button variant="outlined" onClick={() => fetchRecentJobs('1')}>
+                                <Button variant="outlined" value={1} onClick={() => fetchRecentJobs('1')}>
                                     24 hours
                                 </Button>
                                 <Button variant="outlined" onClick={() => fetchRecentJobs('3')}>
@@ -166,6 +214,13 @@ function Main() {
                     {openModal ? <p></p> : <Internships />}
                 </div>
             </div>
+            <Stack spacing={2} sx={{ width: '350px' }}>
+                <Snackbar open={open} autoHideDuration={1800} onClose={handleClose} TransitionComponent={Slide}>
+                    <Alert onClose={handleClose} severity="info" sx={{ width: '350px' }}>
+                        Filtering by the last {snackBarValue} days!
+                    </Alert>
+                </Snackbar>
+            </Stack>
         </>
     )
 
