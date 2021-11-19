@@ -162,7 +162,9 @@ const useStyles = makeStyles(
       fontSize: '36px',
     },
 
-
+    recaptchaContainer: {
+      margin: 'center'
+    },
   },
   { index: 1 }
 );

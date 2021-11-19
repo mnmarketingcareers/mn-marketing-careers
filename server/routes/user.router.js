@@ -5,6 +5,7 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+const axios = require('axios');
 
 const router = express.Router();
 
@@ -17,19 +18,39 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
-  const username = req.body.username;
-  const password = encryptLib.encryptPassword(req.body.password);
+router.post('/register', async (req, res, next) => {
+  try {
+    await pool.query('BEGIN');
+    if (req.body.token) {
+      // validate captcha token 
+      const secretKey = process.env.REACT_APP_SECRET_KEY;
+      const token = req.body.token;
+      const validate = await axios.post(`
+    https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}
+    `)
+      console.log('validation response', validate.data.success);
+      if (validate.data.success != true) {
+        const error = 'Captcha not validated';
+        throw error;
+      }
 
-  const queryText = `INSERT INTO "user" (email, password, first_name, last_name)
+    } else {
+      res.status(500).send('Captcha token required');
+      return;
+    }
+    const username = req.body.username;
+    const password = encryptLib.encryptPassword(req.body.password);
+
+    const queryText = `INSERT INTO "user" (email, password, first_name, last_name)
     VALUES ($1, $2, $3, $4) RETURNING id`;
-  pool
-    .query(queryText, [username, password, req.body.first_name, req.body.last_name])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-      console.log('User registration failed: ', err);
-      res.sendStatus(500);
-    });
+    await pool.query(queryText, [username, password, req.body.first_name, req.body.last_name])
+    await pool.query('COMMIT');
+    res.sendStatus(201)
+  } catch (err) {
+    console.log('User registration failed: ', err);
+    await pool.query('ROLLBACK');
+    res.sendStatus(500);
+  }
 });
 
 // Handles login form authenticate/login POST

@@ -5,6 +5,8 @@ import useStyles from '../Styles/Styles';
 
 //for password visibility:
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import ReCaptchaV2 from 'react-google-recaptcha';
+
 
 function RegisterForm() {
 const classes = useStyles(); 
@@ -12,6 +14,7 @@ const classes = useStyles();
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [token, setToken] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -26,6 +29,7 @@ const classes = useStyles();
         password: password,
         first_name: firstName,
         last_name: lastName,
+        token: token,
       },
     });
   }; // end registerUser
@@ -35,7 +39,31 @@ const [showPassword, setShowPassword] = useState(false);
 const handleClickShowPassword = () => setShowPassword(!showPassword);
 const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
+  // Recaptcha handlers
+  const [showButton, setShowButton] = useState(false);
+  // let showButton = lasagna.success ? true : false;
+  /**
+   * Adds the token to the form object
+   *
+   * @param {string} token - response from ReCaptcha
+   */
+  const handleToken = (token) => {
+    console.log('recaptcha token: ', token);
+    // dispatch({ type: 'LASAGNA', payload: token });
+    setShowButton(true);
+    setToken(token);
+  }
 
+  /**
+   * Removes the token from the from object
+   */
+  const handleExpire = () => {
+    dispatch({ type: 'RESET_LASAGNA' });
+    console.log('showbutton is: ', showButton);
+    setShowButton(false);
+    console.log('showButton is: ', showButton);
+    setToken( null );
+  }
 
   return (
     <Paper className={classes.loginRegisterPaper}  elevation={6}>
@@ -58,7 +86,7 @@ const handleMouseDownPassword = () => setShowPassword(!showPassword);
         required            
         type="email"
         id="register-username"
-        label="Username"
+        label="Email"
         variant="outlined"
         size="small"
         value={username}
@@ -132,11 +160,23 @@ const handleMouseDownPassword = () => setShowPassword(!showPassword);
         />
 
       
-      </div>
-      <div>
-        <Button className={classes.loginButton} type="submit" color="primary" name="submit" variant="contained" size="small" value="Register">GO</Button>
-      </div>
-    </form>
+        </div>
+        <div className={classes.recaptchaContainer}>
+          {
+            !showButton &&
+            <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)}
+              onChange={handleToken}
+              onExpired={handleExpire}
+              onErrored={err => console.error(`Recaptcha error: ${err}`)}
+            />
+          }
+          {
+            showButton &&
+            <Button className={classes.loginButton} type="submit" color="primary" name="submit" variant="contained" size="small" value="Register">GO</Button>
+          }
+        </div>
+
+      </form>
     </Paper>
   );
 }

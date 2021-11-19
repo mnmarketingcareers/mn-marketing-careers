@@ -10,6 +10,7 @@ const {
 router.post('/', async (req, res) => {
     console.log('in issue POST; req.body is', req.body);
     try{
+        await pool.query('BEGIN');
         // validate captcha token 
         const secretKey = process.env.REACT_APP_SECRET_KEY;
         const token = req.body.token;
@@ -42,9 +43,11 @@ router.post('/', async (req, res) => {
             ]
         );
         console.log('issue Post returned id', issuePost.rows[0]);
+        await pool.query('COMMIT');
         res.sendStatus(201);
     } catch (err) {
         console.log('job issue POST failed: ', err);
+        await pool.query('ROLLBACK');
         res.sendStatus(500);
     }
 });
