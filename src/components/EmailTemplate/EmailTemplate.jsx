@@ -33,6 +33,7 @@ const EmailTemplate = () => {
   }, []);
 
   const handleSubmitPatchTemplate = () => {
+   
     const bodyToSubmit = templateBodyText; //THIS is where the user's input is entering our crazy HTML
     console.log("in handleSubmitPatchTemplate");
     console.log("templateId =", templateId);
@@ -46,7 +47,7 @@ const EmailTemplate = () => {
         payload: {
           template_id: templateId,
           name: templateName,
-          html: emailBody, //important cross fingers...
+          html: 'test', //important email body coming in from EmailBody component
         },
       });
     } else {
@@ -54,7 +55,7 @@ const EmailTemplate = () => {
         type: "SEND_POST_TEMPLATE",
         payload: {
           name: templateName,
-          html: emailBody, //important cross fingers...
+          html: 'test', //important email body coming in from EmailBody component
         },
       });
     }
@@ -83,7 +84,7 @@ const EmailTemplate = () => {
 
 
 
-      <EmailBody />
+      {/* <EmailBody /> */}
 
 
 
