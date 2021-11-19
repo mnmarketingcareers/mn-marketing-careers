@@ -31,7 +31,10 @@ router.post('/', (req, res) => {
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('In GET for all job issues');
 
-    if (req.user.access_level === 1) {
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level to delete this content');
+        return;
+    }
         const queryText = `SELECT "i"."id", "comment", "issue_type", "is_resolved", 
         "issues_email", "jp"."available_role", "jp"."application_link", "c"."company_name", "jp"."job_city",
         "jp"."job_state", "jp"."date_posted"     
@@ -48,13 +51,15 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         }).catch(error => {
             console.log('ERROR in GET all job issues', error);
             res.sendStatus(500);
-        })
-    }
-})
+        });
+});
 
 // Handles PUT request which changes is_resolved from 'false' to 'true'
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-    if (req.user.access_level === 1) {
+    if (req.user.access_level < 1) {
+        res.status(500).send('You do not have the correct access level to delete this content');
+        return;
+    }
         // set is_resolved value to TRUE from its default value of FALSE
         const queryText = `UPDATE "issues" SET "is_resolved" = 'TRUE' WHERE "id" = $1;`;
         const queryValues = [req.body.id];
@@ -63,9 +68,8 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         .catch((err) => {
             console.log('Error completing UPDATE issues', err);
             res.sendStatus(500);
-        })
-    }
-})
+        });
+});
 
 // Handles DELETE request that removes issue column from the database
 router.delete('/:id', rejectUnauthenticated, async (req, res) => {
@@ -83,6 +87,6 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
         console.log('Error in Delete', error);
         res.sendStatus(500);
     }
-})
+});
 
 module.exports = router;
