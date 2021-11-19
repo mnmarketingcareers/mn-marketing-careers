@@ -15,26 +15,26 @@ client.setConfig({
   });
 
 
-  //GET //deletelater
+  //GET 
 /** 
- * @api {get} /campaign/getcampaign
- * @apiName Get Campaign
- * @apiGroup Campaign
+ * @api {get} /campaign/getinfo
+ * @apiName Get Campaigns
+ * @apiGroup Campaigns
  * 
- * @apiDescription get information for a specific campaign
- * this is experimental as of 11/16 - seeing what we can get back! //fix
+ * @apiDescription get ALL campaigns' info!
+ * this is experimental as of 11/16 - seeing what we can get back!
  */
  router.get('/getinfo', (req, res) => {
      console.log('in get campaign ROUTER parteeeeeee')
-    const response = client.campaigns.getContent("8590181")
-    .then((response) => {
-      console.log("response from GET CAMPAIGN INFO:", response);
+     const response = client.campaigns.list()
+     .then((response) => {
+      // console.log("response from GET CAMPAIGNS INFO:", response);
       res.send(response);
     })
     .catch((error) => {
       res.sendStatus(500);
     });
-  }) //deletelater
+  }) 
 
 
 
@@ -61,8 +61,8 @@ client.setConfig({
  */
 router.post("/", (req, res) => {
   console.log("At router, info is showing up as:", req.body);
-  const listId = process.env.TEST_LIST_ID;
-  const template_id = parseInt(process.env.REGULAR_TEMPLATE_ID);
+  const listId = process.env.TEST_LIST_ID; //standard - same always for her/us
+  const template_id = parseInt(req.body.template_id); //now bringing this in from client - NEED TO WIRE THIS U P
   const campaignDetails = req.body;
   console.log("campaign details:", req.body);
   console.log("TEMPLATE ID IS:", template_id);
@@ -80,8 +80,8 @@ router.post("/", (req, res) => {
         template_id: template_id, //working - currently REGULAR (hee hee)
         from_name: campaignDetails.from_name,
         reply_to: campaignDetails.reply_to,
-        to_name: "*|FNAME|*", //fix
-        auto_footer: campaignDetails.footer,
+        // to_name: "*|FNAME|*", //fix
+        // auto_footer: campaignDetails.footer,
         // inline_css: true, //research
       },
       tracking: {
@@ -100,9 +100,9 @@ router.post("/", (req, res) => {
     });
 });
 
-//POST
+//POST - EMAIL FINAL SEND
 /**
- * @api {post} /campaign/send SEND a campaign by ID
+ * @api {post} /campaign/send SEND / EMAIL OUT a campaign by ID
  * @apiName Send Campaign By ID
  * @apiGroup Campaign
  * @apiDescription Sends a campaign that has already been created
@@ -118,11 +118,9 @@ router.post("/", (req, res) => {
  */
 router.post("/send", (req, res) => {
   const campaign_id = req.body.campaign_id; 
-  console.log("And now, the campaign_id variable is officially:", campaign_id);
+  console.log("Campaign ID:", campaign_id);
 
-
-  const response = client.campaigns.send(campaignId); //fix MAKE VARIABLE
-  console.log(response)
+  const response = client.campaigns.send(campaign_id)
     .then((response) => {
       console.log("response from CAMPAIGN POST is:", response);
       res.send(response);

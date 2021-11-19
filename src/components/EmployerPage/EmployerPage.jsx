@@ -30,6 +30,10 @@ import MuiAlert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+// Google ReCaptcha import
+import ReCaptchaV2 from 'react-google-recaptcha';
+import ShareOurApp from "../ShareOurApp/ShareOurApp.jsx";
+import Container from '@mui/material/Container';
 
 
 
@@ -39,6 +43,13 @@ function EmployerPage() {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    // actions to perform on page load
+    useEffect( () => {
+        dispatch({ type: 'RESET_LASAGNA'});
+    }, []);
+    // get verification from reducer
+    const lasagna = useSelector(store => store.lasagna)
 
     // On the question : "Is this job remote?"; toggles whether other input field is displayed or not.
     const [toggleOther, setToggleOther] = useState(true);
@@ -54,8 +65,8 @@ function EmployerPage() {
         setToggleContact(!toggleContact)
     };
 
+    
     // Success Button toggle
-
     const [open, setOpen] = useState(false);
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
@@ -80,7 +91,6 @@ function EmployerPage() {
 
     const submitEmployerJob = (event) => {
         event.preventDefault();
-        console.log('what is jobPostingsTable', jobPostingsTable)
         dispatch({
             type: 'NEW_EMPLOYER_JOB_POST',
             payload: jobPostingsTable
@@ -126,16 +136,12 @@ function EmployerPage() {
 
 
     const setValues = (propertyName) => (event) => {
-        console.log('what is propertyName', propertyName);
-        console.log('what is event.target.value', event.target.value);
         setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value });
     };
 
 
     // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
-        console.log('what is event', event.target.value)
-        console.log('in yes')
         setJobPostingsTable({ ...jobPostingsTable, share_contact: true });
         changeContactView();
     };
@@ -223,10 +229,36 @@ function EmployerPage() {
         },
     ];
 
+    const [showButton, setShowButton] = useState(false);
+    // let showButton = lasagna.success ? true : false;
+    /**
+     * Adds the token to the form object
+     *
+     * @param {string} token - response from ReCaptcha
+     */
+    const handleToken = (token) => {
+        console.log('recaptcha token: ', token);
+        // dispatch({ type: 'LASAGNA', payload: token });
+        setShowButton(true);
+        setJobPostingsTable((jobPostingsTable) => {
+        return { ...jobPostingsTable, token }
+        });
+    }
+
+    /**
+     * Removes the token from the from object
+     */
+    const handleExpire = () => {
+        dispatch({ type: 'RESET_LASAGNA'});
+        console.log('showbutton is: ', showButton);
+        setShowButton(false);
+        console.log('showButton is: ', showButton);
+        setJobPostingsTable((jobPostingsTable) => {
+        return { ...jobPostingsTable, token: null }
+        });
+    }
 
     const [job, setJob] = useState([]);
-    const jobType = [];
-
 
     const handleJob = (event) => {
         const {
@@ -242,6 +274,11 @@ function EmployerPage() {
     const toAbout = (event) => {
         history.push('/about');
     }
+
+    // const showtSitekey = (event) => {
+    //     event.preventDefault();
+    //     console.log(process.env.REACT_APP_SITE_KEY);
+    // }
 
     return (
         <>
@@ -270,7 +307,7 @@ function EmployerPage() {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">Share</Button>
+                                    <ShareOurApp />
                                     <Button size="small" onClick={toAbout}>Learn More</Button>
                                 </CardActions>
                             </Card>
@@ -279,7 +316,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Your name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     id="poster-name"
                                     variant="standard"
@@ -293,7 +330,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Your email" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     id="poster-email"
                                     variant="standard"
@@ -307,7 +344,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Company Name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     id="company"
                                     variant="standard"
@@ -321,7 +358,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Title of Position Available" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     placeholder="title"
                                     variant="standard"
@@ -334,7 +371,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="Link to Job Post Online" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     placeholder="link"
                                     variant="standard"
@@ -364,7 +401,7 @@ function EmployerPage() {
                                 <div>
                                     <FormControl sx={{ m: 1.1, width: 300 }}>
                                         <InputLabel id="job-types">types</InputLabel>
-                                        <Select
+                                        <Select required
                                             labelId="job-types"
                                             id="job-types"
                                             multiple
@@ -403,7 +440,7 @@ function EmployerPage() {
                             <Card>
                                 <CardHeader title="State" />
                                 &nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     placeholder="State"
                                     variant="standard"
@@ -415,7 +452,7 @@ function EmployerPage() {
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="&nbsp;Is this job remote?" />
-                                <FormControl component="fieldset">
+                                <FormControl required component="fieldset">
                                     <RadioGroup
                                         aria-label="Is this job remote?"
                                         name="radio-buttons-group"
@@ -432,7 +469,7 @@ function EmployerPage() {
                         <Grid item xs={8}>
                             <Card>
                                 <CardHeader title="&nbsp;Can we share a contact person" />
-                                <FormControl component="fieldset">
+                                <FormControl required component="fieldset">
                                     <RadioGroup
                                         aria-label="Can we share a contact person?"
                                         name="radio-buttons-group"
@@ -448,11 +485,25 @@ function EmployerPage() {
                             </Card>
                         </Grid>
                     </Grid>
-                    <input className="submit-employer-form-button" type='submit' value='Submit' />
+
+                    <div className="recaptcha-container">
+                        {
+                        !showButton &&     
+                        <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
+                               onChange={handleToken}
+                               onExpired={handleExpire}
+                               onErrored={err => console.error(`Recaptcha error: ${err}`)}
+                        />
+                        }
+                        {
+                        showButton &&
+                            <input className="submit-employer-form-button" type='submit' value='Submit' />
+                        }
+                    </div>
                 </form>
             </div>
             <Stack spacing={2} sx={{ width: '100%' }}>
-                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                         Job Submitted!
                     </Alert>

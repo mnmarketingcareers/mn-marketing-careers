@@ -1,5 +1,5 @@
 * {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Red Hat Text', sans-serif;
 }
 /* THIS WILL ONLY APPLY TO NATIVE HTML ELEMENTS */
 
@@ -21,6 +21,7 @@ img {
 
 
 
+
 /* --------------------------------------------------------------------------------
 Container
 -------------------------------------------------------------------------------- */
@@ -33,7 +34,7 @@ Container
 Button
 -------------------------------------------------------------------------------- */
 
-.btn {
+/* .btn {
   display: inline-block;
   padding: 10px 20px;
   border-color: #014041;
@@ -44,7 +45,8 @@ Button
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
-}
+  margin-top: 15px;
+} */
 
 .btn_sizeMin {
   min-height: 50px;
