@@ -108,21 +108,23 @@ const AdminHub = () => {
 
       <Container className="adminContainer" style={{textAlign: "center"}}>
       <Button style={{margin: '5px'}}  variant="contained" size="large" color="primary" onClick={() =>  history.push('/emailtemplate')}>CREATE CAMPAIGN</Button>
+      <Button variant="contained" size="large" onClick={handleAddJob} >Add Some Jobs</Button>
             {/* <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button> */}
 <br />
-        <Button onClick={handleAddJob} >Add Some Jobs</Button>
+        
         <div style={{marginTop: '20px'}} className="gridWrapper">
-        <Grid container spacing={2}>  
-          <Grid item xs={4}>
-            <div className="gridL"><NewSubmissions /></div>
+          {/* <Button variant="contained" onClick={handleAddJob} >Add Some Jobs</Button> */}
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <div className="gridL"><NewSubmissions /></div>
+            </Grid>
+            <Grid item xs={4}>
+              <div className="something"><NewIssues /></div>
+            </Grid>
+            <Grid item xs={4}>
+              <div className="gridR"><NewPostingsReady /></div>
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <div className="something"><NewIssues /></div>
-          </Grid>
-          <Grid item xs={4}>
-            <div className="gridR"><NewPostingsReady /></div>
-          </Grid>
-        </Grid>
           <div className="gridL">
             <Typography variant="h4">Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
