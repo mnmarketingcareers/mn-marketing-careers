@@ -17,7 +17,7 @@ function ReadyToPost () {
 
     const handleEdit = (id) => {
         // go to edit page
-        console.log('eventually');
+        history.push(`/editpage/${id}`)
     }
 
     const handleDelete = (id) => {
