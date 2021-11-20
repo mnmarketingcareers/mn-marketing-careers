@@ -107,7 +107,7 @@ router.get('/pending', rejectUnauthenticated, (req, res) => {
  * GET by id here
  */
 router.get('/:id', (req, res) => {
-    console.log('In GET by id', req.body.id);
+    console.log('In GET by id', req.params.id);
     // if requiring access level check, uncomment the next 4 lines
     // if (req.user.access_level < 1) {
     //     res.status(500).send('You do not have the correct access level for this content');
@@ -128,7 +128,7 @@ router.get('/:id', (req, res) => {
                 "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";
     `;
-    pool.query(query, [req.body.id]).then((results) => {
+    pool.query(query, [req.params.id]).then((results) => {
         console.log('results', results.rows);
         res.send(results.rows[0]);
     }).catch(error => {

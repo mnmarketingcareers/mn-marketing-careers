@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { 
     Button, 
     TableRow,
@@ -9,18 +10,16 @@ import {
 
 function AdminJobListItem ({job}) {
     // set React hooks
+    const history = useHistory();
     const dispatch = useDispatch();
-    const defaultRow = {
-        // Job posting keys here
-    }
-    const [rowToEdit, setRowToEdit] = useState(defaultRow);
 
     // define button handlers
     const handleEdit = () => {
-        dispatch({
-            type: 'EDIT_POSTING',
-            payload: rowToEdit
-        });
+        // dispatch({
+        //     type: 'EDIT_POSTING',
+        //     payload: rowToEdit
+        // });
+        history.push(`/editpage/${job.id}`)
     }
 
     const handleDelete = () => {

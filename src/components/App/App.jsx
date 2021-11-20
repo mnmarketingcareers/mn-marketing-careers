@@ -35,6 +35,7 @@ import './App.css';
 import AdminAddJobPage from '../AdminAddJobPage/AdminAddJobPage';
 import JobPostingIssuesPage from '../JobPostingIssuesPage/JobPostingIssuesPage';
 import JobIssuesReviewPage from '../JobIssuesReviewPage/JobIssuesReviewPage';
+import EditJobPage from '../EditJobPage/EditJobPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -133,11 +134,19 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows AdminAddJobPage else shows LoginPage
             exact
             path="/adminaddjob"
           >
             <AdminAddJobPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows EditJobPage else shows LoginPage
+            exact
+            path="/editpage/:id"
+          >
+            <EditJobPage />
           </ProtectedRoute>
 
           <ProtectedRoute
