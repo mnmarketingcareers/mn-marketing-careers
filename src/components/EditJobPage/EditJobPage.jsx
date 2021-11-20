@@ -132,7 +132,7 @@ function EditJobPage() {
                         type="text"
                         id="poster-name"
                         variant="standard"
-                        placeholder="name"
+                        placeholder={jobToEdit.posting_contact_name}
                         className="poster-name"
                         onChange={setValues('posting_contact_name')}
                         value={rowEdits.posting_contact_name} ></TextField>
@@ -144,7 +144,7 @@ function EditJobPage() {
                         type="text"
                         id="poster-email"
                         variant="standard"
-                        placeholder="email"
+                        placeholder={jobToEdit.posting_contact_email}
                         className="poster-email"
                         onChange={setValues('posting_contact_email')}
                         value={rowEdits.posting_contact_email} ></TextField>
@@ -156,17 +156,17 @@ function EditJobPage() {
                         type="text"
                         id="company"
                         variant="standard"
-                        placeholder="company"
+                        placeholder={jobToEdit.company_name}
                         className="company"
                         onChange={setValues('company')}
-                        value={rowEdits.company} ></TextField>
+                        value={rowEdits.company_name} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Title of Position Available" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        placeholder="title"
+                        placeholder={jobToEdit.available_role}
                         variant="standard"
                         className="title"
                         onChange={setValues('available_role')}
@@ -177,7 +177,7 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        placeholder="link"
+                        placeholder={jobToEdit.application_link}
                         variant="standard"
                         className="application-link"
                         onChange={setValues('application_link')}
@@ -217,7 +217,7 @@ function EditJobPage() {
                         multiline rows={4}
                         sx={{ m: 1, width: 450 }}
                         type="text"
-                        placeholder="Description"
+                        placeholder={jobToEdit.description}
                         variant='outlined'
                         className="description"
                         onChange={setValues('description')}
@@ -228,7 +228,7 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        placeholder="City"
+                        placeholder={jobToEdit.job_city}
                         variant="standard"
                         className="city"
                         onChange={setValues('job_city')}
@@ -239,7 +239,7 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        placeholder="State"
+                        placeholder={jobToEdit.job_state}
                         variant="standard"
                         className="state"
                         onChange={setValues('job_state')}
