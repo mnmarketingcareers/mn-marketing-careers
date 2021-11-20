@@ -1,6 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from 'react-router-dom';
+import './EditJobPage.css';
+
+// mui imports
+import { 
+    Button, 
+    TextField,
+    Radio,
+    RadioGroup,
+    FormControl,
+    FormControlLabel,
+    InputLabel,
+    Select,
+    OutlinedInput,
+    MenuItem,
+    Checkbox,
+    ListItemText,
+    Card,
+    Grid,
+    CardHeader
+} from '@mui/material';
 
 function EditJobPage() {
     // declare hooks
@@ -33,9 +53,8 @@ function EditJobPage() {
 
      // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
-        console.log('what is event', event.target.value)
         console.log('in yes')
-        setJobPostingsObject({ ...jobPostingsObject, share_contact: true });
+        setRowEdits({ ...rowEdits, share_contact: true });
         changeContactView();
     };
 
@@ -44,7 +63,7 @@ function EditJobPage() {
         event.preventDefault();
         dispatch({
             type: 'ADD_APPROVED_JOB_POST',
-            payload: jobPostingsObject
+            payload: rowEdits
         })
         history.go(0);
         alert('New Job Submission Successful!');
@@ -53,14 +72,13 @@ function EditJobPage() {
     const setValues = (propertyName) => (event) => {
         console.log('what is propertyName', propertyName);
         console.log('event.target.value is:', event.target.value);
-        setJobPostingsObject({...jobPostingsObject, [propertyName]: event.target.value});
+        setRowEdits({...rowEdits, [propertyName]: event.target.value});
         setToggleOther(true);
     }
 
-    const handleDontShareContact = (event) => {
-        console.log('event.target.value', event.target.value);
-        setJobPostingsObject({
-            ...jobPostingsObject, share_contact: false,
+    const handleDontShareContact = () => {
+        setRowEdits({
+            ...rowEdits, share_contact: false,
             name: '',
             email: '',
             title: '',
@@ -83,9 +101,6 @@ function EditJobPage() {
     const [job, setJob] = useState([]);
 
     const handleJob = (event) => {
-        console.log('the event is:', event);
-        console.log('the names are:', names);
-        console.log('names[0].field', names[0].field);
         const {
             target: {value},
         } = event;
@@ -93,13 +108,13 @@ function EditJobPage() {
             // On autofill we get the stringified value
             typeof value === 'string' ? value.split(',') : value
         );
-        setJobPostingsObject({...jobPostingsObject, job_types: value});
+        setRowEdits({...rowEdits, job_types: value});
     };
 
     const toAdminHub = () => {
         history.push('/adminhub');
     }
-    
+
     // set return
     return(
         <div>
@@ -120,7 +135,7 @@ function EditJobPage() {
                         placeholder="name"
                         className="poster-name"
                         onChange={setValues('posting_contact_name')}
-                        value={jobPostingsObject.posting_contact_name} ></TextField>
+                        value={rowEdits.posting_contact_name} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Your email" />
@@ -132,7 +147,7 @@ function EditJobPage() {
                         placeholder="email"
                         className="poster-email"
                         onChange={setValues('posting_contact_email')}
-                        value={jobPostingsObject.posting_contact_email} ></TextField>
+                        value={rowEdits.posting_contact_email} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Company Name" />
@@ -144,7 +159,7 @@ function EditJobPage() {
                         placeholder="company"
                         className="company"
                         onChange={setValues('company')}
-                        value={jobPostingsObject.company} ></TextField>
+                        value={rowEdits.company} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Title of Position Available" />
@@ -155,7 +170,7 @@ function EditJobPage() {
                         variant="standard"
                         className="title"
                         onChange={setValues('available_role')}
-                        value={jobPostingsObject.available_role} ></TextField>
+                        value={rowEdits.available_role} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Link to Job Post Online" />
@@ -166,7 +181,7 @@ function EditJobPage() {
                         variant="standard"
                         className="application-link"
                         onChange={setValues('application_link')}
-                        value={jobPostingsObject.application_link} ></TextField>
+                        value={rowEdits.application_link} ></TextField>
                 </Grid>
                 
                 <Grid item xs={12} md={6} lg={4} xl={3}>
@@ -184,10 +199,10 @@ function EditJobPage() {
                                 renderValue={(selected) => selected.join(', ')}
                                 MenuProps={MenuProps}
                             >
-                                {names.map((name) => (
-                                    <MenuItem key={name.field} id={name.field} value={name.field}>
-                                        <Checkbox checked={job.indexOf(name.field) > -1} />
-                                        <ListItemText primary={name.field} />
+                                {jobTypes.map((name) => (
+                                    <MenuItem key={name.id} id={name.type} value={name.type}>
+                                        <Checkbox checked={job.indexOf(name.type) > -1} />
+                                        <ListItemText primary={name.type} />
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -206,7 +221,7 @@ function EditJobPage() {
                         variant='outlined'
                         className="description"
                         onChange={setValues('description')}
-                        value={jobPostingsObject.description} ></TextField>
+                        value={rowEdits.description} ></TextField>
                 </Grid>
                 <Grid item xs={6} md={4} lg={2} xl={2}>
                     <CardHeader title="City" />
@@ -217,7 +232,7 @@ function EditJobPage() {
                         variant="standard"
                         className="city"
                         onChange={setValues('job_city')}
-                        value={jobPostingsObject.job_city} ></TextField>
+                        value={rowEdits.job_city} ></TextField>
                 </Grid>
                 <Grid item xs={6} md={4} lg={2} xl={2}>
                     <CardHeader title="State" />
@@ -228,7 +243,7 @@ function EditJobPage() {
                         variant="standard"
                         className="state"
                         onChange={setValues('job_state')}
-                        value={jobPostingsObject.job_state} ></TextField>
+                        value={rowEdits.job_state} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="&nbsp;Is this job remote?" />

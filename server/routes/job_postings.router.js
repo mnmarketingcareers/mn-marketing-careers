@@ -80,18 +80,21 @@ router.get('/pending', rejectUnauthenticated, (req, res) => {
         }
     const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
-                "job_city", "job_state", "remote", "share_contact", "date_posted", "hc".hiring_contact_email, 
+                "job_city", "job_state", "remote", "share_contact", "date_posted", 
+                "pc"."posting_contact_name", "pc"."posting_contact_email", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
                 ARRAY_AGG("jt"."type") AS "job type" 
                 FROM "job_postings" AS "jp"
                 JOIN "company" AS "co" ON "jp".company_id = "co".id
+                JOIN "posting_contact" AS "pc" ON "jp"."posting_contact_id" = "pc"."id"
                 LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
                 LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
                 LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
                 WHERE "jp".archived = 'false' AND "jp".status = 'APPROVED'
                 AND "jp"."date_posted" > (current_date - interval '30' day)
                 GROUP BY "jp"."id", "available_role", "description", "application_link", 
-                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                "job_city", "job_state", "remote", "date_posted", "pc"."posting_contact_name", 
+                "pc"."posting_contact_email", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";`;
     pool.query(query).then(result => {
         console.log('Sending rows to Admin to post to list', result.rowCount);
@@ -114,18 +117,21 @@ router.get('/:id', (req, res) => {
     //     return;
     // }
     const query = `
-                SELECT "available_role", "description", "application_link", 
-                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                SELECT "jp"."id", "available_role", "description", "application_link", 
+                "job_city", "job_state", "remote", "date_posted", "pc"."posting_contact_name", 
+                "pc"."posting_contact_email", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
                 ARRAY_AGG("jt"."type") AS "job type" 
                 FROM "job_postings" AS "jp"
                 JOIN "company" AS "co" ON "jp".company_id = "co".id
+                JOIN "posting_contact" AS "pc" ON "jp"."posting_contact_id" = "pc"."id"
                 LEFT JOIN "hiring_contact" AS "hc" ON "jp".hiring_contact_id = "hc".id
                 LEFT JOIN "jobs_by_type" AS "jbt" ON "jp".id = "jbt".job_posting_id
                 LEFT JOIN "job_types" AS "jt" ON "jbt".job_type_id = "jt".id
                 WHERE "jp"."id" = $1
                 GROUP BY "jp"."id", "available_role", "description", "application_link", 
-                "job_city", "job_state", "remote", "date_posted", "hc".hiring_contact_email, 
+                "job_city", "job_state", "remote", "date_posted", "pc"."posting_contact_name", 
+                "pc"."posting_contact_email", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name";
     `;
     pool.query(query, [req.params.id]).then((results) => {
