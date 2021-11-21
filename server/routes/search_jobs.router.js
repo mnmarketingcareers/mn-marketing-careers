@@ -76,7 +76,7 @@ router.get('/internships', (req, res) => {
     if (
         req.body.posting_contact_name === '' ||
         req.body.posting_contact_email === '' ||
-        req.body.company === '' ||
+        req.body.company_name === '' ||
         req.body.available_role === '' ||
         req.body.application_link === '' ||
         // req.body.description === '' ||
@@ -84,7 +84,7 @@ router.get('/internships', (req, res) => {
         req.body.job_state === '' ||
         req.body.remote === '' ||
         req.body.share_contact === '' ||
-        req.body.job_types.length === 0
+        req.body.job_type.length === 0
     ) {
         // define an error to match validation failure
         const error = 'Invalid input: Form not added -  missing fields';
@@ -93,14 +93,14 @@ router.get('/internships', (req, res) => {
     }
 
    
-    let status = '';
-    if (req.body.status === '') {
-        status = null;
-    } else {
-        status = req.body.status;
-    }
+    // let status = '';
+    // if (req.body.status === '') {
+    //     status = null;
+    // } else {
+    //     status = req.body.status;
+    // }
 
-    console.log('Status sent from client', status);
+    // console.log('Status sent from client', status);
 
     await pool.query('BEGIN');
     // const userId = 0;
@@ -117,21 +117,20 @@ router.get('/internships', (req, res) => {
                             WHERE "id" = $5
                             RETURNING "id";`;
     // for adding to "company" table
-    const companyQuery = `UPDATE "company" SET ("company_name") 
-                            = ($1) 
-                            WHERE "ID" = $2
-                            RETURNING id;`;
+    const companyQuery = `UPDATE "company" SET "company_name" = $1 
+                            WHERE "id" = $2
+                            RETURNING "id";`;
     // for inserting to "job_postings" table
     const jobQuery = `UPDATE "job_postings" SET ("company_id", "available_role", "description", 
                         "application_link", "job_city", "job_state", "remote", "posting_contact_id", 
-                        "share_contact", "hiring_contact_id", "status") 
-                        = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-                        WHERE "id" = $12
+                        "share_contact", "hiring_contact_id" ) 
+                        = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+                        WHERE "id" = $11
                         RETURNING "id";`;
 
     // run the query for the posting contact table
     const postingContactQueryResult = await pool.query(postingContactQuery, 
-        [req.body.posting_contact_name, req.body.posting_contact_email, req.posting_contact_id]
+        [req.body.posting_contact_name, req.body.posting_contact_email, req.body.posting_contact_id]
     );
     console.log('posting contact ID', postingContactQueryResult.rows[0].id);
     // set the returned ID to a new variable 
@@ -158,7 +157,7 @@ router.get('/internships', (req, res) => {
 
     // run the query for the company table
     const companyQueryResult = await pool.query(companyQuery, 
-        [req.body.company, req.body.company_id]
+        [req.body.company_name, req.body.company_id]
     );
     console.log('company id', companyQueryResult.rows[0].id);
     // set the returned ID to a new variable 
@@ -179,8 +178,8 @@ router.get('/internships', (req, res) => {
                 req.body.share_contact,     // $9
                 hiring_contact_id,          // $10
                 // userId,                     
-                status,          // $11
-                req.body.id
+                // status,
+                req.body.id                 // $11
             ]
     );
     
@@ -193,32 +192,51 @@ router.get('/internships', (req, res) => {
     const jobsByType = [];
     // get array of job types with IDs
     const allJobTypes = await pool.query(`SELECT * FROM "job_types";`);
+    const currentJobTypesForJob = await pool.query(`SELECT * FROM "jobs_by_type" WHERE "job_posting_id" = ${rowIdToAdd};`);
     console.log('what do all the job types look like?', allJobTypes);
+    console.log('What are the Job types for the job before the edits?', currentJobTypesForJob.rows);
 
-    // loop over job types strings from client array, pushing their IDs to jobsByType array
     const jobTypes = req.body.job_type;
-    console.log('Job types from the client', jobTypes);
-    for (let index in jobTypes) {
+    // compare the array from client with array of existing job types for job posting
+    const diff = function (arr, arr2) {
+      var ret = [];
+      for (var i in arr) {
+        if (arr2.indexOf(arr[i]) > -1) {
+          ret.push(arr[i]);
+        }
+      }
+      return ret;
+    };
+    let ifDifferent = [];
+    ifDifferent = diff(currentJobTypesForJob.rows, jobTypes);
+    console.log('should see an array. if no changes, it will be empty', ifDifferent);
+
+    // If the client sent any changes, loop over job types strings from client array, 
+    // pushing their IDs to jobsByType array
+    if(ifDifferent.length > 0) {
+      console.log('Job types from the client', jobTypes);
+      for (let index in jobTypes) {
         console.log('looping through job Types from client');
         console.log('index', index, 'job type here', jobTypes[index], 'value in allJobtypes here', allJobTypes.rows[index].type);
         for (let item in allJobTypes.rows) {
-            console.log('checking all job types at item', item);
-            if (jobTypes[index] == allJobTypes.rows[item].type) {
-                console.log('found a match at index', index, 'item', item);
-                jobsByType.push(allJobTypes.rows[item].id);
-            }
+          console.log('checking all job types at item', item);
+          if (jobTypes[index] == allJobTypes.rows[item].type) {
+            console.log('found a match at index', index, 'item', item);
+            jobsByType.push(allJobTypes.rows[item].id);
+          }
         }
-    }
-    console.log('Jobs by type, as IDs', jobsByType);
-    // delete existing rows from jobs by type with job posting id to remove possible duplicates
-    await pool.query(`DELETE FROM "jobs_by_type" WHERE "job_posting_id" = $1`, [rowIdToAdd])
-    // now loop over that new array of IDs and add them to the "jobs_by_type" table
-    for (let i = 0; i < jobsByType.length; i++) {
+      }
+      console.log('Jobs by type, as IDs', jobsByType);
+      // delete existing rows from jobs by type with job posting id to remove possible duplicates
+      await pool.query(`DELETE FROM "jobs_by_type" WHERE "job_posting_id" = $1`, [rowIdToAdd])
+      // now loop over that new array of IDs and add them to the "jobs_by_type" table
+      for (let i = 0; i < jobsByType.length; i++) {
         let jobTypeToAdd = jobsByType[i];
         await pool.query(`
                     INSERT INTO "jobs_by_type" ("job_posting_id", "job_type_id") 
-                    VALUES ($1, $2);`, 
-                    [rowIdToAdd, jobTypeToAdd]);
+                    VALUES ($1, $2);`,
+          [rowIdToAdd, jobTypeToAdd]);
+      }
     }
     console.log('POST SUCCESS');
     await pool.query('COMMIT');

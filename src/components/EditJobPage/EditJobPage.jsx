@@ -44,7 +44,6 @@ function EditJobPage() {
 
     
 
-    console.log('job types from current job posting', jobToEdit.job_type);
     // const multiPlaceholderText = (arr) => {
     //     let newString = ''
     //     for (let item of arr) {
@@ -87,14 +86,14 @@ function EditJobPage() {
     
 
     const toAdminHub = () => {
-        history.push('/adminhub');
+        history.push('/adminjoblist');
     }
 
     // set return
     return(
         <div>
             <h2>Editing this posting:</h2>
-            <Button onClick={toAdminHub}>Back to Hub</Button>
+            <Button onClick={toAdminHub}>Back to List</Button>
             {/* <p>{JSON.stringify(jobToEdit)}</p> */}
             {/* <p>{JSON.stringify(jobTypes)}</p> */}
             {!showForm && <CircularProgress />}
@@ -102,7 +101,7 @@ function EditJobPage() {
             <div className="form-container">
             
                 <EditJobForm id={id} thisJob={thisJob} jobTypes={jobTypes} />
-                <Button onClick={toAdminHub}>Back to Hub</Button>
+                <Button onClick={toAdminHub}>Back to List</Button>
                 {/* <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button> */}
             </div>}
         </div>

@@ -26,9 +26,16 @@ import {
     
 function EditJobForm ({ thisJob, jobTypes, id }) {
 
+    // declare hooks
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     useEffect( () => {
+        console.log('All Job Types', jobTypes);
         console.log('rowEdits', rowEdits);
-        console.log('This Job to Edit', thisJob)
+        console.log('This Job to Edit', thisJob);
+        console.log('job types from current job posting', thisJob.job_type);
+
     }, []);
     
     // default job postgin item for making edits 
@@ -76,7 +83,7 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
         console.log('what is propertyName', propertyName);
         console.log('event.target.value is:', event.target.value);
         setRowEdits({...rowEdits, [propertyName]: event.target.value});
-        console.log('Row Edits: ', rowEdits, 'Original job item: ', jobToEdit);
+        console.log('Row Edits: ', rowEdits, 'Original job item: ', thisJob);
         setToggleOther(true);
     }
 
