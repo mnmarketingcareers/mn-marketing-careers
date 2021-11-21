@@ -20,7 +20,8 @@ import {
     Card,
     Grid,
     CardHeader,
-    CircularProgress
+    CircularProgress, 
+    Typography,
 } from '@mui/material';
 
 function EditJobPage() {
@@ -148,17 +149,19 @@ function EditJobPage() {
     // set return
     return(
         <div>
-            <h2>Edit this posting:</h2>
+            <h2>Editing this posting:</h2>
+            
             {/* <p>{JSON.stringify(jobToEdit)}</p> */}
             {/* <p>{JSON.stringify(jobTypes)}</p> */}
             {isLoading && <CircularProgress />}
             {!isLoading && <div className="form-container">
+            <Typography>Title: {jobToEdit.available_role}, Company: {jobToEdit.company_name}</Typography>
                 <form className="add-job-form" onSubmit={handleSubmit}>
                 <FormControl>
                 <Card xs={12}>
                 <Grid container item>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
-                    <CardHeader title="Your name" />
+                    <CardHeader title="Contact person" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
@@ -171,7 +174,7 @@ function EditJobPage() {
                         value={rowEdits.posting_contact_name} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
-                    <CardHeader title="Your email" />
+                    <CardHeader title="Contact email" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
@@ -209,7 +212,7 @@ function EditJobPage() {
                         value={rowEdits.available_role} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
-                    <CardHeader title="Link to Job Post Online" />
+                    <CardHeader title="Link to application page" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
