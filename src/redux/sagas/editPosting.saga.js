@@ -11,7 +11,7 @@ function* editJobPosting (action) {
         
         // make axios call, sending id and job posting item with changes from action payload;
         const id = action.payload.id;
-        const response = axios.put(`/api/job/${id}`, action.payload, config);
+        const response = axios.put(`/api/search/${id}`, action.payload, config);
         console.log('Rows Edited: ', response.rowCount);
     } catch (err) {
         console.log('ERROR making edit', err);

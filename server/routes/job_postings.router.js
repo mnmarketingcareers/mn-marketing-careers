@@ -118,7 +118,8 @@ router.get('/:id', (req, res) => {
     // }
     const query = `
                 SELECT "jp"."id", "available_role", "description", "application_link", 
-                "job_city", "job_state", "remote", "date_posted", "pc"."posting_contact_name", 
+                "job_city", "job_state", "remote", "date_posted", "posting_contact_id", 
+                "company_id", "hiring_contact_id", "pc"."posting_contact_name", 
                 "pc"."posting_contact_email", "share_contact", "hc".hiring_contact_email, 
                 "hc".hiring_contact_name, "hc".title, "hc".phone, "co"."company_name", 
                 ARRAY_AGG("jt"."type") AS "job_type" 
@@ -136,7 +137,7 @@ router.get('/:id', (req, res) => {
     `;
     pool.query(query, [req.params.id]).then((results) => {
         console.log('results', results.rows);
-        res.send(results.rows[0]);
+        res.send(results.rows);
     }).catch(error => {
         console.log('ERROR in GET all job postings', error);
         res.sendStatus(500);

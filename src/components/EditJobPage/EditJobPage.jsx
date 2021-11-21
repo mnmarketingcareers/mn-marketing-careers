@@ -25,15 +25,46 @@ import {
 } from '@mui/material';
 
 function EditJobPage() {
+    
+
     // declare hooks
     const history = useHistory();
     const dispatch =useDispatch();
     const { id } = useParams();
     const jobToEdit = useSelector(store => store.setJobsReducer);
     const jobTypes = useSelector(store => store.jobTypes);
+    
+    // set items in state 
+    
+    // default job postgin item for making edits 
+    const defaultJobPost = {
+        id: id,
+        posting_contact_name: '',
+        posting_contact_email: '',
+        posting_contact_id: '',
+        company_name: '',
+        company_id: '',
+        available_role: '',
+        application_link: '',
+        description: '',
+        job_city: '',
+        job_state: '',
+        remote: '',
+        share_contact: '',
+        hiring_contact_id: '',
+        hiring_contact_name: '',
+        hiring_contact_email: '',
+        title: '',
+        phone: '',
+        job_type: []
 
+    }
+    const [rowEdits, setRowEdits] = useState(defaultJobPost);
+    
+    const thisJob = jobToEdit[0];
+    console.log('This Job', thisJob);
     const [isLoading, setIsLoading] = useState(true);
-    // const showForm = (jobToEdit === {}) ? true : false;
+    const showForm = (jobToEdit.length > 0) ? true : false;
     // make call for item to edit on page load with useEffect
     useEffect( ()=> {
         dispatch({ type: 'GET_JOB_TYPES' });
@@ -41,12 +72,20 @@ function EditJobPage() {
         // handleShareContactDefault();
         // multiPlaceholderText();
         setIsLoading(false);
-    }, []);
-    // set items in state 
-    const [rowEdits, setRowEdits] = useState(jobToEdit);
+        // setRowEdits(thisJob);
+        console.log('rowEdits', rowEdits);
 
+    }, []);
+   
+    const handleSetEditObj = () => {
+        setRowEdits((rowEdits) => {
+            return {...rowEdits, jobToEdit};
+        });
+        console.log('rowEdits', rowEdits);
+    }
     // declare anonymous functions
 
+    // for readable display of share contact data
     const stringifyShareContact = (str) => {
         
         if (str === true) {
@@ -56,7 +95,7 @@ function EditJobPage() {
             }
         return shareContactDefault;
     }
-
+    // calling function do set to variable with actual data from DB
     const editShareContact = stringifyShareContact(jobToEdit.share_contact);
 
     console.log('job types from current job posting', jobToEdit.job_type);
@@ -72,6 +111,9 @@ function EditJobPage() {
     // console.log(jobTypesString);
      // "Is this job remote?": toggles whether other other input field is displayed or not. 
      const [toggleOther, setToggleOther] = useState(true);
+     const changeState = () => {
+        setToggleOther(!toggleOther)
+    };
 
      // "Can we share contact person?"; toggles the input fields necessary to add person's contact info.
      const [toggleContact, setToggleContact] = useState(true);
@@ -80,6 +122,9 @@ function EditJobPage() {
      const changeContactView = () => {
          setToggleContact(!toggleContact);
      };
+
+     // Success Button toggle
+    const [open, setOpen] = useState(false);
 
      // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
@@ -91,6 +136,18 @@ function EditJobPage() {
     // Push new job inputs to the database to be seen on the DOM in a different component
     const handleSubmit = (event) => {
         event.preventDefault();
+        // If no changes to the following fields, send existing ids
+        // if(rowEdits.posting_contact_name == '' || rowEdits.posting_contact_email == '' ) {
+        //     setRowEdits({ ...rowEdits, 
+        //     posting_contact_id: thisJob.posting_contact_id })
+        // }
+        // if(rowEdits.company_name == '') {
+        //     setRowEdits({ ...rowEdits, company_id: thisJob.company_id})
+        // }
+        // if(rowEdits.hiring_contact_email == '' || rowEdits.hiring_contact_name == '' || rowEdits.title == '' || rowEdits.phone == '') {
+        //     setRowEdits({...rowEdits, hiring_contact_id: thisJob.hiring_contact_id})
+        // }
+        handleSetFKIds();
         console.log('posting object to send', rowEdits);
         dispatch({
             type: 'EDIT_JOB_POSTING',
@@ -100,10 +157,20 @@ function EditJobPage() {
         alert('Updating job posting details');
     }
 
+    const handleSetFKIds = () => {
+        console.log('Setting Foreign Key Ids');
+            setRowEdits({ ...rowEdits, 
+            posting_contact_id: thisJob.posting_contact_id, 
+            company_id: thisJob.company_id, 
+            hiring_contact_id: thisJob.hiring_contact_id})
+    }
+
     const setValues = (propertyName) => (event) => {
+        console.log('what is Row Edits', rowEdits);
         console.log('what is propertyName', propertyName);
         console.log('event.target.value is:', event.target.value);
         setRowEdits({...rowEdits, [propertyName]: event.target.value});
+        console.log('Row Edits: ', rowEdits, 'Original job item: ', jobToEdit);
         setToggleOther(true);
     }
 
@@ -153,9 +220,10 @@ function EditJobPage() {
             
             {/* <p>{JSON.stringify(jobToEdit)}</p> */}
             {/* <p>{JSON.stringify(jobTypes)}</p> */}
-            {isLoading && <CircularProgress />}
-            {!isLoading && <div className="form-container">
-            <Typography>Title: {jobToEdit.available_role}, Company: {jobToEdit.company_name}</Typography>
+            {!showForm && <CircularProgress />}
+            {showForm && 
+            <div className="form-container">
+            <Typography>Title: {thisJob.available_role}, Company: {thisJob.company_name}</Typography>
                 <form className="add-job-form" onSubmit={handleSubmit}>
                 <FormControl>
                 <Card xs={12}>
@@ -167,8 +235,8 @@ function EditJobPage() {
                         type="text"
                         id="poster-name"
                         variant="standard"
-                        defaultValue={jobToEdit.posting_contact_name}
-                        placeholder={jobToEdit.posting_contact_name}
+                        defaultValue={thisJob.posting_contact_name}
+                        placeholder={thisJob.posting_contact_name}
                         className="poster-name"
                         onChange={setValues('posting_contact_name')}
                         value={rowEdits.posting_contact_name} ></TextField>
@@ -177,11 +245,11 @@ function EditJobPage() {
                     <CardHeader title="Contact email" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
-                        type="text"
+                        type="email"
                         id="poster-email"
                         variant="standard"
-                        defaultValue={jobToEdit.posting_contact_email}
-                        placeholder={jobToEdit.posting_contact_email}
+                        defaultValue={thisJob.posting_contact_email}
+                        placeholder={thisJob.posting_contact_email}
                         className="poster-email"
                         onChange={setValues('posting_contact_email')}
                         value={rowEdits.posting_contact_email} ></TextField>
@@ -193,8 +261,8 @@ function EditJobPage() {
                         type="text"
                         id="company"
                         variant="standard"
-                        defaultValue={jobToEdit.company_name}
-                        placeholder={jobToEdit.company_name}
+                        defaultValue={thisJob.company_name}
+                        placeholder={thisJob.company_name}
                         className="company"
                         onChange={setValues('company')}
                         value={rowEdits.company_name} ></TextField>
@@ -204,8 +272,8 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        defaultValue={jobToEdit.available_role}
-                        placeholder={jobToEdit.available_role}
+                        defaultValue={thisJob.available_role}
+                        placeholder={thisJob.available_role}
                         variant="standard"
                         className="title"
                         onChange={setValues('available_role')}
@@ -216,8 +284,8 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        defaultValue={jobToEdit.application_link}
-                        placeholder={jobToEdit.application_link}
+                        defaultValue={thisJob.application_link}
+                        placeholder={thisJob.application_link}
                         variant="standard"
                         className="application-link"
                         onChange={setValues('application_link')}
@@ -226,7 +294,7 @@ function EditJobPage() {
                 
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Select job types (Multiple selections allowed)" />
-                    <p>Editing: {jobToEdit.job_type}</p>
+                    <p>Editing: {thisJob.job_type}</p>
                     <div>
                         <FormControl sx={{ m: 1.1, width: 300 }}>
                             <InputLabel id="job-types"></InputLabel>
@@ -260,8 +328,8 @@ function EditJobPage() {
                         multiline rows={4}
                         sx={{ m: 1, width: 450 }}
                         type="text"
-                        defaultValue={jobToEdit.description}
-                        placeholder={jobToEdit.description}
+                        defaultValue="no description"
+                        placeholder={thisJob.description}
                         variant='outlined'
                         className="description"
                         onChange={setValues('description')}
@@ -272,8 +340,8 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        defaultValue={jobToEdit.job_city}
-                        placeholder={jobToEdit.job_city}
+                        defaultValue={thisJob.job_city}
+                        placeholder={thisJob.job_city}
                         variant="standard"
                         className="city"
                         onChange={setValues('job_city')}
@@ -284,8 +352,8 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        defaultValue={jobToEdit.job_state}
-                        placeholder={jobToEdit.job_state}
+                        defaultValue={thisJob.job_state}
+                        placeholder={thisJob.job_state}
                         variant="standard"
                         className="state"
                         onChange={setValues('job_state')}
@@ -293,10 +361,10 @@ function EditJobPage() {
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="&nbsp;Is this job remote?" />
-                    <p>Editing: {jobToEdit.remote}</p>
+                    <p>Editing: {thisJob.remote}</p>
                     <FormControl component="fieldset">
                         <RadioGroup
-                            defaultChecked={jobToEdit.remote}
+                            defaultChecked={thisJob.remote}
                             aria-label="Is this job remote?"
                             name="radio-buttons-group"
                         >
@@ -311,7 +379,7 @@ function EditJobPage() {
                     <p>Editing: {editShareContact}</p>
                     <FormControl  component="fieldset">
                         <RadioGroup
-                            defaultChecked={jobToEdit.share_contact}
+                            defaultChecked={thisJob.share_contact}
                             aria-label="Can we share a contact person?"
                             name="radio-buttons-group"
                         >
@@ -321,10 +389,10 @@ function EditJobPage() {
                                     : 
                                 <div>
                                     <p>
-                                        {jobToEdit.hiring_contact_name} 
-                                        {jobToEdit.hiring_contact_email} 
-                                        {jobToEdit.title} 
-                                        {jobToEdit.phone}
+                                        {thisJob.hiring_contact_name} 
+                                        {thisJob.hiring_contact_email} 
+                                        {thisJob.title} 
+                                        {thisJob.phone}
                                     </p>
                                     <TextField className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('hiring_contact_name')} ></TextField>&nbsp;&nbsp;
                                     &nbsp;<TextField className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('hiring_contact_email')} ></TextField>&nbsp;

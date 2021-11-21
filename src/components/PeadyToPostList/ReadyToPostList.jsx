@@ -18,6 +18,7 @@ function ReadyToPost () {
     const handleEdit = (id) => {
         // go to edit page
         dispatch({ type: 'UNSET_JOBS' });
+        dispatch({ type: 'FETCH_JOB_ID', payload: { job_posting_id: id } })
         history.push(`/editpage/${id}`)
     }
 

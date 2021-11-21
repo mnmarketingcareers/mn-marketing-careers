@@ -18,6 +18,7 @@ function AdminJobListItem ({job}) {
         dispatch({
             type: 'UNSET_JOBS',
         });
+        dispatch({ type: 'FETCH_JOB_ID', payload: { job_posting_id: job.id } })
         history.push(`/editpage/${job.id}`)
     }
 
