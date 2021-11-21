@@ -82,7 +82,7 @@ function Main() {
                 }
             }
         },
-        { field: 'job type', headName: 'Job Field', width: 350 },
+        { field: 'job_type', headName: 'Job Field', width: 350 },
         {
             field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => {
                 return <Button variant="contained" style={{ backgroundColor: '#FFA384', color: 'white', fontWeight: '600' }} size="small"

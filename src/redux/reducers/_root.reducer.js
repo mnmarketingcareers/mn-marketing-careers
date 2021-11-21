@@ -19,6 +19,7 @@ import setActiveCampaignReducer from './setActiveCampaign.reducer';
 import setCampaignsReducer from './setCampaigns.reducer';
 import setRecentJobs from './moreRecentJobs.reducer';
 import setJobIssueListReducer from './jobIssues.reducer';
+import jobTypes from './jobtypes.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -46,6 +47,7 @@ const rootReducer = combineReducers({
   setActiveCampaignReducer,
   setCampaignsReducer,
   setRecentJobs,
+  jobTypes,
 
   setJobIssueListReducer,
 });

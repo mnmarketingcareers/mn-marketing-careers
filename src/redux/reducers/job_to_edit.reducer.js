@@ -1,12 +1,10 @@
-const setJobsReducer = (state = [], action) => {
+const setJobsReducer = (state = {}, action) => {
     // console.log('inside Jobs reducer, Data is:', action.payload)
     switch (action.type) {
-      case 'SET_JOBS':
+      case 'SET_FOR_EDIT':
         return action.payload
-      case 'SET_RECENT_JOBS':
-        return action.payloadl
-      case 'UNSET_JOBS':
-        return [];
+      case 'UNSET_FOR_EDIT':
+        return {};
       default:
         return state;
     }

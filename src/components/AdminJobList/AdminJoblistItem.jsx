@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { 
     Button, 
     TableRow,
@@ -9,18 +10,16 @@ import {
 
 function AdminJobListItem ({job}) {
     // set React hooks
+    const history = useHistory();
     const dispatch = useDispatch();
-    const defaultRow = {
-        // Job posting keys here
-    }
-    const [rowToEdit, setRowToEdit] = useState(defaultRow);
 
     // define button handlers
     const handleEdit = () => {
         dispatch({
-            type: 'EDIT_POSTING',
-            payload: rowToEdit
+            type: 'UNSET_JOBS',
         });
+        dispatch({ type: 'FETCH_JOB_ID', payload: { job_posting_id: job.id } })
+        history.push(`/editpage/${job.id}`)
     }
 
     const handleDelete = () => {
@@ -40,7 +39,7 @@ function AdminJobListItem ({job}) {
                     <Link href={job.application_link} underline="hover">{job.application_link}</Link>
                 </TableCell>
                 <TableCell>{job.job_city}, &nbsp;{job.job_state}</TableCell>
-                <TableCell>{job.array_agg}</TableCell>
+                <TableCell>{job.job_type}</TableCell>
                 <TableCell>{job.remote}</TableCell>
                 <TableCell>
                     {(job.share_contact) ? (
