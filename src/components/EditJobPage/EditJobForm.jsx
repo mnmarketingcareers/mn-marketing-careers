@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -22,6 +22,9 @@ import {
     Typography,
 } from '@mui/material';
 
+// Snackbar button
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
     
     
 function EditJobForm ({ thisJob, jobTypes, id }) {
@@ -97,8 +100,45 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
             payload: rowEdits
         })
         // history.go(0);
-        alert('Updating job posting details');
+        setOpen(true); setTimeout(() => {
+            history.push('/adminjoblist')
+         }, 2000);
+        // alert('Updating job posting details');
     }
+    
+    // Success Button toggle
+    const [open, setOpen] = useState(false);
+        
+    // For the Snackbar button when Submit is pressed.
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    // For the Snackbar button when Submit is pressed.
+    const action = (
+        <React.Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+                UNDO
+            </Button>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </React.Fragment>
+    );
+
+    // For the Snackbar button when Submit is pressed.
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
 
 
     // "Is this job remote?": toggles whether other other input field is displayed or not. 
@@ -205,7 +245,7 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
                                     defaultValue={thisJob.company_name}
                                     placeholder={thisJob.company_name}
                                     className="company"
-                                    onChange={setValues('company')}
+                                    onChange={setValues('company_name')}
                                     value={rowEdits.company_name} ></TextField>
                             </Grid>
                             <Grid item xs={12} md={6} lg={4} xl={3}>
