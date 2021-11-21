@@ -31,27 +31,44 @@ function EditJobPage() {
     const jobToEdit = useSelector(store => store.setJobsReducer);
     const jobTypes = useSelector(store => store.jobTypes);
 
-    const showForm = (jobToEdit) ? true : false;
+    const [isLoading, setIsLoading] = useState(true);
+    // const showForm = (jobToEdit === {}) ? true : false;
     // make call for item to edit on page load with useEffect
     useEffect( ()=> {
         dispatch({ type: 'GET_JOB_TYPES' });
         dispatch({ type: 'FETCH_JOB_ID', payload: { job_posting_id: id } });
-        handleShareContactDefault();
+        // handleShareContactDefault();
+        // multiPlaceholderText();
+        setIsLoading(false);
     }, []);
     // set items in state 
     const [rowEdits, setRowEdits] = useState(jobToEdit);
-    const [shareContactDefault, setShareContactDefault] = useState('');
 
-    const handleShareContactDefault = () => {
+    // declare anonymous functions
+
+    const stringifyShareContact = (str) => {
         
-        if (jobToEdit.share_contact) {
-                setShareContactDefault('yes');
+        if (str === true) {
+                return 'yes';
             } else {
-                setShareContactDefault('no');
+                return 'no';
             }
         return shareContactDefault;
     }
-    // declare anonymous functions
+
+    const editShareContact = stringifyShareContact(jobToEdit.share_contact);
+
+    console.log('job types from current job posting', jobToEdit.job_type);
+    // const multiPlaceholderText = (arr) => {
+    //     let newString = ''
+    //     for (let item of arr) {
+    //         newString += item + ', ';
+    //     }
+    //     return newString;
+    // }
+
+    // let jobTypesString = multiPlaceholderText( jobToEdit.job_type);
+    // console.log(jobTypesString);
      // "Is this job remote?": toggles whether other other input field is displayed or not. 
      const [toggleOther, setToggleOther] = useState(true);
 
@@ -73,12 +90,13 @@ function EditJobPage() {
     // Push new job inputs to the database to be seen on the DOM in a different component
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log('posting object to send', rowEdits);
         dispatch({
-            type: 'ADD_APPROVED_JOB_POST',
+            type: 'EDIT_JOB_POSTING',
             payload: rowEdits
         })
-        history.go(0);
-        alert('New Job Submission Successful!');
+        // history.go(0);
+        alert('Updating job posting details');
     }
 
     const setValues = (propertyName) => (event) => {
@@ -131,12 +149,12 @@ function EditJobPage() {
     return(
         <div>
             <h2>Edit this posting:</h2>
-            <p>{JSON.stringify(jobToEdit)}</p>
-            <p>{JSON.stringify(jobTypes)}</p>
-            {!showForm && <CircularProgress />}
-            {showForm && <div className="form-container">
+            {/* <p>{JSON.stringify(jobToEdit)}</p> */}
+            {/* <p>{JSON.stringify(jobTypes)}</p> */}
+            {isLoading && <CircularProgress />}
+            {!isLoading && <div className="form-container">
                 <form className="add-job-form" onSubmit={handleSubmit}>
-                    <FormControl>
+                <FormControl>
                 <Card xs={12}>
                 <Grid container item>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
@@ -147,6 +165,7 @@ function EditJobPage() {
                         id="poster-name"
                         variant="standard"
                         defaultValue={jobToEdit.posting_contact_name}
+                        placeholder={jobToEdit.posting_contact_name}
                         className="poster-name"
                         onChange={setValues('posting_contact_name')}
                         value={rowEdits.posting_contact_name} ></TextField>
@@ -159,6 +178,7 @@ function EditJobPage() {
                         id="poster-email"
                         variant="standard"
                         defaultValue={jobToEdit.posting_contact_email}
+                        placeholder={jobToEdit.posting_contact_email}
                         className="poster-email"
                         onChange={setValues('posting_contact_email')}
                         value={rowEdits.posting_contact_email} ></TextField>
@@ -171,6 +191,7 @@ function EditJobPage() {
                         id="company"
                         variant="standard"
                         defaultValue={jobToEdit.company_name}
+                        placeholder={jobToEdit.company_name}
                         className="company"
                         onChange={setValues('company')}
                         value={rowEdits.company_name} ></TextField>
@@ -181,6 +202,7 @@ function EditJobPage() {
                     <TextField
                         type="text"
                         defaultValue={jobToEdit.available_role}
+                        placeholder={jobToEdit.available_role}
                         variant="standard"
                         className="title"
                         onChange={setValues('available_role')}
@@ -192,6 +214,7 @@ function EditJobPage() {
                     <TextField
                         type="text"
                         defaultValue={jobToEdit.application_link}
+                        placeholder={jobToEdit.application_link}
                         variant="standard"
                         className="application-link"
                         onChange={setValues('application_link')}
@@ -200,13 +223,15 @@ function EditJobPage() {
                 
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Select job types (Multiple selections allowed)" />
+                    <p>Editing: {jobToEdit.job_type}</p>
                     <div>
                         <FormControl sx={{ m: 1.1, width: 300 }}>
                             <InputLabel id="job-types"></InputLabel>
                             <Select
                                 labelId="job-types"
                                 id="job-types"
-                                defaultValue={jobToEdit.job_type}
+                                defaultValue={''}
+                                // placeholder={jobTypesString}
                                 multiple
                                 value={job}
                                 onChange={handleJob}
@@ -233,6 +258,7 @@ function EditJobPage() {
                         sx={{ m: 1, width: 450 }}
                         type="text"
                         defaultValue={jobToEdit.description}
+                        placeholder={jobToEdit.description}
                         variant='outlined'
                         className="description"
                         onChange={setValues('description')}
@@ -244,6 +270,7 @@ function EditJobPage() {
                     <TextField
                         type="text"
                         defaultValue={jobToEdit.job_city}
+                        placeholder={jobToEdit.job_city}
                         variant="standard"
                         className="city"
                         onChange={setValues('job_city')}
@@ -255,6 +282,7 @@ function EditJobPage() {
                     <TextField
                         type="text"
                         defaultValue={jobToEdit.job_state}
+                        placeholder={jobToEdit.job_state}
                         variant="standard"
                         className="state"
                         onChange={setValues('job_state')}
@@ -262,39 +290,41 @@ function EditJobPage() {
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="&nbsp;Is this job remote?" />
+                    <p>Editing: {jobToEdit.remote}</p>
                     <FormControl component="fieldset">
                         <RadioGroup
-                            defaultValue={jobToEdit.remote}
+                            defaultChecked={jobToEdit.remote}
                             aria-label="Is this job remote?"
                             name="radio-buttons-group"
                         >
-                            <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
-                            <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
-                            <FormControlLabel placeholder="remote-hybrid" value="hybrid" onClick={setValues('remote')} control={<Radio />} label="Hybrid" />
+                            <FormControlLabel  placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
+                            <FormControlLabel  placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
+                            <FormControlLabel  placeholder="remote-hybrid" value="hybrid" onClick={setValues('remote')} control={<Radio />} label="Hybrid" />
                         </RadioGroup>
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="&nbsp;Can we share a contact person" />
+                    <p>Editing: {editShareContact}</p>
                     <FormControl  component="fieldset">
                         <RadioGroup
-                            defaultValue={shareContactDefault}
+                            defaultChecked={jobToEdit.share_contact}
                             aria-label="Can we share a contact person?"
                             name="radio-buttons-group"
                         >
-                            <FormControlLabel placeholder="yes" value="yes" onClick={shareContact} control={<Radio />} label="Yes" />
+                            <FormControlLabel  value="yes" onClick={shareContact} control={<Radio />} label="Yes" />
                             {toggleContact ? <p></p> : <div><TextField className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('name')} ></TextField>&nbsp;&nbsp;
                                 &nbsp;<TextField className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('email')} ></TextField>&nbsp;
                                 &nbsp;<TextField className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>&nbsp;
                                 &nbsp;&nbsp;<TextField className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField></div>}
-                            <FormControlLabel placeholder="no" value="no" onClick={handleDontShareContact} control={<Radio />} label="No" />
+                            <FormControlLabel  value="no" onClick={handleDontShareContact} control={<Radio />} label="No" />
                         </RadioGroup>
                     </FormControl>
                 </Grid>
                 </Grid>
                 </Card>
                 <input className="submit-add-job-button" type='submit' value='Submit' />
-                                    </FormControl>
+                </FormControl>
                 </form>
                 <Button onClick={toAdminHub}>Back to Hub</Button>
 

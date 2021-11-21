@@ -56,7 +56,7 @@ function AdminJobList() {
             <h1>Job Postings</h1>
             
             <ReadyToPost />
-            {/* <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
+            {/* <Button variant="outlined"  onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
             {/* {JSON.stringify(postingsList)} */}
             <h2>These job openings are currently on the public list, viewable by who goes to your page.</h2>
             {!showJoblist && <><p>No jobs to see here...</p><CircularProgress /></>}
@@ -92,9 +92,6 @@ function AdminJobList() {
             
         </>
     )
-
-
-
 }
 
 export default AdminJobList;

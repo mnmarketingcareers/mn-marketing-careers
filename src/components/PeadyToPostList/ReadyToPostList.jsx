@@ -32,7 +32,7 @@ function ReadyToPost () {
     return (
         <div>
             <h2>Job openings you've  added or approved, ready to go to the public list</h2>
-            <p>Click here: <Button variant="outlined" extended onClick={handlePostToList}>Go Live</Button> if you want to post all new job openings below to the public list</p>
+            <p>Click here: <Button variant="outlined" onClick={handlePostToList}>Go Live</Button> if you want to post all new job openings below to the public list</p>
                 {/* {JSON.stringify(approvedPostings)} */}
                 <div className="job-postings-table">
                     <ul>
