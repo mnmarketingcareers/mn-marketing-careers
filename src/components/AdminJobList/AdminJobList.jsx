@@ -46,9 +46,9 @@ function AdminJobList() {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
-    }, []);
+    }, [dispatch]);
 
-    const showJoblist = rows ? true: false;
+    const showJoblist = (rows.length > 0) ? true: false;
 
     return (
         <>
@@ -59,7 +59,7 @@ function AdminJobList() {
             {/* <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
             {/* {JSON.stringify(postingsList)} */}
             <h2>These job openings are currently on the public list, viewable by who goes to your page.</h2>
-            {!showJoblist && <CircularProgress />}
+            {!showJoblist && <><p>No jobs to see here...</p><CircularProgress /></>}
             {showJoblist &&
             (<TableContainer component={Paper}>
                 <Table>

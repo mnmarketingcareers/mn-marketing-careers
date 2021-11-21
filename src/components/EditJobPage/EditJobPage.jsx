@@ -19,7 +19,8 @@ import {
     ListItemText,
     Card,
     Grid,
-    CardHeader
+    CardHeader,
+    CircularProgress
 } from '@mui/material';
 
 function EditJobPage() {
@@ -30,15 +31,26 @@ function EditJobPage() {
     const jobToEdit = useSelector(store => store.setJobsReducer);
     const jobTypes = useSelector(store => store.jobTypes);
 
-
+    const showForm = (jobToEdit) ? true : false;
     // make call for item to edit on page load with useEffect
     useEffect( ()=> {
         dispatch({ type: 'GET_JOB_TYPES' });
         dispatch({ type: 'FETCH_JOB_ID', payload: { job_posting_id: id } });
+        handleShareContactDefault();
     }, []);
     // set items in state 
     const [rowEdits, setRowEdits] = useState(jobToEdit);
+    const [shareContactDefault, setShareContactDefault] = useState('');
 
+    const handleShareContactDefault = () => {
+        
+        if (jobToEdit.share_contact) {
+                setShareContactDefault('yes');
+            } else {
+                setShareContactDefault('no');
+            }
+        return shareContactDefault;
+    }
     // declare anonymous functions
      // "Is this job remote?": toggles whether other other input field is displayed or not. 
      const [toggleOther, setToggleOther] = useState(true);
@@ -121,8 +133,10 @@ function EditJobPage() {
             <h2>Edit this posting:</h2>
             <p>{JSON.stringify(jobToEdit)}</p>
             <p>{JSON.stringify(jobTypes)}</p>
-            <div className="form-container">
+            {!showForm && <CircularProgress />}
+            {showForm && <div className="form-container">
                 <form className="add-job-form" onSubmit={handleSubmit}>
+                    <FormControl>
                 <Card xs={12}>
                 <Grid container item>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
@@ -132,7 +146,7 @@ function EditJobPage() {
                         type="text"
                         id="poster-name"
                         variant="standard"
-                        placeholder={jobToEdit.posting_contact_name}
+                        defaultValue={jobToEdit.posting_contact_name}
                         className="poster-name"
                         onChange={setValues('posting_contact_name')}
                         value={rowEdits.posting_contact_name} ></TextField>
@@ -144,7 +158,7 @@ function EditJobPage() {
                         type="text"
                         id="poster-email"
                         variant="standard"
-                        placeholder={jobToEdit.posting_contact_email}
+                        defaultValue={jobToEdit.posting_contact_email}
                         className="poster-email"
                         onChange={setValues('posting_contact_email')}
                         value={rowEdits.posting_contact_email} ></TextField>
@@ -156,7 +170,7 @@ function EditJobPage() {
                         type="text"
                         id="company"
                         variant="standard"
-                        placeholder={jobToEdit.company_name}
+                        defaultValue={jobToEdit.company_name}
                         className="company"
                         onChange={setValues('company')}
                         value={rowEdits.company_name} ></TextField>
@@ -166,7 +180,7 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        placeholder={jobToEdit.available_role}
+                        defaultValue={jobToEdit.available_role}
                         variant="standard"
                         className="title"
                         onChange={setValues('available_role')}
@@ -177,7 +191,7 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        placeholder={jobToEdit.application_link}
+                        defaultValue={jobToEdit.application_link}
                         variant="standard"
                         className="application-link"
                         onChange={setValues('application_link')}
@@ -188,10 +202,11 @@ function EditJobPage() {
                     <CardHeader title="Select job types (Multiple selections allowed)" />
                     <div>
                         <FormControl sx={{ m: 1.1, width: 300 }}>
-                            <InputLabel id="job-types">types</InputLabel>
+                            <InputLabel id="job-types"></InputLabel>
                             <Select
                                 labelId="job-types"
                                 id="job-types"
+                                defaultValue={jobToEdit.job_type}
                                 multiple
                                 value={job}
                                 onChange={handleJob}
@@ -217,7 +232,7 @@ function EditJobPage() {
                         multiline rows={4}
                         sx={{ m: 1, width: 450 }}
                         type="text"
-                        placeholder={jobToEdit.description}
+                        defaultValue={jobToEdit.description}
                         variant='outlined'
                         className="description"
                         onChange={setValues('description')}
@@ -228,7 +243,7 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        placeholder={jobToEdit.job_city}
+                        defaultValue={jobToEdit.job_city}
                         variant="standard"
                         className="city"
                         onChange={setValues('job_city')}
@@ -239,7 +254,7 @@ function EditJobPage() {
                     &nbsp;&nbsp;&nbsp;
                     <TextField
                         type="text"
-                        placeholder={jobToEdit.job_state}
+                        defaultValue={jobToEdit.job_state}
                         variant="standard"
                         className="state"
                         onChange={setValues('job_state')}
@@ -249,6 +264,7 @@ function EditJobPage() {
                     <CardHeader title="&nbsp;Is this job remote?" />
                     <FormControl component="fieldset">
                         <RadioGroup
+                            defaultValue={jobToEdit.remote}
                             aria-label="Is this job remote?"
                             name="radio-buttons-group"
                         >
@@ -260,8 +276,9 @@ function EditJobPage() {
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="&nbsp;Can we share a contact person" />
-                    <FormControl component="fieldset">
+                    <FormControl  component="fieldset">
                         <RadioGroup
+                            defaultValue={shareContactDefault}
                             aria-label="Can we share a contact person?"
                             name="radio-buttons-group"
                         >
@@ -277,11 +294,12 @@ function EditJobPage() {
                 </Grid>
                 </Card>
                 <input className="submit-add-job-button" type='submit' value='Submit' />
+                                    </FormControl>
                 </form>
                 <Button onClick={toAdminHub}>Back to Hub</Button>
 
                 {/* <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button> */}
-            </div>
+            </div>}
         </div>
     )
 }
