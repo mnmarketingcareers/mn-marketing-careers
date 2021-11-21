@@ -58,31 +58,6 @@ function EditJobPage() {
 
      // Success Button toggle
     const [open, setOpen] = useState(false);
-
-
-
-
-            // If no changes to the following fields, send existing ids
-        // if(rowEdits.posting_contact_name == '' || rowEdits.posting_contact_email == '' ) {
-        //     setRowEdits({ ...rowEdits, 
-        //     posting_contact_id: thisJob.posting_contact_id })
-        // }
-        // if(rowEdits.company_name == '') {
-        //     setRowEdits({ ...rowEdits, company_id: thisJob.company_id})
-        // }
-        // if(rowEdits.hiring_contact_email == '' || rowEdits.hiring_contact_name == '' || rowEdits.title == '' || rowEdits.phone == '') {
-        //     setRowEdits({...rowEdits, hiring_contact_id: thisJob.hiring_contact_id})
-        // }
-
-    // might not be necessary anymore...    
-    const handleSetFKIds = () => {
-        console.log('Setting Foreign Key Ids');
-            setRowEdits({ ...rowEdits, 
-            posting_contact_id: thisJob.posting_contact_id, 
-            company_id: thisJob.company_id, 
-            hiring_contact_id: thisJob.hiring_contact_id})
-    }
-
     
 
     const toAdminHub = () => {

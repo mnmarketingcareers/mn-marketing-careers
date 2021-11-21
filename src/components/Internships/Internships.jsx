@@ -33,7 +33,7 @@ function Internships() {
                                                 return <Button style={{backgroundColor: '#E7F2F8'}} variant="outlined"><a style={{color: 'black', fontWeight: '500'}} href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
                                             }
                                             }},
-        { field: 'job type', headName: 'Job Field', width: 350},
+        { field: 'job_type', headName: 'Job Field', width: 350},
         { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
             return  <Button style={{backgroundColor: '#FFA384', color: 'white', fontWeight: '600'}} variant="contained" color="primary" size="small" 
             onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>  

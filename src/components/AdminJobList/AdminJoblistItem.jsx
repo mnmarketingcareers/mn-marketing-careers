@@ -39,7 +39,7 @@ function AdminJobListItem ({job}) {
                     <Link href={job.application_link} underline="hover">{job.application_link}</Link>
                 </TableCell>
                 <TableCell>{job.job_city}, &nbsp;{job.job_state}</TableCell>
-                <TableCell>{job.array_agg}</TableCell>
+                <TableCell>{job.job_type}</TableCell>
                 <TableCell>{job.remote}</TableCell>
                 <TableCell>
                     {(job.share_contact) ? (

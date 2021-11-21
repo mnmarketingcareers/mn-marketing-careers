@@ -37,7 +37,7 @@ function RemoteJobs() {
             return  <Button style={{backgroundColor: '#FFA384', color: 'white', fontWeight: '600'}} variant="contained" color="primary" size="small" 
             onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>   
         }},
-        { field: 'job type', headName: 'Job Field', width: 350},
+        { field: 'job_type', headName: 'Job Field', width: 350},
     ];                                                                 
 
     useEffect(() => {
