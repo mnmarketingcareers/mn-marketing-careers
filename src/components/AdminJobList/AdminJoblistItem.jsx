@@ -15,10 +15,9 @@ function AdminJobListItem ({job}) {
 
     // define button handlers
     const handleEdit = () => {
-        // dispatch({
-        //     type: 'EDIT_POSTING',
-        //     payload: rowToEdit
-        // });
+        dispatch({
+            type: 'UNSET_JOBS',
+        });
         history.push(`/editpage/${job.id}`)
     }
 

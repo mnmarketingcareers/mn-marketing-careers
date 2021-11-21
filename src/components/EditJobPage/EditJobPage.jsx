@@ -110,8 +110,8 @@ function EditJobPage() {
     const handleDontShareContact = () => {
         setRowEdits({
             ...rowEdits, share_contact: false,
-            name: '',
-            email: '',
+            hiring_contact_name: '',
+            hiring_contact_email: '',
             title: '',
             phone: '',
         });
@@ -316,10 +316,22 @@ function EditJobPage() {
                             name="radio-buttons-group"
                         >
                             <FormControlLabel  value="yes" onClick={shareContact} control={<Radio />} label="Yes" />
-                            {toggleContact ? <p></p> : <div><TextField className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('name')} ></TextField>&nbsp;&nbsp;
-                                &nbsp;<TextField className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('email')} ></TextField>&nbsp;
-                                &nbsp;<TextField className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>&nbsp;
-                                &nbsp;&nbsp;<TextField className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField></div>}
+                            {toggleContact ? 
+                                <p></p> 
+                                    : 
+                                <div>
+                                    <p>
+                                        {jobToEdit.hiring_contact_name} 
+                                        {jobToEdit.hiring_contact_email} 
+                                        {jobToEdit.title} 
+                                        {jobToEdit.phone}
+                                    </p>
+                                    <TextField className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('hiring_contact_name')} ></TextField>&nbsp;&nbsp;
+                                    &nbsp;<TextField className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('hiring_contact_email')} ></TextField>&nbsp;
+                                    &nbsp;<TextField className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>&nbsp;
+                                    &nbsp;&nbsp;<TextField className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField>
+                                </div>
+                            }
                             <FormControlLabel  value="no" onClick={handleDontShareContact} control={<Radio />} label="No" />
                         </RadioGroup>
                     </FormControl>

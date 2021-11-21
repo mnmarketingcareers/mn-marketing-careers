@@ -4,7 +4,9 @@ const setJobsReducer = (state = [], action) => {
       case 'SET_JOBS':
         return action.payload
       case 'SET_RECENT_JOBS':
-        return action.payload
+        return action.payloadl
+      case 'UNSET_JOBS':
+        return [];
       default:
         return state;
     }
