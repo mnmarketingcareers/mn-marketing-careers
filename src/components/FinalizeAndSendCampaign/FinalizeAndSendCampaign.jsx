@@ -32,6 +32,8 @@ function Campaign() {
       type: "SEND_EMAIL_NOW",
       payload: { campaign_id: campaignId },
     });
+    // post approved jobs to the list now
+    dispatch({ type: 'POST_APPROVED_JOBS'});
     history.push('/adminhub')
   };
 
