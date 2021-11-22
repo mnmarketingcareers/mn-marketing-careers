@@ -192,28 +192,34 @@ router.get('/internships', (req, res) => {
     const jobsByType = [];
     // get array of job types with IDs
     const allJobTypes = await pool.query(`SELECT * FROM "job_types";`);
-    const currentJobTypesForJob = await pool.query(`SELECT * FROM "jobs_by_type" WHERE "job_posting_id" = ${rowIdToAdd};`);
+    const currentJobTypesForJob = await pool.query(`
+                                                    SELECT "job_types"."type" FROM "jobs_by_type"
+                                                    JOIN "job_types" ON "jobs_by_type"."job_type_id" = "job_types"."id"
+                                                    WHERE "job_posting_id" = ${rowIdToAdd}
+                                                    GROUP BY "job_types"."type";
+                                                  `);
     console.log('what do all the job types look like?', allJobTypes);
     console.log('What are the Job types for the job before the edits?', currentJobTypesForJob.rows);
 
     const jobTypes = req.body.job_type;
+    console.log('Job Types from the client', jobTypes);
+    const compareJobTypes = currentJobTypesForJob.rows
     // compare the array from client with array of existing job types for job posting
-    const diff = function (arr, arr2) {
-      var ret = [];
-      for (var i in arr) {
-        if (arr2.indexOf(arr[i]) > -1) {
-          ret.push(arr[i]);
+    const diff = (arr, arr2) => {
+      let ret = [];
+      for (let i in arr) {
+        if (!arr2.includes(arr[i])) {
+          ret.push(arr[i].type);
         }
       }
       return ret;
     };
-    let ifDifferent = [];
-    ifDifferent = diff(currentJobTypesForJob.rows, jobTypes);
+    let ifDifferent = diff(compareJobTypes, jobTypes);
     console.log('should see an array. if no changes, it will be empty', ifDifferent);
 
     // If the client sent any changes, loop over job types strings from client array, 
     // pushing their IDs to jobsByType array
-    if(ifDifferent.length > 0) {
+    if(ifDifferent.length > 0 || compareJobTypes.length != jobTypes.length) {
       console.log('Job types from the client', jobTypes);
       for (let index in jobTypes) {
         console.log('looping through job Types from client');
