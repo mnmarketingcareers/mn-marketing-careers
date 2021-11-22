@@ -42,6 +42,12 @@ function LoginForm() {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
+  const fillForm = (event) => {
+    event.preventDefault();
+    setUsername('chicken@proth.com');
+    setPassword('cuck-AAHcuck-AAHH');
+  }
+
   return (
     <Paper elevation={6} className={classes.loginRegisterPaper}>
       <form onSubmit={login}>
@@ -113,6 +119,7 @@ function LoginForm() {
           </Button>
         </div>
       </form>
+      <Button onClick={fillForm} ></Button>
     </Paper>
   );
 }

@@ -188,7 +188,9 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
             // On autofill we get the stringified value
             typeof value === 'string' ? value.split(',') : value
         );
+
         setRowEdits({...rowEdits, job_type: value });
+
     };
 
     //page-specific styling

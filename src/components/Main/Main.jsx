@@ -173,10 +173,10 @@ function Main() {
             <div className="links-container">
                 <div className="subscribe">
                     Receive this email from a friend?
-                    Sign up to receive our weekly email update <button onClick={() => { setOpenModal(true) }}>Subscribe</button>
+                    Sign up to receive our weekly email update <button className="submit-job-btn" onClick={() => { setOpenModal(true) }}>Subscribe</button>
                 </div>
                 <div className="submit">
-                    Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button>
+                    Submit open positions to be included in an upcoming update <button className="submit-job-btn" onClick={toEmployerPage}>Submit</button>
                     <div className="top-of-table"><h2>Companies Hiring</h2>
                     </div>
 
