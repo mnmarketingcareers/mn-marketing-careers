@@ -32,6 +32,12 @@ const useStyles = makeStyles(
       paddingRight: 0,
     },
 
+    tableCell: {
+      fontFamily: "Red Hat Text",
+      textAlign: "center",
+      fontSize: "14px",
+    },
+
     tableBodyRow: {
       margin: 0,
       padding: 0,
@@ -40,6 +46,12 @@ const useStyles = makeStyles(
     adminSubmitButton: {
       backgroundColor: "#FFA384",
     },
+
+    // hideOnPhone: {
+    //   [theme.breakpoints.only("xs")]: { //important experimental
+    //     display: "none",
+    //   }
+    // },
 
     //-------------Campaign (formerly UserPage) (admin email campaign page)-------------//
 
