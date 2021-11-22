@@ -36,7 +36,7 @@ function AboutPage() {
         </p>
         </div>
         <div className="rightColumn">
-        <img className="aboutImage" src="./images/aboutImage1.jpeg" />
+        <img className="aboutImage" src="./images/aboutImage1.png" />
       </div>
     </div>
     </>
