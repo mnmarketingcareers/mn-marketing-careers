@@ -34,7 +34,7 @@ function Nav() {
 
         {user.id === undefined && (
           <>
-            <div className="nav-words">
+            <div className="nav-words-visitor">
               <Link className="navLink" to="/main">
                 Main
               </Link>
@@ -70,15 +70,11 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <div className="nav-words">
+            <div className="nav-words-admin">
               <LogOutButton />
 
-              <Link className="navLink" to="/campaign">
-                Campaign
-              </Link>
-
               <Link className="navLink" to="/emailtemplate">
-                Template
+                Send Email
               </Link>
 
               <Link className="navLink" to="/adminjoblist">

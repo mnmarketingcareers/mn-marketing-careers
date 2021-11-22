@@ -44,6 +44,7 @@ const AdminAddJobPage = () => {
         job_state: '',
         remote: '',
         share_contact: '',
+        status: 'APPROVED',
         name: '',
         email: '',
         title: '',
@@ -63,7 +64,7 @@ const AdminAddJobPage = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch({
-            type: 'NEW_EMPLOYER_JOB_POST',
+            type: 'ADD_APPROVED_JOB_POST',
             payload: jobPostingsObject
         })
         history.go(0);

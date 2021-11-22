@@ -17,7 +17,9 @@ function ReadyToPost () {
 
     const handleEdit = (id) => {
         // go to edit page
-        console.log('eventually');
+        dispatch({ type: 'UNSET_JOBS' });
+        dispatch({ type: 'FETCH_JOB_ID', payload: { job_posting_id: id } })
+        history.push(`/editpage/${id}`)
     }
 
     const handleDelete = (id) => {
@@ -32,28 +34,29 @@ function ReadyToPost () {
     return (
         <div>
             <h2>Job openings you've  added or approved, ready to go to the public list</h2>
-            <p>Click here: <Button variant="outlined" extended onClick={handlePostToList}>Go Live</Button> if you want to post all new job openings below to the public list</p>
+            <p>Click here: <Button variant="outlined" onClick={handlePostToList}>Go Live</Button> if you want to post all new job openings below to the public list</p>
                 {/* {JSON.stringify(approvedPostings)} */}
                 <div className="job-postings-table">
                     <ul>
                         {approvedPostings.map((job) => {
                             return(
                                 <li key={job.id}>
-                                    {job.available_role}, &nbsp;
-                                    {job.company_name}, &nbsp;
-                                    {job.description}, &nbsp;
-                                    <a href={`https://${job.application_link}`}>https://{job.application_link}</a>, &nbsp;
-                                    {job.job_city}, &nbsp;
-                                    {job.job_state}, &nbsp;
-                                    {job.remote}, &nbsp;
+                                    <b>{job.available_role}</b> &nbsp;|&nbsp;
+                                    {job.company_name} &nbsp;|&nbsp;
+                                    {job.description} &nbsp;|&nbsp;
+                                    <a href={`https://${job.application_link}`}>https://{job.application_link}</a> &nbsp;|&nbsp;
+                                    {job.job_type} &nbsp;|&nbsp;
+                                    {job.job_city} &nbsp;|&nbsp;
+                                    {job.job_state} &nbsp;|&nbsp;
+                                    <i>(in-person or remote?) &nbsp;</i>{job.remote} &nbsp;|&nbsp;
                                     {(job.share_contact) ? (
                                         <p>{job.hiring_contact_email, job.hiring_contact_name, job.title, job.phone}</p>
                                     ) : (<></>)}
-                                    {job.date_posted} &nbsp; | &nbsp;
+                                    {job.date_posted} &nbsp; || &nbsp;
                                     <label htmlFor="edit-btn"></label>
                                     <Button id="edit-btn" variant="outlined" color="success" onClick={() => handleEdit(job.id)}>Edit</Button> 
-                                    &nbsp;&nbsp;
-                                    <Button id="delete-btn" variant="outlined" color="error" onClick={() => handleDelete(job.id)}>JK, Delete dis</Button>   
+                                    &nbsp;|&nbsp;
+                                    <Button id="delete-btn" variant="outlined" color="error" onClick={() => handleDelete(job.id)}>Delete</Button>   
                                 </li>
                             )
                             })}

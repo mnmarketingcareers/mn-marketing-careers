@@ -15,9 +15,21 @@ function* addNewJobIssue(action) {
     };
 };
 
+function* fetchJobId(action) {
+    try{
+        const jobIssueId = action.payload.job_posting_id;
+        const jobIssue = yield axios.get(`/api/job/${jobIssueId}`);
+        console.log('In fetch job by ID, response from server: ', jobIssue.data);
+        yield put({ type: "SET_JOBS", payload: jobIssue.data});
+    } catch (error) {
+        console.log("Failure to GET all job issues", error);
+    }
+};
+
 //listener - add an issue
 function* addNewJobIssueSaga() {
     yield takeEvery('ADD_JOB_ISSUE', addNewJobIssue);
+    yield takeEvery('FETCH_JOB_ID', fetchJobId);
 };
 
 export default addNewJobIssueSaga;

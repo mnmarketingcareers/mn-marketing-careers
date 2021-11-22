@@ -49,7 +49,7 @@ function EmployerPage() {
         dispatch({ type: 'RESET_LASAGNA'});
     }, []);
     // get verification from reducer
-    const lasagna = useSelector(store => store.lasagna)
+    const lasagna = useSelector(store => store.lasagna);
 
     // On the question : "Is this job remote?"; toggles whether other input field is displayed or not.
     const [toggleOther, setToggleOther] = useState(true);
@@ -65,7 +65,24 @@ function EmployerPage() {
         setToggleContact(!toggleContact)
     };
 
-    
+    const sampleData = {
+        posting_contact_name: 'Danny',
+        posting_contact_email: 'danny.m@yahoo.com',
+        company: 'C.H. Robbinson',
+        available_role: 'engineer',
+        application_link: 'sdvas',
+        description: 'asdfas',
+        job_city: 'Minneappolis',
+        job_state: 'MN',
+        remote: 'yes',
+        share_contact: 'yes',
+        name: 'Danny',
+        email: 'danny.m@yahoo.com',
+        title: 'site manager',
+        phone: '',
+        job_types: []
+
+    }
     // Success Button toggle
     const [open, setOpen] = useState(false);
 
@@ -133,7 +150,10 @@ function EmployerPage() {
     });
 
 
-
+    const handleSetFields = () => {
+        // do something
+        setJobPostingsTable(sampleData);
+    }
 
     const setValues = (propertyName) => (event) => {
         setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value });
@@ -143,6 +163,7 @@ function EmployerPage() {
     // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
         setJobPostingsTable({ ...jobPostingsTable, share_contact: true });
+        // prefillShareContact();
         changeContactView();
     };
 
@@ -159,6 +180,16 @@ function EmployerPage() {
         });
     }
 
+    // const prefillShareContact = () => {
+    //     console.log('trying to FILLIT');
+    //     setJobPostingsTable({
+    //         ...jobPostingsTable, share_contact: true,
+    //         name: 'Danny',
+    //         email: 'danny.m@yahoo.com',
+    //         title: 'Hiring Manager',
+    //         phone: '612-555-9154'
+    //     })
+    // }
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -282,7 +313,7 @@ function EmployerPage() {
 
     return (
         <>
-
+            
             <div className="form-container">
                 <form className="employer-form" onSubmit={submitEmployerJob}>
                     <Grid container spacing={2}>
@@ -312,7 +343,9 @@ function EmployerPage() {
                                 </CardActions>
                             </Card>
                         </Grid>
+                        
                         <Grid item xs={8}>
+                        <Button  onClick={handleSetFields}></Button>
                             <Card>
                                 <CardHeader title="Your name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -475,14 +508,15 @@ function EmployerPage() {
                                         name="radio-buttons-group"
                                     >
                                         <FormControlLabel placeholder="yes" value="yes" onClick={shareContact} control={<Radio />} label="Yes" />
-                                        {toggleContact ? <p></p> : <div><TextField className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('name')} ></TextField>&nbsp;&nbsp;
-                                            &nbsp;<TextField className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('email')} ></TextField>&nbsp;
-                                            &nbsp;<TextField className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>&nbsp;
-                                            &nbsp;&nbsp;<TextField className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField></div>}
+                                        {toggleContact ? <p></p> : <div><TextField defaultValue="Danny" className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('name')} ></TextField>&nbsp;&nbsp;
+                                            &nbsp;<TextField defaultValue="danny.m@yahoo.com" className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('email')} ></TextField>&nbsp;
+                                            &nbsp;<TextField defaultValue="Hiring Manager" className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>&nbsp;
+                                            &nbsp;&nbsp;<TextField defaultValue="612-pri-menw" className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField></div>}
                                         <FormControlLabel placeholder="no" value="no" onClick={dontShareContact} control={<Radio />} label="No" />
                                     </RadioGroup>
                                 </FormControl>
                             </Card>
+                            
                         </Grid>
                     </Grid>
 

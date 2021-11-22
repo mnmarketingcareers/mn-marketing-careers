@@ -20,6 +20,7 @@ import getTemplatesSaga from './getTemplates.saga';
 import postNewTemplateSaga from './postTemplate.saga';
 import jobIssuesSaga from './jobIssue.saga';
 import buildEmailJobListSaga from './builtEmailJobList.saga';
+import editSaga from './editPosting.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -51,5 +52,6 @@ export default function* rootSaga() {
     postNewTemplateSaga(), //POST new template from scratch
     jobIssuesSaga(), //GET job issues from database
     buildEmailJobListSaga(), //IMPORTANT
+    editSaga(),
   ]);
 }

@@ -1,0 +1,23 @@
+
+.submit-employer-form-button {
+    width: 150px;
+    height: 45px;
+    margin: 10px;
+    border: none;
+    background-color: #74BDCB;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: background-color .4s linear;
+}
+
+.submit-employer-form-button:hover,
+.submit-employer-form-button:hover::after{
+  cursor: pointer;
+  background-color: #5298a7;
+  transition: background-color 0.23s linear;
+}
+
+
