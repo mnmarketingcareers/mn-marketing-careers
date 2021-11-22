@@ -392,6 +392,13 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
                 </form>
                 
             </FormControl>
+            <Stack spacing={2} sx={{ width: '350px' }}>
+                <Snackbar open={open} autoHideDuration={1800} onClose={handleClose} TransitionComponent={Slide}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '350px' }}>
+                        Submitting Edits
+                    </Alert>
+                </Snackbar>
+            </Stack>
         </>
     )
 }
