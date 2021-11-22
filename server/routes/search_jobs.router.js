@@ -193,23 +193,23 @@ router.get('/internships', (req, res) => {
     // get array of job types with IDs
     const allJobTypes = await pool.query(`SELECT * FROM "job_types";`);
     const currentJobTypesForJob = await pool.query(`
-                                                    SELECT "job_types"."type" FROM "jobs_by_type"
+                                                    SELECT "jobs_by_type"."job_posting_id", ARRAY_AGG("job_types"."type") FROM "jobs_by_type"
                                                     JOIN "job_types" ON "jobs_by_type"."job_type_id" = "job_types"."id"
                                                     WHERE "job_posting_id" = ${rowIdToAdd}
-                                                    GROUP BY "job_types"."type";
+                                                    GROUP BY "jobs_by_type"."job_posting_id";
                                                   `);
     console.log('what do all the job types look like?', allJobTypes);
-    console.log('What are the Job types for the job before the edits?', currentJobTypesForJob.rows);
+    console.log('What are the Job types for the job before the edits?', currentJobTypesForJob.rows[0].array_agg);
 
     const jobTypes = req.body.job_type;
     console.log('Job Types from the client', jobTypes);
-    const compareJobTypes = currentJobTypesForJob.rows
+    const compareJobTypes = currentJobTypesForJob.rows[0].array_agg;
     // compare the array from client with array of existing job types for job posting
     const diff = (arr, arr2) => {
       let ret = [];
       for (let i in arr) {
         if (!arr2.includes(arr[i])) {
-          ret.push(arr[i].type);
+          ret.push(arr[i]);
         }
       }
       return ret;
