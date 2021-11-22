@@ -42,7 +42,7 @@ const AdminAddJobPage = () => {
     };
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
-    const [jobPostingsObject, setJobPostingsObject] = useState({
+    const defaultJobObject = {
         posting_contact_name: '',
         posting_contact_email: '',
         company: '',
@@ -59,7 +59,8 @@ const AdminAddJobPage = () => {
         title: '',
         phone: '',
         job_types: []
-    });
+    }
+    const [jobPostingsObject, setJobPostingsObject] = useState(defaultJobObject);
 
     // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
@@ -81,28 +82,7 @@ const AdminAddJobPage = () => {
 
         setTimeout(() => {
             history.go(0);
-        }, 1500)
-
-        // setJobPostingsObject({ ...jobPostingsObject,
-        //     posting_contact_name: '',
-        //     posting_contact_email: '',
-        //     company: '',
-        //     available_role: '',
-        //     application_link: '',
-        //     description: '',
-        //     job_city: '',
-        //     job_state: '',
-        //     remote: '',
-        //     share_contact: '',
-        //     status: 'APPROVED',
-        //     name: '',
-        //     email: '',
-        //     title: '',
-        //     phone: '',
-        //     job_types: ''
-        // });
-        // setToggleContact(true);
-
+        }, 2000);
     }
 
     const setValues = (propertyName) => (event) => {
@@ -417,7 +397,7 @@ const AdminAddJobPage = () => {
                 {/* <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button> */}
             </div>
             <Stack spacing={2} sx={{ width: '350px' }}>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} TransitionComponent={Slide}>
+                <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} TransitionComponent={Slide}>
                     <Alert onClose={handleClose} severity="success" sx={{ width: '350px' }}>
                         Job Opening Added!
                     </Alert>
