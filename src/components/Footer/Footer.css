@@ -10,3 +10,14 @@ footer {
   min-height: calc(100% - 186px);
   width: 100%;
 }
+
+.footerText{
+  font-size: 16px;
+}
+
+@media screen and (max-width: 400px) {
+
+  .footerText {
+    font-size: 12px;
+  }
+}
