@@ -49,14 +49,6 @@ function Main() {
         history.push('/employerpage')
     }
 
-    
-
-
-    
-
-
-
-
     const rows = useSelector((store) => store.setJobsReducer);
     const recentJobs = useSelector(store => store.setRecentJobs);
 
