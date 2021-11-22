@@ -27,6 +27,7 @@ import './Main.css';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 import Internships from '../Internships/Internships.jsx';
 import useStyles from '../Styles/Styles';
+import { format, getUnixTime, utcToZonedTime } from 'date-fns';
 
 // Snackbar button
 import IconButton from '@mui/material/IconButton';
@@ -91,6 +92,9 @@ function Main() {
         },
     ];
 
+    const date = new Date();
+    console.log('what is date',date);
+
     useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
@@ -120,7 +124,6 @@ function Main() {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
 
@@ -148,11 +151,13 @@ function Main() {
     });
 
 
+
+
     return (
         <>
+        
             <div className="parent">
                 <div className="logo">
-                    {/* <h1>LOGO</h1> */}
                     <div>
                         In support of Minnesota’s marketing community, this weekly update is dedicated to sharing marketing
                         career opportunities with Minnesota-based companies. We invite you to review the opportunities below
