@@ -37,7 +37,7 @@ function ReadyToPost () {
             <Paper>
             <p>Click here: <Button variant="outlined" onClick={handlePostToList}>Go Live</Button> <b>ONLY IF</b> you want to post all new job openings below to the public list</p>
                 {/* {JSON.stringify(approvedPostings)} */}
-                <div className="job-postings-table">
+                <Container className="job-postings-table">
                     <ul>
                         {approvedPostings.map((job) => {
                             return(
@@ -62,7 +62,7 @@ function ReadyToPost () {
                             )
                             })}
                     </ul>
-                </div>
+                </Container>
             </Paper>
         </div>
     )
