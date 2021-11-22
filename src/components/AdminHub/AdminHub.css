@@ -1,49 +1,37 @@
 .tempHeader {
-    display: block;
-    position: relative;
-    color: #0087ca;
-    text-align: center;
+  display: block;
+  position: relative;
+  color: #0087ca;
+  text-align: center;
 }
 
-
 .adminContainer {
-    height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-
 .gridL {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
 .gridR {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .gridWrapper {
-    max-width: 1000px;
-margin: 0 auto;
+  max-width: 1000px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   align-items: center;
   grid-gap: 16px;
   padding: 0 50px;
 }
-
-@media screen and (max-width: 768px) {
-    .gridWrapper {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-  }
