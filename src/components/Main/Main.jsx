@@ -24,6 +24,7 @@ import Modal from "../Modal/Modal.jsx";
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel, Link } from '@mui/material/';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import './Main.css';
+import MainGrid from './MainGrid.jsx';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 import Internships from '../Internships/Internships.jsx';
 import useStyles from '../Styles/Styles';
@@ -47,19 +48,10 @@ function Main() {
         history.push('/employerpage')
     }
 
-    const testApply = (event) => {
-        console.log('in button, what is event.target.params', event.target.params);
-        console.log('in button, what is params', event.target.params);
-        const link = event.target.value;
-        <a href="`${link}`" />
-
-    }
+    
 
 
-    // useparams history.push
-    const toIssuePage = (rowId) => {
-        history.push(`/jobpostingissue/${rowId}`)
-    }
+    
 
 
 
@@ -67,29 +59,7 @@ function Main() {
     const rows = useSelector((store) => store.setJobsReducer);
     const recentJobs = useSelector(store => store.setRecentJobs);
 
-// The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
-    const columns = [
-        { field: 'company_name', headerName: 'company', width: 150 },
-        { field: 'date_posted', headerName: 'date', width: 110 },
-        { field: 'available_role', headerName: 'available role', width: 150 },
-        { field: 'description', headerName: 'description', width: 150 },
-        {
-            field: 'application_link', headerName: 'link', width: 150, renderCell: (params) => {
-                if (params.row.application_link.includes('http')) {
-                    return <Button style={{ backgroundColor: '#E7F2F8' }} variant="contained"><a style={{ color: 'black', fontWeight: '500' }} href={`${params.row.application_link}`} target="_blank">Apply</a></Button>
-                } else {
-                    return <Button style={{ backgroundColor: '#E7F2F8' }} variant="contained"><a style={{ color: 'black', fontWeight: '500' }} href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button>
-                }
-            }
-        },
-        { field: 'job_type', headName: 'Job Field', width: 350 },
-        {
-            field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => {
-                return <Button variant="contained" style={{ backgroundColor: '#FFA384', color: 'white', fontWeight: '600' }} size="small"
-                    onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>
-            }
-        },
-    ];
+
 
     useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
@@ -205,16 +175,7 @@ function Main() {
                     }
                     {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}
                     {openModal ? <p></p> :
-                        <div style={{ height: 500, width: '100%' }}>
-                            <DataGrid
-                                rows={rows}
-                                columns={columns}
-                                pageSize={8}
-                                rowsPerPageOptions={[8]}
-                                checkboxSelection
-                                disableSelectionOnClick
-                            />
-                        </div>
+                        <MainGrid rows={rows} />
                     }
                     {openModal ? <p></p> :
                         <div className="top-of-table"><h2>Remote Opportunities</h2></div>
