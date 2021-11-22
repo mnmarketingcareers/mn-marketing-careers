@@ -1,0 +1,22 @@
+
+.oopsPage {
+    text-align: center;
+    margin: 100px auto;
+  }
+  
+  .oopsImage {
+    max-width: 300px;
+  }
+  
+  @media screen and (max-width: 800px) {
+    .oopsPage {
+      margin: 80px auto;
+    }
+  }
+  
+  
+  @media screen and (max-width: 800px) {
+    .oopsImage {
+      max-width: 40%;
+    }
+  }
