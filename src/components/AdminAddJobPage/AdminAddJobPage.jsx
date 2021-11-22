@@ -42,7 +42,7 @@ const AdminAddJobPage = () => {
     };
 
     // Data to be dispatched to job_postings, hiring_contact, and company tables in mn_marketing_careers database.
-    const [jobPostingsObject, setJobPostingsObject] = useState({
+    const defaultJobObject = {
         posting_contact_name: '',
         posting_contact_email: '',
         company: '',
@@ -59,7 +59,8 @@ const AdminAddJobPage = () => {
         title: '',
         phone: '',
         job_types: []
-    });
+    }
+    const [jobPostingsObject, setJobPostingsObject] = useState(defaultJobObject);
 
     // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
@@ -78,26 +79,10 @@ const AdminAddJobPage = () => {
             payload: jobPostingsObject
         })
         setOpen(true);
-        setJobPostingsObject({
-            posting_contact_name: '',
-            posting_contact_email: '',
-            company: '',
-            available_role: '',
-            application_link: '',
-            description: '',
-            job_city: '',
-            job_state: '',
-            remote: '',
-            share_contact: '',
-            status: '',
-            name: '',
-            email: '',
-            title: '',
-            phone: '',
-            job_types: []
-        });
-        setToggleContact(true);
 
+        setTimeout(() => {
+            history.go(0);
+        }, 2000);
     }
 
     const setValues = (propertyName) => (event) => {
@@ -254,7 +239,7 @@ const AdminAddJobPage = () => {
                             <Grid item xs={12} md={6} lg={4} xl={3}>
                                 <CardHeader title="Your name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     id="poster-name"
                                     variant="standard"
@@ -266,8 +251,8 @@ const AdminAddJobPage = () => {
                             <Grid item xs={12} md={6} lg={4} xl={3}>
                                 <CardHeader title="Your email" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
-                                    type="text"
+                                <TextField required
+                                    type="email"
                                     id="poster-email"
                                     variant="standard"
                                     placeholder="email"
@@ -278,7 +263,7 @@ const AdminAddJobPage = () => {
                             <Grid item xs={12} md={6} lg={4} xl={3}>
                                 <CardHeader title="Company Name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     id="company"
                                     variant="standard"
@@ -290,7 +275,7 @@ const AdminAddJobPage = () => {
                             <Grid item xs={12} md={6} lg={4} xl={3}>
                                 <CardHeader title="Title of Position Available" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     placeholder="title"
                                     variant="standard"
@@ -301,7 +286,7 @@ const AdminAddJobPage = () => {
                             <Grid item xs={12} md={6} lg={4} xl={3}>
                                 <CardHeader title="Link to Job Post Online" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <TextField
+                                <TextField required
                                     type="text"
                                     placeholder="link"
                                     variant="standard"
@@ -319,6 +304,7 @@ const AdminAddJobPage = () => {
                                             labelId="job-types"
                                             id="job-types"
                                             multiple
+                                            defaultValue={[]}
                                             value={job}
                                             onChange={handleJob}
                                             input={<OutlinedInput label="Types" />}
@@ -375,6 +361,7 @@ const AdminAddJobPage = () => {
                                 <CardHeader title="&nbsp;Is this job remote?" />
                                 <FormControl component="fieldset">
                                     <RadioGroup
+                                        defaultChecked='false'
                                         aria-label="Is this job remote?"
                                         name="radio-buttons-group"
                                     >
@@ -388,6 +375,7 @@ const AdminAddJobPage = () => {
                                 <CardHeader title="&nbsp;Can we share a contact person" />
                                 <FormControl component="fieldset">
                                     <RadioGroup
+                                        defaultChecked='false'
                                         aria-label="Can we share a contact person?"
                                         name="radio-buttons-group"
                                     >
@@ -409,7 +397,7 @@ const AdminAddJobPage = () => {
                 {/* <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button> */}
             </div>
             <Stack spacing={2} sx={{ width: '350px' }}>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} TransitionComponent={Slide}>
+                <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} TransitionComponent={Slide}>
                     <Alert onClose={handleClose} severity="success" sx={{ width: '350px' }}>
                         Job Opening Added!
                     </Alert>
