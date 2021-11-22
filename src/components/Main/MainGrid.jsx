@@ -7,6 +7,7 @@ import moment from 'moment';
 
 function MainGrid ({ rows }) {
 
+    const history = useHistory();
     const testApply = (event) => {
         console.log('in button, what is event.target.params', event.target.params);
         console.log('in button, what is params', event.target.params);
