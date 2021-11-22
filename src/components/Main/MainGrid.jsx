@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { format, compareAsc, parseISO } from 'date-fns';
+import moment from 'moment';
 
 function MainGrid ({ rows }) {
 
@@ -18,12 +19,12 @@ function MainGrid ({ rows }) {
         history.push(`/jobpostingissue/${rowId}`)
     }
     
-    // renderCell: (params) => {return(format(parseISO(params.row.date_posted)))}
+    // renderCell: (params) => {return(moment(params.row.date_posted).format('MMM Do YY')))}
 
     // The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
     const columns = [
         { field: 'company_name', headerName: 'company', width: 150 },
-        { field: 'date_posted', headerName: 'date', width: 110, renderCell: (params) => {return(parseISO(params.row.date_posted))} },
+        { field: 'date_posted', headerName: 'date', width: 110, renderCell: (params) => {return(moment(params.row.date_posted).format('MMM Do YY'))} },
         { field: 'available_role', headerName: 'available role', width: 150 },
         { field: 'description', headerName: 'description', width: 150 },
         {
@@ -47,6 +48,7 @@ function MainGrid ({ rows }) {
 
     return (
         <>
+        
             <div style={{ height: 500, width: '100%' }}>
                             <DataGrid
                                 rows={rows}
