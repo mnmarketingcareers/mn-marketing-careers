@@ -109,9 +109,6 @@ const AdminHub = () => {
     history.push("/adminaddjob");
   };
 
-  // const navToCreateTemplatePage = () => {
-  //   history.push('/emailtemplate')
-  // }
 
   return (
     <div className="adminHubPage">
