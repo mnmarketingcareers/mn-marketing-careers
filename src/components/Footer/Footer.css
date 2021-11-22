@@ -1,5 +1,12 @@
+
 footer {
-  margin-top: 80px;
-  padding: 20px;
   text-align: center;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  margin-top: 80px;
+  min-height: 100%;
+  min-height: -webkit-calc(100% - 186px);
+  min-height: -moz-calc(100% - 186px);
+  min-height: calc(100% - 186px);
+  width: 100%;
 }

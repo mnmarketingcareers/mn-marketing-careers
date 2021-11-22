@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Typography, Container, Button, Paper, TextField, IconButton } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Container,
+  Button,
+  Paper,
+  TextField,
+  IconButton,
+} from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,7 +17,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-import ToggleOffIcon from '@mui/icons-material/ToggleOff'; 
+import ToggleOffIcon from "@mui/icons-material/ToggleOff";
 
 import NewPostingsReady from "../NewJobOpeningsReadyAlert/NewJobOpeningsReadyAlert";
 import NewSubmissions from "../NewSubmissionsAlert/NewSubmissionsAlert";
@@ -25,7 +33,6 @@ const AdminHub = () => {
   const subs = useSelector((store) => store.setSubsListReducer);
   const user = useSelector((store) => store.user);
 
-
   //loading and redux state
   const [isLoading, setIsLoading] = useState(false);
   const [subList, setSubList] = useState([]);
@@ -37,14 +44,14 @@ const AdminHub = () => {
   const [userZip, setUserZip] = useState("");
 
   //user sub status
-  const [subStatus, setSubStatus] = useState('') //deletelater
+  const [subStatus, setSubStatus] = useState(""); //deletelater
 
   useEffect(() => {
     setIsLoading(true);
     console.log("page loaded - fetching subscribers...");
     dispatch({ type: "GET_SUBS" });
     setSubList(subs.data);
-    console.log('user is:', user.first_name)
+    console.log("user is:", user.first_name);
   }, [subList]);
 
   //check email - is it real? if keep required attribute //deletelater
@@ -87,16 +94,20 @@ const AdminHub = () => {
   };
 
   const toggleSubStatus = (subStatus, id) => {
-    let newStatus = '';
-    subStatus === "subscribed" ? newStatus = "unsubscribed" : newStatus = "subscribed";
-    console.log("current status:", subStatus, 'for user:', id)
-    dispatch({type: "TOGGLE_SUB_STATUS", payload: {status: newStatus, subscriberHash: id}
-    })
-  }
+    let newStatus = "";
+    subStatus === "subscribed"
+      ? (newStatus = "unsubscribed")
+      : (newStatus = "subscribed");
+    console.log("current status:", subStatus, "for user:", id);
+    dispatch({
+      type: "TOGGLE_SUB_STATUS",
+      payload: { status: newStatus, subscriberHash: id },
+    });
+  };
 
   const handleAddJob = () => {
-    history.push('/adminaddjob');
-  }
+    history.push("/adminaddjob");
+  };
 
   // const navToCreateTemplatePage = () => {
   //   history.push('/emailtemplate')
@@ -104,25 +115,46 @@ const AdminHub = () => {
 
   return (
     <div className="adminHubPage">
-      <Typography style={{fontSize: '40px', marginTop: "30px"}}className={classes.adminHeader}>Hi, {user.first_name}!</Typography>
+      <Typography
+        style={{ fontSize: "40px", marginTop: "30px" }}
+        className={classes.adminHeader}
+      >
+        Hi, {user.first_name}!
+      </Typography>
 
-      <Container className="adminContainer" style={{textAlign: "center"}}>
-      <Button style={{margin: '5px'}}  variant="contained" size="large" color="primary" onClick={() =>  history.push('/emailtemplate')}>CREATE CAMPAIGN</Button>
-      <Button variant="contained" size="large" onClick={handleAddJob} >Add Some Jobs</Button>
-            {/* <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button> */}
-<br />
-        
-        <div style={{marginTop: '20px'}} className="gridWrapper">
+      <Container className="adminContainer" style={{ textAlign: "center" }}>
+        <Button
+          style={{ margin: "5px" }}
+          variant="contained"
+          size="large"
+          color="primary"
+          onClick={() => history.push("/emailtemplate")}
+        >
+          CREATE CAMPAIGN
+        </Button>
+        <Button variant="contained" size="large" onClick={handleAddJob}>
+          Add Some Jobs
+        </Button>
+        {/* <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button> */}
+        <br />
+
+        <div style={{ marginTop: "20px" }} className="gridWrapper">
           {/* <Button variant="contained" onClick={handleAddJob} >Add Some Jobs</Button> */}
           <Grid container spacing={2}>
             <Grid item xs={4}>
-              <div className="gridL"><NewSubmissions /></div>
+              <div className="gridL">
+                <NewSubmissions />
+              </div>
             </Grid>
             <Grid item xs={4}>
-              <div className="something"><NewIssues /></div>
+              <div className="something">
+                <NewIssues />
+              </div>
             </Grid>
             <Grid item xs={4}>
-              <div className="gridR"><NewPostingsReady /></div>
+              <div className="gridR">
+                <NewPostingsReady />
+              </div>
             </Grid>
           </Grid>
           <div className="gridL">
@@ -168,10 +200,16 @@ const AdminHub = () => {
                 onChange={(event) => setUserZip(event.target.value)}
               />
               <br />
-              <Button style={{margin: '10px'}} className={classes.adminSubmitButton} variant="contained" type="submit">Submit</Button>
+              <Button
+                style={{ margin: "10px" }}
+                className={classes.adminSubmitButton}
+                variant="contained"
+                type="submit"
+              >
+                Submit
+              </Button>
             </form>
-<br />
-
+            <br />
           </div>
 
           <div className="gridR">
@@ -184,86 +222,86 @@ const AdminHub = () => {
 
             <Paper elevation={8} className="adminPaper">
               <TableContainer sx={{ maxHeight: 470 }}>
-              <Table className="tableMain" stickyHeader aria-label="sticky table">
-                <TableHead className={classes.tableHeader}>
-                  <TableRow>
-                    <TableCell
-                      className={classes.tableHeaderCell}
-                    >
-                      Name
-                    </TableCell>
-                    <TableCell
-                      className={classes.tableHeaderCell}
-                    >
-                      Email
-                    </TableCell>
-                    <TableCell
-                      className={classes.tableHeaderCell}
-                    >
-                      Zip Code
-                       </TableCell>
-                    <TableCell
-                      className={classes.tableHeaderCell}
-                      
-                    >
-                      Status
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody className="adminTableBody">
-                  {subs.length > 0 ? (
-                    subs[0].map((item) => (
-                      <TableRow key={item.id} className={classes.tableBodyRow}>
-                        <TableCell
-                          style={{
-                          
-                            fontFamily: "Red Hat Text",
-                            textAlign: "center",
-                            fontSize: "14px",
-                          }}
+                <Table
+                  className="tableMain"
+                  stickyHeader
+                  aria-label="sticky table"
+                >
+                  <TableHead className={classes.tableHeader}>
+                    <TableRow>
+                      <TableCell className={classes.tableHeaderCell}>
+                        Name
+                      </TableCell>
+                      <TableCell className={classes.tableHeaderCell}>
+                        Email
+                      </TableCell>
+                      <TableCell className={classes.tableHeaderCell}>
+                        Zip Code
+                      </TableCell>
+                      <TableCell className={classes.tableHeaderCell}>
+                        Status
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody className="adminTableBody">
+                    {subs.length > 0 ? (
+                      subs[0].map((item) => (
+                        <TableRow
+                          key={item.id}
+                          className={classes.tableBodyRow}
                         >
-                          {item.full_name}
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            fontFamily: "Red Hat Text",
-                            textAlign: "center",
-                            fontSize: "14px",
-                          }}
-                        >
-                          {item.email_address}
-                        </TableCell>
+                          <TableCell
+                            style={{
+                              fontFamily: "Red Hat Text",
+                              textAlign: "center",
+                              fontSize: "14px",
+                            }}
+                          >
+                            {item.full_name}
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontFamily: "Red Hat Text",
+                              textAlign: "center",
+                              fontSize: "14px",
+                            }}
+                          >
+                            {item.email_address}
+                          </TableCell>
 
+                          <TableCell
+                            style={{
+                              fontFamily: "Red Hat Text",
+                              textAlign: "center",
+                              fontSize: "14px",
+                            }}
+                          >
+                            {item.merge_fields.ADDRESS.zip}
+                          </TableCell>
 
-                        <TableCell
-                          style={{
-                            fontFamily: "Red Hat Text",
-                            textAlign: "center",
-                            fontSize: "14px",
-                          }}
-                        >
-                          {item.merge_fields.ADDRESS.zip}
-                        </TableCell>
-
-
-
-                        <TableCell 
-                          style={{
-                            fontFamily: "Red Hat Text",
-                            textAlign: "center",
-                            fontSize: "14px",
-                          }}
-                        >
-                          {item.status}
-                        </TableCell>
-                        <IconButton onClick={() => toggleSubStatus(item.status, item.contact_id)}><ToggleOffIcon/></IconButton>
-                      </TableRow>
-                    ))
-                  ) : (
-                    <img src="./images/Pendulum.gif" />
-                  )}
-                </TableBody>
-              </Table>
+                          <TableCell
+                            style={{
+                              fontFamily: "Red Hat Text",
+                              textAlign: "center",
+                              fontSize: "14px",
+                            }}
+                          >
+                            {item.status}
+                          </TableCell>
+                          <IconButton
+                            onClick={() =>
+                              toggleSubStatus(item.status, item.contact_id)
+                            }
+                          >
+                            <ToggleOffIcon />
+                          </IconButton>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <img src="./images/Pendulum.gif" />
+                    )}
+                  </TableBody>
+                </Table>
               </TableContainer>
             </Paper>
             <Typography></Typography>
