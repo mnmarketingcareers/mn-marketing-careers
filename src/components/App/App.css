@@ -23,12 +23,77 @@ img {
 
 
 /* --------------------------------------------------------------------------------
-Container
+about page
 -------------------------------------------------------------------------------- */
 
-.container {
-  padding: 20px;
+.aboutContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 80%;
+  margin: auto;
 }
+
+.aboutHeadline {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.aboutParagraph {
+  text-align: right;
+  margin-right: 2ch;
+}
+
+
+.aboutImage {
+  min-width: 200px;
+  text-align: center;
+}
+
+.aboutParagraph {
+  font-size: 1.6rem;
+}
+
+@media screen and (max-width: 1100px) {
+  .aboutParagraph{
+    font-size: 1.2rem;
+  };
+
+
+}
+
+@media screen and (max-width: 768px) {
+  .aboutContainer{
+  grid-template-columns: 1fr;
+  width: 93%;
+  margin: auto;
+  }
+
+  .aboutParagraph{
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .aboutContainer{
+  grid-template-columns: 1fr;
+  }
+
+  .aboutHeadline {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+
+  .aboutParagraph{
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
+}
+
+
 
 /* --------------------------------------------------------------------------------
 Button

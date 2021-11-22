@@ -28,6 +28,7 @@ import MainGrid from './MainGrid.jsx';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 import Internships from '../Internships/Internships.jsx';
 import useStyles from '../Styles/Styles';
+import { format, getUnixTime, utcToZonedTime } from 'date-fns';
 
 // Snackbar button
 import IconButton from '@mui/material/IconButton';
@@ -61,6 +62,9 @@ function Main() {
 
 
 
+    const date = new Date();
+    console.log('what is date',date);
+
     useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
     }, []);
@@ -90,7 +94,6 @@ function Main() {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
 
@@ -118,11 +121,13 @@ function Main() {
     });
 
 
+
+
     return (
         <>
+        
             <div className="parent">
                 <div className="logo">
-                    {/* <h1>LOGO</h1> */}
                     <div>
                         In support of Minnesota’s marketing community, this weekly update is dedicated to sharing marketing
                         career opportunities with Minnesota-based companies. We invite you to review the opportunities below
@@ -138,10 +143,10 @@ function Main() {
             <div className="links-container">
                 <div className="subscribe">
                     Receive this email from a friend?
-                    Sign up to receive our weekly email update <button onClick={() => { setOpenModal(true) }}>Subscribe</button>
+                    Sign up to receive our weekly email update <button className="submit-job-btn" onClick={() => { setOpenModal(true) }}>Subscribe</button>
                 </div>
                 <div className="submit">
-                    Submit open positions to be included in an upcoming update <button onClick={toEmployerPage}>Submit</button>
+                    Submit open positions to be included in an upcoming update <button className="submit-job-btn" onClick={toEmployerPage}>Submit</button>
                     <div className="top-of-table"><h2>Companies Hiring</h2>
                     </div>
 

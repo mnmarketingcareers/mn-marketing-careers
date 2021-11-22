@@ -32,33 +32,8 @@ function EditJobPage() {
         dispatch({ type: 'FETCH_JOB_ID', payload: { job_posting_id: id } });
         // setIsLoading(false);
     }, []);
-   
-    // probably no longer needed
-    // const handleSetEditObj = () => {
-    //     setRowEdits((rowEdits) => {
-    //         return {...rowEdits, jobToEdit};
-    //     });
-    //     console.log('rowEdits', rowEdits);
-    // }
-    // declare anonymous functions
 
-    
-
-    // const multiPlaceholderText = (arr) => {
-    //     let newString = ''
-    //     for (let item of arr) {
-    //         newString += item + ', ';
-    //     }
-    //     return newString;
-    // }
-
-    // let jobTypesString = multiPlaceholderText( jobToEdit.job_type);
-    // console.log(jobTypesString);
-    
-
-     // Success Button toggle
-    const [open, setOpen] = useState(false);
-    
+ 
 
     const toAdminHub = () => {
         history.push('/adminjoblist');
