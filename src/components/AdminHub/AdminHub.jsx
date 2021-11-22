@@ -9,6 +9,7 @@ import {
   Paper,
   TextField,
   IconButton,
+  Box,
 } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -109,7 +110,6 @@ const AdminHub = () => {
     history.push("/adminaddjob");
   };
 
-
   return (
     <div className="adminHubPage">
       <Typography
@@ -138,23 +138,23 @@ const AdminHub = () => {
         <div style={{ marginTop: "20px" }} className="gridWrapper">
           {/* <Button variant="contained" onClick={handleAddJob} >Add Some Jobs</Button> */}
           <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <div className="gridL">
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+              <div>
                 <NewSubmissions />
               </div>
             </Grid>
-            <Grid item xs={4}>
-              <div className="something">
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+              <div>
                 <NewIssues />
               </div>
             </Grid>
-            <Grid item xs={4}>
-              <div className="gridR">
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+              <div>
                 <NewPostingsReady />
               </div>
             </Grid>
           </Grid>
-          <div className="gridL">
+          <div>
             <Typography variant="h4">Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
               <TextField
@@ -217,91 +217,69 @@ const AdminHub = () => {
               Full Subscriber List:
             </Typography>
 
-            <Paper elevation={8} className="adminPaper">
-              <TableContainer sx={{ maxHeight: 470 }}>
-                <Table
-                  className="tableMain"
-                  stickyHeader
-                  aria-label="sticky table"
-                >
-                  <TableHead className={classes.tableHeader}>
-                    <TableRow>
-                      <TableCell className={classes.tableHeaderCell}>
-                        Name
-                      </TableCell>
-                      <TableCell className={classes.tableHeaderCell}>
-                        Email
-                      </TableCell>
-                      <TableCell className={classes.tableHeaderCell}>
-                        Zip Code
-                      </TableCell>
-                      <TableCell className={classes.tableHeaderCell}>
-                        Status
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody className="adminTableBody">
-                    {subs.length > 0 ? (
-                      subs[0].map((item) => (
-                        <TableRow
-                          key={item.id}
-                          className={classes.tableBodyRow}
-                        >
-                          <TableCell
-                            style={{
-                              fontFamily: "Red Hat Text",
-                              textAlign: "center",
-                              fontSize: "14px",
-                            }}
+            <Paper elevation={8} className="adminPaper" >
+              <Grid style={{xs: "none", lg: "block"}}>
+                <TableContainer sx={{ maxHeight: 470 }}>
+                  <Table
+                    className="tableMain"
+                    stickyHeader
+                    aria-label="sticky table"
+                  >
+                    <TableHead className={classes.tableHeader}>
+                      <TableRow>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Name
+                        </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Email
+                        </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Zip Code
+                        </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Status
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody className="adminTableBody">
+                      {subs.length > 0 ? (
+                        subs[0].map((item) => (
+                          <TableRow
+                            key={item.id}
+                            className={classes.tableBodyRow}
                           >
-                            {item.full_name}
-                          </TableCell>
-                          <TableCell
-                            style={{
-                              fontFamily: "Red Hat Text",
-                              textAlign: "center",
-                              fontSize: "14px",
-                            }}
-                          >
-                            {item.email_address}
-                          </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {item.full_name}
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {item.email_address}
+                            </TableCell>
 
-                          <TableCell
-                            style={{
-                              fontFamily: "Red Hat Text",
-                              textAlign: "center",
-                              fontSize: "14px",
-                            }}
-                          >
-                            {item.merge_fields.ADDRESS.zip}
-                          </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {item.merge_fields.ADDRESS.zip}
+                            </TableCell>
 
-                          <TableCell
-                            style={{
-                              fontFamily: "Red Hat Text",
-                              textAlign: "center",
-                              fontSize: "14px",
-                            }}
-                          >
-                            {item.status}
-                          </TableCell>
-                          <IconButton
-                            onClick={() =>
-                              toggleSubStatus(item.status, item.contact_id)
-                            }
-                          >
-                            <ToggleOffIcon />
-                          </IconButton>
-                        </TableRow>
-                      ))
-                    ) : (
-                      <img src="./images/Pendulum.gif" />
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                            <TableCell className={classes.tableCell}>
+                              {item.status}
+                            </TableCell>
+                            <IconButton
+                              onClick={() =>
+                                toggleSubStatus(item.status, item.contact_id)
+                              }
+                            >
+                              <ToggleOffIcon />
+                            </IconButton>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <img src="./images/Pendulum.gif" />
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
             </Paper>
-            <Typography></Typography>
+        
           </div>
         </div>
       </Container>
