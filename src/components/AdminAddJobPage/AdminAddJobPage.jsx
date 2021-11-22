@@ -189,9 +189,10 @@ const AdminAddJobPage = () => {
                 <Card xs={12}>
                 <Grid container item>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
-                    <CardHeader title="Your name" />
+                    <CardHeader title="Concact Person's Name" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
+                        required
                         type="text"
                         id="poster-name"
                         variant="standard"
@@ -201,10 +202,10 @@ const AdminAddJobPage = () => {
                         value={jobPostingsObject.posting_contact_name} ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4} xl={3}>
-                    <CardHeader title="Your email" />
+                    <CardHeader title="Contact Person's Email" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <TextField
-                        type="text"
+                    <TextField required
+                        type="email"
                         id="poster-email"
                         variant="standard"
                         placeholder="email"
@@ -215,7 +216,7 @@ const AdminAddJobPage = () => {
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Company Name" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <TextField
+                    <TextField required
                         type="text"
                         id="company"
                         variant="standard"
@@ -227,7 +228,7 @@ const AdminAddJobPage = () => {
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Title of Position Available" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <TextField
+                    <TextField required
                         type="text"
                         placeholder="title"
                         variant="standard"
@@ -238,7 +239,7 @@ const AdminAddJobPage = () => {
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="Link to Job Post Online" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <TextField
+                    <TextField required
                         type="text"
                         placeholder="link"
                         variant="standard"
@@ -252,7 +253,7 @@ const AdminAddJobPage = () => {
                     <div>
                         <FormControl sx={{ m: 1.1, width: 300 }}>
                             <InputLabel id="job-types">types</InputLabel>
-                            <Select
+                            <Select 
                                 labelId="job-types"
                                 id="job-types"
                                 multiple
@@ -289,7 +290,7 @@ const AdminAddJobPage = () => {
                 <Grid item xs={6} md={4} lg={2} xl={2}>
                     <CardHeader title="City" />
                     &nbsp;&nbsp;&nbsp;
-                    <TextField
+                    <TextField required
                         type="text"
                         placeholder="City"
                         variant="standard"
@@ -300,7 +301,7 @@ const AdminAddJobPage = () => {
                 <Grid item xs={6} md={4} lg={2} xl={2}>
                     <CardHeader title="State" />
                     &nbsp;&nbsp;&nbsp;
-                    <TextField
+                    <TextField required
                         type="text"
                         placeholder="State"
                         variant="standard"
@@ -311,7 +312,7 @@ const AdminAddJobPage = () => {
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="&nbsp;Is this job remote?" />
                     <FormControl component="fieldset">
-                        <RadioGroup
+                        <RadioGroup required
                             aria-label="Is this job remote?"
                             name="radio-buttons-group"
                         >
@@ -324,7 +325,7 @@ const AdminAddJobPage = () => {
                 <Grid item xs={12} md={6} lg={4} xl={3}>
                     <CardHeader title="&nbsp;Can we share a contact person" />
                     <FormControl component="fieldset">
-                        <RadioGroup
+                        <RadioGroup required
                             aria-label="Can we share a contact person?"
                             name="radio-buttons-group"
                         >
