@@ -150,6 +150,7 @@ function Modal({ closeModal }) {
               value="Subscribe"
             />
           </form>
+          <Button onClick={fillSubscribe} ></Button>
         </div>
       </div>
       <Stack spacing={2} sx={{ width: '350px' }}>
