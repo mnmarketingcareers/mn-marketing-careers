@@ -1,10 +1,10 @@
 import React from 'react'
-import { Button } from '@mui/material';
+import './OopsPage.css'
 
 const OopsPage = () => {
     return (
         <div className="oopsPage">
-            <img src="./images/MMC404.png" />
+            <img className="oopsImage" src="./images/MMC404.png" />
         </div>
     )
 }
