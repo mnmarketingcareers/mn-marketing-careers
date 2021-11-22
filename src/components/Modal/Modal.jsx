@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Modal.css";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { TextField, Grid } from "@mui/material/";
+import { TextField, Grid, Button } from "@mui/material/";
 import { FaWindowClose} from "react-icons/fa";
 
 function Modal({ closeModal }) {
@@ -15,6 +15,14 @@ function Modal({ closeModal }) {
   const [userLastName, setUserLastName] = useState("");
   const [userZip, setUserZip] = useState("");
 
+
+  const fillSubscribe = (event) => {
+    event.preventDefault();
+    setUserEmail('francky-B@proth.com'),
+    setUserFirstName('Franck'),
+    setUserLastName('Bushbaum'),
+    setUserZip('55127')
+  } 
     
     const submitForm = () => {
         const userAddress = {
@@ -97,6 +105,7 @@ function Modal({ closeModal }) {
               value="Subscribe"
             />
         </form>
+        <Button onClick={fillSubscribe} ></Button>
         </div>
       </div>
     </div>
