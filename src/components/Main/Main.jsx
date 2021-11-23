@@ -144,7 +144,7 @@ function Main() {
 
                     {openModal ? <p></p> :
                         <>
-                            <span>See jobs posted within the last</span>
+                            <span className="filter-header"><h3>See jobs posted within the last:</h3></span>
                             <div className="filter">
                                 <Button variant="outlined" onClick={() => fetchRecentJobs('1')}>
                                     24 hours

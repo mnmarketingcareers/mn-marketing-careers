@@ -18,6 +18,12 @@
     margin-bottom: 8px;
 }
 
+.filter-header {
+    display: flex;
+    justify-content: right;
+    margin-right: 220px;
+}
+
 /* .apply-button {
     width: 75px;
     height: 33px;
