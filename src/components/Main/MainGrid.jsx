@@ -41,7 +41,7 @@ function MainGrid ({ rows }) {
         { field: 'job_type', headName: 'Job Field', width: 350 },
         {
             field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => {
-                return <Button variant="contained" style={{ backgroundColor: '#FFA384', color: 'white', fontWeight: '600' }} size="small"
+                return <Button variant="contained" style={{ backgroundColor: '#FFA384', color: 'white', fontWeight: '600', padding: '0 6px' }} size="small"
                     onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>
             }
         },

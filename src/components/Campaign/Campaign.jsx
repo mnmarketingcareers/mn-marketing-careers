@@ -27,7 +27,6 @@ function Campaign() {
 
   const [newOrMod, setNewOrMod] = useState(""); //set if user wants to use a new or old campaign
 
-
   //states for fields
   const [templateId, setTemplateId] = useState(""); //updated
   const [campaignTitle, setCampaignTitle] = useState("");
@@ -49,10 +48,9 @@ function Campaign() {
 
   //this function creates and SAVES an email
   const handleCreateCampaign = () => {
-   
     console.log("subs email array:", emailArray);
     console.log("Number of recipients:", emailArray.length);
-    console.log('Template ID:', parseInt(templateId)); //updated
+    console.log("Template ID:", parseInt(templateId)); //updated
     console.log("Title:", campaignTitle);
     console.log("Subject:", campaignSubject);
     console.log("Preview Text:", campaignPreviewText);
@@ -70,11 +68,9 @@ function Campaign() {
         subject_line: campaignSubject,
         preview_text: campaignPreviewText,
         footer: false,
-
       },
     });
-    history.push('/finalizeandsendcampaign')
-
+    history.push("/finalizeandsendcampaign");
   };
 
   const clearInputs = () => {
@@ -86,46 +82,48 @@ function Campaign() {
     setCampaignBodyText("");
   };
 
-
-
   const handleSelectTemplateId = (event) => {
     console.log("selected template id:", event.target.value);
     setTemplateId(event.target.value);
   };
 
   const handleSelectCampaignId = () => {
-    console.log("selected campaign id:", event.target.value)
-  }
+    console.log("selected campaign id:", event.target.value);
+  };
 
   const handleSelectNewOrMod = (event) => {
     console.log("user has chosen", event.target.value);
     setNewOrMod(event.target.value);
   };
 
-
-
   return (
     <div className="container">
       <br />
       <Typography
-        style={{ textAlign: "center", marginBottom: "25px" }}
-        variant="h3"
+        style={{
+          textAlign: "center",
+          marginBottom: "25px",
+          fontWeight: "600",
+          fontFamily: "Red Hat Text",
+        }}
+        variant="h4"
       >
-        New Email Campaign
+        Email Details
       </Typography>
-
 
       <Paper className={classes.campaignPaperContainer} elevation={6}>
         <form onSubmit={() => handleCreateCampaign()}>
-          <br />
-
-          {newOrMod === "new" || newOrMod === "" ? (
+          {/* {newOrMod === "new" || newOrMod === "" ? (
             <></>
           ) : (
-        <FormControl required style={{ width: "50%" }}
-        //important DROPDOWN OF CAMPAIGNS
-        >
-              <InputLabel id="template-id-select-label">Select Campaign</InputLabel>
+            <FormControl
+              required
+              style={{ width: "50%" }}
+              //important DROPDOWN OF CAMPAIGNS
+            >
+              <InputLabel id="template-id-select-label">
+                Select Campaign
+              </InputLabel>
 
               <Select
                 className={classes.templateIdSelect}
@@ -135,7 +133,7 @@ function Campaign() {
                 value={templateId}
                 onChange={handleSelectCampaignId}
               >
-                {templateList.length > 0 ? (//IMPORTANT MAP LIST OF CAMPAIGNS!
+                {templateList.length > 0 ? ( //IMPORTANT MAP LIST OF CAMPAIGNS!
                   templateList[0].map((item) => (
                     <MenuItem key={item.id} value={item.id}>
                       {item.name}
@@ -146,34 +144,36 @@ function Campaign() {
                 )}
               </Select>
             </FormControl>
-          )}
-            <br/><br />
+          )} */}
+          <br />
 
+          <FormControl required style={{ width: "220px" }}>
+            <InputLabel id="template-id-select-label">
+              Select Template
+            </InputLabel>
 
-        <FormControl required style={{ width: "50%" }}>
-              <InputLabel id="template-id-select-label">Select Template</InputLabel>
+            <Select
+              className={classes.templateIdSelect}
+              labelId="template-id-select-label"
+              id="template-id-select"
+              label="template"
+              value={templateId}
+              onChange={handleSelectTemplateId}
+            >
+              {templateList.length > 0 ? (
+                templateList[0].map((item) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.name}
+                  </MenuItem>
+                ))
+              ) : (
+                <img src="./images/Pendulum.gif" />
+              )}
+            </Select>
+          </FormControl>
 
-              <Select
-                className={classes.templateIdSelect}
-                labelId="template-id-select-label"
-                id="template-id-select"
-                label="template"
-                value={templateId}
-                onChange={handleSelectTemplateId}
-              >
-                {templateList.length > 0 ? (
-                  templateList[0].map((item) => (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.name}
-                    </MenuItem>
-                  ))
-                ) : (
-                  <img src="./images/Pendulum.gif" />
-                )}
-              </Select>
-            </FormControl>
-
-<br /><br />
+          <br />
+          <br />
 
           <TextField
             required
@@ -181,11 +181,10 @@ function Campaign() {
             onChange={() => setCampaignTitle(event.target.value)}
             id="campaign-title"
             label="Campaign Title"
-            size="small"
             value={campaignTitle}
             variant="outlined"
             inputProps={{ style: { fontSize: 18 } }}
-            InputLabelProps={{ style: { fontSize: 16, color: "#D3D3D3" } }}
+            InputLabelProps={{ style: { fontSize: "18px" } }}
           />
 
           <TextField
@@ -194,51 +193,32 @@ function Campaign() {
             onChange={() => setCampaignSubject(event.target.value)}
             id="campaign-subject"
             label="Email Subject Line"
-            size="small"
             value={campaignSubject}
             variant="outlined"
-            InputLabelProps={{ style: { color: "#D3D3D3" } }}
+            inputProps={{ style: { fontSize: 18 } }}
+            InputLabelProps={{ style: { fontSize: "18px" } }}
           />
-          {/* <TextField
-            required
-            className={classes.previewTextField}
-            onChange={() => setCampaignPreviewText(event.target.value)}
-            id="campaign-preview-text"
-            label="Email Preview Text"
-            size="small"
-            value={campaignPreviewText}
-            variant="outlined"
-            InputLabelProps={{ style: { color: "#D3D3D3" } }}
-          /> */}
 
-          {/* <div className={classes.footerCheckDiv}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  id="footer-checkbox"
-                  defaultChecked
-                  color="secondary"
-                  label="Include Pre-Built Footer?"
-                  checked={footerChecked}
-                  onChange={toggleCheckBox}
-                  inputProps={{ "aria-label": "include footer toggle" }}
-                />
-              }
-              label="Include Footer?"
-            />
-          </div> */}
           <div>
-            <Button style={{ margin: "6px" }} variant="contained" type="submit">
+            <Button
+              style={{
+                margin: "15px 6px 0",
+                fontSize: "20px",
+                fontWeight: "600",
+              }}
+              variant="contained"
+              type="submit"
+            >
               SAVE & NEXT
             </Button>
 
-
-
-
-
-
             <Button
-              style={{ margin: "6px" }}
+              style={{
+                margin: "15px 6px 0",
+                fontWeight: "600",
+                fontSize: "20px",
+                backgroundColor: "#FFA384",
+              }}
               variant="contained"
               color="error"
               onClick={() => clearInputs()}
@@ -247,7 +227,6 @@ function Campaign() {
             </Button>
             <br />
             <br />
-
           </div>
         </form>
       </Paper>

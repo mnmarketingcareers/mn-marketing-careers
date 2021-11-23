@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import {
   Typography,
+  Grid,
   Button,
   Paper,
   TextField,
@@ -83,12 +84,12 @@ const EmailTemplate = () => {
     <div className={classes.templatePageContainer}>
 
 
-      <h1 style={{ textAlign: "center", margin: "15px" }}> New Email </h1>
+      <h1 style={{ textAlign: "center", margin: "15px", fontFamily: 'Red Hat Text', fontSize: '45px' }}> New Email </h1>
      
 
-      <Paper className={classes.templatePaperContainer} elevation={12}>
+      <Paper className={classes.templatePaperContainer} elevation={6}>
         <form onSubmit={() => handleSubmitPatchTemplate()}>
-          <FormControl required style={{ width: "30%" }}>
+          <FormControl required style={{ width: "220px"}}>
             <InputLabel id="new-or-mod-label">Select</InputLabel>
 
             <Select
@@ -123,6 +124,7 @@ const EmailTemplate = () => {
                 label="template"
                 value={templateId}
                 onChange={handleSelectTemplateId}
+
               >
                 {templateList.length > 0 ? (
                   templateList[0].map((item) => (
@@ -142,35 +144,16 @@ const EmailTemplate = () => {
             onChange={() => setTemplateName(event.target.value)}
             id="template-name"
             label="New Template Name"
-            size="small"
             value={templateName}
             variant="outlined"
             inputProps={{ maxLength: 50 }}
-            InputLabelProps={{ style: { color: "#D3D3D3" } }}
+            inputProps={{ style: { fontSize: 18 } }}
+
+            InputLabelProps={{ style: {fontSize: '18px'} }}
           />
           <br />
           <br />
-          {templateBodyText.length > 3000 ? (
-            <Button variant="contained" color="success" type="submit">
-              SUBMIT
-            </Button>
-          ) : (
-            <></>
-          )}
-          <br />
-          {/* <TextField
-            required
-            multiline
-            className={classes.bodyTextField}
-            onChange={() => setTemplateBodyText(event.target.value)}
-            id="template-email-body"
-            label="Email Body"
-            size="large"
-            value={templateBodyText}
-            variant="outlined"
-            InputLabelProps={{ style: { color: "#D3D3D3" } }}
-          /> */}
-          <br />
+        
 
           <Button
             //this button is always here
@@ -178,7 +161,7 @@ const EmailTemplate = () => {
             //  appears at over 2k characters
             variant="contained"
             color="success"
-            style={{margin: '4px'}}
+            style={{margin: '4px', fontSize: '20px', fontWeight: '600', }}
 
             type="submit"
           >
@@ -187,8 +170,7 @@ const EmailTemplate = () => {
           <Button
             onClick={() => clearFields()}
             variant="contained"
-            color="error"
-            style={{margin: '4px'}}
+            style={{margin: '4px', fontWeight: '600', fontSize: '20px', backgroundColor: '#FFA384'}}
           >
             CLEAR
           </Button>

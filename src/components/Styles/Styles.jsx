@@ -136,17 +136,13 @@ const useStyles = makeStyles(
       textAlign: "center",
     },
 
-    newOrModSelect: {
-      width: "90%",
-    },
 
     templateIdSelect: {
-
     },
 
 
     templateNameField: {
-      width: "80%",
+      width: "70%",
       margin: "24px 0 12px",
     },
 
@@ -154,7 +150,9 @@ const useStyles = makeStyles(
 
 
     emailConfirmText: {
-      fontSize: '20px',
+      fontSize: '18px',
+      fontFamily: 'Red Hat Text',
+      fontWeight: '400'
     },
 
 
