@@ -397,7 +397,9 @@ const AdminAddJobPage = () => {
                 {/* <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button> */}
             </div>
             <Stack spacing={2} sx={{ width: '350px' }}>
-                <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} TransitionComponent={Slide}>
+
+                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} TransitionComponent={Slide}>
+
                     <Alert onClose={handleClose} severity="success" sx={{ width: '350px' }}>
                         Job Opening Added!
                     </Alert>
