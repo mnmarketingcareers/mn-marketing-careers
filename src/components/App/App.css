@@ -12,7 +12,7 @@ body,
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background: url('https://cdn2.vectorstock.com/i/1000x1000/29/96/minneapolis-usa-city-skyline-silhouette-vector-1482996.jpg') no-repeat center center fixed;
+  background: url('./mn-skyline.png') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
