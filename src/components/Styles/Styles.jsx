@@ -8,10 +8,12 @@ const useStyles = makeStyles(
 
     adminHeader: {
       textAlign: "center",
-      fontSize: "40px",
-      marginBottom: "7px",
-      color: "#74BDCB",
-      textDecoration: "underline",
+      fontSize: "50px",
+      margin: "10px",
+      color: "black",
+      fontFamily: 'Red Hat Text',
+      fontWeight: '600',
+
     },
 
     //admin sub table
@@ -36,11 +38,28 @@ const useStyles = makeStyles(
       fontFamily: "Red Hat Text",
       textAlign: "center",
       fontSize: "14px",
+      margin: 0,
+      padding: 0,
     },
 
     tableBodyRow: {
       margin: 0,
       padding: 0,
+    },
+
+    subEntryHeader: {
+      margin: '25px',
+      fontFamily: 'Red Hat Text',
+      fontWeight: '600',
+      fontSize: '30px'
+    },
+
+    fullSubListHeader: {
+      fontFamily: 'Red Hat Text',
+      fontWeight: '600', 
+      margin: '25px',
+      fontSize: '30px'
+
     },
 
     adminSubmitButton: {
