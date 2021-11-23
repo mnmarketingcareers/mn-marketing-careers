@@ -12,19 +12,25 @@
   align-items: center;
 }
 
-.gridL {
+/* .gridL {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-}
+} */
 
 .gridR {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
+  align-items: center; */
+} 
+
+@media screen and (max-width: 650px) {
+.gridR {
+  display: none;
+}
 }
 
 .gridWrapper {

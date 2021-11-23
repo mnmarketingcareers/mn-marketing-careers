@@ -24,6 +24,7 @@ import AdminHub from '../AdminHub/AdminHub';
 import Main from '../Main/Main';
 import EmailTemplate from '../EmailTemplate/EmailTemplate';
 import FinalizeAndSendCampaign from '../FinalizeAndSendCampaign/FinalizeAndSendCampaign';
+import OopsPage from '../OopsPage/OopsPage';
 
 // leaving space for other new Pages here
 import ApproveSubmissions from '../ApproveSubmissions/ApproveSubmissions';
@@ -251,10 +252,8 @@ function App() {
 
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route
-          //FIX make a 404 page with a return link to main
-          >
-            <h1>404</h1>
+          <Route >
+            <OopsPage />
           </Route>
         </Switch>
 

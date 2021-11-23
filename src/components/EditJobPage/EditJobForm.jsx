@@ -25,7 +25,10 @@ import {
 // Snackbar button
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-    
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Slide from '@mui/material/Slide';
     
 function EditJobForm ({ thisJob, jobTypes, id }) {
 
@@ -185,7 +188,9 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
             // On autofill we get the stringified value
             typeof value === 'string' ? value.split(',') : value
         );
-        setRowEdits({...rowEdits, job_type: value});
+
+        setRowEdits({...rowEdits, job_type: value });
+
     };
 
     //page-specific styling
@@ -392,6 +397,13 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
                 </form>
                 
             </FormControl>
+            <Stack spacing={2} sx={{ width: '350px' }}>
+                <Snackbar open={open} autoHideDuration={1800} onClose={handleClose} TransitionComponent={Slide}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '350px' }}>
+                        Submitting Edits
+                    </Alert>
+                </Snackbar>
+            </Stack>
         </>
     )
 }

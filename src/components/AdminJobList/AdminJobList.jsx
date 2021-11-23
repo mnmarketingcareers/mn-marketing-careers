@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { 
-    // Button, 
+    Button, 
     CircularProgress,
     TableContainer,
     Table,
@@ -25,24 +26,15 @@ function AdminJobList() {
 
     // const history = useHistory();
     const dispatch = useDispatch();
-
+    const history = useHistory();
     // const [openModal, setOpenModal] = useState(false)
 
     //1 DATA FROM SERVER
     const rows = useSelector((store) => store.setJobsReducer);
 
-    // const columns = [
-    //     { field: 'company_name', headerName: 'company', width: 150 },
-    //     { field: 'date_posted', headerName: 'date', width: 150 },
-    //     { field: 'available_role', headerName: 'available role', width: 150 },
-    //     { field: 'description', headerName: 'description', width: 150 },
-    //     { field: 'application_link', headerName: 'link', width: 150 },
-    //     { field: 'job_city', headername: 'city', width: 150},
-    //     { field: 'job_state', headername: 'state', width: 150},
-    //     { field: 'array_agg', headername: 'job types', width: 150},
-    //     { field: 'remote', headername: 'remote', width: 150},
-    //     { field: 'hiring_contact_email', headername: 'hiring contact', width: 150},
-    // ];
+    // const handleAddJob = () => {
+    //     history.push("/adminaddjob");
+    //   };
 
     useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
@@ -55,6 +47,9 @@ function AdminJobList() {
         <div className="admin-joblist-container">
             <h1>Job Postings</h1>
             
+            <Button variant="contained" size="large" onClick={() => history.push("/adminaddjob")}>
+                Add Some Jobs
+            </Button>
             <ReadyToPost />
             {/* <Button variant="outlined"  onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
             {/* {JSON.stringify(postingsList)} */}
