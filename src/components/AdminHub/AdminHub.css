@@ -12,20 +12,65 @@
   align-items: center;
 }
 
-.gridL {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-}
+/* ------------------------------------------ */
+/* --------DISPLAY FOUR COLUMN table--------  */
+@media screen and (max-width: 3000px) {
+  .fourColTable {
+    display: block;
+  }
+  .threeColTable {
+    display: none;
+  }
+  .twoColTable {
+    display: none;
+  }
+} 
+/* ------------------------------------------- */
+/* --------DISPLAY THREE COLUMN table--------  */
 
-.gridR {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+@media screen and (max-width: 700px) {
+  .fourColTable {
+    display: none;
+  }
+  .threeColTable {
+    display: block;
+
+  }
+  .twoColTable {
+    display: none;
+  }
 }
+/* ------------------------------------------- */
+  /* --------DISPLAY TWO COLUMN table--------  */
+
+  @media screen and (max-width: 550px) {
+    .fourColTable {
+      display: none;
+    }
+    .threeColTable {
+      display: none;
+
+    }
+    .twoColTable {
+      display: block;
+    }
+  }
+
+  /* ---------------------------------- */
+   /* --------DISPLAY NO table--------  */
+
+   @media screen and (max-width: 370px) {
+    .fourColTable {
+      display: none;
+    }
+    .threeColTable {
+      display: none;
+
+    }
+    .twoColTable {
+      display: none;
+    }
+  }
 
 .gridWrapper {
   max-width: 1000px;

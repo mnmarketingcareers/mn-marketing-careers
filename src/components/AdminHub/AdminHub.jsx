@@ -54,12 +54,12 @@ const AdminHub = () => {
     console.log("user is:", user.first_name);
   }, [subList]);
 
-  //check email - is it real? if keep required attribute //deletelater
+  //check email - is it real? if keep required attribute
   const validateEmail = () => {
     if (userEmail.indexOf("@") > -1) {
       submit();
     } else {
-      alert("invalid email, yo!");
+      alert("invalid email!");
     }
   };
 
@@ -109,14 +109,13 @@ const AdminHub = () => {
     history.push("/adminaddjob");
   };
 
-
   return (
     <div className="adminHubPage">
       <Typography
-        style={{ fontSize: "40px", marginTop: "30px" }}
+
         className={classes.adminHeader}
       >
-        Hi, {user.first_name}!
+        Hi {user.first_name}!
       </Typography>
 
       <Container className="adminContainer" style={{ textAlign: "center" }}>
@@ -138,24 +137,24 @@ const AdminHub = () => {
         <div style={{ marginTop: "20px" }} className="gridWrapper">
           {/* <Button variant="contained" onClick={handleAddJob} >Add Some Jobs</Button> */}
           <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <div className="gridL">
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+              <div>
                 <NewSubmissions />
               </div>
             </Grid>
-            <Grid item xs={4}>
-              <div className="something">
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+              <div>
                 <NewIssues />
               </div>
             </Grid>
-            <Grid item xs={4}>
-              <div className="gridR">
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+              <div>
                 <NewPostingsReady />
               </div>
             </Grid>
           </Grid>
-          <div className="gridL">
-            <Typography variant="h4">Manual Subscriber Entry</Typography>
+          <div>
+            <Typography variant="h4" className={classes.subEntryHeader}>Manual Subscriber Entry</Typography>
             <form onSubmit={() => validateEmail()}>
               <TextField
                 value={userEmail}
@@ -163,7 +162,7 @@ const AdminHub = () => {
                 id="email"
                 size="small"
                 placeholder="Email"
-                style={{ width: "200px" }}
+                style={{ width: "200px", margin: '4px' }}
                 onChange={(event) => setUserEmail(event.target.value)}
               />{" "}
               <br />
@@ -173,7 +172,7 @@ const AdminHub = () => {
                 id="firstName"
                 size="small"
                 placeholder="First Name"
-                style={{ width: "200px" }}
+                style={{ width: "200px", margin: '4px'  }}
                 onChange={(event) => setUserFirstName(event.target.value)}
               />
               <br />
@@ -183,7 +182,7 @@ const AdminHub = () => {
                 id="lastName"
                 size="small"
                 placeholder="Last Name"
-                style={{ width: "200px" }}
+                style={{ width: "200px", margin: '4px'  }}
                 onChange={(event) => setUserLastName(event.target.value)}
               />
               <br />
@@ -193,13 +192,13 @@ const AdminHub = () => {
                 id="email"
                 size="small"
                 placeholder="Zip Code"
-                style={{ width: "200px" }}
+                style={{ width: "200px", margin: '4px'  }}
                 onChange={(event) => setUserZip(event.target.value)}
               />
               <br />
               <Button
-                style={{ margin: "10px" }}
-                className={classes.adminSubmitButton}
+                style={{ margin: "15px" }}
+    
                 variant="contained"
                 type="submit"
               >
@@ -209,100 +208,254 @@ const AdminHub = () => {
             <br />
           </div>
 
-          <div className="gridR">
+          {/* ---------- FOUR COLUMN TABLE ON 3000 PX (AKA nothing is too big, hopefully) ---------- */}
+
+
+          <div className="fourColTable">
             <Typography
               variant="h4"
-              style={{ margin: "20px", textDecoration: "underline" }}
+              className={classes.fullSubListHeader}
             >
               Full Subscriber List:
             </Typography>
 
-            <Paper elevation={8} className="adminPaper">
-              <TableContainer sx={{ maxHeight: 470 }}>
-                <Table
-                  className="tableMain"
-                  stickyHeader
-                  aria-label="sticky table"
-                >
-                  <TableHead className={classes.tableHeader}>
-                    <TableRow>
-                      <TableCell className={classes.tableHeaderCell}>
-                        Name
-                      </TableCell>
-                      <TableCell className={classes.tableHeaderCell}>
-                        Email
-                      </TableCell>
-                      <TableCell className={classes.tableHeaderCell}>
-                        Zip Code
-                      </TableCell>
-                      <TableCell className={classes.tableHeaderCell}>
-                        Status
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody className="adminTableBody">
-                    {subs.length > 0 ? (
-                      subs[0].map((item) => (
-                        <TableRow
-                          key={item.id}
-                          className={classes.tableBodyRow}
-                        >
-                          <TableCell
-                            style={{
-                              fontFamily: "Red Hat Text",
-                              textAlign: "center",
-                              fontSize: "14px",
-                            }}
+            <Paper elevation={4} className="adminPaper" >
+              <Grid>
+                <TableContainer sx={{ maxHeight: 470 }}>
+                  <Table
+                    className="tableMain"
+                    stickyHeader
+                    aria-label="sticky table"
+                  >
+                    <TableHead className={classes.tableHeader}>
+                      <TableRow>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Name
+                        </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Email
+                        </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Zip Code
+                        </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Status
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody className="adminTableBody">
+                      {subs.length > 0 ? (
+                        subs[0].map((item) => (
+                          <TableRow
+                            key={item.id}
+                            className={classes.tableBodyRow}
                           >
-                            {item.full_name}
-                          </TableCell>
-                          <TableCell
-                            style={{
-                              fontFamily: "Red Hat Text",
-                              textAlign: "center",
-                              fontSize: "14px",
-                            }}
-                          >
-                            {item.email_address}
-                          </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {item.full_name}
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {item.email_address}
+                            </TableCell>
 
-                          <TableCell
-                            style={{
-                              fontFamily: "Red Hat Text",
-                              textAlign: "center",
-                              fontSize: "14px",
-                            }}
-                          >
-                            {item.merge_fields.ADDRESS.zip}
-                          </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {item.merge_fields.ADDRESS.zip}
+                            </TableCell>
 
-                          <TableCell
-                            style={{
-                              fontFamily: "Red Hat Text",
-                              textAlign: "center",
-                              fontSize: "14px",
-                            }}
-                          >
-                            {item.status}
-                          </TableCell>
-                          <IconButton
-                            onClick={() =>
-                              toggleSubStatus(item.status, item.contact_id)
-                            }
-                          >
-                            <ToggleOffIcon />
-                          </IconButton>
-                        </TableRow>
-                      ))
-                    ) : (
-                      <img src="./images/Pendulum.gif" />
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                            <TableCell className={classes.tableCell}>
+                              {item.status}
+
+                              <IconButton
+                              onClick={() =>
+                                toggleSubStatus(item.status, item.contact_id)
+                              }
+                            >
+                              <ToggleOffIcon />
+                            </IconButton>
+
+
+                            </TableCell>
+                            
+                          </TableRow>
+                        ))
+                      ) : (
+                        <img src="./images/Pendulum.gif" />
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
             </Paper>
-            <Typography></Typography>
+        
           </div>
+
+{/* ---------- THREE COLUMN TABLE ON 600 PX ---------- */}
+
+
+<div className="threeColTable">
+            <Typography
+              variant="h4"
+              className={classes.fullSubListHeader}
+            >
+              Full Subscriber List:
+            </Typography>
+
+            <Paper elevation={4} className="adminPaper" >
+              <Grid>
+                <TableContainer sx={{ maxHeight: 470 }}>
+                  <Table
+                    className="tableMain"
+                    stickyHeader
+                    aria-label="sticky table"
+                  >
+                    <TableHead className={classes.tableHeader}>
+                      <TableRow>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Name
+                        </TableCell>
+                        <TableCell className={classes.tableHeaderCell}>
+                          Email
+                        </TableCell>
+                        {/* <TableCell className={classes.tableHeaderCell}>
+                          Zip Code
+                        </TableCell> */}
+                        <TableCell className={classes.tableHeaderCell}>
+                          Status
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody className="adminTableBody">
+                      {subs.length > 0 ? (
+                        subs[0].map((item) => (
+                          <TableRow
+                            key={item.id}
+                            className={classes.tableBodyRow}
+                          >
+                            <TableCell className={classes.tableCell}>
+                              {item.full_name}
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {item.email_address}
+                            </TableCell>
+
+                            {/* <TableCell className={classes.tableCell}>
+                              {item.merge_fields.ADDRESS.zip}
+                            </TableCell> */}
+
+                            <TableCell className={classes.tableCell}>
+                              {item.status}
+
+                              <IconButton
+                              onClick={() =>
+                                toggleSubStatus(item.status, item.contact_id)
+                              }
+                            >
+                              <ToggleOffIcon />
+                            </IconButton>
+
+
+                            </TableCell>
+                            
+                          </TableRow>
+                        ))
+                      ) : (
+                        <img src="./images/Pendulum.gif" />
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+            </Paper>
+        
+          </div>
+
+{/* ---------- TWO COLUMN TABLE ON 600 PX ---------- */}
+
+
+<div className="twoColTable">
+            <Typography
+              variant="h4"
+              className={classes.fullSubListHeader}
+            >
+              Full Subscriber List:
+            </Typography>
+
+            <Paper elevation={4} className="adminPaper" >
+              <Grid>
+                <TableContainer sx={{ maxHeight: 470 }}>
+                  <Table
+                    className="tableMain"
+                    stickyHeader
+                    aria-label="sticky table"
+                  >
+                    <TableHead className={classes.tableHeader}>
+                      <TableRow>
+                        {/* <TableCell className={classes.tableHeaderCell}>
+                          Name
+                        </TableCell> */}
+                        <TableCell className={classes.tableHeaderCell}>
+                          Email
+                        </TableCell>
+                        {/* <TableCell className={classes.tableHeaderCell}>
+                          Zip Code
+                        </TableCell> */}
+                        <TableCell className={classes.tableHeaderCell}>
+                          Status
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody className="adminTableBody">
+                      {subs.length > 0 ? (
+                        subs[0].map((item) => (
+                          <TableRow
+                            key={item.id}
+                            className={classes.tableBodyRow}
+                          >
+                            {/* <TableCell className={classes.tableCell}>
+                              {item.full_name}
+                            </TableCell> */}
+                            <TableCell className={classes.tableCell}>
+                              {item.email_address}
+                            </TableCell>
+
+                            {/* <TableCell className={classes.tableCell}>
+                              {item.merge_fields.ADDRESS.zip}
+                            </TableCell> */}
+
+                            <TableCell className={classes.tableCell}>
+                              {item.status}
+
+                              <IconButton
+                              onClick={() =>
+                                toggleSubStatus(item.status, item.contact_id)
+                              }
+                            >
+                              <ToggleOffIcon />
+                            </IconButton>
+
+
+                            </TableCell>
+                            
+                          </TableRow>
+                        ))
+                      ) : (
+                        <img src="./images/Pendulum.gif" />
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+            </Paper>
+        
+          </div>
+
+
+
+
+
+
+
+
+
         </div>
       </Container>
     </div>
