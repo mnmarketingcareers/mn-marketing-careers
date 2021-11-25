@@ -16,19 +16,6 @@ import { Button,
         Card, 
         Grid, 
         CardHeader } from "@mui/material";
-// import Radio from '@mui/material/Radio';
-// import RadioGroup from '@mui/material/RadioGroup';
-// import FormControl from '@mui/material/FormControl';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import InputLabel from '@mui/material/InputLabel';
-// import Select from '@mui/material/Select';
-// import OutlinedInput from '@mui/material/OutlinedInput';
-// import MenuItem from '@mui/material/MenuItem';
-// import Checkbox from '@mui/material/Checkbox';
-// import ListItemText from '@mui/material/ListItemText';
-// import Card from '@mui/material/Card';
-// import Grid from '@mui/material/Grid';
-// import CardHeader from '@mui/material/CardHeader';
 import { useHistory } from "react-router";
 import './AdminAddJobPage.css';
 

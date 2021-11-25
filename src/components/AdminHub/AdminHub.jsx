@@ -447,15 +447,6 @@ const AdminHub = () => {
             </Paper>
         
           </div>
-
-
-
-
-
-
-
-
-
         </div>
       </Container>
     </div>

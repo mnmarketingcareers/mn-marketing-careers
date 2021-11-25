@@ -2,8 +2,8 @@ import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import Modal from "../Modal/Modal.jsx";
-import { Button, Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import  { Button }from '@mui/material/';
+import  { DataGrid } from '@mui/x-data-grid';
 import './Internships.css';
 
 function Internships() {
@@ -11,8 +11,6 @@ function Internships() {
     const dispatch = useDispatch();
 
     const rows = useSelector((store) => store.setInternshipsReducer);
-
-    console.log('whats in setInternships reducer', rows);
     
     const history = useHistory();
 
