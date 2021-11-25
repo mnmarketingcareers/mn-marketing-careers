@@ -119,7 +119,6 @@ function LoginForm() {
           </Button>
         </div>
       </form>
-      <Button onClick={fillForm} ></Button>
     </Paper>
   );
 }
