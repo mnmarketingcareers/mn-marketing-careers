@@ -1,23 +1,22 @@
-# MN Marketing Careers Application
+# <b>MN Marketing Careers Application</b>
+
+
+
+##### _Duration: 2 Week Sprint_
 
 ## Description
 
-_Duration: 2 Week Sprint_
+This application provides improved and expanded functionality for the curators of the MN Marketing Careers job list sharing service and increased accessibility to the the subscribers to that list, and employers looking to include new job openings. It aims to gather all current methods in use by the client in one place. With that in mind, it was designed to continue to utilize MailChimp functionality for the client to incorporate existing practices and subscriber contact data conveniently and effectively into the application. The app was then customized for more interaction between employers looking to post jobs, job-seekers, and the job list curators. The job list now lives on a page where job seekers can see all previous postings up to 30 days after initiation, and can sort and filter results by a few predetermined categories. The job list curator can also manage listings with more control. 
 
-This application provides improved and expanded functionality for the curators of the MN Marketing Careers joblist sharing service and increased accessibility to the the subscribers to that list, and employers looking to include new job openings. It aims to gather all current methods inuse by the client in one place. With that in mind, it was designed to continue to utilize MailChimp functionalty for the client to incorporate existing practices and subscriber contact data conveneintly and effectively into the application. The app was then customized for more interaction between employers looking to post jobs, job-seekers, and the joblist curators. The joblist now lives on a page where job seekers can see all previous postings up to 30 days after initiation, and can sort and filter results by a few predetermined categories. The joblist curator can also manage listings with more control. 
+The star of the app may be the **MailChimp API integration**. Admin curators AND visitors to the site are able to submit job postings to this app which are stored in a backend database (pending administrator approval). Whenever the admin desires, they can automatically populate all of these submissions - in the _same format_ which they have previously used - input a subject line, preview in the browser and send away.
 
 
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
 
 ## Screen Shot
 
-First, lets get in the right frame of mind:
 
-![Classic Lasagna](public/images/classic_lasagna.png)
-
-That's better!
-
-To gain a working understading of the data pathways, one might reference the following chart.
+To gain a working understanding of the data pathways, one might reference the following chart.
 
 ![Expensive Lucid Chart](public/images/lucid_chart.png)
 
@@ -55,7 +54,7 @@ function ReturnLasagna(hunger) {
 export default ReturnLasagna;
 ```
 
-### Prerequisites
+## Prerequisites
 
 Link to software that is required to install the app (e.g. node).
 
@@ -72,27 +71,26 @@ Link to software that is required to install the app (e.g. node).
   SERVER_SESSION_SECRET=superDuperSecret 
   While you're in your new .env file, take the time to replace superDuperSecret with some long random string like 25POUbVtx6RKVNWszd9ERB9Bb6 to keep your application secure. Here's a site that can help you: https://passwordsgenerator.net/. If you don't do this step, create a secret with less than eight characters, or leave it as superDuperSecret, you will get a warning.
 - You will need to generate/locate your MailChimp api key (basic instructions here [mailchimp_gettingstarted](https://mailchimp.com/developer/marketing/guides/quick-start/#generate-your-api-key)). Use this to replace the text immediately after `MAILCHIMP_API_KEY=` in the lines below.
-- Your server prefix is found in the url of your MailChimp dashboard when logged in. It immediately follows the `https://` and precedes the first `.` Use this to replace the text immediately after `DC=` in the lines below.
-- Find you Audience Id in your Audience settings on your MailChimp account. Use this to replace the text immediately after `TEST_LIST_ID=` in the lines below.
-- Replace sample text in each of the following 3 lines as mentioned above, and include in your .env file:
+- Your "server prefix" is found in the url of your MailChimp dashboard when logged in. It immediately follows the `https://` and precedes the first `.` Use this to replace the text immediately after `DC=` (which stands for "data center" and likely starts with `us`) in the lines below.
+- Find you "Audience" Id in your Audience settings on your MailChimp account. Use this to replace the text immediately after `TEST_LIST_ID=` in the lines below.
+- Replace sample text in each of the following 3 lines as mentioned above, and include in your `.env` file
 
-DC=your_server_prefix
-MAILCHIMP_API_KEY=your_maichimp_api_key
-TEST_LIST_ID=your_account_id_number
+      DC=three_caracter_dc
+      MAILCHIMP_API_KEY=your_maichimp_api_key
+      TEST_LIST_ID=your_account_id_number
 
-- Make sure your .env is in your .gitignore!
+- _*Make sure `.env` is in your .gitignore!*_
 
 Next:
 
 1. Create a database named `mn_marketing_careers`,
-2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
+2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries 
 3. Open up your editor of choice and run an `npm install`
 4. Run `npm run server` in your terminal
-5. Run `npm run client` in your terminal
-6. The `npm run client` command will open up a new browser tab for you!
+5. Run `npm run client` in another terminal tab (this should open a browser tab for you)
 
 ## Usage
-How does someone use this application? Tell a user story here.
+
 
 1. Go to the main page, linked from email
 2. See the jobs - Click around
