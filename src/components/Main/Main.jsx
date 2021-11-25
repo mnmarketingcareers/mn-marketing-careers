@@ -44,12 +44,12 @@ function Main() {
     const [snackBarValue, setSnackBarValue] = useState('0')
 
     // Fetches jobs by date.
-    const fetchRecentJobs = (event) => {
-        setSnackBarValue(event);
+    const fetchRecentJobs = (time) => {
+        setSnackBarValue(time);
         setOpen(true); 
-        dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: event } });
-        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: event } });
-        dispatch({ type: 'FETCH_RECENT_INTERNSHIPS', payload: { age: event } });
+        dispatch({ type: 'FETCH_RECENT_JOBS', payload: { age: time } });
+        dispatch({ type: 'FETCH_RECENT_REMOTE_JOBS', payload: { age: time } });
+        dispatch({ type: 'FETCH_RECENT_INTERNSHIPS', payload: { age: time } });
     }
 
 

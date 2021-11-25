@@ -33,12 +33,9 @@ import { useHistory } from "react-router";
 import './AdminAddJobPage.css';
 
 // Snackbar button
-import IconButton from '@mui/material/IconButton';
+import {IconButton, Stack, Snackbar, Slide} from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import Slide from '@mui/material/Slide';
 
 const AdminAddJobPage = () => {
     const dispatch = useDispatch();

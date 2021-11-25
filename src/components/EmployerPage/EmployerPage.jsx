@@ -6,7 +6,8 @@ import {Radio,
         RadioGroup, 
         FormControlLabel, 
         FormControl, 
-        FormGroup, 
+        FormGroup,
+        Checkbox, 
         Card, 
         Grid, 
         CardHeader, 
@@ -526,8 +527,8 @@ function EmployerPage() {
                 </form>
             </div>
             <Stack spacing={2} sx={{ width: '100%' }}>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} TransitionComponent={Slide}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '350px' }}>
                         Job Submitted!
                     </Alert>
                 </Snackbar>
