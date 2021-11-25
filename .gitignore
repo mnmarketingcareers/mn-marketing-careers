@@ -67,5 +67,5 @@ typings/
 # ignore package-lock as it complicates merging
 package-lock.json
 
-# misc
-notes.txt
+notes.md
+

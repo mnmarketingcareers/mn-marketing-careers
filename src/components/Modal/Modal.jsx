@@ -21,14 +21,6 @@ function Modal({ closeModal }) {
   const [userLastName, setUserLastName] = useState("");
   const [userZip, setUserZip] = useState("");
 
-
-  const fillSubscribe = (event) => {
-    event.preventDefault();
-    setUserEmail('francky-B@proth.com'),
-    setUserFirstName('Franck'),
-    setUserLastName('Bushbaum'),
-    setUserZip('55127')
-  } 
     
 
   const submitForm = () => {
@@ -147,7 +139,6 @@ function Modal({ closeModal }) {
               value="Subscribe"
             />
           </form>
-          <Button onClick={fillSubscribe} ></Button>
         </div>
       </div>
       <Stack spacing={2} sx={{ width: '350px' }}>

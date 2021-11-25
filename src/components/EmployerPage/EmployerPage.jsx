@@ -6,12 +6,10 @@ import {Radio,
         RadioGroup, 
         FormControlLabel, 
         FormControl, 
-        FormGroup,
         Checkbox, 
         Card, 
         Grid, 
         CardHeader, 
-        CheckBox, 
         TextField, 
         OutlinedInput, 
         InputLabel, 
@@ -32,7 +30,6 @@ import MuiAlert from '@mui/material/Alert';
 // Google ReCaptcha import
 import ReCaptchaV2 from 'react-google-recaptcha';
 import ShareOurApp from "../ShareOurApp/ShareOurApp.jsx";
-import Container from '@mui/material/Container';
 
 
 
@@ -64,24 +61,6 @@ function EmployerPage() {
         setToggleContact(!toggleContact)
     };
 
-    const sampleData = {
-        posting_contact_name: 'Danny',
-        posting_contact_email: 'danny.m@yahoo.com',
-        company: 'Learners Edge',
-        available_role: 'Marketing Associate',
-        application_link: 'https://eepurl.us2.list-manage.com/track/click?u=988880c6e24cb98ce8f81835c&id=02814ee660&e=96e0281bf4',
-        description: 'We are looking for Branding & Marketing Director experienced in eCommerce to be in charge of building an organization’s brand equity and developing marketing ventures. You have experience growing brand value and revenue for eCommerce businesses. You are proactive in generating unique ideas and executing on them while taking complete ownership. You love analytics and base your decisions on data. No task is too big or too small for you, you do what it takes to get the job done. You’ll work closely with the owner, have the ability to work from anywhere, be given responsibility and autonomy to execute on impactful projects, and have your ideas valued and appreciated.',
-        job_city: 'Eagan',
-        job_state: 'MN',
-        remote: 'hybrid',
-        share_contact: 'yes',
-        name: 'Danny',
-        email: 'danny.m@yahoo.com',
-        title: 'Hiring manager',
-        phone: '',
-        job_types: []
-
-    }
     // Success Button toggle
     const [open, setOpen] = useState(false);
 
@@ -149,11 +128,6 @@ function EmployerPage() {
     });
 
 
-    const handleSetFields = () => {
-        // do something
-        setJobPostingsTable(sampleData);
-    }
-
     const setValues = (propertyName) => (event) => {
         setJobPostingsTable({ ...jobPostingsTable, [propertyName]: event.target.value });
     };
@@ -191,8 +165,7 @@ function EmployerPage() {
         },
     };
 
-
-// Names of every job type for the "Select job types (Multiple selections allowed)" question.
+    // Array of Job Types, matching existing rows for column "type" in database
     const names = [
         {
             order: 1,
@@ -296,6 +269,7 @@ function EmployerPage() {
     };
 
     const toAbout = (event) => {
+        event.preventDefault();
         history.push('/about');
     }
 
@@ -334,7 +308,6 @@ function EmployerPage() {
                         </Grid>
                         
                         <Grid item xs={8}>
-                        <Button  onClick={handleSetFields}></Button>
                             <Card>
                                 <CardHeader title="Your name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -346,7 +319,6 @@ function EmployerPage() {
                                     className="poster-name"
                                     onChange={setValues('posting_contact_name')}
                                     value={jobPostingsTable.posting_contact_name} ></TextField>
-                                    <Button  onClick={handleSetFields}></Button>
                             </Card>
                         </Grid>
                         <Grid item xs={8}>
