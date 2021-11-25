@@ -1,30 +1,28 @@
 import React from 'react';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, TextField } from "@mui/material";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import MenuItem from '@mui/material/MenuItem';
-import Checkbox from '@mui/material/Checkbox';
-import ListItemText from '@mui/material/ListItemText';
-import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid';
-import CardHeader from '@mui/material/CardHeader';
+import { Button, 
+        TextField, 
+        Radio, 
+        RadioGroup, 
+        FormControl, 
+        FormControlLabel, 
+        InputLabel, 
+        Select, 
+        OutlinedInput, 
+        MenuItem, 
+        Checkbox, 
+        ListItemText,
+        Card, 
+        Grid, 
+        CardHeader } from "@mui/material";
 import { useHistory } from "react-router";
 import './AdminAddJobPage.css';
 
 // Snackbar button
-import IconButton from '@mui/material/IconButton';
+import {IconButton, Stack, Snackbar, Slide} from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import Slide from '@mui/material/Slide';
 
 const AdminAddJobPage = () => {
     const dispatch = useDispatch();

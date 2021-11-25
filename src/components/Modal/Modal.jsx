@@ -7,12 +7,9 @@ import { FaWindowClose } from "react-icons/fa";
 
 //For the snackbar
 import useStyles from "../Styles/Styles";
-import IconButton from '@mui/material/IconButton';
+import {IconButton, Stack, Snackbar, Slide} from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import Slide from '@mui/material/Slide';
 
 function Modal({ closeModal }) {
   const history = useHistory();
@@ -152,7 +149,6 @@ function Modal({ closeModal }) {
         </Snackbar>
       </Stack>
     </div>
-
   );
 }
 

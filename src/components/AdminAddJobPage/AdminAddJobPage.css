@@ -31,7 +31,7 @@
     justify-content: center;
 }
 
-
+/* From here to the end, this is generally how all buttons not imported from Material UI were styled.  */
 .submit-add-job-button {
     width: 150px;
     height: 45px;

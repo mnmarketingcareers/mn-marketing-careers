@@ -6,9 +6,11 @@ import {LinkedinIcon, TwitterIcon, FacebookIcon} from "react-share";
 
 function ShareOurApp() {
   return (
+
+    //Icons that link to user's Facebook, LinkedIn and Twitter so they can share app.
+    
         <>
-            <Container>
-                
+            <Container>               
                     <FacebookShareButton url="http://fullstack.primeacademy.io/"
                     quote={"This week's Minnesota Marketing Careers email features an awesome list of marketing, digital, and PR career openings. To receive the full list of jobs in your inbox, sign up here https://bit.ly/mnmcsignup"}
                     hashtag="#Minnesota">
@@ -26,9 +28,7 @@ function ShareOurApp() {
                     title={"Minnesota Marketing Careers"}
                     hashtag="#Minnesota">
                         <TwitterIcon round={true}></TwitterIcon>
-                    </TwitterShareButton>
-                
-                
+                    </TwitterShareButton>                              
             </Container>
 
         </>

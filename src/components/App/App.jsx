@@ -5,14 +5,10 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
-
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import AboutPage from "../AboutPage/AboutPage";
 import Campaign from "../Campaign/Campaign";
 import InfoPage from "../InfoPage/InfoPage";
@@ -25,13 +21,10 @@ import Main from "../Main/Main";
 import EmailTemplate from "../EmailTemplate/EmailTemplate";
 import FinalizeAndSendCampaign from "../FinalizeAndSendCampaign/FinalizeAndSendCampaign";
 import OopsPage from "../OopsPage/OopsPage";
-
 // leaving space for other new Pages here
 import ApproveSubmissions from "../ApproveSubmissions/ApproveSubmissions";
 import UnsubFeedbackPage from "../UnsubFeedbackPage/UnsubFeedbackPage";
-
 import AdminJobList from "../AdminJobList/AdminJobList";
-
 import "./App.css";
 import AdminAddJobPage from "../AdminAddJobPage/AdminAddJobPage";
 import JobPostingIssuesPage from "../JobPostingIssuesPage/JobPostingIssuesPage";

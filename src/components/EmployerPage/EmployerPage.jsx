@@ -2,33 +2,32 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid';
-import CardHeader from '@mui/material/CardHeader';
-import Checkbox from '@mui/material/Checkbox';
-import TextField from '@mui/material/TextField';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemText from '@mui/material/ListItemText';
-import Select from '@mui/material/Select';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import {Radio, 
+        RadioGroup, 
+        FormControlLabel, 
+        FormControl, 
+        FormGroup,
+        Checkbox, 
+        Card, 
+        Grid, 
+        CardHeader, 
+        CheckBox, 
+        TextField, 
+        OutlinedInput, 
+        InputLabel, 
+        MenuItem, 
+        ListItemText, 
+        Select, 
+        CardActions, 
+        CardContent, 
+        CardMedia, 
+        Button, 
+        Typography} from '@mui/material';
 
 // Snackbar button
-import IconButton from '@mui/material/IconButton';
+import {IconButton, Stack, Snackbar, Slide} from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
+import MuiAlert from '@mui/material/Alert';
 
 // Google ReCaptcha import
 import ReCaptchaV2 from 'react-google-recaptcha';
@@ -144,7 +143,7 @@ function EmployerPage() {
         changeContactView();
     };
 
-
+    // Second function for the "Can we share a contact person?"
     const dontShareContact = (event) => {
         console.log('what is event', event.target.value)
         console.log('in no');
@@ -260,6 +259,7 @@ function EmployerPage() {
 
     const [job, setJob] = useState([]);
 
+    // For the "Select job types (Multiple selections allowed)" question.
     const handleJob = (event) => {
         const {
             target: { value },
@@ -502,8 +502,8 @@ function EmployerPage() {
                 </form>
             </div>
             <Stack spacing={2} sx={{ width: '100%' }}>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} TransitionComponent={Slide}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '350px' }}>
                         Job Submitted!
                     </Alert>
                 </Snackbar>
