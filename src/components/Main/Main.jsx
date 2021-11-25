@@ -1,42 +1,19 @@
-import React from 'react';
+import  React from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-// import Radio from '@mui/material/Radio';
-// import RadioGroup from '@mui/material/RadioGroup';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import FormControl from '@mui/material/FormControl';
-// import FormLabel from '@mui/material/FormLabel';
-// import FormGroup from '@mui/material/FormGroup';
-// import Card from '@mui/material/Card';
-// import Grid from '@mui/material/Grid';
-// import CardHeader from '@mui/material/CardHeader';
-// import Checkbox from '@mui/material/Checkbox';
-// import TextField from '@mui/material/TextField';
-// import CardContent from '@mui/material/CardContent';
-// import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import ListItemText from '@mui/material/ListItemText';
-// import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Modal from "../Modal/Modal.jsx";
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel, Link } from '@mui/material/';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import './Main.css';
 import MainGrid from './MainGrid.jsx';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 import Internships from '../Internships/Internships.jsx';
 import useStyles from '../Styles/Styles';
-import { format, getUnixTime, utcToZonedTime } from 'date-fns';
 
 // Snackbar button
-import IconButton from '@mui/material/IconButton';
+import {IconButton, Stack, Snackbar, Slide} from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import Slide from '@mui/material/Slide';
 
 function Main() {
     const classes = useStyles();
@@ -162,12 +139,6 @@ function Main() {
                                     30 days
                                 </Button>
                             </div>
-                            {/* <ul> */}
-                            {/* <li>{JSON.stringify(recentJobs)}</li> */}
-                            {/* {recentJobs.map((job) => (
-                                    <li>{job.date_posted}</li> */}
-                            {/* ))} */}
-                            {/* </ul> */}
                         </>
                     }
                     {/* openModal conditional statements are put there to hide the page when user clicks on 'Subscribe' and the modal appears. */}

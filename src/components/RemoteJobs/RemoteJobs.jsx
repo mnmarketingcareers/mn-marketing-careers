@@ -14,7 +14,6 @@ function RemoteJobs() {
 
     const rows = useSelector((store) => store.setRemoteJobsReducer);
 
-    // useparams history.push
     const toIssuePage = (jobId) => {
         history.push(`/jobpostingissue/${jobId}`)
     }
@@ -31,7 +30,6 @@ function RemoteJobs() {
                                                 return <Button style={{backgroundColor: '#E7F2F8'}} variant="contained"><a style={{color: 'black', fontWeight: '500'}} href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
                                             }
                                             }},
-        // { field: 'array_agg', headName: 'array_agg', width: 350},
         { field: 'job type', headName: 'Job Field', width: 350 },
         { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
             return  <Button style={{backgroundColor: '#FFA384', color: 'white', fontWeight: '600'}} variant="contained" color="primary" size="small" 
@@ -47,7 +45,6 @@ function RemoteJobs() {
 
     return (
         <>
-            {/* <button onClick={getInternships}>Test Remote Jobs</button> */}
             <div style={{ height: 500, width: '100%' }}>
                       <DataGrid
                         rows={rows}
