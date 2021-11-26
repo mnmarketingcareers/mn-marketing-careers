@@ -1,0 +1,12 @@
+
+.shareOurAppButton {
+margin-right: 4px;
+transform: scale(1)
+}
+
+@media screen and (max-width: 480px){
+    .shareOurAppButton {
+ transform: scale(0.7);
+        margin-right: -14px;
+    }
+}

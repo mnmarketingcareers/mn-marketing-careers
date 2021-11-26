@@ -191,6 +191,10 @@ const useStyles = makeStyles(
       fontSize: '36px',
     },
 
+    employerPageHeaderCard: {
+     
+    }
+
 
   },
   { index: 1 }
