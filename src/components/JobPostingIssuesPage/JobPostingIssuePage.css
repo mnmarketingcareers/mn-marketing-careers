@@ -1,4 +1,6 @@
-
+.job-issue-container{
+  margin-left: 25px;
+}
 .submit-employer-form-button {
     width: 150px;
     height: 45px;
@@ -18,6 +20,10 @@
   cursor: pointer;
   background-color: #5298a7;
   transition: background-color 0.23s linear;
+}
+
+.recaptcha-container{
+  display: inline-block;
 }
 
 
