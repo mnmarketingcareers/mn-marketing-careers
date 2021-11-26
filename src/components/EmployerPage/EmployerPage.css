@@ -1,53 +1,108 @@
-
-
 .form-container {
-    display: grid;
-    justify-content: center;
+  display: block;
+  justify-content: center;
 }
-
 
 /* The whole individual cards */
-.MuiPaper-root{
-    padding: 10px;
-    margin-right: 2px;
-    margin-bottom: 15px;
+.MuiPaper-root {
+  padding: 10px;
+  margin-right: 2px;
+  margin-bottom: 15px;
 }
 
-
 .MuiFormGroup-root {
-    padding: 20px;
+  padding: 20px;
 }
 
 .MuiPaper-root {
-    padding: 20px;
+  padding: 20px;
 }
 
-.employer-form{
-    padding-left: 55px;
-    padding-bottom: 20px;
-    display: grid;
-    justify-content: center;
-}
 
 .submit-issues-form-button {
-    width: 150px;
-    height: 45px;
-    margin: 10px;
-    border: none;
-    background-color: #74BDCB;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: #74bdcb;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
 
-    transition: background-color .4s linear;
+  transition: background-color 0.4s linear;
 }
 
 .submit-issues-form-button:hover,
-.submit-issues-form-button:hover::after{
+.submit-issues-form-button:hover::after {
   cursor: pointer;
   background-color: #5298a7;
   transition: background-color 0.23s linear;
 }
 
+/* ----------Employer Page Full-size Screen---------- */
 
+.employer-form {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+    display: block;
+    justify-content: center;
+  }
+
+  .recaptcha-container {
+      margin: 2%;
+      padding-top: 10px;
+  }
+
+
+  .jobTypesDropdown {
+    width: 60%;
+}
+
+.description {
+    width: 80%;
+}
+
+
+/* ----------Employer Page screen under 590px---------- */
+
+
+
+@media screen and (max-width: 480px) {
+
+    .gridContainer {
+        display:block;
+       margin-left: 20px;
+       margin-right: 20px;
+       justify-content: center;
+    }
+
+    .employer-form {
+       display:block;
+       margin-left: 0px;
+       margin-right: 0px;
+       padding: 0px;
+       justify-content: center;
+      }
+
+  .employerHeaderCard {
+   width: 360px;
+
+  }
+
+  .employerHeaderCardImage {
+    max-width: 360px;
+    margin: auto;
+
+  }
+
+  .description {
+    width: 270px;
+  }
+
+  .jobTypesDropdown {
+      width: 270px;
+  }
+
+}

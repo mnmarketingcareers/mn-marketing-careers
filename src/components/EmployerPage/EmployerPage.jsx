@@ -31,12 +31,15 @@ import MuiAlert from '@mui/material/Alert';
 import ReCaptchaV2 from 'react-google-recaptcha';
 import ShareOurApp from "../ShareOurApp/ShareOurApp.jsx";
 
+import useStyles from "../Styles/Styles";
+
 
 
 import './EmployerPage.css';
 
 function EmployerPage() {
 
+    const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -279,11 +282,12 @@ function EmployerPage() {
             
             <div className="form-container">
                 <form className="employer-form" onSubmit={submitEmployerJob}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Card>
+                    <Grid container spacing={2} className="gridContainer">
+                        <Grid item>
+                            <Card className="employerHeaderCard" style={{backgroundColor: '#ffffff99'}}>
                                 <CardHeader title="Hiring? Submit a job" />
                                 <CardMedia
+                                className="employerHeaderCardImage"
                                     component="img"
                                     height="140"
                                     image="./images/employerform.jpeg"
@@ -294,22 +298,24 @@ function EmployerPage() {
                                         Minnesota Marketing Careers is a weekly email update dedicated to sharing marketing, communications and digital career opportunities with Minnesota-based
                                         companies.Remote positions and internships included.Submit opportunities within your organization including advertising, marketing, public relations,
                                         UX/software development, communications and digital.
-                                    </Typography>
+                                    </Typography><br />
                                     <Typography padding="2" variant="body2" color="text.secondary">
-                                        Curated by Minnesota-based Recruiter, Elizabeth Laukka and Marketing Consultant, Casey Tilli.
+                                        Curated by Minnesota-based Recruiter Elizabeth Laukka and Marketing Consultant Casey Tilli.
                                         Questions?  Reach us at <a href="mnmarketingcareers@gamil.com">mnmarketingcareers@gmail.com</a>
                                     </Typography>
                                 </CardContent>
-                                <CardActions>
+                                <CardActions 
+                                style={{paddingLeft: '0px'}}
+                                >
                                     <ShareOurApp />
                                     <Button size="small" onClick={toAbout}>Learn More</Button>
                                 </CardActions>
                             </Card>
                         </Grid>
                         
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Your name" />
+                                <CardHeader title="Your Name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField required
                                     type="text"
@@ -321,9 +327,9 @@ function EmployerPage() {
                                     value={jobPostingsTable.posting_contact_name} ></TextField>
                             </Card>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Your email" />
+                                <CardHeader title="Your Email" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField required
                                     type="text"
@@ -335,7 +341,7 @@ function EmployerPage() {
                                     value={jobPostingsTable.posting_contact_email} ></TextField>
                             </Card>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
                                 <CardHeader title="Company Name" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -349,7 +355,7 @@ function EmployerPage() {
                                     value={jobPostingsTable.company} ></TextField>
                             </Card>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
                                 <CardHeader title="Title of Position Available" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -362,7 +368,7 @@ function EmployerPage() {
                                     value={jobPostingsTable.available_role} ></TextField>
                             </Card>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
                                 <CardHeader title="Link to Job Post Online" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -375,26 +381,33 @@ function EmployerPage() {
                                     value={jobPostingsTable.application_link} ></TextField>
                             </Card>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
                                 <CardHeader title="Description" />
-                                &nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     multiline rows={4}
-                                    sx={{ m: 1, width: 450 }}
+                                    // sx={{ m: 1, width: 450 }}
                                     type="text"
                                     placeholder="Description"
                                     variant='outlined'
                                     className="description"
                                     onChange={setValues('description')}
-                                    value={jobPostingsTable.description} ></TextField>
+                                    
+                                    value={jobPostingsTable.description} >
+
+
+                                    </TextField>
                             </Card>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Select job types (Multiple selections allowed)" />
+                                <CardHeader title="Select Job Types (Multiple selections allowed)" />
                                 <div>
-                                    <FormControl sx={{ m: 1.1, width: 300 }}>
+                                    <FormControl 
+                                    // sx={{ m: 1.1, width: 300 }}
+                                        className="jobTypesDropdown"
+                                    >
                                         <InputLabel id="job-types">types</InputLabel>
                                         <Select required
                                             labelId="job-types"
@@ -418,7 +431,7 @@ function EmployerPage() {
                             </Card>
                         </Grid>
 
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
                                 <CardHeader title="City" />
                                 &nbsp;&nbsp;&nbsp;
@@ -431,7 +444,7 @@ function EmployerPage() {
                                     value={jobPostingsTable.job_city} ></TextField>
                             </Card>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
                                 <CardHeader title="State" />
                                 &nbsp;&nbsp;&nbsp;
@@ -444,7 +457,7 @@ function EmployerPage() {
                                     value={jobPostingsTable.job_state} ></TextField>
                             </Card>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
                                 <CardHeader title="&nbsp;Is this job remote?" />
                                 <FormControl required component="fieldset">
@@ -461,12 +474,12 @@ function EmployerPage() {
                             </Card>
                         </Grid>
 
-                        <Grid item xs={8}>
+                        <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="&nbsp;Can we share a contact person" />
+                                <CardHeader title="&nbsp;Can we share a contact person?" />
                                 <FormControl required component="fieldset">
                                     <RadioGroup
-                                        aria-label="Can we share a contact person?"
+                                        aria-label="Can we share a contact person? "
                                         name="radio-buttons-group"
                                     >
                                         <FormControlLabel placeholder="yes" value="yes" onClick={shareContact} control={<Radio />} label="Yes" />
@@ -478,11 +491,9 @@ function EmployerPage() {
                                     </RadioGroup>
                                 </FormControl>
                             </Card>
-                            
-                        </Grid>
-                    </Grid>
 
-                    <div className="recaptcha-container">
+
+                            <div className="recaptcha-container">
                         {
                         !showButton &&     
                         <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
@@ -496,6 +507,24 @@ function EmployerPage() {
                             <input className="submit-employer-form-button" type='submit' value='Submit' />
                         }
                     </div>
+                            
+                        </Grid>
+                    </Grid>
+
+                    {/* <div className="recaptcha-container" //deletelater>
+                        {
+                        !showButton &&     
+                        <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
+                               onChange={handleToken}
+                               onExpired={handleExpire}
+                               onErrored={err => console.error(`Recaptcha error: ${err}`)}
+                        />
+                        }
+                        {
+                        showButton &&
+                            <input className="submit-employer-form-button" type='submit' value='Submit' />
+                        }
+                    </div> //deletelater */}
                 </form>
             </div>
             <Stack spacing={2} sx={{ width: '100%' }}>

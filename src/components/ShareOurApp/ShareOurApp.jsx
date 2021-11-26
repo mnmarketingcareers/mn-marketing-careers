@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Container from '@mui/material/Container';
 import { LinkedinShareButton, TwitterShareButton, FacebookShareButton} from "react-share";
 import {LinkedinIcon, TwitterIcon, FacebookIcon} from "react-share";
+import './ShareOurApp.css';
 
 function ShareOurApp() {
   return (
@@ -14,20 +15,26 @@ function ShareOurApp() {
                     <FacebookShareButton url="http://fullstack.primeacademy.io/"
                     quote={"This week's Minnesota Marketing Careers email features an awesome list of marketing, digital, and PR career openings. To receive the full list of jobs in your inbox, sign up here https://bit.ly/mnmcsignup"}
                     hashtag="#Minnesota">
-                        <FacebookIcon round={true}></FacebookIcon>
+                        <FacebookIcon 
+                        className="shareOurAppButton"
+                        round={true}></FacebookIcon>
                     </FacebookShareButton>
 
                     <LinkedinShareButton url="http://fullstack.primeacademy.io/"
                     title={"Minnesota Marketing Careers"}
                     summary={"This week's Minnesota Marketing Careers email features an awesome list of marketing, digital, and PR career openings. To receive the full list of jobs in your inbox, sign up here https://bit.ly/mnmcsignup"}
                     hashtag="#Minnesota">
-                        <LinkedinIcon round={true}></LinkedinIcon>
+                        <LinkedinIcon 
+                        className="shareOurAppButton"
+                        round={true}></LinkedinIcon>
                     </LinkedinShareButton>
 
                     <TwitterShareButton url="http://fullstack.primeacademy.io/"
                     title={"Minnesota Marketing Careers"}
                     hashtag="#Minnesota">
-                        <TwitterIcon round={true}></TwitterIcon>
+                        <TwitterIcon 
+                        className="shareOurAppButton"
+                        round={true}></TwitterIcon>
                     </TwitterShareButton>                              
             </Container>
 
