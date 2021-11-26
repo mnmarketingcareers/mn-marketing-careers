@@ -39,6 +39,7 @@ import './EmployerPage.css';
 
 function EmployerPage() {
 
+    const [shareContactOpen, setShareContactOpen] = useState(false)
     const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
