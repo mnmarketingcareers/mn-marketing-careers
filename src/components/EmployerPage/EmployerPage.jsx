@@ -283,9 +283,10 @@ function EmployerPage() {
             <div className="form-container">
                 <form className="employer-form" onSubmit={submitEmployerJob}>
                     <Grid container spacing={2} className="gridContainer">
-                        <Grid item>
+                        <Grid item >
                             <Card className="employerHeaderCard" style={{backgroundColor: '#ffffff99'}}>
-                                <CardHeader title="Hiring? Submit a job" />
+                                <CardHeader title="Hiring? Submit a job" titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '32px'}}
+/>
                                 <CardMedia
                                 className="employerHeaderCardImage"
                                     component="img"
@@ -294,12 +295,12 @@ function EmployerPage() {
                                     sx={{ borderRadius: 3 }}
                                 />
                                 <CardContent>
-                                    <Typography variant="body2" color="text.secondary">
+                                    <Typography variant="body2" color="text.secondary" style={{fontFamily: 'Red Hat Text'}}>
                                         Minnesota Marketing Careers is a weekly email update dedicated to sharing marketing, communications and digital career opportunities with Minnesota-based
                                         companies.Remote positions and internships included.Submit opportunities within your organization including advertising, marketing, public relations,
                                         UX/software development, communications and digital.
                                     </Typography><br />
-                                    <Typography padding="2" variant="body2" color="text.secondary">
+                                    <Typography padding="2" variant="body2" color="text.secondary" style={{fontFamily: 'Red Hat Text'}}>
                                         Curated by Minnesota-based Recruiter Elizabeth Laukka and Marketing Consultant Casey Tilli.
                                         Questions?  Reach us at <a href="mnmarketingcareers@gamil.com">mnmarketingcareers@gmail.com</a>
                                     </Typography>
@@ -315,7 +316,9 @@ function EmployerPage() {
                         
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Your Name" />
+                                <CardHeader title="Your Name" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '28px'}}
+                                />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField required
                                     type="text"
@@ -329,7 +332,9 @@ function EmployerPage() {
                         </Grid>
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Your Email" />
+                                <CardHeader title="Your Email" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '28px'}}
+                                />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField required
                                     type="text"
@@ -343,7 +348,9 @@ function EmployerPage() {
                         </Grid>
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Company Name" />
+                                <CardHeader title="Company Name" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '28px'}}
+                                />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField required
                                     type="text"
@@ -357,7 +364,9 @@ function EmployerPage() {
                         </Grid>
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Title of Position Available" />
+                                <CardHeader title="Title of Position Available" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '24px'}}
+                                />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField required
                                     type="text"
@@ -370,7 +379,9 @@ function EmployerPage() {
                         </Grid>
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Link to Job Post Online" />
+                                <CardHeader title="Link to Job Post Online" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '24px'}}
+                                />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField required
                                     type="text"
@@ -383,7 +394,9 @@ function EmployerPage() {
                         </Grid>
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Description" />
+                                <CardHeader title="Description" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '28px'}}
+                                />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <TextField
                                     multiline rows={4}
@@ -402,7 +415,9 @@ function EmployerPage() {
                         </Grid>
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="Select Job Types (Multiple selections allowed)" />
+                                <CardHeader title="Select Job Types (Multiple selections allowed)" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '24px'}}
+                                />
                                 <div>
                                     <FormControl 
                                     // sx={{ m: 1.1, width: 300 }}
@@ -433,7 +448,9 @@ function EmployerPage() {
 
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="City" />
+                                <CardHeader title="City" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '30px'}}
+                                />
                                 &nbsp;&nbsp;&nbsp;
                                 <TextField
                                     type="text"
@@ -446,7 +463,9 @@ function EmployerPage() {
                         </Grid>
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="State" />
+                                <CardHeader title="State" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '30px'}}
+                                />
                                 &nbsp;&nbsp;&nbsp;
                                 <TextField required
                                     type="text"
@@ -459,15 +478,17 @@ function EmployerPage() {
                         </Grid>
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="&nbsp;Is this job remote?" />
+                                <CardHeader title="&nbsp;Is this job remote?" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '24px'}}
+                                />
                                 <FormControl required component="fieldset">
                                     <RadioGroup
                                         aria-label="Is this job remote?"
                                         name="radio-buttons-group"
                                     >
-                                        <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio />} label="Yes" />
-                                        <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio />} label="No" />
-                                        <FormControlLabel value="other" onClick={changeState} control={<Radio />} label="Other" />
+                                        <FormControlLabel placeholder="remote-yes" value="yes" onClick={setValues('remote')} control={<Radio className="radioCircle" />} label="Yes" />
+                                        <FormControlLabel placeholder="remote-no" value="no" onClick={setValues('remote')} control={<Radio className="radioCircle" />} label="No" />
+                                        <FormControlLabel value="other" onClick={changeState} control={<Radio className="radioCircle" />} label="Other" />
                                         {toggleOther ? <p></p> : <div><TextField className="other" variant="standard" placeholder="details" onChange={setValues('remote')} ></TextField></div>}
                                     </RadioGroup>
                                 </FormControl>
@@ -476,18 +497,20 @@ function EmployerPage() {
 
                         <Grid item xs={10} sm={8} md={7} lg={7} xl={7}>
                             <Card>
-                                <CardHeader title="&nbsp;Can we share a contact person?" />
+                                <CardHeader title="Can we share a contact person?" 
+                                titleTypographyProps={{ fontFamily: 'Red Hat Text', fontSize: '24px'}}
+                                />
                                 <FormControl required component="fieldset">
                                     <RadioGroup
                                         aria-label="Can we share a contact person? "
                                         name="radio-buttons-group"
                                     >
-                                        <FormControlLabel placeholder="yes" value="yes" onClick={shareContact} control={<Radio />} label="Yes" />
-                                        {toggleContact ? <p></p> : <div><TextField defaultValue="Danny" className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('name')} ></TextField>&nbsp;&nbsp;
-                                            &nbsp;<TextField defaultValue="danny.m@yahoo.com" className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('email')} ></TextField>&nbsp;
-                                            &nbsp;<TextField defaultValue="Hiring Manager" className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>&nbsp;
-                                            &nbsp;&nbsp;<TextField defaultValue="612-pri-menw" className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField></div>}
-                                        <FormControlLabel placeholder="no" value="no" onClick={dontShareContact} control={<Radio />} label="No" />
+                                        <FormControlLabel placeholder="yes" value="yes" onClick={shareContact} control={<Radio className="radioCircle" />} label="Yes" />
+                                        {toggleContact ? <p></p> : <div><TextField className="hiring-contact-name" variant="standard" placeholder="name" onChange={setValues('name')} ></TextField>&nbsp;&nbsp;
+                                            &nbsp;<TextField className="hiring-contact-email" variant="standard" placeholder="email" onChange={setValues('email')} ></TextField>&nbsp;
+                                            &nbsp;<TextField className="hiring-contact-title" variant="standard" placeholder="title" onChange={setValues('title')} ></TextField>&nbsp;
+                                            &nbsp;&nbsp;<TextField className="hiring-contact-phone" variant="standard" placeholder="phone" onChange={setValues('phone')} ></TextField></div>}
+                                        <FormControlLabel placeholder="no" value="no" onClick={dontShareContact} control={<Radio className="radioCircle" />} label="No" />
                                     </RadioGroup>
                                 </FormControl>
                             </Card>

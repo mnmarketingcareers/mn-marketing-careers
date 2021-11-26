@@ -64,6 +64,10 @@
     width: 80%;
 }
 
+.poster-name, .poster-email, .company, .title, .application-link, .city, .state {
+    width: 70%;
+}
+
 
 /* ----------Employer Page screen under 590px---------- */
 
@@ -104,5 +108,12 @@
   .jobTypesDropdown {
       width: 270px;
   }
+
+  .poster-name, .poster-email, .company, .title, .application-link, .city, .state {
+    width: 85%;
+}
+.radioCircle {
+    transform: scale(1.4);
+}
 
 }
