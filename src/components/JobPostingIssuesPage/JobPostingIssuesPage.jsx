@@ -7,7 +7,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import axios from "axios";
 import JobIssuesItem from "./JobIssuesItem";
@@ -120,8 +120,13 @@ function JobPostingIssuesPage() {
     setIssue({ ...issue, issue_type: 'other' });
   };
 
+  const goBack = () => {
+    history.push('/main')
+  }
+
     return (
         <>
+      <div className="job-issue-container">
       <div className="issueheader">
         <h2>Hit a Snag Applying? Let Us Know What's Going On</h2>
       </div>
@@ -205,11 +210,14 @@ function JobPostingIssuesPage() {
               showButton &&
               <input className="submit-issues-form-button" type='submit' value='Submit' />
             }
+            <button className="cancel-employer-form-button" onClick={goBack}>Cancel</button>
           </div>
         </FormControl>
         </form>
       </div>
+      </div>
     </>
+
     );
 };
 
