@@ -121,7 +121,6 @@ function JobPostingIssuesPage() {
   };
 
   const goBack = () => {
-    console.log('in button?')
     history.push('/main')
   }
 
@@ -211,7 +210,7 @@ function JobPostingIssuesPage() {
               showButton &&
               <input className="submit-issues-form-button" type='submit' value='Submit' />
             }
-            <Button variant="contained" color="error" onClick={goBack}>CANCEL</Button>
+            <button className="cancel-employer-form-button" onClick={goBack}>Cancel</button>
           </div>
         </FormControl>
         </form>

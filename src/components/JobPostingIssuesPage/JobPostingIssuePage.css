@@ -22,8 +22,29 @@
   transition: background-color 0.23s linear;
 }
 
+.cancel-employer-form-button {
+    width: 150px;
+    height: 45px;
+    margin: 10px;
+    border: none;
+   background-color: #cb7474;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: background-color .4s linear;
+}
+
+.cancel-employer-form-button:hover,
+.cancel-employer-form-button:hover::after{
+  cursor: pointer;
+  background-color: #a75252;
+  transition: background-color 0.23s linear;
+}
+
 .recaptcha-container{
-  display: inline-block;
+  display: flex;
 }
 
 
