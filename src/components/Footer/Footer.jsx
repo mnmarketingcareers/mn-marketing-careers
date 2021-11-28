@@ -10,9 +10,6 @@ function Footer() {
   return (
     <footer className="footerText">
       Copyright &copy; 2021 Minnesota Marketing Careers <br />
-      <p>
-        (temporary <a href="/login#/login">LOGIN</a> button)
-      </p>
     </footer>
   );
 }
