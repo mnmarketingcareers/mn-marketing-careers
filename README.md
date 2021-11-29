@@ -75,9 +75,18 @@ Link to software that is required to install the app (e.g. node).
 - Find you "Audience" Id in your Audience settings on your MailChimp account. Use this to replace the text immediately after `TEST_LIST_ID=` in the lines below.
 - Replace sample text in each of the following 3 lines as mentioned above, and include in your `.env` file
 
+```
+      SERVER_SESSION_SECRET=
       DC=three_character_dc
       MAILCHIMP_API_KEY=your_maichimp_api_key
       TEST_LIST_ID=your_account_id_number
+
+      REACT_APP_RECAPTCHA_SITE_KEY=
+      RECAPTCHA_SECRET_KEY=
+
+      REGULAR_TEMPLATE_ID=
+      PLAIN_TEXT_TEMPLATE_ID=
+```
 
 - _*Make sure `.env` is in your .gitignore!*_
 
