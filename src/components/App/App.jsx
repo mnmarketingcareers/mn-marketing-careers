@@ -138,7 +138,7 @@ function App() {
             <JobIssuesReviewPage />
           </ProtectedRoute>
 
-          <Route exact path="/login">
+          <Route exact path="/mnmcadmin101">
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
@@ -170,14 +170,6 @@ function App() {
               <LandingPage />
             )}
           </Route>
-
-          {/* 
-          <Route 
-          exact
-          path="/info"
-          >
-            <InfoPage />
-          </Route> */}
 
           <Route exact path="/unsubfeedbackpage">
             <UnsubFeedbackPage />

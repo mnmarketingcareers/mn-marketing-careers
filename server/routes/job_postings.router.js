@@ -232,7 +232,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
   try {
 
-    // const secretKey = process.env.REACT_APP_SECRET_KEY;
+    // const secretKey = process.env.RECAPTCHA_SECRET_KEY;
     // const token = req.body.token;
     // const validate = await axios.post(`
     // https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}

@@ -520,7 +520,7 @@ function EmployerPage() {
                             <div className="recaptcha-container">
                         {
                         !showButton &&     
-                        <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
+                        <ReCaptchaV2 sitekey={(process.env.REACT_APP_RECAPTCHA_SITE_KEY)} 
                                onChange={handleToken}
                                onExpired={handleExpire}
                                onErrored={err => console.error(`Recaptcha error: ${err}`)}

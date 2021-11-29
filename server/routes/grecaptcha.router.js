@@ -18,7 +18,7 @@ client.setConfig({
 
  router.post('/', (req, res) => { 
     console.log('In reCaptcha verification', req.body.token);
-    const secretKey = process.env.REACT_APP_SECRET_KEY;
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
     const token = req.body.token;
 
 
