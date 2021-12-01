@@ -27,7 +27,7 @@ function Main() {
     }
 
     const rows = useSelector((store) => store.setJobsReducer);
-    const recentJobs = useSelector(store => store.setRecentJobs);
+    
 
 
 
