@@ -36,7 +36,6 @@ function ReadyToPost () {
             <h2>Job openings you've  added or approved, ready to go to the public list</h2>
             <Paper>
             <p>Click here: <Button variant="outlined" onClick={handlePostToList}>Go Live</Button> <b>ONLY IF</b> you want to post all new job openings below to the public list</p>
-                {/* {JSON.stringify(approvedPostings)} */}
                 <Container className="job-postings-table">
                     <ul>
                         {approvedPostings.map((job) => {
