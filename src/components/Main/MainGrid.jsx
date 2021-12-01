@@ -1,27 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
-import { format, compareAsc, parseISO } from 'date-fns';
 import moment from 'moment';
 
 function MainGrid ({ rows }) {
 
     const history = useHistory();
-    const testApply = (event) => {
-        console.log('in button, what is event.target.params', event.target.params);
-        console.log('in button, what is params', event.target.params);
-        const link = event.target.value;
-        <a href="`${link}`" />
-
-    }
 
     // useparams history.push
     const toIssuePage = (rowId) => {
         history.push(`/jobpostingissue/${rowId}`)
     }
-    
-    // renderCell: (params) => {return(moment(params.row.date_posted).format('MMM Do YY')))}
 
     // The application field column will render a button that will take user to link wether the employer has put in a 'https' or not.
     const columns = [

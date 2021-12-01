@@ -88,6 +88,7 @@ function EmployerPage() {
 
     });
 
+//When the submit button is pushed, data is dispatched and user is routed to /main after 1000 ms.
     const submitEmployerJob = (event) => {
         event.preventDefault();
         dispatch({

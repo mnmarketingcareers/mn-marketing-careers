@@ -43,7 +43,7 @@ function Main() {
     // "Filtering by the last 3 days" fetchRecentJobs is called.
     const [snackBarValue, setSnackBarValue] = useState('0')
 
-    // Fetches jobs by date.
+    // Fetches jobs by date. The 3 different dispatches for the 3 different categories on the /main page.
     const fetchRecentJobs = (time) => {
         setSnackBarValue(time);
         setOpen(true); 
