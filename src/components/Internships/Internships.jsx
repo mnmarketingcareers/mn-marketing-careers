@@ -22,8 +22,8 @@ function Internships() {
     const columns = [
         { field: 'company_name', headerName: 'Company', width: 150 },
         { field: 'date_posted', headerName: 'Date', width: 110 },
-        { field: 'available_role', headerName: 'Available role', width: 150 },
-        { field: 'description', headerName: 'Description', width: 150 },
+        { field: 'available_role', headerName: 'Available Role', width: 175 },
+        { field: 'description', headerName: 'Description', width: 200 },
         { field: 'application_link', headerName: 'Link', width: 150, renderCell: (params) => {
                                             if(params.row.application_link.includes('http')){
                                                 return <Button style={{backgroundColor: '#E7F2F8'}} variant="outlined"><a style={{color: 'black', fontWeight: '500'}} href={`${params.row.application_link}`} target="_blank">Apply</a></Button>
@@ -31,8 +31,8 @@ function Internships() {
                                                 return <Button style={{backgroundColor: '#E7F2F8'}} variant="outlined"><a style={{color: 'black', fontWeight: '500'}} href={`https://${params.row.application_link}`} target="_blank">Apply</a></Button> 
                                             }
                                             }},
-        { field: 'job_type', headName: 'Job Field', width: 350},
-        { field: 'id', headerName: 'Any Issues?', width: 150, renderCell: (params) => { 
+        { field: 'job_type', headerName: 'Job Type', width: 350},
+        { field: 'id', headerName: 'Any Issues?', width: 160, renderCell: (params) => { 
             return  <Button style={{backgroundColor: '#FFA384', color: 'white', fontWeight: '600'}} variant="contained" color="primary" size="small" 
             onClick={() => toIssuePage(params.row.id)}> Report Issue </Button>  
         }},
@@ -45,7 +45,6 @@ function Internships() {
 
     return (
         <>
-            {/* <button onClick={getRemoteJobs}>Test Remote Jobs</button> */}
             <div style={{ height: 500, width: '100%' }}>
                       <DataGrid
                         rows={rows}
