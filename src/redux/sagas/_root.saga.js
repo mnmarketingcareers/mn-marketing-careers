@@ -21,6 +21,7 @@ import postNewTemplateSaga from './postTemplate.saga';
 import jobIssuesSaga from './jobIssue.saga';
 import buildEmailJobListSaga from './builtEmailJobList.saga';
 import editSaga from './editPosting.saga';
+import getUnsubscriberInfoSaga from './getUnsubscriberFeedback';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -53,5 +54,6 @@ export default function* rootSaga() {
     jobIssuesSaga(), //GET job issues from database
     buildEmailJobListSaga(), //IMPORTANT
     editSaga(),
+    getUnsubscriberInfoSaga()
   ]);
 }

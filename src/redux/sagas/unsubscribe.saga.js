@@ -15,6 +15,5 @@ function* fetchUnsubFeedback(action) {
 
 function* getFeedbackSaga() {
   yield takeEvery("SUBMIT_UNSUB_FEEDBACK", fetchUnsubFeedback);
-
 }
 export default getFeedbackSaga;

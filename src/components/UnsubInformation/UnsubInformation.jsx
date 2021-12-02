@@ -5,8 +5,20 @@ import { useState, useEffect } from "react";
 
 
 function UnsubInformation(){
+
+    const history = useHistory()
+
+    const dispatch = useDispatch();
+
+    const unsubscriberList = useSelector(store => store.unsubscriberReducer);
+
+    useEffect(() => {
+       dispatch({type: 'GET_UNSUBSCRIBER_FEEDBACK'})
+    }, []);
+
     return(
         <>
+        <p>{JSON.stringify(unsubscriberList)}</p>
             We're in
         </>
     )
