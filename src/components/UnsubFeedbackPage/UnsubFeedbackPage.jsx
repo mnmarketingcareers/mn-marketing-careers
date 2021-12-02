@@ -9,8 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { TextField } from "@mui/material";
 import "./UnsubFeedbackPage.css";
-import FormGroup from "@mui/material/FormGroup";
-import axios from "axios";
+
 
 function UnsubFeedbackPage() {
   const history = useHistory();
@@ -22,7 +21,6 @@ function UnsubFeedbackPage() {
   });
   const [userEmail, setUserEmail] = useState("");
 
-  // const suscribers = useSelector(store => store.setSubsListReducer);
 
   const handleSubmit = (event) => {
     event.preventDefault();
