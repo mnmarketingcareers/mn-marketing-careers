@@ -21,7 +21,7 @@ import postNewTemplateSaga from './postTemplate.saga';
 import jobIssuesSaga from './jobIssue.saga';
 import buildEmailJobListSaga from './builtEmailJobList.saga';
 import editSaga from './editPosting.saga';
-import getUnsubscriberInfoSaga from './getUnsubscriberFeedback';
+import getUnsubscriberInfoSaga from './getUnsubscriberFeedback.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
