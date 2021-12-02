@@ -12,7 +12,6 @@ import setRemoteJobsReducer from './remote_jobs.reducer';
 import setInternshipsReducer from './internships.reducer';
 import lasagna from './captcha.reducer';
 
-// import setRecentJobs from './moreRecentJobs.reducer';
 
 import setTemplatesReducer from './setTemplates.reducer';
 import setActiveCampaignReducer from './setActiveCampaign.reducer';

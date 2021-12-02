@@ -7,10 +7,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { TextField, Button } from "@mui/material";
-import FormGroup from "@mui/material/FormGroup";
-import axios from "axios";
-import JobIssuesItem from "./JobIssuesItem";
+import { TextField } from "@mui/material";
+
 
 import ReCaptchaV2 from 'react-google-recaptcha';
 import './JobPostingIssuePage.css'
@@ -32,17 +30,15 @@ function JobPostingIssuesPage() {
     
     // get by ID route in job postings router
     const job = useSelector(store => store.setJobsReducer);
-    const lasagna = useSelector(store => store.lasagna);
 
     const thisJob = job[0];
 
     console.log('whats in setJobsReducer in job issue page', thisJob.available_role);
     
 
-    //will I need a new saga/reducer for this dispatch? POST route?
+    
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('the event is', event);
         dispatch({
             type: 'ADD_JOB_ISSUE',
             payload: issue
@@ -58,7 +54,6 @@ function JobPostingIssuesPage() {
 
   // switch statment function for different radio button selection options
   const radioButtonValue = (event) => {
-    console.log('inside radio button', event.target.value);
     switch (event.target.value) {
       case 'This Position is No Longer Available':
         setIssue({ ...issue, issue_type: event.target.value });
@@ -73,12 +68,10 @@ function JobPostingIssuesPage() {
   // function for text field
 
   const textFieldValue = (event) => {
-    console.log('inside text field', event.target.value);
     setIssue({ ...issue, comment: event.target.value });
   };
 
   const emailTextFieldValue = (event) => {
-    console.log('inside email text field', event.target.value);
     setIssue({...issue, issues_email: event.target.value});
   }
 
@@ -86,7 +79,7 @@ function JobPostingIssuesPage() {
   // we want to toggle from true to false for the ternerary operator
   const [toggleOther, setToggleOther] = useState(true);
   const [showButton, setShowButton] = useState(false);
-  // let showButton = lasagna.success ? true : false;
+  
   /**
    * Adds the token to the form object
    *
@@ -94,7 +87,6 @@ function JobPostingIssuesPage() {
    */
   const handleToken = (token) => {
     console.log('recaptcha token: ', token);
-    // dispatch({ type: 'LASAGNA', payload: token });
     setShowButton(true);
     setIssue((issue) => {
       return { ...issue, token }
@@ -188,15 +180,6 @@ function JobPostingIssuesPage() {
               onChange={emailTextFieldValue}
             />
           </RadioGroup>
-          {/* <div className="unsub-submit-div">
-
-            <input
-              className="submit-employer-form-button"
-              type="submit"
-              name="submit"
-              value="Submit"
-            />
-          </div> */}
           <div className="recaptcha-container">
             {
               !showButton &&     
