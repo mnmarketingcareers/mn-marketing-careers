@@ -53,6 +53,10 @@ const AdminHub = () => {
     history.push("/adminaddjob");
   };
 
+  const toUnsubscribeInfo = () => {
+    history.push("/unsubscribeinfo");
+  }
+
   return (
     <div className="adminHubPage">
       <Typography className={classes.adminHeader}>
@@ -103,6 +107,7 @@ const AdminHub = () => {
           />
           <AdminHubTwoColTable subs={subs} toggleSubStatus={toggleSubStatus} />
         </div>
+        <Button variant="contained" onClick={toUnsubscribeInfo}>UNSUBSCRIBER INFO</Button>
       </Container>
     </div>
   );

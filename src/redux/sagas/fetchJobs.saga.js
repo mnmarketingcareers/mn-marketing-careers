@@ -22,7 +22,6 @@ function* fetchRemoteJobs(){
 function* fetchInternships(){
   try{
     const approvedInternships = yield axios.get("/api/search/internships");
-    // console.log('approvedInternships is', approvedInternships);
     yield put({ type: "SET_INTERNSHIPS", payload: approvedInternships.data})
   } catch (error){
     console.log("Error in GET Internships ");
@@ -33,7 +32,6 @@ function* fetchJobsByAge(action) {
   try {
     const age = action.payload.age;
     const jobsByAgeResponse = yield axios.get(`/api/recentjob/${age}`);
-    // console.log("jobs by age", age, "response", jobsByAgeResponse.data);
     yield put({ type: 'SET_RECENT_JOBS', payload: jobsByAgeResponse.data})
   } catch (error) {
     console.log('ERROR in GET jobs by age', error);
@@ -44,7 +42,6 @@ function* fetchRemoteJobsByAge(action) {
   try {
     const age = action.payload.age;
     const remoteJobsByAgeResponse = yield axios.get(`/api/recentjob/remote/${age}`);
-    // console.log("jobs by age", age, "response", remoteJobsByAgeResponse.data);
     yield put({ type: 'SET_RECENT_REMOTE_JOBS', payload: remoteJobsByAgeResponse.data})
   } catch (error) {
     console.log('ERROR in GET remote jobs by age', error);
