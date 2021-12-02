@@ -17,7 +17,6 @@ import lasagna from './captcha.reducer';
 import setTemplatesReducer from './setTemplates.reducer';
 import setActiveCampaignReducer from './setActiveCampaign.reducer';
 import setCampaignsReducer from './setCampaigns.reducer';
-import setRecentJobs from './moreRecentJobs.reducer';
 import setJobIssueListReducer from './jobIssues.reducer';
 import jobTypes from './jobtypes.reducer';
 
@@ -46,7 +45,6 @@ const rootReducer = combineReducers({
   setTemplatesReducer,
   setActiveCampaignReducer,
   setCampaignsReducer,
-  setRecentJobs,
   jobTypes,
 
   setJobIssueListReducer,
