@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
 router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
     // console.log('in router.get', req.user);
     
-    if (req.user.access_level === 1){
+    if (req.user.access_level >= 1){
         const queryText = `SELECT * FROM "feedback";`;
         //not positive on what we are actually pooling here
         pool.query(queryText)
