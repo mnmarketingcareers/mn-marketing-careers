@@ -30,6 +30,7 @@ import AdminAddJobPage from "../AdminAddJobPage/AdminAddJobPage";
 import JobPostingIssuesPage from "../JobPostingIssuesPage/JobPostingIssuesPage";
 import JobIssuesReviewPage from "../JobIssuesReviewPage/JobIssuesReviewPage";
 import EditJobPage from "../EditJobPage/EditJobPage";
+import UnsubInformation from "../UnsubInformation/UnsubInformation";
 
 function App() {
   const dispatch = useDispatch();
@@ -136,6 +137,14 @@ function App() {
             path="/adminjobissuelist"
           >
             <JobIssuesReviewPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Unsubscriber Information Page
+            exact
+            path="/unsubscribeinfo"
+          >
+            <UnsubInformation />
           </ProtectedRoute>
 
           <Route exact path="/mnmcadmin101">

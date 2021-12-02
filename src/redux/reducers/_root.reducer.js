@@ -19,6 +19,8 @@ import setCampaignsReducer from './setCampaigns.reducer';
 import setJobIssueListReducer from './jobIssues.reducer';
 import jobTypes from './jobtypes.reducer';
 
+import unsubscriberReducer from './unsubscriber.reducer';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -47,6 +49,8 @@ const rootReducer = combineReducers({
   jobTypes,
 
   setJobIssueListReducer,
+
+  unsubscriberReducer,
 });
 
 export default rootReducer;

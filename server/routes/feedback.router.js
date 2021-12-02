@@ -36,6 +36,7 @@ router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
         //not positive on what we are actually pooling here
         pool.query(queryText)
         .then(results => {
+        console.log('What are the unsubscribing users feedback?', results.rows)
         res.send(results.rows);
         })
         .catch(err => {
