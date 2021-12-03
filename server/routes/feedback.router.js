@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
 router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
     // console.log('in router.get', req.user);
     
-    if (req.user.access_level === 1){
+    if (req.user.access_level >= 1){
         const queryText = `SELECT * FROM "feedback";`;
         //not positive on what we are actually pooling here
         pool.query(queryText)
@@ -50,7 +50,7 @@ router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
 // Access level for admin-only access
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     
-    if (req.user.access_level === 1) {
+    if (req.user.access_level >= 1) {
         // this query updates the archive boolean status of a job seeker's feedback
         const queryText = `UPDATE "feedback" SET "archived" = NOT "archived" WHERE "id" = $1;`;
         const queryValues = [req.body.id];
