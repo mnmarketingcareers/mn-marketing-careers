@@ -3,8 +3,6 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { 
-    Button, 
-    CircularProgress,
     TableContainer,
     Table,
     TableHead,
@@ -13,6 +11,8 @@ import {
     TableBody,
     Paper,
 } from '@mui/material';
+
+import './UnsubInformation.css'
 
 
 function UnsubInformation(){
@@ -30,13 +30,14 @@ function UnsubInformation(){
     return(
         <>
         <p>{JSON.stringify(unsubscriberList)}</p>
-            <TableContainer component={Paper}>
+            <div className="table-margin-container">
+            <TableContainer component={Paper} sx={{ margin: 8, width: 2000}}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Reason</TableCell>
-                            <TableCell>Message</TableCell>
+                            <TableCell align="center">Date</TableCell>
+                            <TableCell align="center">Reason</TableCell>
+                            <TableCell align="center">Message</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -51,6 +52,7 @@ function UnsubInformation(){
                     </TableBody>
                 </Table>
             </TableContainer>
+            </div>
         </>
     )
 }
