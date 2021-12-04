@@ -33,7 +33,7 @@ function UnsubFeedbackPage() {
       payload: reason,
     });
     // handleUnsubscribers();
-    alert("Successfully unsuscribed, you can close this tab");
+    // alert("Successfully unsuscribed, you can close this tab");
     history.push("/main");
   };
 
