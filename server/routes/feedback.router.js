@@ -17,9 +17,9 @@ router.post('/', async (req, res) => {
         const unsubData = {
             status: req.body.status,
             subscriberHash: req.body.subscriberHash,
-        }
+        };
         // unsubscribe with mailchimp
-        const mailChimpUnsub = await axios.put('/api/subs', unsubData);
+        const mailChimpUnsub = await axios.put('/api/subs', req.body);
         console.log('Response from mailchimp router:', mailChimpUnsub);
         // the query that's responsible for inserting user feedback into the feedback database table
         const queryText = `INSERT INTO "feedback" ("reason", "message")

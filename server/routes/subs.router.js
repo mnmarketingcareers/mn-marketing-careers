@@ -104,7 +104,7 @@ router.post("/", (req, res) => {
    const response = client.lists.setListMember(
     listId, //name it this
     userHash, //name it this
-    { status: statusChange }2
+    { status: statusChange }
   ).then((response) => {
     console.log('response from PUT is:', response);
     res.send(response);
