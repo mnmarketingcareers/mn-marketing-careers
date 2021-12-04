@@ -5,24 +5,45 @@ const router = express.Router();
 const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const client = require("@mailchimp/mailchimp_marketing");
+
+client.setConfig({
+    apiKey: process.env.MAILCHIMP_API_KEY,
+    server: process.env.DC,
+  });
 
 // Handles POST request with new job seeker feedback, responses to database
 // Additional POST to post feedback to DOM?
-router.post('/', (req, res) => {
-    // console.log('req.body is', req.body);
-    const reason = req.body.reason;
-    const message = req.body.message;
-    // the query that's responsible for inserting user feedback into the feedback database table
-    const queryText = `INSERT INTO "feedback" ("reason", "message")
-    VALUES ($1, $2) RETURNING id;`;
-    // this pools the query text and datafields and sends the data on to the database 
-    pool
-        .query(queryText, [reason, message])
-        .then(() => res.sendStatus(201))
-        .catch((err) => {
+router.post('/', async (req, res) => {
+    try {
+        await pool.query('BEGIN');
+        // console.log('req.body is', req.body);
+        const reason = req.body.reason;
+        const message = req.body.message;
+        
+        console.log('Modifying user #', req.body.subscriberHash,'to status of', req.body.status)
+        const listId = process.env.TEST_LIST_ID; 
+        const statusChange = req.body.status; 
+        const userHash = req.body.subscriberHash;
+
+        const response = await client.lists.setListMember(
+            listId, //name it this
+            userHash, //name it this
+            { status: statusChange }
+        );
+        console.log('Mailchimp response', response);
+        // the query that's responsible for inserting user feedback into the feedback database table
+        const queryText = `INSERT INTO "feedback" ("reason", "message")
+        VALUES ($1, $2) RETURNING id;`;
+        // this pools the query text and datafields and sends the data on to the database 
+        await pool.query(queryText, [reason, message]);
+        await pool.query('COMMIT');
+        res.sendStatus(201);
+    } catch(err) {
+            await pool.query('ROLLBACK');
             console.log('feedback POST failed: ', err);
             res.sendStatus(500);
-        })
+    }
 })
 
 // Handles GET request, get feedback data from database

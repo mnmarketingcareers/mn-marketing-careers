@@ -31,6 +31,7 @@ client.setConfig({
     res.send(response);
   })
   .catch((error) => {
+    console.log('Error unsubscribing from Mailchimp', error);
     res.sendStatus(500);
   });
 });
