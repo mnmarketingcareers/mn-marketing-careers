@@ -1,0 +1,21 @@
+.page-container-actual{
+    display: grid;
+}
+
+.card-container{
+    margin: auto;
+    justify-content: center;
+    text-align:center
+}
+
+.table-margin-container{
+    max-width: 700px;
+    display:flex;
+    justify-content: center;
+    margin:auto;
+}
+
+.back-button{
+    display:flex;
+    justify-content: center;
+}
