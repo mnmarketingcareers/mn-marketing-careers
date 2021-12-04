@@ -31,6 +31,7 @@ client.setConfig({
     res.send(response);
   })
   .catch((error) => {
+    console.log('Error unsubscribing from Mailchimp', error);
     res.sendStatus(500);
   });
 });
@@ -103,7 +104,7 @@ router.post("/", (req, res) => {
    const response = client.lists.setListMember(
     listId, //name it this
     userHash, //name it this
-    { status: statusChange }
+    { status: statusChange }2
   ).then((response) => {
     console.log('response from PUT is:', response);
     res.send(response);

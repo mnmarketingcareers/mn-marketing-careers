@@ -19,14 +19,15 @@ router.post('/', async (req, res) => {
             subscriberHash: req.body.subscriberHash,
         }
         // unsubscribe with mailchimp
-        await axios.put('/api/subs', unsubData);
+        const mailChimpUnsub = await axios.put('/api/subs', unsubData);
+        console.log('Response from mailchimp router:', mailChimpUnsub);
         // the query that's responsible for inserting user feedback into the feedback database table
         const queryText = `INSERT INTO "feedback" ("reason", "message")
         VALUES ($1, $2) RETURNING id;`;
         // this pools the query text and datafields and sends the data on to the database 
         await pool.query(queryText, [reason, message]);
         await pool.query('COMMIT');
-        res.sendStatus(201)
+        res.sendStatus(201);
     } catch(err) {
             await pool.query('ROLLBACK');
             console.log('feedback POST failed: ', err);
