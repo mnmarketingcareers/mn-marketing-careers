@@ -5,6 +5,12 @@ const router = express.Router();
 const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const client = require("@mailchimp/mailchimp_marketing");
+
+client.setConfig({
+    apiKey: process.env.MAILCHIMP_API_KEY,
+    server: process.env.DC,
+  });
 
 // Handles POST request with new job seeker feedback, responses to database
 // Additional POST to post feedback to DOM?
@@ -14,13 +20,18 @@ router.post('/', async (req, res) => {
         // console.log('req.body is', req.body);
         const reason = req.body.reason;
         const message = req.body.message;
-        const unsubData = {
-            status: req.body.status,
-            subscriberHash: req.body.subscriberHash,
-        };
-        // unsubscribe with mailchimp
-        const mailChimpUnsub = await axios.put('/api/subs', req.body);
-        console.log('Response from mailchimp router:', mailChimpUnsub);
+        
+        console.log('Modifying user #', req.body.subscriberHash,'to status of', req.body.status)
+        const listId = process.env.TEST_LIST_ID; 
+        const statusChange = req.body.status; 
+        const userHash = req.body.subscriberHash;
+
+        const response = await client.lists.setListMember(
+            listId, //name it this
+            userHash, //name it this
+            { status: statusChange }
+        );
+        console.log('Mailchimp response', response);
         // the query that's responsible for inserting user feedback into the feedback database table
         const queryText = `INSERT INTO "feedback" ("reason", "message")
         VALUES ($1, $2) RETURNING id;`;
@@ -32,7 +43,7 @@ router.post('/', async (req, res) => {
             await pool.query('ROLLBACK');
             console.log('feedback POST failed: ', err);
             res.sendStatus(500);
-        }
+    }
 })
 
 // Handles GET request, get feedback data from database
