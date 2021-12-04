@@ -91,7 +91,7 @@ function UnsubFeedbackPage() {
       <div className="unsubheader">
         <h2>Unsubcribing? Let Us Know Why!</h2>
       </div>
-      <div className="unsubfeedback">
+      <form className="unsubfeedback" onSubmit={handleSubmit}>
         <FormControl component="fieldset">
           <FormLabel
             component="legend"
@@ -144,6 +144,7 @@ function UnsubFeedbackPage() {
             )}
           </RadioGroup>
           <TextField
+            required
             label="Confirm Your Email to Unsubscribe"
             variant="outlined"
             type="email" 
@@ -151,7 +152,7 @@ function UnsubFeedbackPage() {
           />
           <div className="unsub-submit-div">
             <input
-              onClick={handleSubmit}
+              
               className="submit-employer-form-button"
               type="submit"
               name="submit"
@@ -159,7 +160,7 @@ function UnsubFeedbackPage() {
             />
           </div>
         </FormControl>
-      </div>
+      </form>
     </>
   );
 }
