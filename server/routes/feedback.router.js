@@ -8,21 +8,30 @@ const {
 
 // Handles POST request with new job seeker feedback, responses to database
 // Additional POST to post feedback to DOM?
-router.post('/', (req, res) => {
-    // console.log('req.body is', req.body);
-    const reason = req.body.reason;
-    const message = req.body.message;
-    // the query that's responsible for inserting user feedback into the feedback database table
-    const queryText = `INSERT INTO "feedback" ("reason", "message")
-    VALUES ($1, $2) RETURNING id;`;
-    // this pools the query text and datafields and sends the data on to the database 
-    pool
-        .query(queryText, [reason, message])
-        .then(() => res.sendStatus(201))
-        .catch((err) => {
+router.post('/', async (req, res) => {
+    try {
+        await pool.query('BEGIN');
+        // console.log('req.body is', req.body);
+        const reason = req.body.reason;
+        const message = req.body.message;
+        const unsubData = {
+            status: req.body.status,
+            subscriberHash: req.body.subscriberHash,
+        }
+        // unsubscribe with mailchimp
+        await axios.put('/api/subs', unsubData);
+        // the query that's responsible for inserting user feedback into the feedback database table
+        const queryText = `INSERT INTO "feedback" ("reason", "message")
+        VALUES ($1, $2) RETURNING id;`;
+        // this pools the query text and datafields and sends the data on to the database 
+        await pool.query(queryText, [reason, message]);
+        await pool.query('COMMIT');
+        res.sendStatus(201)
+    } catch(err) {
+            await pool.query('ROLLBACK');
             console.log('feedback POST failed: ', err);
             res.sendStatus(500);
-        })
+        }
 })
 
 // Handles GET request, get feedback data from database

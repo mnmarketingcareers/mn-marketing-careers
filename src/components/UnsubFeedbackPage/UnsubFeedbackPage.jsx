@@ -18,31 +18,34 @@ function UnsubFeedbackPage() {
   const [reason, setReason] = useState({
     reason: "",
     message: "",
+    status: "unsubscribed",
+    subscriberHash: '',
   });
-  const [userEmail, setUserEmail] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     console.log("the event is", event);
     dispatch({
       type: "SUBMIT_UNSUB_FEEDBACK",
       payload: reason,
     });
-    handleUnsubscribers();
+    // handleUnsubscribers();
     alert("Successfully unsuscribed, you can close this tab");
     history.push("/main");
   };
 
-  const handleUnsubscribers = () => {
-    dispatch({
-      type: "TOGGLE_SUB_STATUS",
-      payload: {
-        status: "unsubscribed",
-        subscriberHash: userEmail,
-      },
-    });
-  };
+  // const handleUnsubscribers = () => {
+  //   dispatch({
+  //     type: "TOGGLE_SUB_STATUS",
+  //     payload: {
+  //       status: "unsubscribed",
+  //       subscriberHash: userEmail,
+  //     },
+  //   });
+  // };
 
   // switch statment function?
   const radioButtonValue = (event) => {
@@ -148,7 +151,7 @@ function UnsubFeedbackPage() {
             label="Confirm Your Email to Unsubscribe"
             variant="outlined"
             type="email" 
-            onChange={(event) => setUserEmail(event.target.value)}
+            onChange={(event) => setReason({...reason, subscriberHash: event.target.value})}
           />
           <div className="unsub-submit-div">
             <input

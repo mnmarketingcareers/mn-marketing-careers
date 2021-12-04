@@ -1,7 +1,7 @@
 import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
-function* fetchUnsubFeedback(action) {
+function* addUnsubFeedback(action) {
   try {
     console.log('Get all subs saga', action.payload);
     // we are sending form data to the database
@@ -14,6 +14,6 @@ function* fetchUnsubFeedback(action) {
 }
 
 function* getFeedbackSaga() {
-  yield takeEvery("SUBMIT_UNSUB_FEEDBACK", fetchUnsubFeedback);
+  yield takeEvery("SUBMIT_UNSUB_FEEDBACK", addUnsubFeedback);
 }
 export default getFeedbackSaga;
