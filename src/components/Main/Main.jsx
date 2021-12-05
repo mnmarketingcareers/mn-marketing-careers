@@ -27,10 +27,7 @@ function Main() {
     }
 
     const rows = useSelector((store) => store.setJobsReducer);
-    
-
-
-
+       
     const date = new Date();
     console.log('what is date',date);
 
