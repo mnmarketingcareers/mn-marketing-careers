@@ -17,7 +17,9 @@ import {
     Typography
 } from '@mui/material';
 
-import './UnsubInformation.css'
+import './UnsubInformation.css';
+import Reasons from '../Reasons/Reasons.jsx'
+import { OtherHousesTwoTone } from "@mui/icons-material";
 
 
 function UnsubInformation() {
@@ -32,26 +34,36 @@ function UnsubInformation() {
         history.push('/adminhub')
     }
 
+    const firstReason = [];
+
+    const secondReason = [];
+ 
+     const testButton = () => {
+         console.log('in button ');
+         for(let i in unsubscriberList){
+             if(unsubscriberList[i].reason === "Found a Job Through MNMC!"){
+                 console.log('in loop', unsubscriberList[i])
+                 firstReason.push(unsubscriberList[i]);               
+             } else if (unsubscriberList[i].reason === "Found a Job Through Other Mediums"){
+                 console.log('IN LOOP', unsubscriberList[i]);
+                 secondReason.push(unsubscriberList[i]);
+             }
+         } 
+     }
+ 
+     console.log('what is first reason', firstReason)
+ 
+     console.log('what is second reason', secondReason)
+ 
     useEffect(() => {
-        dispatch({ type: 'GET_UNSUBSCRIBER_FEEDBACK' })
+        dispatch({ type: 'GET_UNSUBSCRIBER_FEEDBACK' });
+        testButton();
     }, []);
 
     return (
         <>
             <div className="page-container-actual">
-                <div className="card-container">
-                    <Card style={{width: 250}}>
-                        <CardContent>
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                There are
-                                <Typography variant="h5" color="primary" component="div">
-                                    {unsubscriberList.length}
-                                </Typography>
-                                people who have unsubscribed in the past 30 days.
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </div>
+            <Reasons firstReason={firstReason}/>
                 <div className="table-margin-container">
                     <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
                         <Table>
@@ -75,9 +87,9 @@ function UnsubInformation() {
                         </Table>
                     </TableContainer>
                 </div>
-                <div className="back-button">
-                    <Button variant="contained" onClick={backToAdminHub}>Back</Button>
-                </div>
+            <div className="back-button">
+                <Button variant="contained" onClick={backToAdminHub}>Back</Button>
+            </div>
             </div>
         </>
     )
