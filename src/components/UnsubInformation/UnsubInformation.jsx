@@ -67,14 +67,15 @@ function UnsubInformation() {
             <div className="page-container-actual">
                 {!showCounts && <p>Loading...</p>}
                 {showCounts && <>
-                People unsubscribing gave the following reasons:
-                <ul>
+                <h2>People unsubscribing gave the following reasons:</h2>
+                {/* <ul>
                     <li>Content Not Relevant To My Search: &nbsp; <b>{unsubscriberList.notRelevantCount?.count}</b></li>
                     <li>Found a Job Through MNMC!: &nbsp; <b>{unsubscriberList.foundThruMnmcCount?.count}</b></li>
                     <li>Found a Job Through Other Mediums: &nbsp; <b>{unsubscriberList.foundElseCount?.count}</b></li>
                     <li>I Did Not Sign Up to Receive These Emails:&nbsp;<b>{unsubscriberList.noSignUpCount?.count}</b></li>
                     <li>Other: &nbsp;<b>{unsubscriberList.otherCount?.count}</b></li>
-                </ul></>}
+                </ul> */}
+                </>}
             </div>    
 
             <div className="card-container">
@@ -85,7 +86,7 @@ function UnsubInformation() {
                             <Typography variant="h5" color="primary" component="div">
                                 {unsubscriberList.notRelevantCount?.count}
                             </Typography>
-                            people who say content is not relevant to search.
+                            people say content is not relevant to search.
                         </Typography>
                     </CardContent>
                 </Card>
@@ -97,7 +98,7 @@ function UnsubInformation() {
                             <Typography variant="h5" color="primary" component="div">
                                 {unsubscriberList.foundThruMnmcCount?.count}
                             </Typography>
-                            people who have found jobs through MNMC.
+                            people found jobs through MNMC.
                         </Typography>
                     </CardContent>
                 </Card>
