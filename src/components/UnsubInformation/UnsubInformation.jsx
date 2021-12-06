@@ -66,7 +66,7 @@ function UnsubInformation() {
         <>
             <div className="page-container-actual">
                 {!showCounts && <p>Loading...</p>}
-                {showCounts && <><p>{JSON.stringify(unsubscriberList)}</p>
+                {showCounts && <>
                 People unsubscribing gave the following reasons:
                 <ul>
                     <li>Content Not Relevant To My Search: &nbsp; <b>{unsubscriberList.notRelevantCount?.count}</b></li>
@@ -89,9 +89,7 @@ function UnsubInformation() {
                         </Typography>
                     </CardContent>
                 </Card>
-            </div>
-
-            <div className="card-container">
+            
                 <Card style={{width: 250}}>
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -103,9 +101,7 @@ function UnsubInformation() {
                         </Typography>
                     </CardContent>
                 </Card>
-            </div>
 
-            <div className="card-container">
                 <Card style={{width: 250}}>
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -117,9 +113,7 @@ function UnsubInformation() {
                         </Typography>
                     </CardContent>
                 </Card>
-            </div>
 
-            <div className="card-container">
                 <Card style={{width: 250}}>
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -131,9 +125,7 @@ function UnsubInformation() {
                         </Typography>
                     </CardContent>
                 </Card>
-            </div>
 
-            <div className="card-container">
                 <Card style={{width: 250}}>
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
