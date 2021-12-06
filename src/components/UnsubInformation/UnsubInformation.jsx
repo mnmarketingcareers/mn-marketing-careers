@@ -75,6 +75,21 @@ function UnsubInformation() {
                     <li>I Did Not Sign Up to Receive These Emails:&nbsp;<b>{unsubscriberList.noSignUpCount?.count}</b></li>
                     <li>Other: &nbsp;<b>{unsubscriberList.otherCount?.count}</b></li>
                 </ul></>}
+            </div>    
+
+                <div className="card-container">
+                    <Card style={{width: 250}}>
+                        <CardContent>
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                A total of 
+                                <Typography variant="h5" color="primary" component="div">
+                                    {unsubscriberList.foundThruMnmcCount?.count}
+                                </Typography>
+                                people who have found jobs through MNMC.
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </div>
 
             {/* <Reasons firstReason={firstReason}/>
                 <div className="table-margin-container">
@@ -103,7 +118,6 @@ function UnsubInformation() {
             <div className="back-button">
                 <Button variant="contained" onClick={backToAdminHub}>Back</Button>
             </div> */}
-            </div>
         </>
     )
 }
