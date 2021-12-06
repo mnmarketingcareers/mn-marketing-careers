@@ -66,7 +66,7 @@ function UnsubInformation() {
         <>
             <div className="page-container-actual">
                 {!showCounts && <p>Loading...</p>}
-                {showCounts && <><p>{JSON.stringify(unsubscriberList)}</p>
+                {showCounts && <>
                 People unsubscribing gave the following reasons:
                 <ul>
                     <li>Content Not Relevant To My Search: &nbsp; <b>{unsubscriberList.notRelevantCount?.count}</b></li>
@@ -75,7 +75,7 @@ function UnsubInformation() {
                     <li>I Did Not Sign Up to Receive These Emails:&nbsp;<b>{unsubscriberList.noSignUpCount?.count}</b></li>
                     <li>Other: &nbsp;<b>{unsubscriberList.otherCount?.count}</b></li>
                 </ul></>}
-
+                {/* <p>{JSON.stringify(unsubscriberList)}</p> */}
             {/* <Reasons firstReason={firstReason}/>
                 <div className="table-margin-container">
                     <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
