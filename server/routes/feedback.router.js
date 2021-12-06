@@ -49,22 +49,29 @@ router.post('/', async (req, res) => {
 // Handles GET request, get feedback data from database
 // Access level for admin-only access
 // wrap query around conditional that checks for access_level
-router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
+router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
     // console.log('in router.get', req.user);
-    
     if (req.user.access_level >= 1){
-        const queryText = `SELECT * FROM "feedback";`;
-        //not positive on what we are actually pooling here
-        pool.query(queryText)
-        .then(results => {
-        console.log('What are the unsubscribing users feedback?', results.rows)
-        res.send(results.rows);
-        })
-        .catch(err => {
-        console.log('ERROR: GET all feedback', err);
-        res.sendStatus(500);
-        })
-    }  
+        try {
+            const notRelevantQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Content Not Relevant To My Search';`;
+            //not positive on what we are actually pooling here
+            const foundThruMnmcQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Found a Job Through MNMC!'`;
+            
+            const foundElseQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Found a Job Through Other Mediums'`;
+
+            const noSignUpQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'I Did Not Sign Up to Receive These Emails'`;
+
+            const otherQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'other'`;
+            
+            const notRelevantCount = await pool.query(notRelevantQuery);
+            // const 
+
+            res.send(results.rows);
+        } catch (err) {
+            console.log('ERROR: GET all feedback', err);
+            res.sendStatus(500);
+        }  
+    }
 });
 
 // Handles PUT request, change feedback archived status to TRUE

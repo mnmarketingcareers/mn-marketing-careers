@@ -63,6 +63,7 @@ function UnsubInformation() {
     return (
         <>
             <div className="page-container-actual">
+                <p>{JSON.stringify(unsubscriberList)}</p>
             <Reasons firstReason={firstReason}/>
                 <div className="table-margin-container">
                     <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
