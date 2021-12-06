@@ -77,19 +77,61 @@ function UnsubInformation() {
                 </ul></>}
             </div>    
 
-                <div className="card-container">
-                    <Card style={{width: 250}}>
-                        <CardContent>
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                A total of 
-                                <Typography variant="h5" color="primary" component="div">
-                                    {unsubscriberList.foundThruMnmcCount?.count}
-                                </Typography>
-                                people who have found jobs through MNMC.
+            <div className="card-container">
+                <Card style={{width: 250}}>
+                    <CardContent>
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            A total of 
+                            <Typography variant="h5" color="primary" component="div">
+                                {unsubscriberList.notRelevantCount?.count}
                             </Typography>
-                        </CardContent>
-                    </Card>
-                </div>
+                            people who say content is not relevant to search.
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </div>
+
+            <div className="card-container">
+                <Card style={{width: 250}}>
+                    <CardContent>
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            A total of 
+                            <Typography variant="h5" color="primary" component="div">
+                                {unsubscriberList.foundThruMnmcCount?.count}
+                            </Typography>
+                            people who have found jobs through MNMC.
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </div>
+
+            <div className="card-container">
+                <Card style={{width: 250}}>
+                    <CardContent>
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            A total of 
+                            <Typography variant="h5" color="primary" component="div">
+                                {unsubscriberList.foundElseCount?.count}
+                            </Typography>
+                            people found jobs through other mediums.
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </div>
+
+            <div className="card-container">
+                <Card style={{width: 250}}>
+                    <CardContent>
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            A total of 
+                            <Typography variant="h5" color="primary" component="div">
+                                {unsubscriberList.noSignUpCount?.count}
+                            </Typography>
+                            people did not sign up for these emails.
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </div>
 
             {/* <Reasons firstReason={firstReason}/>
                 <div className="table-margin-container">
