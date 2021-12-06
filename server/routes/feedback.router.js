@@ -75,11 +75,11 @@ router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
 
             // send back results in an object
             res.send({ 
-                notRelevantCount: notRelevantCount.rows, 
-                foundThruMnmcCount: foundThruMnmcCount.rows, 
-                foundElseCount: foundElseCount.rows,
-                noSignUpCount: noSignUpCount.rows,
-                otherCount: otherCount.rows,
+                notRelevantCount: notRelevantCount.rows[0], 
+                foundThruMnmcCount: foundThruMnmcCount.rows[0], 
+                foundElseCount: foundElseCount.rows[0],
+                noSignUpCount: noSignUpCount.rows[0],
+                otherCount: otherCount.rows[0],
             });
         } catch (err) {
             // oopsies, send an error message

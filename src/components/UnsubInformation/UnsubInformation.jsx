@@ -64,7 +64,16 @@ function UnsubInformation() {
         <>
             <div className="page-container-actual">
                 <p>{JSON.stringify(unsubscriberList)}</p>
-            <Reasons firstReason={firstReason}/>
+                People unsubscribing gave the following reasons:
+                <ul>
+                    <li>Content Not Relevant To My Search: &nbsp; <b>{unsubscriberList?.notRelevantCount.count}</b></li>
+                    <li>Found a Job Through MNMC!: &nbsp; <b>{unsubscriberList?.foundThruMnmcCount.count}</b></li>
+                    <li>Found a Job Through Other Mediums: &nbsp; <b>{unsubscriberList?.foundElseCount.count}</b></li>
+                    <li>I Did Not Sign Up to Receive These Emails:&nbsp;<b>{unsubscriberList?.noSignUpCount.count}</b></li>
+                    <li>Other: &nbsp;<b>{unsubscriberList?.otherCount.count}</b></li>
+                </ul>
+                
+            {/* <Reasons firstReason={firstReason}/>
                 <div className="table-margin-container">
                     <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
                         <Table>
@@ -90,7 +99,7 @@ function UnsubInformation() {
                 </div>
             <div className="back-button">
                 <Button variant="contained" onClick={backToAdminHub}>Back</Button>
-            </div>
+            </div> */}
             </div>
         </>
     )
