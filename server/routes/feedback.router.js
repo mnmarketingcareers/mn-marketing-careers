@@ -49,22 +49,44 @@ router.post('/', async (req, res) => {
 // Handles GET request, get feedback data from database
 // Access level for admin-only access
 // wrap query around conditional that checks for access_level
-router.get('/feedbacklist', rejectUnauthenticated, (req, res) => {
+router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
     // console.log('in router.get', req.user);
-    
     if (req.user.access_level >= 1){
-        const queryText = `SELECT * FROM "feedback";`;
-        //not positive on what we are actually pooling here
-        pool.query(queryText)
-        .then(results => {
-        console.log('What are the unsubscribing users feedback?', results.rows)
-        res.send(results.rows);
-        })
-        .catch(err => {
-        console.log('ERROR: GET all feedback', err);
-        res.sendStatus(500);
-        })
-    }  
+        try {
+            // queries for each count, individually
+            const notRelevantQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Content Not Relevant To My Search';`;
+            
+            const foundThruMnmcQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Found a Job Through MNMC!'`;
+            
+            const foundElseQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Found a Job Through Other Mediums'`;
+
+            const noSignUpQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'I Did Not Sign Up to Receive These Emails'`;
+
+            const otherQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'other'`;
+            
+            // make requests, and set results to variables
+            const notRelevantCount = await pool.query(notRelevantQuery);
+            const foundThruMnmcCount = await pool.query(foundThruMnmcQuery);
+            const foundElseCount = await pool.query(foundElseQuery);
+            const noSignUpCount = await pool.query(noSignUpQuery);
+            const otherCount = await pool.query(otherQuery);
+
+            console.log('results from all queries', notRelevantCount.rows, foundThruMnmcCount.rows, foundElseCount.rows, noSignUpCount.rows, otherCount.rows);
+
+            // send back results in an object
+            res.send({ 
+                notRelevantCount: notRelevantCount.rows[0], 
+                foundThruMnmcCount: foundThruMnmcCount.rows[0], 
+                foundElseCount: foundElseCount.rows[0],
+                noSignUpCount: noSignUpCount.rows[0],
+                otherCount: otherCount.rows[0],
+            });
+        } catch (err) {
+            // oopsies, send an error message
+            console.log('ERROR: GET all feedback', err);
+            res.sendStatus(500);
+        }  
+    }
 });
 
 // Handles PUT request, change feedback archived status to TRUE
