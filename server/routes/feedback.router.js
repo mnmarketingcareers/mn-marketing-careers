@@ -53,8 +53,9 @@ router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
     // console.log('in router.get', req.user);
     if (req.user.access_level >= 1){
         try {
+            // queries for each count, individually
             const notRelevantQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Content Not Relevant To My Search';`;
-            //not positive on what we are actually pooling here
+            
             const foundThruMnmcQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Found a Job Through MNMC!'`;
             
             const foundElseQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'Found a Job Through Other Mediums'`;
@@ -63,11 +64,25 @@ router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
 
             const otherQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'other'`;
             
+            // make requests, and set results to variables
             const notRelevantCount = await pool.query(notRelevantQuery);
-            // const 
+            const foundThruMnmcCount = await pool.query(foundThruMnmcQuery);
+            const foundElseCount = await pool.query(foundElseQuery);
+            const noSignUpCount = await pool.query(noSignUpQuery);
+            const otherCount = await pool.query(otherQuery);
 
-            res.send(results.rows);
+            console.log('results from all queries', notRelevantCount.rows, foundThruMnmcCount.rows, foundElseCount.rows, noSignUpCount.rows, otherCount.rows);
+
+            // send back results in an object
+            res.send({ 
+                notRelevantCount: notRelevantCount.rows, 
+                foundThruMnmcCount: foundThruMnmcCount.rows, 
+                foundElseCount: foundElseCount.rows,
+                noSignUpCount: noSignUpCount.rows,
+                otherCount: otherCount.rows,
+            });
         } catch (err) {
+            // oopsies, send an error message
             console.log('ERROR: GET all feedback', err);
             res.sendStatus(500);
         }  
