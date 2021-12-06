@@ -133,6 +133,20 @@ function UnsubInformation() {
                 </Card>
             </div>
 
+            <div className="card-container">
+                <Card style={{width: 250}}>
+                    <CardContent>
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            A total of 
+                            <Typography variant="h5" color="primary" component="div">
+                                {unsubscriberList.otherCount?.count}
+                            </Typography>
+                            people unsubscribed for other reasons.
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </div>
+
             {/* <Reasons firstReason={firstReason}/>
                 <div className="table-margin-container">
                     <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
