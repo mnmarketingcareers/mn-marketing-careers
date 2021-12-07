@@ -46,7 +46,7 @@ function AdminJobListItem ({job}) {
                 <TableCell>{job.company_name}</TableCell>
                 <TableCell>{job.description}</TableCell>
                 <TableCell>
-                <Link href={jobLink} underline="hover">{jobLink}</Link>
+                <Link href={jobLink} underline="hover" target="_blank">{jobLink}</Link>
                 </TableCell>
                 <TableCell>{job.job_city}, &nbsp;{job.job_state}</TableCell>
                 <TableCell>{job.job_type}</TableCell>
