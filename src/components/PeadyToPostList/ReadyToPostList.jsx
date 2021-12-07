@@ -44,7 +44,7 @@ function ReadyToPost () {
                                     <b>{job.available_role}</b> &nbsp;|&nbsp;
                                     {job.company_name} &nbsp;|&nbsp;
                                     {job.description} &nbsp;|&nbsp;
-                                    <a href={`https://${job.application_link}`}>https://{job.application_link}</a> &nbsp;|&nbsp;
+                                    <a href={`${job.application_link}`}>{job.application_link}</a> &nbsp;|&nbsp;
                                     {job.job_type} &nbsp;|&nbsp;
                                     {job.job_city} &nbsp;|&nbsp;
                                     {job.job_state} &nbsp;|&nbsp;
