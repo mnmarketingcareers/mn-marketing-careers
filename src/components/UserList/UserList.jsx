@@ -10,19 +10,23 @@ function UserList () {
         dispatch({ type: 'FETCH_USER_LIST' });
     }, []);
 
+    const showUserList = (userList.message) ? false : true;
     return(
-        <div>
-            <h4>Users</h4>
+        <>
             <p>{JSON.stringify(userList)}</p>
-            <ul>
-                {userList.map((user) => {return(
-                        
-                        <UserListItem user={user}/>
-                        
+            {!showUserList ? (<p>{userList.message}</p>) : (<div>
+                <h4>Users</h4>
+                
+                <ul>
+                    {userList.map((user) => {return(
+                            
+                            <UserListItem user={user}/>
+                            
+                        )}
                     )}
-                )}
-            </ul>
-        </div>
+                </ul>
+            </div>)}
+        </>
     )
 }   
 
