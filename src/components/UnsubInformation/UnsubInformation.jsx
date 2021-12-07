@@ -18,8 +18,7 @@ import {
 } from '@mui/material';
 
 import './UnsubInformation.css';
-import Reasons from '../Reasons/Reasons.jsx'
-import { OtherHousesTwoTone } from "@mui/icons-material";
+// import Reasons from '../Reasons/Reasons.jsx'
 
 
 function UnsubInformation() {
@@ -75,7 +74,6 @@ function UnsubInformation() {
                     <li>I Did Not Sign Up to Receive These Emails:&nbsp;<b>{unsubscriberList.noSignUpCount?.count}</b></li>
                     <li>Other: &nbsp;<b>{unsubscriberList.otherCount?.count}</b></li>
                 </ul> */}
-                   
 
                     <div className="card-container">
                         <Card style={{width: 250}}>
@@ -138,6 +136,25 @@ function UnsubInformation() {
                             </CardContent>
                         </Card>
                     </div>
+                    <div className="table-margin-container">
+                            <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align="center" sx={{ fontSize: 23 }}>Other Reasons given for unsubscribing</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {unsubscriberList.messages?.map((message) => {
+                                            return (
+                                                <TableRow key={message.id}>
+                                                    <TableCell align="center">{message.message}</TableCell>
+                                                </TableRow>)
+                                        })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
 
                     {/* <Reasons firstReason={firstReason}/>
                         <div className="table-margin-container">

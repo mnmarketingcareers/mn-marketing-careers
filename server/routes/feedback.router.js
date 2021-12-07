@@ -63,6 +63,8 @@ router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
             const noSignUpQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'I Did Not Sign Up to Receive These Emails'`;
 
             const otherQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'other'`;
+
+            const messagesQuery = `SELECT "id", "message" FROM "feedback" WHERE "reason" = 'other';`
             
             // make requests, and set results to variables
             const notRelevantCount = await pool.query(notRelevantQuery);
@@ -70,7 +72,9 @@ router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
             const foundElseCount = await pool.query(foundElseQuery);
             const noSignUpCount = await pool.query(noSignUpQuery);
             const otherCount = await pool.query(otherQuery);
-
+            const otherMessages = await pool.query(messagesQuery);
+            
+            console.log("messages", otherMessages.rows);
             // console.log('results from all queries', notRelevantCount.rows, foundThruMnmcCount.rows, foundElseCount.rows, noSignUpCount.rows, otherCount.rows);
 
             // send back results in an object
@@ -80,6 +84,7 @@ router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
                 foundElseCount: foundElseCount.rows[0],
                 noSignUpCount: noSignUpCount.rows[0],
                 otherCount: otherCount.rows[0],
+                messages: otherMessages.rows,
             });
         } catch (err) {
             // oopsies, send an error message
