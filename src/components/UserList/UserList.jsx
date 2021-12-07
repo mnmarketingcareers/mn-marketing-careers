@@ -19,7 +19,7 @@ function UserList () {
                 <ul>
                     {userList.map((user) => {return(
                             
-                            <UserListItem user={user}/>
+                            <UserListItem key={user.id} user={user}/>
                             
                         )}
                     )}

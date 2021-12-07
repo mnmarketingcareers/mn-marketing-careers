@@ -20,7 +20,7 @@ function UserListItem({user}) {
 
     return(
         <>
-            <li key={user.id}>
+            <li>
                             Username: {user.email} &nbsp;|&nbsp; 
                             Full Name: {user.first_name} {user.last_name} &nbsp;|&nbsp;
                             Access Level: {user.access_level} &nbsp;&nbsp;
