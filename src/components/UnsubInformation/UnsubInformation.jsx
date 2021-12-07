@@ -67,7 +67,7 @@ function UnsubInformation() {
             <div className="page-container-actual">
                 {!showCounts && <p>Loading...</p>}
                 {showCounts && <>
-                <h2>People unsubscribing gave the following reasons:</h2>
+                <h2>Unsubscriber Feedback:</h2>
                 {/* <ul>
                     <li>Content Not Relevant To My Search: &nbsp; <b>{unsubscriberList.notRelevantCount?.count}</b></li>
                     <li>Found a Job Through MNMC!: &nbsp; <b>{unsubscriberList.foundThruMnmcCount?.count}</b></li>
@@ -75,7 +75,7 @@ function UnsubInformation() {
                     <li>I Did Not Sign Up to Receive These Emails:&nbsp;<b>{unsubscriberList.noSignUpCount?.count}</b></li>
                     <li>Other: &nbsp;<b>{unsubscriberList.otherCount?.count}</b></li>
                 </ul> */}
-                </>}
+                
             </div>    
 
             <div className="card-container">
@@ -163,10 +163,11 @@ function UnsubInformation() {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                </div>
+                </div> */}
             <div className="back-button">
                 <Button variant="contained" onClick={backToAdminHub}>Back</Button>
-            </div> */}
+            </div>
+            </>}
         </>
     )
 }
