@@ -67,43 +67,107 @@ function UnsubInformation() {
             <div className="page-container-actual">
                 {!showCounts && <p>Loading...</p>}
                 {showCounts && <>
-                People unsubscribing gave the following reasons:
-                <ul>
+                    <h2>Unsubscriber Feedback:</h2>
+                {/* <ul>
                     <li>Content Not Relevant To My Search: &nbsp; <b>{unsubscriberList.notRelevantCount?.count}</b></li>
                     <li>Found a Job Through MNMC!: &nbsp; <b>{unsubscriberList.foundThruMnmcCount?.count}</b></li>
                     <li>Found a Job Through Other Mediums: &nbsp; <b>{unsubscriberList.foundElseCount?.count}</b></li>
                     <li>I Did Not Sign Up to Receive These Emails:&nbsp;<b>{unsubscriberList.noSignUpCount?.count}</b></li>
                     <li>Other: &nbsp;<b>{unsubscriberList.otherCount?.count}</b></li>
-                </ul></>}
-                {/* <p>{JSON.stringify(unsubscriberList)}</p> */}
-            {/* <Reasons firstReason={firstReason}/>
-                <div className="table-margin-container">
-                    <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell align="center" sx={{ fontSize: 23 }}>Date</TableCell>
-                                    <TableCell align="center" sx={{ fontSize: 23 }}>Reason</TableCell>
-                                    <TableCell align="center" sx={{ fontSize: 23 }}>Message</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {unsubscriberList.map((unsubscriber) => {
-                                    return (
-                                        <TableRow key={unsubscriber.id}>
-                                            <TableCell align="center">{(moment(unsubscriber.date_received).format('MMM Do YY'))}</TableCell>
-                                            <TableCell align="center">{unsubscriber.reason}</TableCell>
-                                            <TableCell align="center">{unsubscriber.message}</TableCell>
-                                        </TableRow>)
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </div>
-            <div className="back-button">
-                <Button variant="contained" onClick={backToAdminHub}>Back</Button>
-            </div> */}
-            </div>
+                </ul> */}
+                   
+
+                    <div className="card-container">
+                        <Card style={{width: 250}}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                    A total of 
+                                    <Typography variant="h5" color="primary" component="div">
+                                        {unsubscriberList.notRelevantCount?.count}
+                                    </Typography>
+                                    people say content is not relevant to search.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+
+                        <Card style={{width: 250}}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                    A total of 
+                                    <Typography variant="h5" color="primary" component="div">
+                                        {unsubscriberList.foundThruMnmcCount?.count}
+                                    </Typography>
+                                    people found jobs through MNMC.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+
+                        <Card style={{width: 250}}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                    A total of 
+                                    <Typography variant="h5" color="primary" component="div">
+                                        {unsubscriberList.foundElseCount?.count}
+                                    </Typography>
+                                    people found jobs through other mediums.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+
+                        <Card style={{width: 250}}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                    A total of 
+                                    <Typography variant="h5" color="primary" component="div">
+                                        {unsubscriberList.noSignUpCount?.count}
+                                    </Typography>
+                                    people did not sign up for these emails.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+
+                        <Card style={{width: 250}}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                    A total of 
+                                    <Typography variant="h5" color="primary" component="div">
+                                        {unsubscriberList.otherCount?.count}
+                                    </Typography>
+                                    people unsubscribed for other reasons.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </div>
+
+                    {/* <Reasons firstReason={firstReason}/>
+                        <div className="table-margin-container">
+                            <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align="center" sx={{ fontSize: 23 }}>Date</TableCell>
+                                            <TableCell align="center" sx={{ fontSize: 23 }}>Reason</TableCell>
+                                            <TableCell align="center" sx={{ fontSize: 23 }}>Message</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {unsubscriberList.map((unsubscriber) => {
+                                            return (
+                                                <TableRow key={unsubscriber.id}>
+                                                    <TableCell align="center">{(moment(unsubscriber.date_received).format('MMM Do YY'))}</TableCell>
+                                                    <TableCell align="center">{unsubscriber.reason}</TableCell>
+                                                    <TableCell align="center">{unsubscriber.message}</TableCell>
+                                                </TableRow>)
+                                        })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div> */}
+                    <div className="back-button">
+                        <Button variant="contained" onClick={backToAdminHub}>Back</Button>
+                    </div>
+                </>}
+            </div> 
         </>
     )
 }

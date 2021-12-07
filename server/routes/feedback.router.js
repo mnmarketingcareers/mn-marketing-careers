@@ -71,7 +71,7 @@ router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
             const noSignUpCount = await pool.query(noSignUpQuery);
             const otherCount = await pool.query(otherQuery);
 
-            console.log('results from all queries', notRelevantCount.rows, foundThruMnmcCount.rows, foundElseCount.rows, noSignUpCount.rows, otherCount.rows);
+            // console.log('results from all queries', notRelevantCount.rows, foundThruMnmcCount.rows, foundElseCount.rows, noSignUpCount.rows, otherCount.rows);
 
             // send back results in an object
             res.send({ 
