@@ -14,6 +14,7 @@ import AdminHubTwoColTable from "./AdminHubTwoColTable";
 
 import "./AdminHub.css";
 import AdminHubManualSubEntryForm from "./AdminHubManualSubEntryForm";
+import UserList from "../UserList/UserList";
 
 const AdminHub = () => {
   const history = useHistory();
@@ -107,6 +108,7 @@ const AdminHub = () => {
           />
           <AdminHubTwoColTable subs={subs} toggleSubStatus={toggleSubStatus} />
         </div>
+        <UserList />
         <Button variant="contained" onClick={toUnsubscribeInfo}>UNSUBSCRIBER INFO</Button>
       </Container>
     </div>

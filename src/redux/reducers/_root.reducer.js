@@ -20,6 +20,7 @@ import setJobIssueListReducer from './jobIssues.reducer';
 import jobTypes from './jobtypes.reducer';
 
 import unsubscriberReducer from './unsubscriber.reducer';
+import userList from './userList.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -51,6 +52,7 @@ const rootReducer = combineReducers({
   setJobIssueListReducer,
 
   unsubscriberReducer,
+  userList,
 });
 
 export default rootReducer;

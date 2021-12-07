@@ -14,6 +14,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// Handles Ajax request for all users, if user is authenticated and has correct access level
+router.get('/list', rejectUnauthenticated, (req, res) => {
+  // check access level
+  if (req.user.access_level > 1) {
+    pool.query(`SELECT "id", "email", "first_name", "last_name", "access_level" FROM "user"`)
+    .then(response => {
+      console.log('User list Requested:', response);
+      res.send(response.rows);
+    }).catch(err => {
+      console.log('Error fetching Users:', err);
+      res.sendStatus(500);
+    });
+  } else {
+    res.send({message: 'You do not have access to this content.'})
+  }
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
@@ -45,6 +62,16 @@ router.post('/logout', (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();
   res.sendStatus(200);
+});
+
+// handles request to 
+router.put('/newaccess', rejectUnauthenticated, (req, res) => {
+  if(req.user.access_level > 1) {
+    // 
+    pool.query(`UPDATE "user" SET `)
+  } else {
+    res.send({message: 'You do not have access to this content.'})
+  }
 });
 
 

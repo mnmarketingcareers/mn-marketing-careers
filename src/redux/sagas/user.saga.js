@@ -24,8 +24,26 @@ function* fetchUser() {
   }
 }
 
+function* fetchUserList() {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    const response = yield axios.get('/api/user/list', config);
+    // Let's see the resoponse
+    console.log('userList response from server:', response);
+    // send response to reducer
+    yield put({ type: 'SET_USER_LIST', payload: response.data});
+  } catch (error) {
+    console.log('UserList get request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_USER_LIST', fetchUserList);
 }
 
 export default userSaga;
