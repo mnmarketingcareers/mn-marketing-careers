@@ -13,7 +13,6 @@ function UserList () {
     const showUserList = (userList.message) ? false : true;
     return(
         <>
-            <p>{JSON.stringify(userList)}</p>
             {!showUserList ? (<p>{userList.message}</p>) : (<div>
                 <h4>Users</h4>
                 
