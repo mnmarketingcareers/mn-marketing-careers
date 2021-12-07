@@ -3,18 +3,6 @@ import { useDispatch } from 'react-redux';
 
 function LogOutButton(props) {
   const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch({ type: 'LOGOUT' });
-    // clear reducers with admin only content
-    // dispatch({ type: 'UNSET_JOB_ISSUE_LIST' });
-    // dispatch({ type: 'UNSET_USER_LIST' });
-    // dispatch({ type: 'RESET_APPROVED_POSTINGS' });
-    // dispatch({ type: 'RESET_PENDING_POSTINGS' });
-    // dispatch({ type: 'UNSET_UNSUB_FEEDBACK' });
-    // dispatch({ type: 'UNSET_SUBS_LIST' });
-  }
-
   return (
     <button 
     style={{backgroundColor: 'transparent'}}
