@@ -25,9 +25,9 @@ function UserListItem({user}) {
                             Full Name: {user.first_name} {user.last_name} &nbsp;|&nbsp;
                             Access Level: {user.access_level} &nbsp;&nbsp;
                             {(user.access_level < 1) ? (
-                                    <button onClick={handleGrantAccess} >Grant Admin Access</button>
+                                    <button onClick={() => {if(window.confirm('Confirm you want to grant this User Adim access')) handleGrantAccess()} }>Grant Admin Access</button>
                                 ) : (
-                                    <button onClick={handleRemoveAccess} >Remove Admin Access</button>
+                                    <button onClick={() => {if (window.confirm("Confirm you want to remove this User's Admin access")) handleRemoveAccess()}} >Remove Admin Access</button>
                                 )}
 
                         </li>
