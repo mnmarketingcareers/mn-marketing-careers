@@ -50,7 +50,7 @@ function* grantAdminAccess (action) {
 
     const idToUpdate = action.payload;
 
-    const response = yield axios.put(`/api/user/${idToUpdate}`, config);
+    const response = yield axios.put(`/api/user/grant/${idToUpdate}`, config);
     // on success fetch all users
     yield put({ type: 'FETCH_USER_LIST' });
   } catch (error) {
@@ -58,10 +58,28 @@ function* grantAdminAccess (action) {
   }
 }
 
+function* removeAdminAccess (action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    const idToUpdate = action.payload;
+
+    const response = yield axios.put(`/api/user/remove/${idToUpdate}`, config);
+    // on success fetch all users
+    yield put({ type: 'FETCH_USER_LIST' });
+  } catch (error) {
+    console.log('Request to remove access failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_LIST', fetchUserList);
-  yield takeLatest('GRANT_ADMIN_ACCESS', grantAdminAccess)
+  yield takeLatest('GRANT_ADMIN_ACCESS', grantAdminAccess);
+  yield takeLatest('REMOVE_ADMIN_ACCESS', removeAdminAccess);
 }
 
 export default userSaga;

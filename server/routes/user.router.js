@@ -64,8 +64,8 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
-// handles request to 
-router.put('/:id', rejectUnauthenticated, (req, res) => {
+// handles request to grant access
+router.put('/grant/:id', rejectUnauthenticated, (req, res) => {
   if(req.user.access_level > 1) {
     // change user access level to 1
     const userToUpdate = req.params.id;
@@ -79,5 +79,18 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   }
 });
 
+router.put('/remove/:id', rejectUnauthenticated, (req, res) => {
+  if(req.user.access_level > 1) {
+    // change user access level to 1
+    const userToUpdate = req.params.id;
+    pool.query(`UPDATE "user" SET "access_level" = 0 WHERE "id" = $1`, [userToUpdate])
+    .then(response => {
+      console.log('If updated show 1; if not, show 0: ', response.rowCount);
+      res.sendStatus(201);
+    })
+  } else {
+    res.send({message: 'You do not have access to this content.'})
+  }
+});
 
 module.exports = router;
