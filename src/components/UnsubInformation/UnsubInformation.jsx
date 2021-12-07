@@ -77,7 +77,7 @@ function UnsubInformation() {
                 </ul> */}
 
                     <Grid container className="card-container">
-                        <Grid item xs={6} md={4} lg={2}>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
                             <Card style={{minWidth: 200}}>
                                 <CardContent>
                                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -90,7 +90,7 @@ function UnsubInformation() {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={6} md={4} lg={2}>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
                             <Card style={{minWidth: 200}}>
                                 <CardContent>
                                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -103,7 +103,7 @@ function UnsubInformation() {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={6} md={4} lg={2}>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
                             <Card style={{minWidth: 200}}>
                                 <CardContent>
                                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -116,7 +116,7 @@ function UnsubInformation() {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={6} md={4} lg={2}>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
                             <Card style={{minWidth: 200}}>
                                 <CardContent>
                                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -129,7 +129,7 @@ function UnsubInformation() {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={6} md={4} lg={2}>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
                             <Card style={{minWidth: 200}}>
                                 <CardContent>
                                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
