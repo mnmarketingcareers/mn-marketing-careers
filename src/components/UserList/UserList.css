@@ -1,0 +1,13 @@
+#grant-access-btn {
+    background-color: #74BDCB;
+    color: white; 
+    font-weight: 600;
+    padding: 0 6px;
+}
+
+#rmv-access-btn {
+    background-color: #FFA384;
+    color: white;
+    font-weight: 600;
+    padding: 0 6px;
+}

@@ -18,8 +18,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/list', rejectUnauthenticated, (req, res) => {
   // check access level
   if (req.user.access_level > 1) {
-    pool.query(`SELECT "id", "email", "first_name", "last_name", "access_level" FROM "user"`)
-    .then(response => {
+    pool.query(
+        `SELECT "id", "email", "first_name", "last_name", "access_level" 
+        FROM "user" ORDER BY "id";`
+    ).then(response => {
       console.log('User list Requested:', response);
       res.send(response.rows);
     }).catch(err => {
