@@ -14,7 +14,8 @@ import {
     Button,
     Card,
     CardContent,
-    Typography
+    Typography,
+    Grid
 } from '@mui/material';
 
 import './UnsubInformation.css';
@@ -75,67 +76,73 @@ function UnsubInformation() {
                     <li>Other: &nbsp;<b>{unsubscriberList.otherCount?.count}</b></li>
                 </ul> */}
 
-                    <div className="card-container">
-                        <Card style={{width: 250}}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    A total of 
-                                    <Typography variant="h5" color="primary" component="div">
-                                        {unsubscriberList.notRelevantCount?.count}
+                    <Grid container className="card-container">
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                            <Card style={{minWidth: 200}}>
+                                <CardContent>
+                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                        A total of 
+                                        <Typography variant="h5" color="primary" component="div">
+                                            {unsubscriberList.notRelevantCount?.count}
+                                        </Typography>
+                                        people say content is not relevant to search.
                                     </Typography>
-                                    people say content is not relevant to search.
-                                </Typography>
-                            </CardContent>
-                        </Card>
-
-                        <Card style={{width: 250}}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    A total of 
-                                    <Typography variant="h5" color="primary" component="div">
-                                        {unsubscriberList.foundThruMnmcCount?.count}
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                            <Card style={{minWidth: 200}}>
+                                <CardContent>
+                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                        A total of 
+                                        <Typography variant="h5" color="primary" component="div">
+                                            {unsubscriberList.foundThruMnmcCount?.count}
+                                        </Typography>
+                                        people found jobs through MNMC.
                                     </Typography>
-                                    people found jobs through MNMC.
-                                </Typography>
-                            </CardContent>
-                        </Card>
-
-                        <Card style={{width: 250}}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    A total of 
-                                    <Typography variant="h5" color="primary" component="div">
-                                        {unsubscriberList.foundElseCount?.count}
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                            <Card style={{minWidth: 200}}>
+                                <CardContent>
+                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                        A total of 
+                                        <Typography variant="h5" color="primary" component="div">
+                                            {unsubscriberList.foundElseCount?.count}
+                                        </Typography>
+                                        people found jobs through other mediums.
                                     </Typography>
-                                    people found jobs through other mediums.
-                                </Typography>
-                            </CardContent>
-                        </Card>
-
-                        <Card style={{width: 250}}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    A total of 
-                                    <Typography variant="h5" color="primary" component="div">
-                                        {unsubscriberList.noSignUpCount?.count}
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                            <Card style={{minWidth: 200}}>
+                                <CardContent>
+                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                        A total of 
+                                        <Typography variant="h5" color="primary" component="div">
+                                            {unsubscriberList.noSignUpCount?.count}
+                                        </Typography>
+                                        people did not sign up for these emails.
                                     </Typography>
-                                    people did not sign up for these emails.
-                                </Typography>
-                            </CardContent>
-                        </Card>
-
-                        <Card style={{width: 250}}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    A total of 
-                                    <Typography variant="h5" color="primary" component="div">
-                                        {unsubscriberList.otherCount?.count}
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                            <Card style={{minWidth: 200}}>
+                                <CardContent>
+                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                        A total of 
+                                        <Typography variant="h5" color="primary" component="div">
+                                            {unsubscriberList.otherCount?.count}
+                                        </Typography>
+                                        people unsubscribed for other reasons.
                                     </Typography>
-                                    people unsubscribed for other reasons.
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </div>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
                     <div className="table-margin-container">
                             <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
                                 <Table>
