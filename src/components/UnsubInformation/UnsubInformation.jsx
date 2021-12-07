@@ -19,7 +19,6 @@ import {
 } from '@mui/material';
 
 import './UnsubInformation.css';
-// import Reasons from '../Reasons/Reasons.jsx'
 
 
 function UnsubInformation() {
@@ -36,30 +35,11 @@ function UnsubInformation() {
 
     const showCounts = unsubscriberList ? true : false;
 
-    const firstReason = [];
+    console.log('what is unsubscriberList?,',unsubscriberList)
 
-    const secondReason = [];
- 
-     const testButton = () => {
-         console.log('in button ');
-         for(let i in unsubscriberList){
-             if(unsubscriberList[i].reason === "Found a Job Through MNMC!"){
-                 console.log('in loop', unsubscriberList[i])
-                 firstReason.push(unsubscriberList[i]);               
-             } else if (unsubscriberList[i].reason === "Found a Job Through Other Mediums"){
-                 console.log('IN LOOP', unsubscriberList[i]);
-                 secondReason.push(unsubscriberList[i]);
-             }
-         } 
-     }
- 
-     console.log('what is first reason', firstReason)
- 
-     console.log('what is second reason', secondReason)
  
     useEffect(() => {
         dispatch({ type: 'GET_UNSUBSCRIBER_FEEDBACK' });
-        testButton();
     }, []);
 
     return (
@@ -148,13 +128,14 @@ function UnsubInformation() {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell align="center" sx={{ fontSize: 23 }}>Other Reasons given for unsubscribing</TableCell>
+                                            <TableCell align="center" sx={{ fontSize: 23}} colSpan={2}>Other Reasons given for unsubscribing</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {unsubscriberList.messages?.map((message) => {
                                             return (
                                                 <TableRow key={message.id}>
+                                                    <TableCell align="center" sx={{width: 80}}>{moment(message.date_received).format('MMM Do YY')}</TableCell>
                                                     <TableCell align="center">{message.message}</TableCell>
                                                 </TableRow>)
                                         })}
@@ -162,31 +143,6 @@ function UnsubInformation() {
                                 </Table>
                             </TableContainer>
                         </div>
-
-                    {/* <Reasons firstReason={firstReason}/>
-                        <div className="table-margin-container">
-                            <TableContainer component={Paper} sx={{ padding: 3, width: 2000 }}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="center" sx={{ fontSize: 23 }}>Date</TableCell>
-                                            <TableCell align="center" sx={{ fontSize: 23 }}>Reason</TableCell>
-                                            <TableCell align="center" sx={{ fontSize: 23 }}>Message</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {unsubscriberList.map((unsubscriber) => {
-                                            return (
-                                                <TableRow key={unsubscriber.id}>
-                                                    <TableCell align="center">{(moment(unsubscriber.date_received).format('MMM Do YY'))}</TableCell>
-                                                    <TableCell align="center">{unsubscriber.reason}</TableCell>
-                                                    <TableCell align="center">{unsubscriber.message}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </div> */}
                     <div className="back-button">
                         <Button variant="contained" onClick={backToAdminHub}>Back</Button>
                     </div>
