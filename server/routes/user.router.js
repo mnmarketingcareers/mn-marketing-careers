@@ -65,10 +65,15 @@ router.post('/logout', (req, res) => {
 });
 
 // handles request to 
-router.put('/newaccess', rejectUnauthenticated, (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
   if(req.user.access_level > 1) {
-    // 
-    pool.query(`UPDATE "user" SET `)
+    // change user access level to 1
+    const userToUpdate = req.params.id;
+    pool.query(`UPDATE "user" SET "access_level" = 1 WHERE "id" = $1`, [userToUpdate])
+    .then(response => {
+      console.log('If updated show 1; if not, show 0: ', response.rowCount);
+      res.sendStatus(201);
+    })
   } else {
     res.send({message: 'You do not have access to this content.'})
   }

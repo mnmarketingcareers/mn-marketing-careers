@@ -41,9 +41,27 @@ function* fetchUserList() {
   }
 }
 
+function* grantAdminAccess (action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    const idToUpdate = action.payload;
+
+    const response = yield axios.put(`/api/user/${idToUpdate}`, config);
+    // on success fetch all users
+    yield put({ type: 'FETCH_USER_LIST' });
+  } catch (error) {
+    console.log('Request to grant access failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_LIST', fetchUserList);
+  yield takeLatest('GRANT_ADMIN_ACCESS', grantAdminAccess)
 }
 
 export default userSaga;

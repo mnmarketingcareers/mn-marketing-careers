@@ -9,13 +9,13 @@ function UserListItem({user}) {
     const handleGrantAccess = () => {
         // dispatch something
         console.log('Clicked grant access, user id:', user.id);
-        dispatch({ type: 'GRANT_ADMIN_ACCESS' });
+        dispatch({ type: 'GRANT_ADMIN_ACCESS', payload: user.id });
     }
 
     const handleRemoveAccess = () => {
         // dispatch something
         console.log('Clicked Remove Access, user id:', user.id);
-        dispatch({ type: 'REMOVE_ADMIN_ACCESS' });
+        dispatch({ type: 'REMOVE_ADMIN_ACCESS', payload: user.id });
     }
 
     return(
