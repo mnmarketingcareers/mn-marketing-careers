@@ -24,8 +24,62 @@ function* fetchUser() {
   }
 }
 
+function* fetchUserList() {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    const response = yield axios.get('/api/user/list', config);
+    // Let's see the resoponse
+    console.log('userList response from server:', response);
+    // send response to reducer
+    yield put({ type: 'SET_USER_LIST', payload: response.data});
+  } catch (error) {
+    console.log('UserList get request failed', error);
+  }
+}
+
+function* grantAdminAccess (action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    const idToUpdate = action.payload;
+
+    const response = yield axios.put(`/api/user/grant/${idToUpdate}`, config);
+    // on success fetch all users
+    yield put({ type: 'FETCH_USER_LIST' });
+  } catch (error) {
+    console.log('Request to grant access failed', error);
+  }
+}
+
+function* removeAdminAccess (action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    const idToUpdate = action.payload;
+
+    const response = yield axios.put(`/api/user/remove/${idToUpdate}`, config);
+    // on success fetch all users
+    yield put({ type: 'FETCH_USER_LIST' });
+  } catch (error) {
+    console.log('Request to remove access failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_USER_LIST', fetchUserList);
+  yield takeLatest('GRANT_ADMIN_ACCESS', grantAdminAccess);
+  yield takeLatest('REMOVE_ADMIN_ACCESS', removeAdminAccess);
 }
 
 export default userSaga;

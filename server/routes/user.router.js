@@ -14,6 +14,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// Handles Ajax request for all users, if user is authenticated and has correct access level
+router.get('/list', rejectUnauthenticated, (req, res) => {
+  // check access level
+  if (req.user.access_level > 1) {
+    pool.query(`SELECT "id", "email", "first_name", "last_name", "access_level" FROM "user"`)
+    .then(response => {
+      console.log('User list Requested:', response);
+      res.send(response.rows);
+    }).catch(err => {
+      console.log('Error fetching Users:', err);
+      res.sendStatus(500);
+    });
+  } else {
+    res.send({message: 'You do not have access to this content.'})
+  }
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
@@ -47,5 +64,33 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+// handles request to grant access
+router.put('/grant/:id', rejectUnauthenticated, (req, res) => {
+  if(req.user.access_level > 1) {
+    // change user access level to 1
+    const userToUpdate = req.params.id;
+    pool.query(`UPDATE "user" SET "access_level" = 1 WHERE "id" = $1`, [userToUpdate])
+    .then(response => {
+      console.log('If updated show 1; if not, show 0: ', response.rowCount);
+      res.sendStatus(201);
+    })
+  } else {
+    res.send({message: 'You do not have access to this content.'})
+  }
+});
+
+router.put('/remove/:id', rejectUnauthenticated, (req, res) => {
+  if(req.user.access_level > 1) {
+    // change user access level to 1
+    const userToUpdate = req.params.id;
+    pool.query(`UPDATE "user" SET "access_level" = 0 WHERE "id" = $1`, [userToUpdate])
+    .then(response => {
+      console.log('If updated show 1; if not, show 0: ', response.rowCount);
+      res.sendStatus(201);
+    })
+  } else {
+    res.send({message: 'You do not have access to this content.'})
+  }
+});
 
 module.exports = router;
