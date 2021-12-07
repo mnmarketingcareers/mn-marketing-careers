@@ -29,6 +29,16 @@ function AdminJobListItem ({job}) {
         });
     }
 
+    const handleLink = (link) => {
+        if(link.includes('http')) {
+            return link;
+        } else {
+            return `https://${link}`;
+        }
+    } 
+
+    let jobLink = handleLink(job.application_link);
+
     return (
         <>
             <TableRow>
@@ -36,7 +46,7 @@ function AdminJobListItem ({job}) {
                 <TableCell>{job.company_name}</TableCell>
                 <TableCell>{job.description}</TableCell>
                 <TableCell>
-                    <Link href={job.application_link} underline="hover">{job.application_link}</Link>
+                <Link href={jobLink} underline="hover">{jobLink}</Link>
                 </TableCell>
                 <TableCell>{job.job_city}, &nbsp;{job.job_state}</TableCell>
                 <TableCell>{job.job_type}</TableCell>
