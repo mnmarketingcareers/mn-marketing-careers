@@ -64,7 +64,7 @@ router.get('/feedbacklist', rejectUnauthenticated, async (req, res) => {
 
             const otherQuery = `SELECT count(*) FROM "feedback" WHERE "reason" = 'other'`;
 
-            const messagesQuery = `SELECT "id", "message" FROM "feedback" WHERE "reason" = 'other';`
+            const messagesQuery = `SELECT "id", "message", "date_received" FROM "feedback" WHERE "reason" = 'other';`
             
             // make requests, and set results to variables
             const notRelevantCount = await pool.query(notRelevantQuery);

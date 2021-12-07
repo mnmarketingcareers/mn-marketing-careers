@@ -35,6 +35,7 @@ function UnsubInformation() {
 
     const showCounts = unsubscriberList ? true : false;
 
+    console.log('what is unsubscriberList?,',unsubscriberList)
 
  
     useEffect(() => {
@@ -127,13 +128,14 @@ function UnsubInformation() {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell align="center" sx={{ fontSize: 23 }}>Other Reasons given for unsubscribing</TableCell>
+                                            <TableCell align="center" sx={{ fontSize: 23}} colSpan={2}>Other Reasons given for unsubscribing</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {unsubscriberList.messages?.map((message) => {
                                             return (
                                                 <TableRow key={message.id}>
+                                                    <TableCell align="center" sx={{width: 80}}>{moment(message.date_received).format('MMM Do YY')}</TableCell>
                                                     <TableCell align="center">{message.message}</TableCell>
                                                 </TableRow>)
                                         })}
