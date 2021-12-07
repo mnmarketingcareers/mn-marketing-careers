@@ -35,36 +35,28 @@ function UserList () {
 
     return(
         <>
-            {!showUserList ? (<p>{userList.message}</p>) : (<div>
-                <h4>Users</h4>
-                
-                {/* <ul>
-                    {userList.map((user) => {return(
-                            
-                            <UserListItem key={user.id} user={user}/>
-                            
-                        )}
-                    )}
-                </ul> */}
-                <TableContainer component={Paper} sx={{ display: 'flex', padding: 1}}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="center">Username</TableCell>
-                                            <TableCell align="center">Full Name</TableCell>
-                                            <TableCell align="center">Access Level</TableCell>
-                                            <TableCell>Change Access</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {userList?.map((user) => {
-                                            return (
-                                                <UserListItem key={user.id} user={user}/>
-                                            )
-                                        })}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
+            {!showUserList ? (<Card>{userList.message}</Card>) : (<div>
+                <h3>Users</h3>
+
+                <TableContainer elevation={4} component={Paper} sx={{ display: 'flex', padding: 1 }}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">Username</TableCell>
+                                <TableCell align="center">Full Name</TableCell>
+                                <TableCell align="center">Access Level</TableCell>
+                                <TableCell>Change Access</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {userList?.map((user) => {
+                                return (
+                                    <UserListItem key={user.id} user={user} />
+                                )
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>)}
         </>
     )

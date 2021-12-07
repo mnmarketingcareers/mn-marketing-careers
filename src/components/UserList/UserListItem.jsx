@@ -25,19 +25,7 @@ function UserListItem({user}) {
 
     return(
         <>
-            {/* <li>
-                Username: {user.email} &nbsp;|&nbsp; 
-                Full Name: {user.first_name} {user.last_name} &nbsp;|&nbsp;
-                Access Level: {user.access_level} &nbsp;&nbsp;
-                {(user.access_level < 1) ? (
-                    <Button variant='contained' id="grant-access-btn" size="small"
-                        onClick={() => {if(window.confirm('Confirm you want to grant this User Adim access')) handleGrantAccess()} }>Grant Admin Access</Button>
-                    ) : (
-                    <Button variant='contained' id="rmv-access-btn" size="small"
-                        onClick={() => {if (window.confirm("Confirm you want to remove this User's Admin access")) handleRemoveAccess()}} >Remove Admin Access</Button>
-                    )
-                }
-            </li> */}
+            
             <TableRow key={user.id}>
                 <TableCell align="center">{user.email}</TableCell>
                 <TableCell align="center">{user.first_name} {user.last_name}</TableCell>
