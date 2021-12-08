@@ -110,8 +110,8 @@ function Campaign() {
                 From Name: <b>{activeCampaign.settings.from_name}</b>
               </Typography>
               <Typography className={classes.emailConfirmText}>
-                Sending to:{" "}
-                <b>1153 recipients</b>
+              Sending to: <b>{activeCampaign.recipients.recipient_count}</b>{" "}
+                recipients
               </Typography>
               <Typography className={classes.emailConfirmText}>
                 Template ID: <b>{activeCampaign.settings.template_id}</b>
