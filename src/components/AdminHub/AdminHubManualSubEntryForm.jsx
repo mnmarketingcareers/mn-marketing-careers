@@ -26,13 +26,6 @@ const AdminHubManualSubEntryForm = () => {
           state: "test state",
           zip: userZip,
         };
-        console.log(
-          "valid!! sending:",
-          userEmail,
-          userFirstName,
-          userLastName,
-          userZip
-        );
         dispatch({
           type: "ADD_SUBSCRIBER",
           payload: {
