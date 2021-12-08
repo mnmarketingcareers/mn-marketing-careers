@@ -17,7 +17,6 @@ function JobIssuesReviewPage() {
 
     // this reducer contains job issue data pulled from the database
     const jobIssueList = useSelector(store => store.setJobIssueListReducer);
-    console.log('what is in job issue reducer?', jobIssueList);
 
     // on pageload, we want to initiate fetching job issue data from the database
     useEffect(() => {
