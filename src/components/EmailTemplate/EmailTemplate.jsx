@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import {
-  Typography,
-  Grid,
   Button,
   Paper,
   TextField,
-  FormControlLabel,
   FormControl,
   InputLabel,
   Select,

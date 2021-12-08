@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import {Radio, 
         RadioGroup, 
@@ -30,17 +30,10 @@ import MuiAlert from '@mui/material/Alert';
 // Google ReCaptcha import
 import ReCaptchaV2 from 'react-google-recaptcha';
 import ShareOurApp from "../ShareOurApp/ShareOurApp.jsx";
-
-import useStyles from "../Styles/Styles";
-
-
-
 import './EmployerPage.css';
 
 function EmployerPage() {
 
-    const [shareContactOpen, setShareContactOpen] = useState(false)
-    const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -48,8 +41,6 @@ function EmployerPage() {
     useEffect( () => {
         dispatch({ type: 'RESET_LASAGNA'});
     }, []);
-    // get verification from reducer
-    const lasagna = useSelector(store => store.lasagna);
 
     // On the question : "Is this job remote?"; toggles whether other input field is displayed or not.
     const [toggleOther, setToggleOther] = useState(true);
@@ -141,14 +132,11 @@ function EmployerPage() {
     // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
         setJobPostingsTable({ ...jobPostingsTable, share_contact: true });
-        // prefillShareContact();
         changeContactView();
     };
 
     // Second function for the "Can we share a contact person?"
     const dontShareContact = (event) => {
-        console.log('what is event', event.target.value)
-        console.log('in no');
         setJobPostingsTable({
             ...jobPostingsTable, share_contact: false,
             name: '',
@@ -231,15 +219,12 @@ function EmployerPage() {
     ];
 
     const [showButton, setShowButton] = useState(false);
-    // let showButton = lasagna.success ? true : false;
     /**
      * Adds the token to the form object
      *
      * @param {string} token - response from ReCaptcha
      */
     const handleToken = (token) => {
-        console.log('recaptcha token: ', token);
-        // dispatch({ type: 'LASAGNA', payload: token });
         setShowButton(true);
         setJobPostingsTable((jobPostingsTable) => {
         return { ...jobPostingsTable, token }
@@ -251,9 +236,7 @@ function EmployerPage() {
      */
     const handleExpire = () => {
         dispatch({ type: 'RESET_LASAGNA'});
-        console.log('showbutton is: ', showButton);
         setShowButton(false);
-        console.log('showButton is: ', showButton);
         setJobPostingsTable((jobPostingsTable) => {
         return { ...jobPostingsTable, token: null }
         });
@@ -536,20 +519,6 @@ function EmployerPage() {
                         </Grid>
                     </Grid>
 
-                    {/* <div className="recaptcha-container" //deletelater>
-                        {
-                        !showButton &&     
-                        <ReCaptchaV2 sitekey={(process.env.REACT_APP_SITE_KEY)} 
-                               onChange={handleToken}
-                               onExpired={handleExpire}
-                               onErrored={err => console.error(`Recaptcha error: ${err}`)}
-                        />
-                        }
-                        {
-                        showButton &&
-                            <input className="submit-employer-form-button" type='submit' value='Submit' />
-                        }
-                    </div> //deletelater */}
                 </form>
             </div>
             <Stack spacing={2} sx={{ width: '100%' }}>
