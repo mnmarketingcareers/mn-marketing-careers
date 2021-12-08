@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { 
     Button, 
     TableRow,
@@ -8,21 +7,7 @@ import {
 } from '@mui/material';
 
 function JobIssuesReviewItem({issue}) {
-
     const dispatch = useDispatch();
-
-    console.log('what is issue?', issue);
-
-    // define button handlers
-
-    // const handleEdit = () => {
-    //     dispatch({
-    //         type: 'EDIT_POSTING',
-    //         payload: rowToEdit
-    //     });
-    // }
-
-    
 
     const handleDelete = () => {
         dispatch({ 
@@ -44,16 +29,7 @@ function JobIssuesReviewItem({issue}) {
                 <TableCell>{issue.issue_type}</TableCell>
                 <TableCell>{issue.comment}</TableCell>
                 <TableCell>{issue.issues_email}</TableCell>
-                {/* <TableCell>{issue.is_resolved}</TableCell> */}
-                {/* <TableCell>
-                    {(job.share_contact) ? (
-                        <p>{job.hiring_contact_email, job.hiring_contact_name, job.title, job.phone}</p>
-                    ) : (
-                        <></>
-                    )}
-                </TableCell> */}
                 <TableCell>
-                    {/* <Button color="success" variant="outlined" id="edit-btn" onClick={handleEdit}>Edit</Button> */}
                     <br />
                     <Button color="error" variant="outlined" id="delete-btn" onClick={handleDelete}>Delete</Button>
                 </TableCell>

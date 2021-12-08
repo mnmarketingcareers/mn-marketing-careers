@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 
 // mui imports
-import { 
-    Button, 
+import {  
     TextField,
     Radio,
     RadioGroup,
@@ -23,50 +22,18 @@ import {
 } from '@mui/material';
 
 // Snackbar button
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Slide from '@mui/material/Slide';
     
-function EditJobForm ({ thisJob, jobTypes, id }) {
+function EditJobForm ({ thisJob, jobTypes }) {
 
     // declare hooks
     const dispatch = useDispatch();
     const history = useHistory();
-
-    useEffect( () => {
-        console.log('All Job Types', jobTypes);
-        console.log('rowEdits', rowEdits);
-        console.log('This Job to Edit', thisJob);
-        console.log('job types from current job posting', thisJob.job_type);
-
-    }, []);
     
-    // default job postgin item for making edits 
-    const defaultJobPost = {
-        id: id,
-        posting_contact_name: '',
-        posting_contact_email: '',
-        posting_contact_id: '',
-        company_name: '',
-        company_id: '',
-        available_role: '',
-        application_link: '',
-        description: '',
-        job_city: '',
-        job_state: '',
-        remote: '',
-        share_contact: '',
-        hiring_contact_id: '',
-        hiring_contact_name: '',
-        hiring_contact_email: '',
-        title: '',
-        phone: '',
-        job_type: []
-
-    }
+    
     const [rowEdits, setRowEdits] = useState(thisJob);
 
 
@@ -85,28 +52,20 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
 
     // Update object to send to DB for editing
     const setValues = (propertyName) => (event) => {
-        console.log('what is Row Edits', rowEdits);
-        console.log('what is propertyName', propertyName);
-        console.log('event.target.value is:', event.target.value);
         setRowEdits({...rowEdits, [propertyName]: event.target.value});
-        console.log('Row Edits: ', rowEdits, 'Original job item: ', thisJob);
         setToggleOther(true);
     }
 
     // On form submission, send updated object to the server, via dispatch to Saga
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        console.log('posting object to send', rowEdits);
         dispatch({
             type: 'EDIT_JOB_POSTING',
             payload: rowEdits
         })
-        // history.go(0);
         setOpen(true); setTimeout(() => {
             history.push('/adminjoblist')
          }, 2000);
-        // alert('Updating job posting details');
     }
     
     // Success Button toggle
@@ -122,23 +81,6 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
     };
 
     // For the Snackbar button when Submit is pressed.
-    const action = (
-        <React.Fragment>
-            <Button color="secondary" size="small" onClick={handleClose}>
-                UNDO
-            </Button>
-            <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-            >
-                <CloseIcon fontSize="small" />
-            </IconButton>
-        </React.Fragment>
-    );
-
-    // For the Snackbar button when Submit is pressed.
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
@@ -146,9 +88,7 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
 
     // "Is this job remote?": toggles whether other other input field is displayed or not. 
     const [toggleOther, setToggleOther] = useState(true);
-    const changeState = () => {
-        setToggleOther(!toggleOther)
-    };
+    
 
     // "Can we share contact person?"; toggles the input fields necessary to add person's contact info.
     const [toggleContact, setToggleContact] = useState(true);
@@ -161,7 +101,6 @@ function EditJobForm ({ thisJob, jobTypes, id }) {
     // Two functions for the "Can we share a contact person?"
     // Handling 'yes' radio button
     const shareContact = (event) => {
-        console.log('in yes')
         setRowEdits({ ...rowEdits, share_contact: true });
         changeContactView();
     };

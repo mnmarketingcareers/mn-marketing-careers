@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -14,42 +14,26 @@ import "./UnsubFeedbackPage.css";
 function UnsubFeedbackPage() {
   const history = useHistory();
   const dispatch = useDispatch();
-  // object useState?
   const [reason, setReason] = useState({
     reason: "",
     message: "",
     status: "unsubscribed",
     subscriberHash: '',
   });
-  // const [userEmail, setUserEmail] = useState("");
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    console.log("the event is", event);
     dispatch({
       type: "SUBMIT_UNSUB_FEEDBACK",
       payload: reason,
     });
-    // handleUnsubscribers();
-    // alert("Successfully unsuscribed, you can close this tab");
     history.push("/main");
   };
 
-  // const handleUnsubscribers = () => {
-  //   dispatch({
-  //     type: "TOGGLE_SUB_STATUS",
-  //     payload: {
-  //       status: "unsubscribed",
-  //       subscriberHash: userEmail,
-  //     },
-  //   });
-  // };
-
-  // switch statment function?
+  // switch statment function
+  // select for a specified reason for unsubscribing and set that selected value to be submitted
   const radioButtonValue = (event) => {
-    console.log("inside radio button", event.target.value);
     switch (event.target.value) {
       case "Found a Job Through MNMC!":
         setReason({ ...reason, reason: event.target.value });
@@ -63,10 +47,10 @@ function UnsubFeedbackPage() {
         return event;
     }
   };
+  
   // function for text field
-
+  // if a user selects "other" they can type their own reason for unsubscribing
   const textFieldValue = (event) => {
-    console.log("inside text field", event.target.value);
     setReason({ ...reason, message: event.target.value });
   };
 

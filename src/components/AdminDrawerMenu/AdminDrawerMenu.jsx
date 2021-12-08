@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
-import LogOutButton from "../LogOutButton/LogOutButton";
-
 import {
   SwipeableDrawer,
   IconButton,
-  Container,
   Divider,
-  Typography,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -24,8 +19,6 @@ const AdminDrawerMenu = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-
-  console.log("drawer user is:", user.first_name);
 
   const handleLogoutClick = () => {
     dispatch({ type: "LOGOUT" });
@@ -87,12 +80,6 @@ const AdminDrawerMenu = () => {
               <h3>Admin Hub</h3>
             </Link>
           </ListItem>
-
-          {/* <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
-            <Link className="drawerLink" to="/campaign">
-              <h3>Campaign</h3>
-            </Link>
-          </ListItem> */}
 
           <ListItem className="drawerListItem" onClick={() => setOpen(false)}>
             <Link className="drawerLink" to="/emailtemplate">

@@ -62,8 +62,6 @@ const AdminAddJobPage = () => {
 
     // Two functions for the "Can we share a contact person?"
     const shareContact = (event) => {
-        console.log('what is event', event.target.value)
-        console.log('in yes')
         setJobPostingsObject({ ...jobPostingsObject, share_contact: true });
         changeContactView();
     };
@@ -84,14 +82,11 @@ const AdminAddJobPage = () => {
     }
 
     const setValues = (propertyName) => (event) => {
-        console.log('what is propertyName', propertyName);
-        console.log('event.target.value is:', event.target.value);
         setJobPostingsObject({ ...jobPostingsObject, [propertyName]: event.target.value });
         setToggleOther(true);
     }
 
     const handleDontShareContact = (event) => {
-        console.log('event.target.value', event.target.value);
         setJobPostingsObject({
             ...jobPostingsObject, share_contact: false,
             name: '',
@@ -175,9 +170,6 @@ const AdminAddJobPage = () => {
     const [job, setJob] = useState([]);
 
     const handleJob = (event) => {
-        console.log('the event is:', event);
-        console.log('the names are:', names);
-        console.log('names[0].field', names[0].field);
         const {
             target: { value },
         } = event;
@@ -391,8 +383,6 @@ const AdminAddJobPage = () => {
                     <input className="submit-add-job-button" type='submit' value='Submit' />
                 </form>
                 <Button onClick={toAdminHub}>Back to Hub</Button>
-
-                {/* <Button variant="contained" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post approved jobs</Button> */}
             </div>
             <Stack spacing={2} sx={{ width: '350px' }}>
 

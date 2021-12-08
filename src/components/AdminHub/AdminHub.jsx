@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Typography, Container, Button, TextField } from "@mui/material";
+import { Grid, Typography, Container, Button } from "@mui/material";
 
 import NewPostingsReady from "../NewJobOpeningsReadyAlert/NewJobOpeningsReadyAlert";
 import NewSubmissions from "../NewSubmissionsAlert/NewSubmissionsAlert";
@@ -27,15 +27,10 @@ const AdminHub = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [subList, setSubList] = useState([]);
 
-  //user sub status
-  const [subStatus, setSubStatus] = useState(""); //deletelater
-
   useEffect(() => {
     setIsLoading(true);
-    console.log("page loaded - fetching subscribers...");
     dispatch({ type: "GET_SUBS" });
     setSubList(subs.data);
-    console.log("user is:", user.first_name);
   }, [subList]);
 
   const toggleSubStatus = (subStatus, id) => {
@@ -43,7 +38,6 @@ const AdminHub = () => {
     subStatus === "subscribed"
       ? (newStatus = "unsubscribed")
       : (newStatus = "subscribed");
-    console.log("current status:", subStatus, "for user:", id);
     dispatch({
       type: "TOGGLE_SUB_STATUS",
       payload: { status: newStatus, subscriberHash: id },
@@ -77,11 +71,9 @@ const AdminHub = () => {
         <Button variant="contained" size="large" onClick={handleAddJob}>
           Add Some Jobs
         </Button>
-        {/* <Button style={{margin: '5px'}} variant="outlined" onClick={() => navToCreateTemplatePage()}>Create Email Template</Button> */}
         <br />
 
         <div style={{ marginTop: "20px" }} className="gridWrapper">
-          {/* <Button variant="contained" onClick={handleAddJob} >Add Some Jobs</Button> */}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
               <div>

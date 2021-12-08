@@ -2,26 +2,23 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import {
-  Typography,
-  Grid,
   Button,
   Paper,
   TextField,
-  FormControlLabel,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
 } from "@mui/material";
 import useStyles from "../Styles/Styles";
-import EmailBody from "../EmailBody/EmailBody"; //important this is the huge HTML string for email world
+//import EmailBody from "../EmailBody/EmailBody"; //important this is the huge HTML string for email world
 
 const EmailTemplate = () => {
   const history = useHistory();
   const templateList = useSelector((store) => store.setTemplatesReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const emailBody = EmailBody(); //important inside a variable
+  //const emailBody = EmailBody(); //important inside a variable
 
   const [newOrMod, setNewOrMod] = useState("");
   const [templateId, setTemplateId] = useState("");
@@ -29,18 +26,12 @@ const EmailTemplate = () => {
   const [templateBodyText, setTemplateBodyText] = useState("");
 
   useEffect(() => {
-    console.log('email body is:', emailBody)
     dispatch({ type: "GET_TEMPLATES" }); 
   }, []);
 
   const handleSubmitPatchTemplate = () => {
    
-    const bodyToSubmit = templateBodyText; //THIS is where the user's input is entering our crazy HTML
-    console.log("in handleSubmitPatchTemplate");
-    console.log("templateId =", templateId);
-    console.log("templateName =", templateName);
-    console.log("templateBody =", templateBodyText);
-    console.log("bodyToSubmit =", bodyToSubmit);
+    // const bodyToSubmit = templateBodyText; //THIS is where the user's input is entering our HTML
 
     if (newOrMod === "mod") {
       dispatch({
@@ -64,12 +55,10 @@ const EmailTemplate = () => {
   };
 
   const handleSelectTemplateId = (event) => {
-    console.log("selected template id:", event.target.value);
     setTemplateId(event.target.value);
   };
 
   const handleSelectNewOrMod = (event) => {
-    console.log("user has chosen", event.target.value);
     setNewOrMod(event.target.value);
   };
 

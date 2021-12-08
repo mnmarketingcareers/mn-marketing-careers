@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import moment from 'moment';
 import {
     TableContainer,
@@ -34,9 +34,6 @@ function UnsubInformation() {
     }
 
     const showCounts = unsubscriberList ? true : false;
-
-    console.log('what is unsubscriberList?,',unsubscriberList)
-
  
     useEffect(() => {
         dispatch({ type: 'GET_UNSUBSCRIBER_FEEDBACK' });
@@ -48,14 +45,6 @@ function UnsubInformation() {
                 {!showCounts && <p>Loading...</p>}
                 {showCounts && <>
                     <h2>Unsubscriber Feedback:</h2>
-                {/* <ul>
-                    <li>Content Not Relevant To My Search: &nbsp; <b>{unsubscriberList.notRelevantCount?.count}</b></li>
-                    <li>Found a Job Through MNMC!: &nbsp; <b>{unsubscriberList.foundThruMnmcCount?.count}</b></li>
-                    <li>Found a Job Through Other Mediums: &nbsp; <b>{unsubscriberList.foundElseCount?.count}</b></li>
-                    <li>I Did Not Sign Up to Receive These Emails:&nbsp;<b>{unsubscriberList.noSignUpCount?.count}</b></li>
-                    <li>Other: &nbsp;<b>{unsubscriberList.otherCount?.count}</b></li>
-                </ul> */}
-
                     <Grid container className="card-container">
                         <Grid item xs={12} sm={6} md={4} lg={2}>
                             <Card style={{minWidth: 200}}>
