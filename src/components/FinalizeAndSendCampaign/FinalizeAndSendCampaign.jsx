@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { Container, Grid, Typography, Button, Paper } from "@mui/material";
+import { Container, Typography, Button, Paper } from "@mui/material";
 
 //For the snackbar
 import useStyles from "../Styles/Styles";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -16,9 +14,7 @@ function Campaign() {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const templateList = useSelector((store) => store.setTemplatesReducer); //incoming full templates list from redux /mailchimp
   const activeCampaign = useSelector((store) => store.setActiveCampaignReducer); //hopefully info coming back for NOW ACTIVE CAMPAIGN
-  const allCampaigns = useSelector((store) => store.setCampaignsReducer);
 
   useEffect(() => {
     dispatch({ type: "GET_TEMPLATES" }); //get all existing template IDs to choose from!
@@ -27,7 +23,6 @@ function Campaign() {
 
   // this is the function that SENDS the email
   const sendEmailNow = (campaignId) => {
-    console.log("in send email now! Campaign Id:", campaignId);
     dispatch({
       type: "SEND_EMAIL_NOW",
       payload: { campaign_id: campaignId },
@@ -35,8 +30,6 @@ function Campaign() {
 
     // post approved jobs to the list now
     dispatch({ type: "POST_APPROVED_JOBS" });
-    //history.push('/adminhub')
-
     setOpen(true);
   };
 
@@ -50,23 +43,6 @@ function Campaign() {
     }
     setOpen(false);
   };
-
-  // For the Snackbar button when the SEND button is pressed.
-  const action = (
-    <React.Fragment>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        UNDO
-      </Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
 
   // For the Snackbar button when the SEND button is pressed.
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -103,9 +79,6 @@ function Campaign() {
                 Email Subject Line:{" "}
                 <b>{activeCampaign.settings.subject_line}</b>
               </Typography>
-              {/* <Typography className={classes.emailConfirmText}>
-                Preview Text: <b>{activeCampaign.settings.preview_text}</b>
-              </Typography> */}
               <Typography className={classes.emailConfirmText}>
                 From Name: <b>{activeCampaign.settings.from_name}</b>
               </Typography>
