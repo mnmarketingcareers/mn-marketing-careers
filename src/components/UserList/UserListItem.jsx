@@ -2,8 +2,7 @@ import { useDispatch } from "react-redux";
 import { 
     Button,
     TableRow,
-    TableCell,
-    TableBody, 
+    TableCell, 
 } from "@mui/material";
 import "./UserList.css";
 
@@ -13,13 +12,11 @@ function UserListItem({user}) {
 
     const handleGrantAccess = () => {
         // dispatch to saga with id to add access
-        console.log('Clicked grant access, user id:', user.id);
         dispatch({ type: 'GRANT_ADMIN_ACCESS', payload: user.id });
     }
 
     const handleRemoveAccess = () => {
         // dispatch to saga with id to remove access
-        console.log('Clicked Remove Access, user id:', user.id);
         dispatch({ type: 'REMOVE_ADMIN_ACCESS', payload: user.id });
     }
 
