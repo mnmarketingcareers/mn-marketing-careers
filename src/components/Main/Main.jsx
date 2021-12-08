@@ -8,15 +8,12 @@ import './Main.css';
 import MainGrid from './MainGrid.jsx';
 import RemoteJobs from '../RemoteJobs/RemoteJobs.jsx';
 import Internships from '../Internships/Internships.jsx';
-import useStyles from '../Styles/Styles';
 
 // Snackbar button
-import {IconButton, Stack, Snackbar, Slide} from "@mui/material"
-import CloseIcon from '@mui/icons-material/Close';
+import {Stack, Snackbar, Slide} from "@mui/material"
 import MuiAlert from '@mui/material/Alert';
 
 function Main() {
-    const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -27,9 +24,6 @@ function Main() {
     }
 
     const rows = useSelector((store) => store.setJobsReducer);
-       
-    const date = new Date();
-    console.log('what is date',date);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_MAIN_JOBS' });
@@ -49,9 +43,6 @@ function Main() {
         dispatch({ type: 'FETCH_RECENT_INTERNSHIPS', payload: { age: time } });
     }
 
-
-
-
     // For the snackbar button.
     const [open, setOpen] = useState(false);
 
@@ -64,34 +55,13 @@ function Main() {
     };
 
     // For the Snackbar button when one of the date buttons in pressed.
-    const action = (
-        <React.Fragment>
-            <Button color="secondary" size="small" onClick={handleClose}>
-                UNDO
-            </Button>
-            <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-            >
-                <CloseIcon fontSize="small" />
-            </IconButton>
-        </React.Fragment>
-    );
-
-    // For the Snackbar button when one of the date buttons in pressed.
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 
     });
 
-
-
-
     return (
         <>
-        
             <div className="parent">
                 <div className="logo">
                     <div>
@@ -157,12 +127,8 @@ function Main() {
                     </Alert>
                 </Snackbar>
             </Stack>
-
         </>
     )
-
-
-
 }
 
 export default Main;
