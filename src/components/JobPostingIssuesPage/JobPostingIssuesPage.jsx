@@ -33,10 +33,6 @@ function JobPostingIssuesPage() {
 
     const thisJob = job[0];
 
-    console.log('whats in setJobsReducer in job issue page', thisJob.available_role);
-    
-
-    
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch({
@@ -86,7 +82,6 @@ function JobPostingIssuesPage() {
    * @param {string} token - response from ReCaptcha
    */
   const handleToken = (token) => {
-    console.log('recaptcha token: ', token);
     setShowButton(true);
     setIssue((issue) => {
       return { ...issue, token }
@@ -98,9 +93,7 @@ function JobPostingIssuesPage() {
    */
   const handleExpire = () => {
     dispatch({ type: 'RESET_LASAGNA' });
-    console.log('showbutton is: ', showButton);
     setShowButton(false);
-    console.log('showButton is: ', showButton);
     setIssue((issue) => {
       return { ...issue, token: null }
     });
