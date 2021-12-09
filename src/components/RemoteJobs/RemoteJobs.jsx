@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@material-ui/core';
-import './RemoteJobs.css';
 
 function RemoteJobs() {
     const history = useHistory();

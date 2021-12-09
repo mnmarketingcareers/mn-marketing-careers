@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import  { Button }from '@mui/material/';
 import  { DataGrid } from '@mui/x-data-grid';
-import './Internships.css';
 
 function Internships() {
 

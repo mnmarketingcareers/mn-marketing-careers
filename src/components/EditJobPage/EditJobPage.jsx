@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useHistory, useParams } from 'react-router-dom';
-import './EditJobPage.css';
 import EditJobForm from "./EditJobForm";
 
 // mui imports
