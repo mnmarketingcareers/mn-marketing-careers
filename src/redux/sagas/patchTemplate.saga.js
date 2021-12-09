@@ -4,7 +4,6 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* patchTemplate(action) {
     try {
-        console.log("action.payload in PATCH TEMPLATE saga is:", action.payload)
         yield axios({
             method: "patch",  
             url: "/api/template/", 

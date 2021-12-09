@@ -4,7 +4,6 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* pushEmail(action) {
     try {
-        console.log("action.payload in SEND EMAIL NOW SAGA is:", action.payload)
         yield axios({
             method: "POST", 
             url: "/api/campaign/send", 

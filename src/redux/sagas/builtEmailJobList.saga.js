@@ -7,10 +7,8 @@ function* buildJobList () {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
           };
-          console.log('fetching approved job postings');
           // make axios call, set response to a variable //fix
           const response = yield axios.get('/template/joblist', config);
-          console.log('Response to call for approved job postings ', response.data);
 
           if(response.data.length > 0) {
                 // send dispatch and payload to reducer

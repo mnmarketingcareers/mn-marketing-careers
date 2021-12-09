@@ -3,7 +3,6 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* addNewJobIssue(action) {
     try {
-        console.log('action.payload in addNewJobIssue is:', action.payload);
         yield axios({
             method: 'POST',
             url: '/api/jobissues',
@@ -19,7 +18,6 @@ function* fetchJobId(action) {
     try{
         const jobIssueId = action.payload.job_posting_id;
         const jobIssue = yield axios.get(`/api/job/${jobIssueId}`);
-        console.log('In fetch job by ID, response from server: ', jobIssue.data);
         yield put({ type: "SET_JOBS", payload: jobIssue.data});
     } catch (error) {
         console.log("Failure to GET all job issues", error);

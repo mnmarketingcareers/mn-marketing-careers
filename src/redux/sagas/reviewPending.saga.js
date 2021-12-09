@@ -28,11 +28,9 @@ function* approvePosting (action) {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
           };
-        console.log('in approve saga', action.payload);
         const id = action.payload.id;
         const response = yield axios.put(`/api/job/${id}`, action.payload, config);
         // verify success with a console log
-        console.log('What did the server send back?', response.data);
         yield put({ type: 'FETCH_PENDING_POSTINGS' });
     } catch (error) {
         console.log("ERROR in approving pending postings", error);
@@ -45,11 +43,9 @@ function* deletePosting (action) {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
           };
-        console.log('in deny saga', action.payload);
         const id = action.payload.id;
         const response = yield axios.delete(`/api/job/${id}`, config);
         // verify success with a console log
-        console.log('What did the server send back?', response.data);
         yield put({ type: 'FETCH_PENDING_POSTINGS' });
     } catch (error) {
         console.log("ERROR in deny pending postings", error);
@@ -62,10 +58,8 @@ function* postApprovedJobs() {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
           };
-        console.log('in post saga');
         const response = yield axios.put(`/api/job/tolist`,config);
         // verify success with a console log
-        console.log('What did the server send back?', response.data);
         yield put({ type: 'FETCH_PENDING_POSTINGS' });
     } catch (error) {
         console.log("ERROR in posting approved postings", error);
