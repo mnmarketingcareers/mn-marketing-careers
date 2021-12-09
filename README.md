@@ -35,7 +35,11 @@ Link to software that is required to install the app (e.g. node).
 
 - MailChimp account (with API_KEY)
 - [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
+- [PostrgeSQL](https://www.postgresql.org/)
+- [Nodemon](https://nodemon.io/)
+- [Google Recaptcha] (https://www.google.com/recaptcha/about/)
+- [Google Marketing Platform] (https://marketingplatform.google.com/about/)
+  - From this platform, you can create Google Analytics and Google Tag Manager products
 
 ## Installation
 
