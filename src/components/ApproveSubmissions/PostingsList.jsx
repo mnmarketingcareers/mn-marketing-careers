@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { 
     Button, 
     TableRow,
@@ -9,7 +9,7 @@ import {
 function PostingsList ({job}) {
 
     const dispatch = useDispatch();
-    // const showJobPosting = job ? true : false;
+
     const handleApprove = () => {
         dispatch({
             type: 'APPROVE_POSTING', 
@@ -48,10 +48,8 @@ function PostingsList ({job}) {
                 </TableCell>
                 <TableCell>{job.date_posted}</TableCell>
                 <TableCell>
-                    {/* <label htmlFor="approve-btn">Approve without posting to list</label> */}
                     <Button color="success" variant="outlined" id="approve-btn" onClick={handleApprove}>Approve</Button>
                     <br />
-                    {/* <label htmlFor="deny-btn">Deny and delete</label> */}
                     <Button color="error" variant="outlined" id="deny-btn" onClick={handleDeny}>Deny</Button>
                 </TableCell>
             </TableRow>

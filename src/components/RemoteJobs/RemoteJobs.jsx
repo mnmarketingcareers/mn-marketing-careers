@@ -1,11 +1,8 @@
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import Modal from "../Modal/Modal.jsx";
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHeader, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material/';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { useEffect } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@material-ui/core';
-import './RemoteJobs.css';
 
 function RemoteJobs() {
     const history = useHistory();

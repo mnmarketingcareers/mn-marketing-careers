@@ -25,7 +25,6 @@ import './VisitorDrawerMenu.css'
 const VisitorDrawerMenu = () => {
 
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
 
 
   return (

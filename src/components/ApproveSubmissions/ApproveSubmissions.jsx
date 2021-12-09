@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
 import './ApproveSubmissions.css';
 import PostingsList from './PostingsList';
-import ReadyToPost from '../PeadyToPostList/ReadyToPostList';
+import ReadyToPost from '../ReadyToPostList/ReadyToPostList';
 import { 
     CircularProgress,
     TableContainer,
@@ -11,10 +10,8 @@ import {
     TableHead,
     TableRow,
     TableCell,
-    TableSortLabel,
     TableBody,
     Paper,
-    Button,
 } from '@mui/material';
 
 
@@ -37,8 +34,7 @@ function ApproveSubmissions() {
             <h1>Review Job Openings</h1>
             
             <ReadyToPost />
-            {/* <Button variant="outlined" extended onClick={() => dispatch({ type: 'POST_APPROVED_JOBS'})}>Post All approved jobs to list</Button> */}
-            {/* {JSON.stringify(postingsList)} */}
+    
             <h2>These job openings were submitted by employers and await your APPROVAL</h2>
             <p><b>NOTE:</b> Clicking "APPROVE" will <b>not</b> post job openings to the main list right away. They will simply be ready and waiting to go live when you click the "GO LIVE" button.</p>
             <p>Clicking "DENY" will permanently delete the request to post a job opening.</p>
@@ -63,7 +59,6 @@ function ApproveSubmissions() {
                     <TableBody>
                         {postingsList.map((job, i) => {
                             return(
-                                // <li key={job.id}>{job.available_role}</li>
                                 <PostingsList key={job.id} job={job} />
                                 )
                             })

@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import "./Modal.css";
-import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { TextField, Grid, Button } from "@mui/material/";
+import { TextField } from "@mui/material/";
 import { FaWindowClose } from "react-icons/fa";
 
 //For the snackbar
-import useStyles from "../Styles/Styles";
-import {IconButton, Stack, Snackbar, Slide} from "@mui/material"
-import CloseIcon from '@mui/icons-material/Close';
+import {Stack, Snackbar, Slide} from "@mui/material"
 import MuiAlert from '@mui/material/Alert';
 
 function Modal({ closeModal }) {
-  const history = useHistory();
   const dispatch = useDispatch();
 
 
@@ -56,23 +52,6 @@ function Modal({ closeModal }) {
     }
     setOpen(false);
   };
-
-  // For the Snackbar button when the SEND button is pressed.
-  const action = (
-    <React.Fragment>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        UNDO
-      </Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
 
   // For the Snackbar button when the SEND button is pressed.
   const Alert = React.forwardRef(function Alert(props, ref) {

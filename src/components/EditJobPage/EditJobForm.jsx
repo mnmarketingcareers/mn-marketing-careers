@@ -227,7 +227,6 @@ function EditJobForm ({ thisJob, jobTypes }) {
                                             labelId="job-types"
                                             id="job-types"
                                             defaultValue={''}
-                                            // placeholder={jobTypesString}
                                             multiple
                                             value={job}
                                             onChange={handleJob}
