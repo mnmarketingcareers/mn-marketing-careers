@@ -24,35 +24,10 @@ Additionally, an example of the site administrators form to add new job openings
 
 ![Admin Add Job Form](public/images/mnmc_admin-add-jobs.png)
 
-## Important Codestuff
+Finally, here's the main page of the application where job seekers and hiring managers first interact with the application.
 
-Check out this amazing code, that will be so helpful for you when spinning up the project:
+![MNMC Main Page](public/images/mnmc_main-page.png)
 
-```
-function ReturnLasagna(hunger) {
-  const lasagna = '';
-
-  const { dinner } = useSelector(store => store);
-
-  useEffect( () => {
-    dispatch({ type: 'FETCH_DINNER' });
-  }, []);
-
-  lasagna = dinner.map(food => <li key={food.id}>{food.item}</li>);
-
-  return (
-    <div>
-      <h2>It's what's for dinner!</h2>
-      <ul>
-        {lasagna}
-      </ul>
-    </div>
-
-  )
-}
-
-export default ReturnLasagna;
-```
 
 ## Prerequisites
 
@@ -76,16 +51,16 @@ Link to software that is required to install the app (e.g. node).
 - Replace sample text in each of the following 3 lines as mentioned above, and include in your `.env` file
 
 ```
-      SERVER_SESSION_SECRET=
+      SERVER_SESSION_SECRET=secret_site_key_here
       DC=three_character_dc
       MAILCHIMP_API_KEY=your_maichimp_api_key
       TEST_LIST_ID=your_account_id_number
 
-      REACT_APP_RECAPTCHA_SITE_KEY=
-      RECAPTCHA_SECRET_KEY=
+      REACT_APP_RECAPTCHA_SITE_KEY=recaptcha_site_key_here
+      RECAPTCHA_SECRET_KEY=recaptcha_secret_key_here
 
-      REGULAR_TEMPLATE_ID=
-      PLAIN_TEXT_TEMPLATE_ID=
+      REGULAR_TEMPLATE_ID=template_id_here
+      PLAIN_TEXT_TEMPLATE_ID=text_template_here
 ```
 
 - _*Make sure `.env` is in your .gitignore!*_
