@@ -11,7 +11,7 @@ This application provides improved and expanded functionality for the curators o
 The star of the app may be the **MailChimp API integration**. Admin curators AND visitors to the site are able to submit job postings to this app which are stored in a backend database (pending administrator approval). Whenever the admin desires, they can automatically populate all of these submissions - in the _same format_ which they have previously used - input a subject line, preview in the browser and send away.
 
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](https://mnmarketingcareers.herokuapp.com/)
 
 ## Screen Shot
 
@@ -42,8 +42,6 @@ Link to software that is required to install the app (e.g. node).
   - From this platform, you can create Google Analytics and Google Tag Manager products
 
 ## Installation
-
-*this section requres further edits by 11/20/2021*
 
 - Before spinning up the project, make sure you have an active MailChimp account, to which to link the project. 
 - Create a .env file at the root of the project and paste this line into the file:
@@ -105,7 +103,7 @@ Next:
 1. JavaScript
 2. React
 3. Redux
-4. AWS S3/aws-sdk
+4. Mailchimp API
 5. Material-UI
 6. Express
 7. Postgres
@@ -119,7 +117,7 @@ Next:
 _Note, include this only if you have a license file. GitHub will generate one for you if you want!_
 
 ## Acknowledgement
-Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. Thanks to lasagna, for being the world of inspiration that you are.
+Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. And a huge thanks to Casey Tilli and Elizabeth Laukka with Minnesota Marketing Careers for allowing our dev team to create this application in your vision. You are both doing some amazing work for the job seeking community.
 
 ## Support
-If you have suggestions or issues, please email me at [coolcoolcool@killer-beans.com](www.google.com)
+If you have suggestions or issues, please email us at [franck.bushbaum@yahoo.com], [cmochinski@gmail.com], [gregtambornino@gmail.com], or [dannymussie7@gmail.com]
