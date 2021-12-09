@@ -49,7 +49,7 @@ function ReadyToPost () {
                                     {job.job_type} &nbsp;|&nbsp;
                                     {job.job_city} &nbsp;|&nbsp;
                                     {job.job_state} &nbsp;|&nbsp;
-                                    <i>(in-person or remote?) &nbsp;</i>{job.remote} &nbsp;|&nbsp;
+                                    <i>(remote?) &nbsp;</i>{job.remote} &nbsp;|&nbsp;
                                     {(job.share_contact) ? (
                                         <p>{job.hiring_contact_email, job.hiring_contact_name, job.title, job.phone}</p>
                                     ) : (<></>)}
