@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './ApproveSubmissions.css';
 import PostingsList from './PostingsList';
-import ReadyToPost from '../PeadyToPostList/ReadyToPostList';
+import ReadyToPost from '../ReadyToPostList/ReadyToPostList';
 import { 
     CircularProgress,
     TableContainer,

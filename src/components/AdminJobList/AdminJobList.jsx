@@ -12,7 +12,7 @@ import {
     Paper,
 } from '@mui/material';
 import './AdminJobList.css';
-import ReadyToPost from '../PeadyToPostList/ReadyToPostList.jsx';
+import ReadyToPost from '../ReadyToPostList/ReadyToPostList.jsx';
 import AdminJobListItem from './AdminJoblistItem.jsx';
 function AdminJobList() {
 
