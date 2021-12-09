@@ -45,9 +45,9 @@ const AdminHubFourColTable = ({ subs, toggleSubStatus }) => {
                     <TableCell className={classes.tableHeaderCell}>
                       Email
                     </TableCell>
-                    <TableCell className={classes.tableHeaderCell}>
+                    {/* <TableCell className={classes.tableHeaderCell}>
                       Zip Code
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell className={classes.tableHeaderCell}>
                       Status
                     </TableCell>
@@ -63,10 +63,10 @@ const AdminHubFourColTable = ({ subs, toggleSubStatus }) => {
                         <TableCell className={classes.tableCell}>
                           {item.email_address}
                         </TableCell>
-
+{/* 
                         <TableCell className={classes.tableCell}>
                           {item.merge_fields.ADDRESS.zip}
-                        </TableCell>
+                        </TableCell> */}
 
                         <TableCell className={classes.tableCell}>
                           {item.status}
