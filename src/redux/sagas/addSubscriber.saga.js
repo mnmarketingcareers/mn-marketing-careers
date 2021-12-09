@@ -4,7 +4,6 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* addNewSubscriber(action) {
     try {
-        console.log("action.payload in addNewSubscriber saga is:", action.payload)
         yield axios({
             method: "POST", 
             url: "/api/subs", 

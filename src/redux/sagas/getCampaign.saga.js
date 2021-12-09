@@ -3,10 +3,9 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* fetchCampaignInfo()  {
   try {
-      console.log('Get campaign info! Weee!')
     const response = yield axios.get("/api/campaign/getinfo");
     yield put({ type: "SET_CAMPAIGN_LIST", payload: response.data.campaigns}); //important //fix make reducer!!
-    console.log('response in fetch campaign info:', response.data.campaigns) //important parse this out
+    // console.log('response in fetch campaign info:', response.data.campaigns) //important parse this out
   } catch (error) {
     console.log("Failure to GET campaign info", error);
   }

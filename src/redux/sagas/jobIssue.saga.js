@@ -8,9 +8,7 @@ function* fetchJobIssues(action) {
             headers: {'Content-Type': 'application/json'},
             withCredentials: true,
         };
-        console.log('action.payload is:', action.payload);
         const response = yield axios.get('/api/jobissues', config);
-        console.log('response.data is:', response.data);
         // this database information is then added to the reducer
         yield put({ type: 'SET_JOB_ISSUE_LIST', payload: response.data});
     } catch (error) {
@@ -24,10 +22,8 @@ function* deleteJobIssue(action) {
             headers: {'Content-Type': 'application/json'},
             withCredentials: true,
         };
-        console.log('action.payload is:', action.payload);
         const issueId = action.payload.id;
         const response = yield axios.delete(`/api/jobissues/${issueId}`, config);
-        console.log('response.data is:', response.data);
         // this database information is then added to the reducer
         yield put({ type: 'FETCH_JOB_ISSUES', payload: response.data});
     } catch (error) {

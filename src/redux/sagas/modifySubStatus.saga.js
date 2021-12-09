@@ -4,7 +4,6 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* modifySubStatus(action) {
     try {
-        console.log("action.payload in PUT MOD SUB saga is:", action.payload)
         yield axios({
             method: "put", 
             url: "/api/subs", 

@@ -4,7 +4,6 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* postNewTemplate(action) {
     try {
-        console.log("action.payload in POST TEMPLATE saga is:", action.payload)
         yield axios({
             method: "post",  
             url: "/api/template/", 

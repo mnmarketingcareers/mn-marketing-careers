@@ -52,7 +52,6 @@ function* fetchInternshipsByAge(action) {
   try {
     const age = action.payload.age;
     const remoteInternshipsByAgeResponse = yield axios.get(`/api/recentjob/internships/${age}`);
-    console.log("jobs by age", age, "response", remoteInternshipsByAgeResponse.data);
     yield put({ type: 'SET_RECENT_INTERNSHIPS', payload: remoteInternshipsByAgeResponse.data})
   } catch (error) {
     console.log('ERROR in GET remote jobs by age', error);

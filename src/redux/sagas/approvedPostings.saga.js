@@ -7,16 +7,14 @@ function* fetchApprovedPostings () {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
           };
-          console.log('fetching approved job postings');
           // make axios call, set response to a variable
           const response = yield axios.get('/api/job/approved', config);
-          console.log('Response to call for approved job postings ', response.data);
 
           if(response.data.length > 0) {
                 // send dispatch and payload to reducer
             yield put({ type: 'SET_APPROVED_POSTINGS', payload: response.data})
             } else {
-                // if no climbs match the request, don't show anything already in reducer
+                // if no job postings match the request, don't show anything already in reducer
                 yield put({ type: 'RESET_APPROVED_POSTINGS' });
             }
     } catch (error) {
@@ -26,12 +24,11 @@ function* fetchApprovedPostings () {
 
 function* addApprovedPosting (action) {
     try {
-        console.log('First saga wired up', action.payload)
           const newJob = action.payload;
           yield axios.post('/api/job', newJob);
           
         } catch(err) {
-          console.log(err)
+          console.log('Error adding job posting', err)
         }
 }
 

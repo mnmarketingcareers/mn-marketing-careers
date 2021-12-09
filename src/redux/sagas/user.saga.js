@@ -32,8 +32,6 @@ function* fetchUserList() {
     };
 
     const response = yield axios.get('/api/user/list', config);
-    // Let's see the resoponse
-    console.log('userList response from server:', response);
     // send response to reducer
     yield put({ type: 'SET_USER_LIST', payload: response.data});
   } catch (error) {
