@@ -11,15 +11,12 @@ import {
   MenuItem,
 } from "@mui/material";
 import useStyles from "../Styles/Styles";
-//import EmailBody from "../EmailBody/EmailBody"; //important this is the huge HTML string for email world
 
 const EmailTemplate = () => {
   const history = useHistory();
   const templateList = useSelector((store) => store.setTemplatesReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
-  //const emailBody = EmailBody(); //important inside a variable
-
   const [newOrMod, setNewOrMod] = useState("");
   const [templateId, setTemplateId] = useState("");
   const [templateName, setTemplateName] = useState("");
@@ -30,9 +27,6 @@ const EmailTemplate = () => {
   }, []);
 
   const handleSubmitPatchTemplate = () => {
-   
-    // const bodyToSubmit = templateBodyText; //THIS is where the user's input is entering our HTML
-
     if (newOrMod === "mod") {
       dispatch({
         type: "SEND_PATCH_TEMPLATE",
@@ -146,8 +140,8 @@ const EmailTemplate = () => {
 
           <Button
             //this button is always here
-            //  button above body text field
-            //  appears at over 2k characters
+            //button above body text field
+            //appears at over 2k characters
             variant="contained"
             color="success"
             style={{margin: '4px', fontSize: '20px', fontWeight: '600', }}
