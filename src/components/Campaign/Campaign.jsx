@@ -34,7 +34,8 @@ function Campaign() {
   }, []);
 
   //this function creates and SAVES an email
-  const handleCreateCampaign = () => {
+  const handleCreateCampaign = (event) => {
+    event.preventDefault();
     dispatch({
       type: "CREATE_CAMPAIGN",
       payload: {
