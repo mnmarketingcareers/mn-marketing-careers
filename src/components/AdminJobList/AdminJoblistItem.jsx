@@ -27,6 +27,7 @@ function AdminJobListItem ({job}) {
             type: 'DELETE_POSTING', 
             payload: {id: job.id}
         });
+        history.go(0);
     }
 
     const handleLink = (link) => {
