@@ -6,10 +6,6 @@
 
 ## Description
 
-![Alttext](https://media0.giphy.com/media/om6CiPK2dF81lb668e/giphy.gif)
-![Alttext](https://media4.giphy.com/media/TIE1OwH8JXdYsjN8dK/giphy.gif)
-![Alttext](https://media0.giphy.com/media/1ErMa455LDdvaSwuNd/giphy.gif)
-![Alttext](https://media1.giphy.com/media/mQNAtAQhRkri3BfRu5/giphy.gif)
 
 This application provides improved and expanded functionality for the curators of the MN Marketing Careers job list sharing service and increased accessibility to the the subscribers to that list, and employers looking to include new job openings. It aims to gather all current methods in use by the client in one place. With that in mind, it was designed to continue to utilize MailChimp functionality for the client to incorporate existing practices and subscriber contact data conveniently and effectively into the application. The app was then customized for more interaction between employers looking to post jobs, job-seekers, and the job list curators. The job list now lives on a page where job seekers can see all previous postings up to 30 days after initiation, and can sort and filter results by a few predetermined categories. The job list curator can also manage listings with more control. 
 
@@ -29,9 +25,22 @@ Additionally, an example of the site administrators form to add new job openings
 
 ![Admin Add Job Form](public/images/mnmc_admin-add-jobs.png)
 
+A brief example of the Job submission for for an employer:
+![Alttext](https://media0.giphy.com/media/1ErMa455LDdvaSwuNd/giphy.gif)
+
 Finally, here's the main page of the application where job seekers and hiring managers first interact with the application.
 
 ![MNMC Main Page](public/images/mnmc_main-page.png)
+
+And a Main page usage example 1:
+![Alttext](https://media0.giphy.com/media/om6CiPK2dF81lb668e/giphy.gif)
+
+Main page example 2:
+![Alttext](https://media4.giphy.com/media/TIE1OwH8JXdYsjN8dK/giphy.gif)
+
+
+Admin hub example:
+![Alttext](https://media1.giphy.com/media/mQNAtAQhRkri3BfRu5/giphy.gif)
 
 
 ## Prerequisites
