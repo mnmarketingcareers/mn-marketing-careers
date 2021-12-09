@@ -1,7 +1,6 @@
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import Modal from "../Modal/Modal.jsx";
+import { useEffect } from 'react';
 import  { Button }from '@mui/material/';
 import  { DataGrid } from '@mui/x-data-grid';
 import './Internships.css';

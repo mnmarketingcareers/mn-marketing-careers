@@ -14,7 +14,7 @@ function Campaign() {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const activeCampaign = useSelector((store) => store.setActiveCampaignReducer); //hopefully info coming back for NOW ACTIVE CAMPAIGN
+  const activeCampaign = useSelector((store) => store.setActiveCampaignReducer); //info coming back for NOW ACTIVE CAMPAIGN
 
   useEffect(() => {
     dispatch({ type: "GET_TEMPLATES" }); //get all existing template IDs to choose from!
