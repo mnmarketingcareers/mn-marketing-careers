@@ -45,9 +45,9 @@ const AdminHubFourColTable = ({ subs, toggleSubStatus }) => {
                     <TableCell className={classes.tableHeaderCell}>
                       Email
                     </TableCell>
-                    <TableCell className={classes.tableHeaderCell}>
+                    {/* <TableCell className={classes.tableHeaderCell}>
                       Zip Code
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell className={classes.tableHeaderCell}>
                       Status
                     </TableCell>
