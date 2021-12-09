@@ -24,6 +24,7 @@ function ReadyToPost () {
 
     const handleDelete = (id) => {
         dispatch({ type: 'DELETE_POSTING', payload: {id: id} });
+        history.go(0);
     }
 
     const handlePostToList = () => {
