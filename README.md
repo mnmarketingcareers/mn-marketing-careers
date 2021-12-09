@@ -21,26 +21,36 @@ To gain a working understanding of the data pathways, one might reference the fo
 
 ![Expensive Lucid Chart](public/images/lucid_chart.png)
 
+
 Additionally, an example of the site administrators form to add new job openings to the list.
 
 ![Admin Add Job Form](public/images/mnmc_admin-add-jobs.png)
 
+
 A brief example of the Job submission for for an employer:
+
 ![Alttext](https://media0.giphy.com/media/1ErMa455LDdvaSwuNd/giphy.gif)
+
 
 Finally, here's the main page of the application where job seekers and hiring managers first interact with the application.
 
 ![MNMC Main Page](public/images/mnmc_main-page.png)
 
+
 And a Main page usage example 1:
+
 ![Alttext](https://media0.giphy.com/media/om6CiPK2dF81lb668e/giphy.gif)
 
+
 Main page example 2:
+
 ![Alttext](https://media4.giphy.com/media/TIE1OwH8JXdYsjN8dK/giphy.gif)
 
 
 Admin hub example:
+
 ![Alttext](https://media1.giphy.com/media/mQNAtAQhRkri3BfRu5/giphy.gif)
+
 
 
 ## Prerequisites
