@@ -6,6 +6,8 @@
 
 ## Description
 
+![Alttext](https://media0.giphy.com/media/om6CiPK2dF81lb668e/giphy.gif)
+
 This application provides improved and expanded functionality for the curators of the MN Marketing Careers job list sharing service and increased accessibility to the the subscribers to that list, and employers looking to include new job openings. It aims to gather all current methods in use by the client in one place. With that in mind, it was designed to continue to utilize MailChimp functionality for the client to incorporate existing practices and subscriber contact data conveniently and effectively into the application. The app was then customized for more interaction between employers looking to post jobs, job-seekers, and the job list curators. The job list now lives on a page where job seekers can see all previous postings up to 30 days after initiation, and can sort and filter results by a few predetermined categories. The job list curator can also manage listings with more control. 
 
 The star of the app may be the **MailChimp API integration**. Admin curators AND visitors to the site are able to submit job postings to this app which are stored in a backend database (pending administrator approval). Whenever the admin desires, they can automatically populate all of these submissions - in the _same format_ which they have previously used - input a subject line, preview in the browser and send away.
