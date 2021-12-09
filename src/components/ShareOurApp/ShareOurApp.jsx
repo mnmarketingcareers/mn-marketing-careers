@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import Container from '@mui/material/Container';
 import { LinkedinShareButton, TwitterShareButton, FacebookShareButton} from "react-share";
 import {LinkedinIcon, TwitterIcon, FacebookIcon} from "react-share";

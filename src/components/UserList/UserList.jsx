@@ -8,17 +8,12 @@ import {
     TableCell,
     TableBody,
     Paper,
-    Button,
     Card,
-    CardContent,
-    Typography,
-    Grid
 } from '@mui/material';
 
 import UserListItem from "./UserListItem";
 
 import './UserList.css';
-import { flexbox } from "@mui/system";
 
 function UserList () {
     const userList = useSelector(store => store.userList);
